@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { fabric } from 'fabric';
 
-import color from '../utlis/colorTheme';
-import { getTheTemplate } from '../utlis/firebase';
-import shapeIcon from '../image/outline_category_black_36dp.png';
-import textIcon from '../image/outline_title_black_36dp.png';
-import drawIcon from '../image/outline_border_color_black_36dp.png';
-import deleteIcon from '../image/outline_delete_black_36dp.png';
-import rectangleIcon from '../image/outline_rectangle_black_36dp.png';
-import circleIcon from '../image/outline_circle_black_36dp.png';
-import triangleIcon from '../image/outline_change_history_black_36dp.png';
-import textBoxIcon from '../image/outline_format_shapes_black_36dp.png';
-import pencilIcon from '../image/outline_mode_edit_black_36dp.png';
+import color from '../Styled/colorTheme';
+import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
+import SaveStatus from './SaveStatus';
+import SaveImage from './SaveImage';
+
+import shapeIcon from '../../image/outline_category_black_36dp.png';
+import textIcon from '../../image/outline_title_black_36dp.png';
+import drawIcon from '../../image/outline_border_color_black_36dp.png';
+import deleteIcon from '../../image/outline_delete_black_36dp.png';
+import rectangleIcon from '../../image/outline_rectangle_black_36dp.png';
+import circleIcon from '../../image/outline_circle_black_36dp.png';
+import triangleIcon from '../../image/outline_change_history_black_36dp.png';
+import textBoxIcon from '../../image/outline_format_shapes_black_36dp.png';
+import pencilIcon from '../../image/outline_mode_edit_black_36dp.png';
 
 const Container0 = styled.div`
   text-align: center;
@@ -33,25 +37,67 @@ const Strong = styled.strong`
 `;
 
 function MemeGenerator() {
+  const { id } = useParams();
+  const { path } = useRouteMatch();
   const [canvas, setCanvas] = useState('');
   const [shapeEditorIsDisplayed, setShapeEditorIsDisplayed] = useState(true);
   const [textEditorIsDisplayed, setTextEditorIsDisplayed] = useState(true);
   const [drawEditorIsDisplayed, setDrawEditorIsDisplayed] = useState(true);
   const allTemplates = useSelector((state) => state.allTemplates);
+  const userData = useSelector((state) => state.userData);
+  const allEditingMeme = useSelector((state) => state.allEditingMeme);
 
   useEffect(() => {
-    getTemplate();
+    if (path === "/templates/:id") { getTemplate(); }
   }, []);
 
+  useEffect(() => {
+    if (userData && path === "/personal/meme-generator/:id") {
+        getEditingMeme();
+    }
+  }, [userData])
+
+  const getEditingMeme = () => {
+    if (allEditingMeme.length > 0) {
+      const editingMeme = allEditingMeme.filter((item) => item.docId === id);
+      const canvasStatus = editingMeme[0].data.canvas_status;
+      const canvasWidth = editingMeme[0].data.canvas_width;
+      const canvasHeight = editingMeme[0].data.canvas_height;
+      const canvas = new fabric.Canvas('c', {
+        width: canvasWidth,
+        height: canvasHeight,
+        hoverCursor: 'grab', // 移動時鼠標顯示
+        freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
+        isDrawingMode: false, // 設置成 true 一秒變身小畫家
+      });
+      canvas.loadFromJSON(canvasStatus);
+      setCanvas(canvas);
+    } else {
+      getTheEditingMeme(userData.user_id, id).then((res) => {
+        const canvasStatus = res.canvas_status;
+        const canvasWidth = res.canvas_width;
+        const canvasHeight = res.canvas_height;
+        const canvas = new fabric.Canvas('c', {
+          width: canvasWidth,
+          height: canvasHeight,
+          hoverCursor: 'grab', // 移動時鼠標顯示
+          freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
+          isDrawingMode: false, // 設置成 true 一秒變身小畫家
+        });
+        canvas.loadFromJSON(canvasStatus);
+        setCanvas(canvas);
+      })
+    }
+  }
+
   const getTemplate = () => {
-    const url = new URL(window.location.href);
-    const image_id = url.searchParams.get('id');
+    const image_id = id;
     let image_url;
-    if (allTemplates.length !== 0 && image_id !== null) {
+    if (allTemplates.length !== 0) {
       const template = allTemplates.filter((item) => item.image_id === parseInt(image_id));
       image_url = template[0].image_url
       getTemplateSize(image_url);
-    } else if (allTemplates.length === 0 && image_id !== null) {
+    } else if (allTemplates.length === 0) {
       getTheTemplate(image_id).then((res) => {
         image_url = res.image_url;
         getTemplateSize(image_url);
@@ -191,6 +237,15 @@ function MemeGenerator() {
     } else { return; }
   }
 
+  const renderUploadImageButton = () => {
+    return (
+      <div>
+        <span>上傳一張圖片：</span>
+        <input id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
+      </div>
+    );
+  }
+
   return (
     <Container0 color={color}>
       <H1><Strong color={color}>迷因產生器</Strong></H1>
@@ -246,13 +301,12 @@ function MemeGenerator() {
         </div>
         <button onClick={() => drawing(canvas)}><img alt="pencilIcon" src={pencilIcon}></img></button>
       </div>
-      <div>
-        <span>上傳一張圖片：</span>
-        <input id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
-      </div>
       <canvas id="c"></canvas>
       <button onClick={() => downloadImage(canvas, 'png')}>Download in png</button>
       <button onClick={() => downloadImage(canvas, 'jpg')}>Download in jpg</button>
+      {path === "/templates/:id" && userData === null ? renderUploadImageButton() : ""}
+      {userData ? <SaveStatus canvas={canvas} /> : ""}
+      {userData ? <SaveImage /> : ""}
     </Container0>
   );
 }

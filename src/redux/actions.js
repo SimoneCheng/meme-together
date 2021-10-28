@@ -26,9 +26,17 @@ const setIsSignupDisplayed = (isSignupDisplayed) => {
     }
 }
 
+const setAllEditingMeme = (allEditingMeme) => {
+    return {
+        type: "setAllEditingMeme",
+        payload: allEditingMeme
+    }
+}
+
 export { 
     setAllTemplates, 
     setUserData,
     setIsLoginDisplayed,
-    setIsSignupDisplayed 
+    setIsSignupDisplayed,
+    setAllEditingMeme 
 };

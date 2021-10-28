@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import color from '../utlis/colorTheme';
+import color from './Styled/colorTheme';
 
 import robot from '../image/day27-my-robot.png';
 import canvasStand from '../image/day10-canvas-stand.png';

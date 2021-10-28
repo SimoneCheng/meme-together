@@ -34,9 +34,19 @@ const isSignupDisplayed = (state = false, action) => {
     }
 }
 
+const allEditingMeme = (state = [], action) => {
+    switch (action.type) {
+        case "setAllEditingMeme":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export { 
     allTemplates, 
     userData,
     isLoginDisplayed,
-    isSignupDisplayed 
+    isSignupDisplayed,
+    allEditingMeme 
 };

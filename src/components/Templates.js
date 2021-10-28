@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { setAllTemplates } from '../redux/actions';
-import color from '../utlis/colorTheme';
+import color from './Styled/colorTheme';
 import { getAllTemplates } from '../utlis/firebase';
 
 const H1 = styled.h1`
@@ -47,36 +47,37 @@ const Img0 = styled.img`
 `;
 
 function Templates() {
-    const dispatch = useDispatch();
-    const allTemplates = useSelector((state) => state.allTemplates);
+  const { url } = useRouteMatch();
+  const dispatch = useDispatch();
+  const allTemplates = useSelector((state) => state.allTemplates);
 
-    useEffect(() => {
-        getAllTemplates().then((res) => {
-            dispatch(setAllTemplates(res));
-        });
-    }, [])
+  useEffect(() => {
+    getAllTemplates().then((res) => {
+      dispatch(setAllTemplates(res));
+    });
+  }, [])
 
-    const renderAllTemplates = (imgURL, imgId) => {
-        return (
-            <Container2>
-                <Link to={`/meme-generator?id=${imgId}`}>
-                    <Img0 src={imgURL} id={imgId} alt={`template-${imgId}`}></Img0>
-                </Link>
-            </Container2>
-        );
-    }
-
+  const renderAllTemplates = (imgURL, imgId) => {
     return (
-        <Container0>
-            <H1><Strong color={color}>選擇模板</Strong></H1>
-            <Container1>
-                {allTemplates.map((item) => {
-                    const { image_url, image_id } = item;
-                    return renderAllTemplates(image_url, image_id);
-                })}
-            </Container1>
-        </Container0>
-    )
+      <Container2>
+        <Link to={`${url}/${imgId}`}>
+          <Img0 src={imgURL} id={imgId} alt={`template-${imgId}`}></Img0>
+        </Link>
+      </Container2>
+    );
+  }
+
+  return (
+      <Container0>
+        <H1><Strong color={color}>選擇模板</Strong></H1>
+        <Container1>
+          {allTemplates.map((item) => {
+            const { image_url, image_id } = item;
+            return renderAllTemplates(image_url, image_id);
+          })}
+        </Container1>
+      </Container0>
+  )
 }
 
 export default Templates;
