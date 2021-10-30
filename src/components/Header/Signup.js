@@ -11,7 +11,7 @@ import {
   Input1,
   SignupButton,
   CloseButton,
-} from '../Styled/LoginAndSignup';
+} from '../Styled/Popup';
 
 function Signup() {
     const dispatch = useDispatch();

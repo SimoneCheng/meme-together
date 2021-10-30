@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import { setAllTemplates } from '../redux/actions';
-import color from './Styled/colorTheme';
-import { getAllTemplates } from '../utlis/firebase';
+import color from '../Styled/colorTheme';
+import { getAllTemplates } from '../../utlis/firebase';
 
 const H1 = styled.h1`
   padding-top: 100px;
@@ -48,14 +46,11 @@ const Img0 = styled.img`
 
 function Templates() {
   const { url } = useRouteMatch();
-  const dispatch = useDispatch();
-  const allTemplates = useSelector((state) => state.allTemplates);
+  const [allTemplates, setAllTemplates] = useState([]);
 
   useEffect(() => {
-    getAllTemplates().then((res) => {
-      dispatch(setAllTemplates(res));
-    });
-  }, [])
+      getAllTemplates(setAllTemplates);
+    }, [])
 
   const renderAllTemplates = (imgURL, imgId) => {
     return (

@@ -42,6 +42,19 @@ const Input1 = styled.input`
   }
 `;
 
+const Input2 = styled.textarea`
+  width: 95%;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  resize: none;
+  :focus{
+    background-color: rgba(0, 0, 0, 0.05);
+    outline: none;
+  }
+`;
+
 const LoginButton = styled.button`
   background-color: ${props => props.color.color1.colorCode};
   border: none;
@@ -125,6 +138,7 @@ export {
     Container1,
     HrText,
     Input1,
+    Input2,
     LoginButton,
     FBLoginButton,
     FBLogoImg,

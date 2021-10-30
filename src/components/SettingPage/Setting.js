@@ -64,7 +64,7 @@ function Setting() {
                         <label for="personal">僅限本人</label>
                         <input type="radio" id="friends" name="privacy" value="friends-only" />
                         <label for="friends">追蹤你的粉絲</label>
-                        <input type="radio" id="public" name="privacy" value="public" />
+                        <input type="radio" id="public" name="privacy" value="public" defaultChecked />
                         <label for="public">所有人</label>
                     </div>
                 </div>

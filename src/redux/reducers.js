@@ -1,15 +1,15 @@
-const allTemplates = (state = [], action) => {
+const userData = (state = {}, action) => {
     switch (action.type) {
-        case "setAllTemplates":
+        case "setUserData":
             return action.payload;
         default:
             return state;
     }
 }
 
-const userData = (state = {}, action) => {
+const userInfo = (state = {}, action) => {
     switch (action.type) {
-        case "setUserData":
+        case "setUserInfo":
             return action.payload;
         default:
             return state;
@@ -34,19 +34,9 @@ const isSignupDisplayed = (state = false, action) => {
     }
 }
 
-const allEditingMeme = (state = [], action) => {
-    switch (action.type) {
-        case "setAllEditingMeme":
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
 export { 
-    allTemplates, 
     userData,
+    userInfo,
     isLoginDisplayed,
-    isSignupDisplayed,
-    allEditingMeme 
+    isSignupDisplayed
 };

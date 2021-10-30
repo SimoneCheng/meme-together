@@ -4,7 +4,7 @@ import { useParams, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components';
 import { fabric } from 'fabric';
 
-import { saveEditingMeme, updateEditingMeme, getTimestamp } from '../../utlis/firebase';
+import { saveEditingMeme, updateEditingMeme } from '../../utlis/firebase';
 
 function SaveStatus(props) {
     const canvas = props.canvas;
@@ -21,8 +21,8 @@ function SaveStatus(props) {
             backgroundImage_src: JSON.parse(status).backgroundImage.src,
             canvas_width: JSON.parse(status).backgroundImage.width,
             canvas_height: JSON.parse(status).backgroundImage.height,
-            created_time: getTimestamp(),
-            last_save_time: getTimestamp()
+            created_time: new Date(),
+            last_save_time: new Date()
         }
         if (!docID) {
             saveEditingMeme(user_id, data)
@@ -31,14 +31,19 @@ function SaveStatus(props) {
                     alert('已儲存編輯狀態！可以到個人頁面看看喔！');
                 })
         } else {
-            updateEditingMeme(user_id, docID, { canvas_status: status, last_save_time: getTimestamp() })
+            updateEditingMeme(user_id, docID, { canvas_status: status, last_save_time: new Date() })
                 .then(alert('已更新編輯狀態！可以到個人頁面看看喔！'));
         }
     }
 
     const PersonalCanvasToJSON = (canvas) => {
         const status = JSON.stringify(canvas);
-        updateEditingMeme(user_id, id, { canvas_status: status, last_save_time: getTimestamp() })
+        const time = new Date();
+        const data = {
+            canvas_status: status,
+            last_save_time: time
+        }
+        updateEditingMeme(user_id, id, data)
             .then(alert('已更新編輯狀態！'));
     }
 

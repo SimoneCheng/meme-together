@@ -13,7 +13,7 @@ import {
   FBLoginButton,
   FBLogoImg,
   CloseButton,
-} from '../Styled/LoginAndSignup';
+} from '../Styled/Popup';
 
 import fLogo from '../../image/f_logo_RGB-White_58.png';
 

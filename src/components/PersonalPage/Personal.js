@@ -3,8 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getUserInfo } from '../../utlis/firebase';
 import AllEditingMeme from './AllEditingMeme';
+import MemeImage from './MemeImage';
+import { 
+    getAllEditingMeme, 
+    getPrivateMemeImg, 
+    getPublicMemeImg 
+} from '../../utlis/firebase';
 
 const Img0 = styled.img`
   width: 100px;
@@ -28,16 +33,22 @@ const Container2 = styled.div`
 function Personal() {
     const history = useHistory();
     const userData = useSelector((state) => state.userData);
-    const allEditingMeme = useSelector((state) => state.allEditingMeme);
-    const [userInfo, setUserInfo] = useState({});
-
+    const userInfo = useSelector((state) => state.userInfo);
+    const [allEditingMeme, setAllEditingMeme] = useState([]);
+    const [privateMemeImg, setPrivateMemeImg] = useState([]);
+    const [publicMemeImg, setPublicMemeImg] = useState([]);
+    
     useEffect(() => {
         if (userData === null) {
             history.push('/');
-        } else {
-            getUserInfo(userData.user_id).then((res) => {
-                setUserInfo(res);
-            });
+        }
+    }, [userData])
+
+    useEffect(() => {
+        if (userData != null && Object.keys(userData).length > 0) {
+            getAllEditingMeme(userData.user_id, setAllEditingMeme);
+            getPublicMemeImg(userData.user_id, setPublicMemeImg);
+            getPrivateMemeImg(userData.user_id, setPrivateMemeImg);
         }
     }, [userData])
 
@@ -49,10 +60,10 @@ function Personal() {
                         {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
                     </Container2>
                     <Container2>
-                        {userInfo ? <p>userID：{userInfo.user_id}</p> : ""}
-                        {userInfo ? <p>userName：{userInfo.user_name}</p> : ""}
-                        {userInfo ? <p>userEmail：{userInfo.user_email}</p> : ""}
-                        {userInfo ? <p>createdTime：{userInfo.created_time}</p> : ""}
+                        {userInfo ? <p>使用者ID：{userInfo.user_id}</p> : ""}
+                        {userInfo ? <p>暱稱：{userInfo.user_name}</p> : ""}
+                        {userInfo ? <p>電子信箱：{userInfo.user_email}</p> : ""}
+                        {userInfo ? <p>創建時間：{userInfo.created_time}</p> : ""}
                     </Container2>
                     <Container2>
                         {userData ? <Link to={`/public/${userData.user_id}`}><button>前往個人公開頁面</button></Link> : ""}
@@ -60,24 +71,28 @@ function Personal() {
                 </Container1>
                 <Container1>
                     <Container2>
-                        <Link to="/personal">創作中</Link>
+                        <span>創作中</span>
                         <span>({allEditingMeme.length})</span>
                     </Container2>
                     <Container2>
-                        <Link to="/personal?status=completed">已完成</Link>
-                        <span>(0)</span>
+                        <span>已完成，未發佈</span>
+                        <span>({privateMemeImg.length})</span>
                     </Container2>
                     <Container2>
-                        <Link to="/personal?status=published">已發布</Link>
-                        <span>(0)</span>
+                        <span>已發布</span>
+                        <span>({publicMemeImg.length})</span>
                     </Container2>
                     <Container2>
-                        <Link to="/personal?status=favorite">收藏</Link>
+                        <span>收藏</span>
                         <span>(0)</span>
                     </Container2>
                 </Container1>
             </Container0>
-            <AllEditingMeme />
+            <AllEditingMeme allEditingMeme={allEditingMeme} />
+            <hr></hr>
+            <MemeImage memeImg={privateMemeImg} />
+            <hr></hr>
+            <MemeImage memeImg={publicMemeImg} />
         </>
     )
 }

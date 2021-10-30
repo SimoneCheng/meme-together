@@ -1,18 +1,16 @@
 import { createStore, combineReducers } from "redux";
 import { 
-    allTemplates, 
-    userData, 
+    userData,
+    userInfo, 
     isLoginDisplayed, 
     isSignupDisplayed,
-    allEditingMeme
  } from "./reducers";
 
- const reducers = combineReducers({
-     allTemplates, 
+ const reducers = combineReducers({ 
      userData,
+     userInfo,
      isLoginDisplayed,
      isSignupDisplayed,
-     allEditingMeme 
  })
 
 const store = createStore(

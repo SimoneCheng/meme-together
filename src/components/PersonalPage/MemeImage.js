@@ -1,9 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { deleteEditingMeme } from '../../utlis/firebase';
 
 const Container0 = styled.div`
   text-align: center;
@@ -34,25 +31,29 @@ const Img0 = styled.img`
   object-fit: contain;
 `;
 
-function AllEditingMeme(props) {
-  const allEditingMeme = props.allEditingMeme;
-  const userData = useSelector((state) => state.userData);
+function MemeImage(props) {
+  const memeImg = props.memeImg;
 
-  const renderEditingMeme = (imgSrc, docId, createdTime, lastSaveTime) => {
+  const renderMemeImg = (item) => {
+    const { title, img_url, img_name, created_time, last_save_time, isPublic } = item;
     return (
       <Container2>
-        <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
+        <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
         <div>
           {<p>
+            標題：{title}
+            <br></br>
             建立時間：
             <br></br>
-            {new Date(createdTime.toDate()).toLocaleString()}
+            {new Date(created_time.toDate()).toLocaleString()}
             <br></br>
             上次儲存時間：
             <br></br>
-            {new Date(lastSaveTime.toDate()).toLocaleString()}
+            {new Date(last_save_time.toDate()).toLocaleString()}
+            <br></br>
+            是否公開發佈：{`${isPublic}`}
           </p>}
-          <button onClick={() => { deleteEditingMeme(userData.user_id, docId).then(()=>alert('刪除成功！')) }}>刪除</button>
+          <button>刪除</button>
         </div>
       </Container2>
     );
@@ -61,11 +62,11 @@ function AllEditingMeme(props) {
   return (
     <Container0>
       <Container1>
-        {allEditingMeme ? allEditingMeme.map((item) => renderEditingMeme(item.data.backgroundImage_src, item.docId, item.data.created_time, item.data.last_save_time)) : ""}
+        {memeImg ? memeImg.map((item) => renderMemeImg(item)) : ""}
       </Container1>
-      <Link to="/templates"><button>新增創作</button></Link>
     </Container0>
   )
-}
 
-export default AllEditingMeme;
+};
+
+export default MemeImage;

@@ -1,14 +1,14 @@
-const setAllTemplates = (templates) => {
-    return {
-        type: "setAllTemplates",
-        payload: templates
-    }
-}
-
 const setUserData = (userData) => {
     return {
         type: "setUserData", 
         payload: userData
+    }
+}
+
+const setUserInfo = (userInfo) => {
+    return {
+        type: "setUserInfo",
+        payload: userInfo
     }
 }
 
@@ -26,17 +26,9 @@ const setIsSignupDisplayed = (isSignupDisplayed) => {
     }
 }
 
-const setAllEditingMeme = (allEditingMeme) => {
-    return {
-        type: "setAllEditingMeme",
-        payload: allEditingMeme
-    }
-}
-
 export { 
-    setAllTemplates, 
     setUserData,
+    setUserInfo,
     setIsLoginDisplayed,
     setIsSignupDisplayed,
-    setAllEditingMeme 
 };

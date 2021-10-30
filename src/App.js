@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Index from './components/Index';
-import Templates from './components/Templates';
+import Templates from './components/MemeGenerator/Templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';

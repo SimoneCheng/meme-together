@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { fabric } from 'fabric';
 
 import color from '../Styled/colorTheme';
-import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
+import { getTheTemplate ,getTheEditingMeme } from '../../utlis/firebase';
 import SaveStatus from './SaveStatus';
 import SaveImage from './SaveImage';
 
@@ -43,26 +43,27 @@ function MemeGenerator() {
   const [shapeEditorIsDisplayed, setShapeEditorIsDisplayed] = useState(true);
   const [textEditorIsDisplayed, setTextEditorIsDisplayed] = useState(true);
   const [drawEditorIsDisplayed, setDrawEditorIsDisplayed] = useState(true);
-  const allTemplates = useSelector((state) => state.allTemplates);
   const userData = useSelector((state) => state.userData);
-  const allEditingMeme = useSelector((state) => state.allEditingMeme);
 
   useEffect(() => {
-    if (path === "/templates/:id") { getTemplate(); }
+    if (path === "/templates/:id") {
+      getTemplate();
+    }
   }, []);
 
   useEffect(() => {
-    if (userData && path === "/personal/meme-generator/:id") {
-        getEditingMeme();
+    if (path === "/personal/meme-generator/:id"
+    && userData !== null  
+    && Object.keys(userData).length > 0) {
+      getEditingMeme();
     }
   }, [userData])
 
   const getEditingMeme = () => {
-    if (allEditingMeme.length > 0) {
-      const editingMeme = allEditingMeme.filter((item) => item.docId === id);
-      const canvasStatus = editingMeme[0].data.canvas_status;
-      const canvasWidth = editingMeme[0].data.canvas_width;
-      const canvasHeight = editingMeme[0].data.canvas_height;
+    getTheEditingMeme(userData.user_id, id).then((res) => {
+      const canvasStatus = res.canvas_status;
+      const canvasWidth = res.canvas_width;
+      const canvasHeight = res.canvas_height;
       const canvas = new fabric.Canvas('c', {
         width: canvasWidth,
         height: canvasHeight,
@@ -72,39 +73,16 @@ function MemeGenerator() {
       });
       canvas.loadFromJSON(canvasStatus);
       setCanvas(canvas);
-    } else {
-      getTheEditingMeme(userData.user_id, id).then((res) => {
-        const canvasStatus = res.canvas_status;
-        const canvasWidth = res.canvas_width;
-        const canvasHeight = res.canvas_height;
-        const canvas = new fabric.Canvas('c', {
-          width: canvasWidth,
-          height: canvasHeight,
-          hoverCursor: 'grab', // 移動時鼠標顯示
-          freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
-          isDrawingMode: false, // 設置成 true 一秒變身小畫家
-        });
-        canvas.loadFromJSON(canvasStatus);
-        setCanvas(canvas);
-      })
-    }
+    })
   }
 
   const getTemplate = () => {
     const image_id = id;
     let image_url;
-    if (allTemplates.length !== 0) {
-      const template = allTemplates.filter((item) => item.image_id === parseInt(image_id));
-      image_url = template[0].image_url
+    getTheTemplate(image_id).then((res) => {
+      image_url = res.image_url;
       getTemplateSize(image_url);
-    } else if (allTemplates.length === 0) {
-      getTheTemplate(image_id).then((res) => {
-        image_url = res.image_url;
-        getTemplateSize(image_url);
-      });
-    } else {
-      return;
-    }
+    });
   }
 
   const getTemplateSize = (imgSrc) => {
@@ -306,7 +284,7 @@ function MemeGenerator() {
       <button onClick={() => downloadImage(canvas, 'jpg')}>Download in jpg</button>
       {path === "/templates/:id" && userData === null ? renderUploadImageButton() : ""}
       {userData ? <SaveStatus canvas={canvas} /> : ""}
-      {userData ? <SaveImage /> : ""}
+      {userData ? <SaveImage canvas={canvas} /> : ""}
     </Container0>
   );
 }
