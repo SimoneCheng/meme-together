@@ -5,10 +5,10 @@ import styled from 'styled-components';
 
 import AllEditingMeme from './AllEditingMeme';
 import MemeImage from './MemeImage';
-import { 
-    getAllEditingMeme, 
-    getPrivateMemeImg, 
-    getPublicMemeImg 
+import {
+    getAllEditingMeme,
+    getPrivateMemeImg,
+    getPublicMemeImg
 } from '../../utlis/firebase';
 
 const Img0 = styled.img`
@@ -28,29 +28,62 @@ const Container1 = styled.div`
 const Container2 = styled.div`
   margin-right: 20px;
   margin-top: 20px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border-bottom: ${props => props.status === 'editing' ? "4px solid black" : "none"};
+  transition: border-width 0.3s linear;
+`;
+
+const Container3 = styled.div`
+   margin-right: 20px;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border-bottom: ${props => props.status === 'nopublic' ? "4px solid black" : "none"};
+  transition: border-width 0.3s linear;
+`;
+
+const Container4 = styled.div`
+  margin-right: 20px;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border-bottom: ${props => props.status === 'ispublic' ? "4px solid black" : "none"};
+  transition: border-width 0.3s linear;
+`;
+
+const Container5 = styled.div`
+  margin-right: 20px;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border-bottom: ${props => props.status === 'favorite' ? "4px solid black" : "none"};
+  transition: border-width 0.3s linear;
 `;
 
 function Personal() {
     const history = useHistory();
     const userData = useSelector((state) => state.userData);
     const userInfo = useSelector((state) => state.userInfo);
+    const [status, setStatus] = useState('editing');
     const [allEditingMeme, setAllEditingMeme] = useState([]);
     const [privateMemeImg, setPrivateMemeImg] = useState([]);
     const [publicMemeImg, setPublicMemeImg] = useState([]);
-    
+
     useEffect(() => {
         if (userData === null) {
             history.push('/');
         }
-    }, [userData])
-
-    useEffect(() => {
         if (userData != null && Object.keys(userData).length > 0) {
             getAllEditingMeme(userData.user_id, setAllEditingMeme);
             getPublicMemeImg(userData.user_id, setPublicMemeImg);
             getPrivateMemeImg(userData.user_id, setPrivateMemeImg);
         }
     }, [userData])
+
+    const clickStatusButton = (status) => {
+        setStatus(status);
+    }
 
     return (
         <>
@@ -70,29 +103,27 @@ function Personal() {
                     </Container2>
                 </Container1>
                 <Container1>
-                    <Container2>
+                    <Container2 status={status} onClick={() => { clickStatusButton('editing') }}>
                         <span>創作中</span>
                         <span>({allEditingMeme.length})</span>
                     </Container2>
-                    <Container2>
-                        <span>已完成，未發佈</span>
+                    <Container3 status={status} onClick={() => { clickStatusButton('nopublic') }}>
+                        <span>已完成，未發布</span>
                         <span>({privateMemeImg.length})</span>
-                    </Container2>
-                    <Container2>
+                    </Container3>
+                    <Container4 status={status} onClick={() => { clickStatusButton('ispublic') }}>
                         <span>已發布</span>
                         <span>({publicMemeImg.length})</span>
-                    </Container2>
-                    <Container2>
+                    </Container4>
+                    <Container5 status={status} onClick={() => { clickStatusButton('favorite') }}>
                         <span>收藏</span>
                         <span>(0)</span>
-                    </Container2>
+                    </Container5>
                 </Container1>
             </Container0>
-            <AllEditingMeme allEditingMeme={allEditingMeme} />
-            <hr></hr>
-            <MemeImage memeImg={privateMemeImg} />
-            <hr></hr>
-            <MemeImage memeImg={publicMemeImg} />
+            {status === 'editing' ? <AllEditingMeme allEditingMeme={allEditingMeme} /> : ""}
+            {status === 'nopublic' ? <MemeImage memeImg={privateMemeImg} /> : ""}
+            {status === 'ispublic' ? <MemeImage memeImg={publicMemeImg} /> : ""}
         </>
     )
 }

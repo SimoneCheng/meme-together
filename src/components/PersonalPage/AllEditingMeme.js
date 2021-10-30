@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { deleteEditingMeme } from '../../utlis/firebase';
 
 const Container0 = styled.div`
-  text-align: center;
+
 `;
 
 const Container1 = styled.div`
@@ -43,15 +43,8 @@ function AllEditingMeme(props) {
       <Container2>
         <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
         <div>
-          {<p>
-            建立時間：
-            <br></br>
-            {new Date(createdTime.toDate()).toLocaleString()}
-            <br></br>
-            上次儲存時間：
-            <br></br>
-            {new Date(lastSaveTime.toDate()).toLocaleString()}
-          </p>}
+          <div>建立時間：{new Date(createdTime.toDate()).toLocaleString()}</div>
+          <div>上次儲存時間：{new Date(lastSaveTime.toDate()).toLocaleString()}</div>
           <button onClick={() => { deleteEditingMeme(userData.user_id, docId).then(()=>alert('刪除成功！')) }}>刪除</button>
         </div>
       </Container2>

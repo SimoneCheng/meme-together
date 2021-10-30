@@ -88,10 +88,11 @@ function getAllTemplates(setAllTemplates) {
     })
 }
 
-function getTheTemplate(id) {
+// Meme Generator Page: Template
+function getTheTemplate(docId) {
   return db
     .collection('templates')
-    .doc(id)
+    .doc(docId)
     .get()
     .then((snapShot) => snapShot.data());
 }
@@ -179,30 +180,48 @@ function saveCompletedMeme(id, data) {
 
 function getPrivateMemeImg(id, setPrivateMemeImg) {
   return db
-  .collection('completed_meme')
-  .where("owner_user_id", "==", id)
-  .where("isPublic", "==", false)
-  .onSnapshot((querySnapshot) => {
-    const privateMemeImgData = [];
-    querySnapshot.forEach(doc => {
-      privateMemeImgData.push(doc.data());
-    })
-    setPrivateMemeImg(privateMemeImgData);
-  });
+    .collection('completed_meme')
+    .where("owner_user_id", "==", id)
+    .where("isPublic", "==", false)
+    .onSnapshot((querySnapshot) => {
+      const privateMemeImgData = [];
+      querySnapshot.forEach(doc => {
+        privateMemeImgData.push(doc.data());
+      })
+      setPrivateMemeImg(privateMemeImgData);
+    });
 }
 
 function getPublicMemeImg(id, setPrivateMemeImg) {
   return db
-  .collection('completed_meme')
-  .where("owner_user_id", "==", id)
-  .where("isPublic", "==", true)
-  .onSnapshot((querySnapshot) => {
-    const publicMemeImgData = [];
-    querySnapshot.forEach(doc => {
-      publicMemeImgData.push(doc.data());
-    })
-    setPrivateMemeImg(publicMemeImgData);
-  });
+    .collection('completed_meme')
+    .where("owner_user_id", "==", id)
+    .where("isPublic", "==", true)
+    .onSnapshot((querySnapshot) => {
+      const publicMemeImgData = [];
+      querySnapshot.forEach(doc => {
+        publicMemeImgData.push(doc.data());
+      })
+      setPrivateMemeImg(publicMemeImgData);
+    });
+}
+
+function deleteMemeImgInDb(docId) {
+  return db
+    .collection('completed_meme')
+    .doc(docId)
+    .delete();
+}
+
+function deleteMemeImgInStorage(fileName) {
+  return storageRef.child(`completed_meme/${fileName}`).delete();
+}
+
+function changeMemePublicStatus(docId, data) {
+  return db
+    .collection('completed_meme')
+    .doc(docId)
+    .update(data);
 }
 
 export {
@@ -222,5 +241,8 @@ export {
   getCompletedMemeImageUrl,
   saveCompletedMeme,
   getPrivateMemeImg,
-  getPublicMemeImg
+  getPublicMemeImg,
+  deleteMemeImgInDb,
+  deleteMemeImgInStorage,
+  changeMemePublicStatus
 };

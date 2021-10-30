@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import {
+  deleteMemeImgInDb,
+  deleteMemeImgInStorage,
+  changeMemePublicStatus
+} from '../../utlis/firebase';
+
 const Container0 = styled.div`
-  text-align: center;
+
 `;
 
 const Container1 = styled.div`
@@ -34,26 +40,53 @@ const Img0 = styled.img`
 function MemeImage(props) {
   const memeImg = props.memeImg;
 
+  const deleteImg = (docId) => {
+    deleteMemeImgInDb(docId)
+      .then(() => {
+        deleteMemeImgInStorage(docId)
+          .then(() => alert('成功刪除！'))
+      })
+  }
+
+  const clickPublicStatus = (img_name, boolean) => {
+    changeMemePublicStatus(img_name, { isPublic: boolean, last_save_time: new Date() });
+  }
+
+  const clickDownloadImage = (img_url, imageFormat) => {
+    fetch(img_url)
+    .then(res => res.blob())
+    .then(blob => {
+        const a = document.createElement("a");
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = `meme-generator-${new Date().getTime()}.${imageFormat}`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
   const renderMemeImg = (item) => {
     const { title, img_url, img_name, created_time, last_save_time, isPublic } = item;
+
     return (
       <Container2>
         <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
         <div>
-          {<p>
-            標題：{title}
-            <br></br>
-            建立時間：
-            <br></br>
-            {new Date(created_time.toDate()).toLocaleString()}
-            <br></br>
-            上次儲存時間：
-            <br></br>
-            {new Date(last_save_time.toDate()).toLocaleString()}
-            <br></br>
-            是否公開發佈：{`${isPublic}`}
-          </p>}
-          <button>刪除</button>
+          <div>標題：{title}</div>
+          <div>建立時間：{new Date(created_time.toDate()).toLocaleString()}</div>
+          <div>上次儲存時間：{new Date(last_save_time.toDate()).toLocaleString()}</div>
+          <div>
+            {isPublic ? <button onClick={() => clickPublicStatus(img_name, false)}>取消公開發布</button> : <button onClick={() => clickPublicStatus(img_name, true)}>公開發布</button>}
+          </div>
+          <div>
+            <button onClick={() => clickDownloadImage(img_url, "jpg")}>下載圖片（jpg）</button>
+          </div>
+          <div>
+            <button onClick={() => clickDownloadImage(img_url, "png")}>下載圖片（png）</button>
+          </div>
+          <div>
+            <button onClick={() => deleteImg(img_name)}>刪除</button>
+          </div>
         </div>
       </Container2>
     );

@@ -87,13 +87,6 @@ const LogoMobile = styled.div`
   font-weight: bolder;
 `;
 
-const Checkbox = styled.input`
-  display: none;
-  :checked~#menu {
-  max-height: 100%;
-  }
-`;
-
 const LabelBurger = styled.label`
   font-size: 30px;
 `;
@@ -108,6 +101,13 @@ const MenuMobile = styled.div`
   width: 100%;
   transition: 0.8s linear;
   box-shadow: 5px 5px 5px gray;
+`;
+
+const Checkbox = styled.input`
+  display: none;
+  &:checked + ${MenuMobile} {
+  max-height: 100%;
+  }
 `;
 
 const LiMobile = styled.li`

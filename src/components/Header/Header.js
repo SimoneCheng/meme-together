@@ -147,7 +147,7 @@ function Header() {
           </LogoMobile>
           <LabelBurger htmlFor="burger">&#9776;</LabelBurger>
           <Checkbox type="checkbox" id="burger" />
-          <MenuMobile id="menu">
+          <MenuMobile>
             <ul>
               <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
             </ul>
