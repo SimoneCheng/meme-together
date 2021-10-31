@@ -7,15 +7,6 @@ const userData = (state = {}, action) => {
     }
 }
 
-const userInfo = (state = {}, action) => {
-    switch (action.type) {
-        case "setUserInfo":
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
 const isLoginDisplayed = (state = false, action) => {
     switch (action.type) {
         case "setIsLoginDisplayed":
@@ -36,7 +27,6 @@ const isSignupDisplayed = (state = false, action) => {
 
 export { 
     userData,
-    userInfo,
     isLoginDisplayed,
     isSignupDisplayed
 };

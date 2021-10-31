@@ -1,14 +1,12 @@
 import { createStore, combineReducers } from "redux";
 import { 
-    userData,
-    userInfo, 
+    userData, 
     isLoginDisplayed, 
     isSignupDisplayed,
  } from "./reducers";
 
  const reducers = combineReducers({ 
      userData,
-     userInfo,
      isLoginDisplayed,
      isSignupDisplayed,
  })

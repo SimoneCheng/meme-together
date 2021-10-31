@@ -5,13 +5,6 @@ const setUserData = (userData) => {
     }
 }
 
-const setUserInfo = (userInfo) => {
-    return {
-        type: "setUserInfo",
-        payload: userInfo
-    }
-}
-
 const setIsLoginDisplayed = (isLoginDisplayed) => {
     return {
         type: "setIsLoginDisplayed",
@@ -28,7 +21,6 @@ const setIsSignupDisplayed = (isSignupDisplayed) => {
 
 export { 
     setUserData,
-    setUserInfo,
     setIsLoginDisplayed,
     setIsSignupDisplayed,
 };

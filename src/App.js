@@ -10,6 +10,7 @@ import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
 import Setting from './components/SettingPage/Setting';
 import AllMemes from './components/ExplorePage/AllMemes';
+import Meme from './components/MemePage/Meme';
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
         <Route path="/personal" exact component={Personal} />
         <Route path="/personal/meme-generator/:id" component={MemeGenerator} />
         <Route path="/setting" component={Setting} />
-        <Route path="/public/:id" exact component={Public}></Route>
-        <Route path="/explorememes" component={AllMemes}></Route>
+        <Route path="/meme/:id" component={Meme} />
+        <Route path="/public/:id" exact component={Public} />
+        <Route path="/explorememes" component={AllMemes} />
       </Switch>
     </Router>
   );

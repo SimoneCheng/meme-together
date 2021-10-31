@@ -6,14 +6,12 @@ import Login from './Login';
 import Signup from './Signup';
 import {
   setUserData,
-  setUserInfo,
   setIsLoginDisplayed,
   setIsSignupDisplayed,
 } from '../../redux/actions';
 import {
   nativeLogout,
   checkLoginStatus,
-  getUserInfo
 } from '../../utlis/firebase';
 import color from '../Styled/colorTheme';
 import {
@@ -47,12 +45,6 @@ function Header() {
   useEffect(() => {
     return checkLoginStatus(dispatch, setUserData);
   }, []);
-
-  useEffect(() => {
-    if (userData != null && Object.keys(userData).length > 0) {
-      getUserInfo(userData.user_id, dispatch, setUserInfo);
-    }
-  }, [userData]);
 
   const clickLoginButton = () => {
     dispatch(setIsLoginDisplayed(true));

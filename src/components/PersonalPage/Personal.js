@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import AllEditingMeme from './AllEditingMeme';
 import MemeImage from './MemeImage';
 import {
+    getUserInfo,
     getAllEditingMeme,
     getPrivateMemeImg,
     getPublicMemeImg
@@ -64,7 +65,7 @@ const Container5 = styled.div`
 function Personal() {
     const history = useHistory();
     const userData = useSelector((state) => state.userData);
-    const userInfo = useSelector((state) => state.userInfo);
+    const [userInfo, setUserInfo] = useState();
     const [status, setStatus] = useState('editing');
     const [allEditingMeme, setAllEditingMeme] = useState([]);
     const [privateMemeImg, setPrivateMemeImg] = useState([]);
@@ -75,6 +76,7 @@ function Personal() {
             history.push('/');
         }
         if (userData != null && Object.keys(userData).length > 0) {
+            getUserInfo(userData.user_id, setUserInfo)
             getAllEditingMeme(userData.user_id, setAllEditingMeme);
             getPublicMemeImg(userData.user_id, setPublicMemeImg);
             getPrivateMemeImg(userData.user_id, setPrivateMemeImg);

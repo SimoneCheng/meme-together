@@ -98,12 +98,12 @@ function getTheTemplate(docId) {
 }
 
 // Functions for Member
-function getUserInfo(id, dispatch, setUserInfo) {
+function getUserInfo(id, setUserInfo) {
   return db
     .collection('users')
     .doc(id)
     .onSnapshot((snapShot) => {
-      dispatch(setUserInfo(snapShot.data()));
+      setUserInfo(snapShot.data());
     });
 }
 
@@ -224,6 +224,16 @@ function changeMemePublicStatus(docId, data) {
     .update(data);
 }
 
+function getTheMemeImage(docId, setTheMemeImg) {
+  return db
+  .collection('completed_meme')
+  .doc(docId)
+  .get()
+  .then((snapShot) => {
+    setTheMemeImg(snapShot.data());
+  })
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -244,5 +254,6 @@ export {
   getPublicMemeImg,
   deleteMemeImgInDb,
   deleteMemeImgInStorage,
-  changeMemePublicStatus
+  changeMemePublicStatus,
+  getTheMemeImage
 };
