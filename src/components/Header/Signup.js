@@ -1,16 +1,15 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 
 import { setIsSignupDisplayed } from '../../redux/actions';
 import { nativeSignup } from '../../utlis/firebase';
 import color from '../Styled/colorTheme';
 import {
-  Container0,
-  Container1,
-  Input1,
-  SignupButton,
-  CloseButton,
+    Container0,
+    Container1,
+    Input1,
+    SignupButton,
+    CloseButton,
 } from '../Styled/Popup';
 
 function Signup() {
@@ -18,11 +17,16 @@ function Signup() {
     const signupEmail = useRef(null);
     const signupPassword = useRef(null);
     const signupName = useRef(null);
+    
     const clickCloseButton = () => {
         dispatch(setIsSignupDisplayed(false));
     }
+    
     const clickSignup = () => {
-        nativeSignup(signupEmail.current.value, signupPassword.current.value, signupName.current.value);
+        nativeSignup(signupEmail.current.value, signupPassword.current.value, signupName.current.value)
+            .then(() => {
+                dispatch(setIsSignupDisplayed(false));
+            });
     }
 
     return (

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components';
-import { fabric } from 'fabric';
 
 import {
     getCompletedMemeImageUrl,

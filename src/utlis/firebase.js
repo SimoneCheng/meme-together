@@ -300,6 +300,45 @@ function addToFavorite(id, docId, data) {
     .set(data);
 }
 
+function deletFromFavorite(id, docId) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('favorites')
+    .doc(docId)
+    .delete();
+}
+
+function getAllFavorite(id, setAllFavorite) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('favorites')
+    .orderBy('created_time', 'desc')
+    .onSnapshot((querySnapshot) => {
+      const allFavorite = [];
+      querySnapshot.forEach(doc => {
+        allFavorite.push(doc.data());
+      })
+      setAllFavorite(allFavorite);
+    });
+}
+
+function checkFavoriteList(id, img_name, setResult) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('favorites')
+    .where('img_name', '==', img_name)
+    .onSnapshot((querySnapshot) => {
+      const result = [];
+      querySnapshot.forEach(doc => {
+        result.push(doc.data());
+      })
+      setResult(result);
+    });
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -327,5 +366,8 @@ export {
   addComment,
   deleteComment,
   updateComment,
-  addToFavorite
+  addToFavorite,
+  deletFromFavorite,
+  getAllFavorite,
+  checkFavoriteList
 };

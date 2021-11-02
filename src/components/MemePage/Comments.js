@@ -34,10 +34,30 @@ function Comments() {
         setIsEditing(false);
     }, [])
 
-    const addTheComment = () => {
-        if (addCommentText.current.value === "") {
+    const addTheCommentClick = () => {
+        if (userData === null || Object.keys(userData).length === 0) {
+            alert('請先登入！');
+            return;
+        } else if (addCommentText.current.value === "") {
             alert('請輸入留言！');
+            return;
         } else {
+            const data = {
+                comment: addCommentText.current.value,
+                created_time: new Date(),
+                user_id: userData.user_id,
+                user_name: userData.user_name
+            }
+            addComment(id, data);
+            addCommentText.current.value = "";
+        }
+    }
+
+    const addTheCommentKeyDown = (e) => {
+        if (userData === null || Object.keys(userData).length === 0) {
+            alert('請先登入！');
+            return;
+        } else if (e.keyCode === 13) {
             const data = {
                 comment: addCommentText.current.value,
                 created_time: new Date(),
@@ -55,7 +75,6 @@ function Comments() {
 
     const updateTheComment = (e, commentId) => {
         if (e.keyCode === 13) {
-            console.log('hi');
             const data = { comment: editCommentText.current.value };
             updateComment(id, commentId, data);
             setIsEditing(false);
@@ -72,8 +91,8 @@ function Comments() {
                 <Link to={`/public/${user_id}`}><strong>{user_name}</strong></Link>
                 {isEditing === item.docId ? <input type="text" defaultValue={comment} ref={editCommentText} onKeyDown={(e) => updateTheComment(e, item.docId)} /> : comment}
                 <i>{new Date(created_time.toDate()).toLocaleString()}</i>
-                {user_id === userData.user_id ? <button onClick={() => clickEditingBtn()}>編輯</button> : ""}
-                {user_id === userData.user_id ? <button onClick={() => deleteTheComment(item.docId)}>刪除</button> : ""}
+                {userData !== null && Object.keys(userData).length > 0 && user_id === userData.user_id ? <button onClick={() => clickEditingBtn()}>編輯</button> : ""}
+                {userData !== null && Object.keys(userData).length > 0 && user_id === userData.user_id ? <button onClick={() => deleteTheComment(item.docId)}>刪除</button> : ""}
             </div>
         )
     }
@@ -85,8 +104,8 @@ function Comments() {
                     <h2>留言({allComments ? allComments.length : "0"})</h2>
                 </div>
                 <div>
-                    <input type="text" ref={addCommentText} />
-                    <button onClick={() => addTheComment()}>輸入留言</button>
+                    <input type="text" onKeyDown={(e) => { addTheCommentKeyDown(e) }} ref={addCommentText} />
+                    <button onClick={() => addTheCommentClick()}>輸入留言</button>
                 </div>
             </Container1>
             {allComments ? allComments.map((item, index) => RenderAllComments(item, index)) : ""}

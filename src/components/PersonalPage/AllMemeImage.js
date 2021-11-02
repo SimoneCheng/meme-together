@@ -37,7 +37,7 @@ const Img0 = styled.img`
   object-fit: contain;
 `;
 
-function MemeImage(props) {
+function AllMemeImage(props) {
   const memeImg = props.memeImg;
 
   const deleteImg = (docId) => {
@@ -102,4 +102,4 @@ function MemeImage(props) {
 
 };
 
-export default MemeImage;
+export default AllMemeImage;

@@ -4,12 +4,14 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import AllEditingMeme from './AllEditingMeme';
-import MemeImage from './MemeImage';
+import AllMemeImage from './AllMemeImage';
+import AllFavorite from './AllFavorite';
 import {
     getUserInfo,
     getAllEditingMeme,
     getPrivateMemeImg,
-    getPublicMemeImg
+    getPublicMemeImg,
+    getAllFavorite
 } from '../../utlis/firebase';
 
 const Img0 = styled.img`
@@ -58,7 +60,7 @@ const Container5 = styled.div`
   margin-top: 20px;
   padding-bottom: 5px;
   cursor: pointer;
-  border-bottom: ${props => props.status === 'favorite' ? "4px solid black" : "none"};
+  border-bottom: ${props => props.status === 'favorites' ? "4px solid black" : "none"};
   transition: border-width 0.3s linear;
 `;
 
@@ -70,6 +72,7 @@ function Personal() {
     const [allEditingMeme, setAllEditingMeme] = useState([]);
     const [privateMemeImg, setPrivateMemeImg] = useState([]);
     const [publicMemeImg, setPublicMemeImg] = useState([]);
+    const [allFavorite, setAllFavorite] = useState([]);
 
     useEffect(() => {
         if (userData === null) {
@@ -80,6 +83,7 @@ function Personal() {
             getAllEditingMeme(userData.user_id, setAllEditingMeme);
             getPublicMemeImg(userData.user_id, setPublicMemeImg);
             getPrivateMemeImg(userData.user_id, setPrivateMemeImg);
+            getAllFavorite(userData.user_id, setAllFavorite);
         }
     }, [userData])
 
@@ -117,15 +121,16 @@ function Personal() {
                         <span>已發布</span>
                         <span>({publicMemeImg.length})</span>
                     </Container4>
-                    <Container5 status={status} onClick={() => { clickStatusButton('favorite') }}>
+                    <Container5 status={status} onClick={() => { clickStatusButton('favorites') }}>
                         <span>收藏</span>
-                        <span>(0)</span>
+                        <span>({allFavorite.length})</span>
                     </Container5>
                 </Container1>
             </Container0>
             {status === 'editing' ? <AllEditingMeme allEditingMeme={allEditingMeme} /> : ""}
-            {status === 'nopublic' ? <MemeImage memeImg={privateMemeImg} /> : ""}
-            {status === 'ispublic' ? <MemeImage memeImg={publicMemeImg} /> : ""}
+            {status === 'nopublic' ? <AllMemeImage memeImg={privateMemeImg} /> : ""}
+            {status === 'ispublic' ? <AllMemeImage memeImg={publicMemeImg} /> : ""}
+            {status === 'favorites' ? <AllFavorite allFavorite={allFavorite} /> : ""}
         </>
     )
 }
