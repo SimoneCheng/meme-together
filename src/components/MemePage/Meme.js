@@ -3,22 +3,28 @@ import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getUserInfo, getTheMemeImage } from '../../utlis/firebase';
+import Comments from './Comments';
 
 const Container0 = styled.div`
   padding-top: 100px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Container1 = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  font-size: 16px;
+  margin: auto;
+  width: 400px;
 `;
 
 const Container2 = styled.div`
-  width: 300px;
+  width: 400px;
 `;
 
 const Img0 = styled.img`
-  width: 300px;
+  width: 400px;
 `;
 
 function Meme() {
@@ -57,6 +63,9 @@ function Meme() {
 
         return (
             <Container1>
+                <Container2>
+                    <Img0 alt={img_name} src={img_url} />
+                </Container2>
                 <div>
                     <div>標題：{title}</div>
                     <div>{context}</div>
@@ -64,11 +73,7 @@ function Meme() {
                     <div>tags：{tags.map((item) => renderTags(item))}</div>
                     <div>建立日期：{new Date(created_time.toDate()).toLocaleString()}</div>
                     <div>最新發布日期：{new Date(last_save_time.toDate()).toLocaleString()}</div>
-
                 </div>
-                <Container2>
-                    <Img0 alt={img_name} src={img_url} />
-                </Container2>
             </Container1>
         )
     }
@@ -77,9 +82,7 @@ function Meme() {
     return (
         <Container0>
             {theMemeImage && userInfo ? renderMemeInfo() : ""}
-            <div>
-                <h2>留言</h2>
-            </div>
+            <Comments />
         </Container0>
     );
 

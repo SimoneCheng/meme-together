@@ -67,7 +67,7 @@ function checkLoginStatus(dispatch, setUserData) {
   return auth
     .onAuthStateChanged((user) => {
       if (user) {
-        const userData = { user_id: user.uid };
+        const userData = { user_id: user.uid, user_name: user.displayName };
         dispatch(setUserData(userData));
       } else {
         dispatch(setUserData(null));
@@ -183,6 +183,7 @@ function getPrivateMemeImg(id, setPrivateMemeImg) {
     .collection('completed_meme')
     .where("owner_user_id", "==", id)
     .where("isPublic", "==", false)
+    .orderBy('last_save_time' ,'desc')
     .onSnapshot((querySnapshot) => {
       const privateMemeImgData = [];
       querySnapshot.forEach(doc => {
@@ -192,17 +193,18 @@ function getPrivateMemeImg(id, setPrivateMemeImg) {
     });
 }
 
-function getPublicMemeImg(id, setPrivateMemeImg) {
+function getPublicMemeImg(id, setPublicMemeImg) {
   return db
     .collection('completed_meme')
     .where("owner_user_id", "==", id)
     .where("isPublic", "==", true)
+    .orderBy('last_save_time' ,'desc')
     .onSnapshot((querySnapshot) => {
       const publicMemeImgData = [];
       querySnapshot.forEach(doc => {
         publicMemeImgData.push(doc.data());
       })
-      setPrivateMemeImg(publicMemeImgData);
+      setPublicMemeImg(publicMemeImgData);
     });
 }
 
@@ -234,6 +236,61 @@ function getTheMemeImage(docId, setTheMemeImg) {
   })
 }
 
+function getAllPublicMemeImg(setAllPublicMemeImg) {
+  return db
+  .collection('completed_meme')
+  .orderBy('last_save_time', 'desc')
+  .where('isPublic', '==', true)
+  .onSnapshot((querySnapshot) => {
+    const allPublicMemeImgData = [];
+    querySnapshot.forEach(doc => {
+      allPublicMemeImgData.push(doc.data());
+    })
+    setAllPublicMemeImg(allPublicMemeImgData);
+  });
+}
+
+function getAllComments(docId, setAllComments) {
+  return db
+  .collection('completed_meme')
+  .doc(docId)
+  .collection('comments')
+  .orderBy('created_time', 'desc')
+  .onSnapshot((querySnapshot) => {
+    const allComments = [];
+    querySnapshot.forEach(doc => {
+      allComments.push({ data: doc.data(), docId: doc.id});
+    })
+    setAllComments(allComments);
+  });
+}
+
+function addComment(docId, data) {
+  return db
+  .collection('completed_meme')
+  .doc(docId)
+  .collection('comments')
+  .add(data);
+}
+
+function deleteComment(docId, commentId) {
+  return db
+  .collection('completed_meme')
+  .doc(docId)
+  .collection('comments')
+  .doc(commentId)
+  .delete();
+}
+
+function updateComment(docId, commentId, data) {
+  return db
+  .collection('completed_meme')
+  .doc(docId)
+  .collection('comments')
+  .doc(commentId)
+  .update(data);
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -255,5 +312,10 @@ export {
   deleteMemeImgInDb,
   deleteMemeImgInStorage,
   changeMemePublicStatus,
-  getTheMemeImage
+  getTheMemeImage,
+  getAllPublicMemeImg,
+  getAllComments,
+  addComment,
+  deleteComment,
+  updateComment
 };
