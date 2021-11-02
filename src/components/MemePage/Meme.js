@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getUserInfo, getTheMemeImage } from '../../utlis/firebase';
+import {
+    getUserInfo,
+    getTheMemeImage,
+    addToFavorite
+} from '../../utlis/firebase';
 import Comments from './Comments';
 
 const Container0 = styled.div`
@@ -31,6 +36,7 @@ function Meme() {
     const { id } = useParams();
     const [userInfo, setUserInfo] = useState();
     const [theMemeImage, setTheMemeImg] = useState();
+    const userData = useSelector((state) => state.userData);
 
     useEffect(() => {
         getTheMemeImage(id, setTheMemeImg)
@@ -42,6 +48,12 @@ function Meme() {
         }
     }, [theMemeImage])
 
+    const addTheMemeToFavorite = () => {
+        const { img_url, img_name } = theMemeImage;
+        const data = { img_url, img_name }
+        addToFavorite(userData.user_id, id, data).then(() => alert('收藏成功！'));
+    }
+
     const renderMemeInfo = () => {
         const {
             title,
@@ -50,7 +62,8 @@ function Meme() {
             last_save_time,
             img_url,
             img_name,
-            tags
+            tags,
+            owner_user_id
         } = theMemeImage;
 
         const renderTags = (item) => {
@@ -73,11 +86,11 @@ function Meme() {
                     <div>tags：{tags.map((item) => renderTags(item))}</div>
                     <div>建立日期：{new Date(created_time.toDate()).toLocaleString()}</div>
                     <div>最新發布日期：{new Date(last_save_time.toDate()).toLocaleString()}</div>
+                    {owner_user_id === userData.user_id ? "" : <button onClick={() => addTheMemeToFavorite()}>加入收藏</button>}
                 </div>
             </Container1>
         )
     }
-
 
     return (
         <Container0>

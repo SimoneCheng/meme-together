@@ -183,7 +183,7 @@ function getPrivateMemeImg(id, setPrivateMemeImg) {
     .collection('completed_meme')
     .where("owner_user_id", "==", id)
     .where("isPublic", "==", false)
-    .orderBy('last_save_time' ,'desc')
+    .orderBy('last_save_time', 'desc')
     .onSnapshot((querySnapshot) => {
       const privateMemeImgData = [];
       querySnapshot.forEach(doc => {
@@ -198,7 +198,7 @@ function getPublicMemeImg(id, setPublicMemeImg) {
     .collection('completed_meme')
     .where("owner_user_id", "==", id)
     .where("isPublic", "==", true)
-    .orderBy('last_save_time' ,'desc')
+    .orderBy('last_save_time', 'desc')
     .onSnapshot((querySnapshot) => {
       const publicMemeImgData = [];
       querySnapshot.forEach(doc => {
@@ -228,67 +228,76 @@ function changeMemePublicStatus(docId, data) {
 
 function getTheMemeImage(docId, setTheMemeImg) {
   return db
-  .collection('completed_meme')
-  .doc(docId)
-  .get()
-  .then((snapShot) => {
-    setTheMemeImg(snapShot.data());
-  })
+    .collection('completed_meme')
+    .doc(docId)
+    .get()
+    .then((snapShot) => {
+      setTheMemeImg(snapShot.data());
+    })
 }
 
 function getAllPublicMemeImg(setAllPublicMemeImg) {
   return db
-  .collection('completed_meme')
-  .orderBy('last_save_time', 'desc')
-  .where('isPublic', '==', true)
-  .onSnapshot((querySnapshot) => {
-    const allPublicMemeImgData = [];
-    querySnapshot.forEach(doc => {
-      allPublicMemeImgData.push(doc.data());
-    })
-    setAllPublicMemeImg(allPublicMemeImgData);
-  });
+    .collection('completed_meme')
+    .orderBy('last_save_time', 'desc')
+    .where('isPublic', '==', true)
+    .onSnapshot((querySnapshot) => {
+      const allPublicMemeImgData = [];
+      querySnapshot.forEach(doc => {
+        allPublicMemeImgData.push(doc.data());
+      })
+      setAllPublicMemeImg(allPublicMemeImgData);
+    });
 }
 
 function getAllComments(docId, setAllComments) {
   return db
-  .collection('completed_meme')
-  .doc(docId)
-  .collection('comments')
-  .orderBy('created_time', 'desc')
-  .onSnapshot((querySnapshot) => {
-    const allComments = [];
-    querySnapshot.forEach(doc => {
-      allComments.push({ data: doc.data(), docId: doc.id});
-    })
-    setAllComments(allComments);
-  });
+    .collection('completed_meme')
+    .doc(docId)
+    .collection('comments')
+    .orderBy('created_time', 'desc')
+    .onSnapshot((querySnapshot) => {
+      const allComments = [];
+      querySnapshot.forEach(doc => {
+        allComments.push({ data: doc.data(), docId: doc.id });
+      })
+      setAllComments(allComments);
+    });
 }
 
 function addComment(docId, data) {
   return db
-  .collection('completed_meme')
-  .doc(docId)
-  .collection('comments')
-  .add(data);
+    .collection('completed_meme')
+    .doc(docId)
+    .collection('comments')
+    .add(data);
 }
 
 function deleteComment(docId, commentId) {
   return db
-  .collection('completed_meme')
-  .doc(docId)
-  .collection('comments')
-  .doc(commentId)
-  .delete();
+    .collection('completed_meme')
+    .doc(docId)
+    .collection('comments')
+    .doc(commentId)
+    .delete();
 }
 
 function updateComment(docId, commentId, data) {
   return db
-  .collection('completed_meme')
-  .doc(docId)
-  .collection('comments')
-  .doc(commentId)
-  .update(data);
+    .collection('completed_meme')
+    .doc(docId)
+    .collection('comments')
+    .doc(commentId)
+    .update(data);
+}
+
+function addToFavorite(id, docId, data) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('favorites')
+    .doc(docId)
+    .set(data);
 }
 
 export {
@@ -317,5 +326,6 @@ export {
   getAllComments,
   addComment,
   deleteComment,
-  updateComment
+  updateComment,
+  addToFavorite
 };
