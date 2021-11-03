@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { countClickTime } from '../../utlis/CountClickTime';
 
 const Container0 = styled.div`
 
@@ -23,6 +25,7 @@ const Container2 = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const Img0 = styled.img`
@@ -32,26 +35,30 @@ const Img0 = styled.img`
 `;
 
 function AllPublicMemeImg(props) {
-    const memeImg = props.memeImg;
-  
-    const renderMemeImg = (item) => {
-      const { img_url, img_name } = item;
-  
-      return (
-        <Container2>
-          <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
-        </Container2>
-      );
-    }
-  
+  const memeImg = props.memeImg;
+  const history = useHistory();
+
+  const renderMemeImg = (item) => {
+    const { img_url, img_name } = item;
+    const clickMemeImg = () => {
+      countClickTime(img_name)
+        .then(() => history.push(`/meme/${img_name}`));
+    };
     return (
-      <Container0>
-        <Container1>
-          {memeImg ? memeImg.map((item) => renderMemeImg(item)) : ""}
-        </Container1>
-      </Container0>
-    )
-  
-  };
-  
-  export default AllPublicMemeImg;
+      <Container2 onClick={() => { clickMemeImg() }}>
+        <Img0 src={img_url} alt={img_name}></Img0>
+      </Container2>
+    );
+  }
+
+  return (
+    <Container0>
+      <Container1>
+        {memeImg ? memeImg.map((item) => renderMemeImg(item)) : ""}
+      </Container1>
+    </Container0>
+  )
+
+};
+
+export default AllPublicMemeImg;

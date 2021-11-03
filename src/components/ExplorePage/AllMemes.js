@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-import { applyMiddleware } from 'redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getAllPublicMemeImg } from '../../utlis/firebase';
+import { getAllPublicMemeImg, getAllPublicMemeNextPage } from '../../utlis/firebase';
+import { countClickTime } from '../../utlis/CountClickTime';
 
 const Container0 = styled.div`
   padding-top: 100px;
@@ -27,6 +26,7 @@ const Container2 = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const Container3 = styled.div`
@@ -41,18 +41,41 @@ const Img0 = styled.img`
 `;
 
 function AllMemes() {
-    const [allPublicMemeImg, setAllPublicMemeImg] = useState();
+    const selectSort = useRef(null);
+    const [sort, setSort] = useState('desc');
+    const [allPublicMemeImg, setAllPublicMemeImg] = useState([]);
+    const [lastKey, setLastKey] = useState({});
+    const history = useHistory();
 
     useEffect(() => {
-        getAllPublicMemeImg(setAllPublicMemeImg);
-    }, [])
+        getAllPublicMemeImg(sort).then((res) => {
+            setAllPublicMemeImg(res.allPublicMemeImgData);
+            setLastKey(res.lastKey);
+        });
+    }, [sort])
+
+    const getMoreMeme = () => {
+        if (lastKey) {
+            getAllPublicMemeNextPage(lastKey, sort).then((res) => {
+                setAllPublicMemeImg(allPublicMemeImg.concat(res.allPublicMemeImgData));
+                setLastKey(res.lastKey);
+            })
+        }
+    }
+
+    const clickSelectSort = () => {
+        setSort(selectSort.current.value);
+    }
 
     const renderAllPublicMemeImg = (item) => {
         const { img_url, img_name } = item;
-
+        const clickMemeImg = () => {
+            countClickTime(img_name)
+                .then(() => history.push(`/meme/${img_name}`));
+        };
         return (
-            <Container2>
-                <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
+            <Container2 onClick={() => clickMemeImg()}>
+                <Img0 src={img_url} alt={img_name} />
             </Container2>
         );
     }
@@ -64,15 +87,17 @@ function AllMemes() {
                     <input type="search" id="site-search" name="q" aria-label="Search through site content" />
                     <button>Search</button>
                 </div>
-                <select>
-                    <option>選擇排序</option>
-                    <option>依熱門程度</option>
-                    <option>依最新發布日期：由新到舊</option>
-                    <option>依最新發布日期：由舊到新</option>
-                </select>
+                <div>
+                    <span>排序：</span>
+                    <select ref={selectSort} onChange={() => clickSelectSort()}>
+                        <option value='desc'>依最新發布日期：由新到舊</option>
+                        <option value='asc'>依最新發布日期：由舊到新</option>
+                    </select>
+                </div>
             </Container3>
             <Container1>
                 {allPublicMemeImg ? allPublicMemeImg.map((item) => renderAllPublicMemeImg(item)) : ""}
+                {lastKey ? <button onClick={() => getMoreMeme()}>more meme</button> : <div>沒有囉！</div>}
             </Container1>
         </Container0>
     )

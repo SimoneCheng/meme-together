@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -55,6 +55,8 @@ function Meme() {
             img_url,
             img_name,
             tags,
+            click_time,
+            owner_user_id
         } = theMemeImage;
 
         const renderTags = (item) => {
@@ -73,10 +75,11 @@ function Meme() {
                 <div>
                     <div>標題：{title}</div>
                     <div>{context}</div>
-                    <div>作者：{userInfo.user_name}</div>
+                    <div><Link to={`/public/${owner_user_id}`}>作者：{userInfo.user_name}</Link></div>
                     <div>tags：{tags.map((item) => renderTags(item))}</div>
                     <div>建立日期：{new Date(created_time.toDate()).toLocaleString()}</div>
                     <div>最新發布日期：{new Date(last_save_time.toDate()).toLocaleString()}</div>
+                    <div>瀏覽次數：{click_time}</div>
                     <AddToFavorite theMemeImage={theMemeImage} />
                 </div>
             </Container1>

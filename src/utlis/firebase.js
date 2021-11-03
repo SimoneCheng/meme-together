@@ -236,18 +236,41 @@ function getTheMemeImage(docId, setTheMemeImg) {
     })
 }
 
-function getAllPublicMemeImg(setAllPublicMemeImg) {
+function getAllPublicMemeImg(sort) {
   return db
     .collection('completed_meme')
-    .orderBy('last_save_time', 'desc')
     .where('isPublic', '==', true)
-    .onSnapshot((querySnapshot) => {
+    .orderBy('last_save_time', sort)
+    .limit(3)
+    .get()
+    .then((querySnapshot) => {
+      let lastKey;
       const allPublicMemeImgData = [];
       querySnapshot.forEach(doc => {
         allPublicMemeImgData.push(doc.data());
+        lastKey = doc;
       })
-      setAllPublicMemeImg(allPublicMemeImgData);
+      return { allPublicMemeImgData, lastKey }
     });
+}
+
+function getAllPublicMemeNextPage(lastOne, sort = 'desc') {
+  return db
+    .collection('completed_meme')
+    .where('isPublic', '==', true)
+    .orderBy('last_save_time', sort)
+    .startAfter(lastOne)
+    .limit(3)
+    .get()
+    .then((querySnapshot) => {
+      let lastKey;
+      const allPublicMemeImgData = [];
+      querySnapshot.forEach(doc => {
+        allPublicMemeImgData.push(doc.data());
+        lastKey = doc;
+      })
+      return { allPublicMemeImgData, lastKey }
+    })
 }
 
 function getAllComments(docId, setAllComments) {
@@ -339,6 +362,37 @@ function checkFavoriteList(id, img_name, setResult) {
     });
 }
 
+function getClickTime(docId) {
+  return db
+    .collection('completed_meme')
+    .doc(docId)
+    .get()
+    .then((snapShot) => snapShot.data().click_time);
+}
+
+function updateClickTime(docId, data) {
+  return db
+    .collection('completed_meme')
+    .doc(docId)
+    .update(data);
+}
+
+function getCampaignMeme() {
+  return db
+    .collection('completed_meme')
+    .where('isPublic', '==', true)
+    .orderBy('click_time', 'desc')
+    .limit(6)
+    .get()
+    .then((querySnapshot) => {
+      const campaignMeme = [];
+      querySnapshot.forEach(doc => {
+        campaignMeme.push(doc.data());
+      })
+      return campaignMeme;
+    });
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -362,6 +416,7 @@ export {
   changeMemePublicStatus,
   getTheMemeImage,
   getAllPublicMemeImg,
+  getAllPublicMemeNextPage,
   getAllComments,
   addComment,
   deleteComment,
@@ -369,5 +424,8 @@ export {
   addToFavorite,
   deletFromFavorite,
   getAllFavorite,
-  checkFavoriteList
+  checkFavoriteList,
+  getClickTime,
+  updateClickTime,
+  getCampaignMeme
 };

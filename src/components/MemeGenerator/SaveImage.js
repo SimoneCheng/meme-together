@@ -54,7 +54,8 @@ function SaveImage(props) {
                         tags: tagsArr,
                         isPublic: isPublic.current.checked,
                         created_time: new Date(),
-                        last_save_time: new Date()
+                        last_save_time: new Date(),
+                        click_time: 0
                     }
                     return memeInfo;
                 })

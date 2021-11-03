@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import color from './Styled/colorTheme';
+import { getCampaignMeme } from '../utlis/firebase';
+import { countClickTime } from '../utlis/CountClickTime';
 
 import robot from '../image/day27-my-robot.png';
 import canvasStand from '../image/day10-canvas-stand.png';
@@ -64,10 +66,39 @@ const Container6 = styled.div`
 
 const Container7 = styled.div`
   background-color: ${props => props.color.color2.colorCode};
-  height: 300px;
   padding-top: 30px;
   @media screen and (max-width: 768px) {
    text-align: center;
+  }
+`;
+
+const Container8 = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  margin: auto;
+`;
+
+const Container9 = styled.div`
+ cursor: pointer;
+ margin: 30px;
+`;
+
+const Container10 = styled.div`
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 50px;
+`;
+
+const Container11 = styled.span`
+  border-bottom: 2px solid white;
+  :hover {
+      background-color: white;
+      color: #056;
+      cursor: pointer;
   }
 `;
 
@@ -95,6 +126,12 @@ const Image2 = styled.img`
   @media screen and (max-width: 425px) {
     width: 10rem;
   }
+`;
+
+const Image3 = styled.img`
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px gray;
 `;
 
 const Title1 = styled.h1`
@@ -160,6 +197,27 @@ const Strong = styled.strong`
 `;
 
 function Index() {
+  const [camapignMeme, setCampaignMeme] = useState();
+  const history = useHistory();
+
+  useEffect(() => {
+    getCampaignMeme().then((res) => setCampaignMeme(res))
+  }, [])
+
+  const renderCampaignMeme = (item) => {
+    const { img_url, img_name } = item;
+    const clickMemeImg = () => {
+      countClickTime(img_name)
+        .then(() => history.push(`/meme/${img_name}`));
+    };
+    return (
+      <Container9 onClick={() => clickMemeImg()}>
+        <Image3 src={img_url} alt={img_name} />
+      </Container9>
+    );
+  }
+
+
   return (
     <div>
       <Container1 color={color}>
@@ -193,6 +251,10 @@ function Index() {
       </Container3>
       <Container7 color={color}>
         <Title3>熱門創作</Title3>
+        <Container8>
+          {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : ""}
+        </Container8>
+        <Link to="/explorememes"><Container10><Container11>查看更多</Container11></Container10></Link>
       </Container7>
     </div>
   );
