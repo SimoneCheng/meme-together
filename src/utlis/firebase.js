@@ -393,6 +393,97 @@ function getCampaignMeme() {
     });
 }
 
+function addFollowing(id, id2, data) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('following_list')
+    .doc(id2)
+    .set(data);
+}
+
+function addFollower(id2, id, data) {
+  return db
+    .collection('users')
+    .doc(id2)
+    .collection('follower_list')
+    .doc(id)
+    .set(data);
+}
+
+function unfollowing(id, id2) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('following_list')
+    .doc(id2)
+    .delete();
+}
+
+function deleteFollower(id2, id) {
+  return db.collection('users')
+    .doc(id2)
+    .collection('follower_list')
+    .doc(id)
+    .delete();
+}
+
+function checkAllFollowing(id, setResult) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('following_list')
+    .onSnapshot((querySnapshot) => {
+      const result = [];
+      querySnapshot.forEach(doc => {
+        result.push(doc.id);
+      })
+      setResult(result);
+    })
+}
+
+function checkAllFollowers(id, setResult) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('follower_list')
+    .onSnapshot((querySnapshot) => {
+      const result = [];
+      querySnapshot.forEach(doc => {
+        result.push(doc.id);
+      })
+      setResult(result);
+    })
+}
+
+function getAllFollowing(followingList) {
+  return db
+    .collection('users')
+    .where('user_id', 'in', followingList)
+    .get()
+    .then((querySnapshot) => {
+      const allFollowing = [];
+      querySnapshot.forEach(doc => {
+        allFollowing.push(doc.data());
+      })
+      return allFollowing;
+    })
+}
+
+function getAllFollowers(followersList) {
+  return db
+  .collection('users')
+  .where('user_id', 'in', followersList)
+  .get()
+  .then((querySnapshot) => {
+    const allFollowers = [];
+    querySnapshot.forEach(doc => {
+      allFollowers.push(doc.data());
+    })
+    return allFollowers;
+  })
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -427,5 +518,13 @@ export {
   checkFavoriteList,
   getClickTime,
   updateClickTime,
-  getCampaignMeme
+  getCampaignMeme,
+  addFollowing,
+  addFollower,
+  unfollowing,
+  deleteFollower,
+  checkAllFollowing,
+  checkAllFollowers,
+  getAllFollowing,
+  getAllFollowers
 };

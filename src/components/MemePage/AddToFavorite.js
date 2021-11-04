@@ -33,7 +33,9 @@ function AddToFavorite(props) {
             && Object.keys(userData).length > 0
             && owner_user_id !== userData.user_id
             && isInFavorite.length !== 0) {
-            return (<button onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alert('已取消收藏！') })}>取消收藏</button>);
+            return (
+                <button onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alert('已取消收藏！') })}>取消收藏</button>
+            );
         }
     }
     return (
