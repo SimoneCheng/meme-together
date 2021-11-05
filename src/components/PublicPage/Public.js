@@ -9,7 +9,9 @@ import {
   addFollower,
   addFollowing,
   checkAllFollowing,
-  checkAllFollowers
+  checkAllFollowers,
+  unfollowing,
+  deleteFollower
 } from '../../utlis/firebase';
 import AllFollowing from './AllFollowing';
 import AllPublicMemeImg from './AllPublicMemeImg';
@@ -48,6 +50,7 @@ function Public() {
   const [publicMemeImg, setPublicMemeImg] = useState([]);
   const [allFollowing, setAllFollowing] = useState([]);
   const [allFollowers, setAllFlowers] = useState([]);
+  const [allFollowingSelf, setAllFollowingSelf] = useState([]);
   const [status, setStatus] = useState('allPublicMeme');
   const userData = useSelector((state) => state.userData);
 
@@ -56,8 +59,13 @@ function Public() {
     getPublicMemeImg(id, setPublicMemeImg);
     checkAllFollowing(id, setAllFollowing);
     checkAllFollowers(id, setAllFlowers)
-    setStatus('allPublicMeme');
-  }, [id])
+  }, [])
+
+  useEffect(() => {
+    if (userData !== null && Object.keys(userData).length > 0) {
+      checkAllFollowing(userData.user_id, setAllFollowingSelf);
+    }
+  }, [userData])
 
   const followUser = () => {
     const data = { user_id: id };
@@ -67,13 +75,28 @@ function Public() {
       .then(() => alert('追蹤成功！'));
   }
 
+  const unfollowUser = () => {
+    unfollowing(userData.user_id, id)
+      .then(() => deleteFollower(id, userData.user_id))
+      .then(() => alert('已取消追蹤！'));
+  }
+
   return (
     <Container0>
       <Container1>
         <Container2>
           {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
           {userInfo ? userInfo.user_name : ""}
-          {userInfo && userData && Object.keys(userData).length > 0 && userInfo.user_id !== userData.user_id ? <button onClick={() => followUser()}>追蹤</button> : ""}
+          {userInfo
+            && userData
+            && Object.keys(userData).length > 0
+            && userInfo.user_id !== userData.user_id
+            && allFollowingSelf.includes(id) === false ? <button onClick={() => followUser()}>追蹤</button> : ""}
+          {userInfo
+            && userData
+            && Object.keys(userData).length > 0
+            && userInfo.user_id !== userData.user_id
+            && allFollowingSelf.includes(id) === true ? <button onClick={() => unfollowUser()}>取消追蹤</button> : ""}
         </Container2>
         <Container2 onClick={() => setStatus('allPublicMeme')}>
           <p>我的創作</p>
