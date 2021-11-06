@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+
+import {
+    getUserInfo,
+    updateUserInfo,
+    updatePassword
+} from '../../utlis/firebase';
 
 const Container0 = styled.div`
   padding-top: 100px;
@@ -15,10 +21,47 @@ const Container1 = styled.div`
 `;
 
 const Img0 = styled.img`
-  width: 200px;
+  width: 100px;
 `;
 
 function Setting() {
+    const userData = useSelector((state) => state.userData);
+    const [userInfo, setUserInfo] = useState();
+    const history = useHistory();
+    const selfIntroTxt = useRef(null);
+    const oldPassword = useRef(null);
+    const newPassword1 = useRef(null);
+    const newPassword2 = useRef(null);
+
+    useEffect(() => {
+        if (userData === null || Object.keys(userData).length === 0) {
+            history.push('/');
+        }
+        if (userData !== null && Object.keys(userData).length > 0) {
+            getUserInfo(userData.user_id, setUserInfo);
+        }
+    }, [userData])
+
+    const clickUpdateSelfIntro = () => {
+        const data = { self_intro: selfIntroTxt.current.value }
+        updateUserInfo(userData.user_id, data).then(() => alert('個人簡介更新成功！'));
+    }
+
+    const clickUpdatePassword = () => {
+        if (oldPassword.current.value === "") {
+            alert('尚未輸入舊密碼！');
+            return;
+        } else if (newPassword1.current.value === "" || newPassword2.current.value === "") {
+            alert('尚未輸入新密碼！');
+            return;
+        } else if (newPassword2.current.value !== newPassword1.current.value) {
+            alert('請再輸入一次新密碼欄位有誤！');
+            return;
+        } else {
+            updatePassword(oldPassword.current.value, newPassword1.current.value);
+        }
+    }
+
     return (
         <Container0>
             <Container1>
@@ -33,27 +76,27 @@ function Setting() {
                     <hr></hr>
                     <div>
                         <h2>修改頭像</h2>
-                        <Img0 alt="profile-img" src="https://teameowdev.files.wordpress.com/2016/04/teameow-e9a090e8a8ade9a0ade8b2bc.jpg"></Img0>
-                        <button>上傳新頭像</button>
+                        {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
+                        {userInfo ? <button>上傳新頭像</button> : ""}
                     </div>
                     <div>
                         <h2>修改個人簡介</h2>
                         <span>個人簡介</span>
-                        <textarea rows="5" cols="33" />
-                        <button>儲存</button>
+                        {userInfo ? <textarea rows="5" cols="33" defaultValue={userInfo.self_intro} ref={selfIntroTxt} /> : ""}
+                        {userInfo ? <button onClick={() => clickUpdateSelfIntro()}>儲存</button> : ""}
                     </div>
                 </div>
                 <div id="password">
                     <h1>修改密碼</h1>
                     <hr></hr>
                     <p>舊密碼</p>
-                    <input type="password" />
+                    <input type="password" ref={oldPassword} />
                     <p>新密碼</p>
-                    <input type="password" />
+                    <input type="password" ref={newPassword1} />
                     <p>請再輸入一次新密碼</p>
-                    <input type="password" />
+                    <input type="password" ref={newPassword2} />
                     <br></br>
-                    <button>送出</button>
+                    <button onClick={() => clickUpdatePassword()}>送出</button>
                 </div>
                 <div id="privacy">
                     <h1>隱私設定</h1>

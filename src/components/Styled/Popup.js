@@ -21,15 +21,6 @@ const Container1 = styled.div`
   position: relative;
 `;
 
-const HrText = styled.div`
-  position: relative;
-  left: 45%;
-  top: -20px;
-  background-color: white;
-  width: 20px;
-  padding-left: 5px;
-`;
-
 const Input1 = styled.input`
   width: 95%;
   margin: 20px auto;
@@ -66,26 +57,6 @@ const LoginButton = styled.button`
   padding: 6px 10px;
   width: 100%;
   margin-bottom: 20px;
-`;
-
-const FBLoginButton = styled.button`
-  border: none;
-  border-radius: 10px;
-  background-color: #3b5998;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 10px;
-  width: 100%;
-`;
-
-const FBLogoImg = styled.img`
-  height: 30px;
-  margin-right: 10px;
 `;
 
 const SignupButton = styled.button`
@@ -136,12 +107,9 @@ const CloseButton = styled.span`
 export {
     Container0,
     Container1,
-    HrText,
     Input1,
     Input2,
     LoginButton,
-    FBLoginButton,
-    FBLogoImg,
     SignupButton,
     CloseButton,
 }

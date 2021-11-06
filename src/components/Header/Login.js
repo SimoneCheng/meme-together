@@ -7,11 +7,8 @@ import color from '../Styled/colorTheme';
 import {
   Container0,
   Container1,
-  HrText,
   Input1,
   LoginButton,
-  FBLoginButton,
-  FBLogoImg,
   CloseButton,
 } from '../Styled/Popup';
 
@@ -46,9 +43,6 @@ function Login() {
           <Input1 type="password" placeholder="password" ref={loginPassword} />
         </div>
         <LoginButton color={color} onClick={() => { clickLogin(); }}>登入</LoginButton>
-        <hr></hr>
-        <HrText>or</HrText>
-        <FBLoginButton><FBLogoImg alt="flogo" src={fLogo}></FBLogoImg>使用 Facebook 帳號登入</FBLoginButton>
       </Container1>
     </Container0>
   )

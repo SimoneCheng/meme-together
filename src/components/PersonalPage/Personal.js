@@ -75,7 +75,7 @@ function Personal() {
     const [allFavorite, setAllFavorite] = useState([]);
 
     useEffect(() => {
-        if (userData === null) {
+        if (userData === null || Object.keys(userData).length === 0) {
             history.push('/');
         }
         if (userData != null && Object.keys(userData).length > 0) {

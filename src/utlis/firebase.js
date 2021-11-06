@@ -35,7 +35,8 @@ async function nativeSignup(email, password, name) {
         user_email: user.email,
         user_name: name,
         user_img: process.env.REACT_APP_defaultProfileImg,
-        created_time: user.metadata.creationTime
+        created_time: user.metadata.creationTime,
+        self_intro: "還沒有個人簡介喔！"
       });
       alert("註冊成功！");
     })
@@ -73,6 +74,25 @@ function checkLoginStatus(dispatch, setUserData) {
         dispatch(setUserData(null));
       };
     });
+}
+
+function reAuth(password) {
+  const user = auth.currentUser;
+  const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
+  return user
+    .reauthenticateWithCredential(credential)
+    .then(() => user)
+    .catch(() => alert('舊密碼輸入錯誤！請重新輸入！'));
+}
+
+function updatePassword(password, newPassword) {
+  return reAuth(password)
+    .then((res) => {
+      res.updatePassword(newPassword);
+    })
+    .then(() => nativeLogout())
+    .then(() => alert('密碼更新完成，請重新登入！'))
+    .catch((error) => alert(error.message))
 }
 
 // All Tamplates Page
@@ -472,16 +492,23 @@ function getAllFollowing(followingList) {
 
 function getAllFollowers(followersList) {
   return db
-  .collection('users')
-  .where('user_id', 'in', followersList)
-  .get()
-  .then((querySnapshot) => {
-    const allFollowers = [];
-    querySnapshot.forEach(doc => {
-      allFollowers.push(doc.data());
+    .collection('users')
+    .where('user_id', 'in', followersList)
+    .get()
+    .then((querySnapshot) => {
+      const allFollowers = [];
+      querySnapshot.forEach(doc => {
+        allFollowers.push(doc.data());
+      })
+      return allFollowers;
     })
-    return allFollowers;
-  })
+}
+
+function updateUserInfo(id, data) {
+  return db
+    .collection('users')
+    .doc(id)
+    .update(data)
 }
 
 export {
@@ -526,5 +553,8 @@ export {
   checkAllFollowing,
   checkAllFollowers,
   getAllFollowing,
-  getAllFollowers
+  getAllFollowers,
+  updateUserInfo,
+  reAuth, 
+  updatePassword
 };

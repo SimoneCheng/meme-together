@@ -87,6 +87,8 @@ function Public() {
         <Container2>
           {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
           {userInfo ? userInfo.user_name : ""}
+          <br></br>
+          {userInfo ? userInfo.self_intro: ""}
           {userInfo
             && userData
             && Object.keys(userData).length > 0
