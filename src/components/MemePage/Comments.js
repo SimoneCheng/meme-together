@@ -43,10 +43,10 @@ function Comments() {
             return;
         } else {
             const data = {
-                comment: addCommentText.current.value,
+                comment: `${addCommentText.current.value}`,
                 created_time: new Date(),
-                user_id: userData.user_id,
-                user_name: userData.user_name
+                user_id: `${userData.user_id}`,
+                user_name: `${userData.user_name}`
             }
             addComment(id, data);
             addCommentText.current.value = "";
@@ -58,14 +58,19 @@ function Comments() {
             alert('請先登入！');
             return;
         } else if (e.keyCode === 13) {
-            const data = {
-                comment: addCommentText.current.value,
-                created_time: new Date(),
-                user_id: userData.user_id,
-                user_name: userData.user_name
+            if (addCommentText.current.value === "") {
+                alert('請輸入留言！');
+                return;
+            } else {
+                const data = {
+                    comment: `${addCommentText.current.value}`,
+                    created_time: new Date(),
+                    user_id: `${userData.user_id}`,
+                    user_name: `${userData.user_name}`
+                }
+                addComment(id, data);
+                addCommentText.current.value = "";
             }
-            addComment(id, data);
-            addCommentText.current.value = "";
         }
     }
 
@@ -104,8 +109,8 @@ function Comments() {
                     <h2>留言({allComments ? allComments.length : "0"})</h2>
                 </div>
                 <div>
-                    <input type="text" onKeyDown={(e) => { addTheCommentKeyDown(e) }} ref={addCommentText} />
-                    <button onClick={() => addTheCommentClick()}>輸入留言</button>
+                    {userData && Object.keys(userData).length > 0 ? <input type="text" onKeyDown={(e) => { addTheCommentKeyDown(e) }} ref={addCommentText} /> : ""}
+                    {userData && Object.keys(userData).length > 0 ? <button onClick={() => addTheCommentClick()}>輸入留言</button> : ""}
                 </div>
             </Container1>
             {allComments ? allComments.map((item, index) => RenderAllComments(item, index)) : ""}

@@ -20,6 +20,7 @@ import {
   NavDesktop,
   LogoDesktop,
   LogoImage,
+  Ul1,
   Ul2,
   LiDesktop,
   Button,
@@ -34,6 +35,7 @@ import {
 import logo from '../../image/outline_bug_report_black_36dp.png';
 import account from '../../image/outline_account_circle_black_36dp.png';
 import setting from '../../image/outline_settings_black_36dp.png';
+import UploadTemplate from './UploadTemplate';
 
 function Header() {
   const dispatch = useDispatch();
@@ -125,9 +127,10 @@ function Header() {
             <Link to='/'><LogoImage alt='logo' src={logo}></LogoImage></Link>
             <Link to='/'><span>together</span></Link>
           </LogoDesktop>
-          <ul>
+          <Ul1>
             <LiDesktop><Link to="/explorememes"><Button color={color}>探索</Button></Link></LiDesktop>
-          </ul>
+            {userData ? <LiDesktop><Button color={color}>貢獻模板</Button></LiDesktop> : ""}
+          </Ul1>
           {userData ? renderDesktopLogoutAndMemberButton() : renderDesktopLoginAndSignupButton()}
         </NavDesktop>
 
@@ -142,6 +145,7 @@ function Header() {
           <MenuMobile>
             <ul>
               <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
+              {userData ? <LiMobile color={color}><Button color={color}>貢獻模板</Button></LiMobile> : ""}
             </ul>
             {userData ? renderMobileLogoutAndMemberButton() : renderMobileLoginAndSignupButton()}
           </MenuMobile>
@@ -150,6 +154,7 @@ function Header() {
 
       {isLoginDisplayed ? <Login /> : ""}
       {isSignupDisplayed ? <Signup /> : ""}
+      {/* <UploadTemplate /> */}
     </>
   );
 }

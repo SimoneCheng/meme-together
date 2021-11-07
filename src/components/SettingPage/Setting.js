@@ -105,7 +105,7 @@ function Setting() {
                     <div>
                         <h2>修改頭像</h2>
                         {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
-                        {userInfo ? <input type="file" accept="img/*" onChange={(e) => clickUploadProfileImg(e)} /> : ""}
+                        {userInfo ? <input type="file" accept="image/*" onChange={(e) => clickUploadProfileImg(e)} /> : ""}
                         {userInfo ? <button onClick={() => clickDefaultProfileImg()}>使用預設頭像</button> : ""}
                     </div>
                     <div>

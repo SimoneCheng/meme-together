@@ -12,8 +12,6 @@ import {
   CloseButton,
 } from '../Styled/Popup';
 
-import fLogo from '../../image/f_logo_RGB-White_58.png';
-
 function Login() {
   const dispatch = useDispatch();
   const loginEmail = useRef(null);

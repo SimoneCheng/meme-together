@@ -43,6 +43,10 @@ const LogoImage = styled.img`
   width: 35px;
 `;
 
+const Ul1 = styled.ul`
+  display: flex;
+`;
+
 const Ul2 = styled.ul`
   display: flex;
   flex-grow: 1;
@@ -60,7 +64,7 @@ const Button = styled.button`
   color: ${props => props.color.color2.colorCode};
   background-color: ${props => props.color.color3.colorCode};
   font-size: 16px;
-  padding: 5px 30px;
+  padding: 5px 15px;
   cursor: pointer;
   :active {
     background-color: ${props => props.color.color2.colorCode};
@@ -125,6 +129,7 @@ export {
     NavDesktop,
     LogoDesktop,
     LogoImage,
+    Ul1,
     Ul2,
     LiDesktop,
     Button,

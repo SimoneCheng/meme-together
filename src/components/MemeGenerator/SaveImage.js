@@ -47,12 +47,12 @@ function SaveImage(props) {
                 .then((res) => {
                     const tagsArr = tags.current.value.split(' ');
                     const memeInfo = {
-                        title: title.current.value,
-                        context: context.current.value,
-                        img_name: res,
-                        owner_user_id: userData.user_id,
-                        tags: tagsArr,
-                        isPublic: isPublic.current.checked,
+                        title: `${title.current.value}`,
+                        context: `${context.current.value}`,
+                        img_name: `${res}`,
+                        owner_user_id: `${userData.user_id}`,
+                        tags: `${tagsArr}`,
+                        isPublic: `${isPublic.current.checked}`,
                         created_time: new Date(),
                         last_save_time: new Date(),
                         click_time: 0
