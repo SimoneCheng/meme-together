@@ -1,3 +1,5 @@
+import { isUploadTemplateDisplayed } from "./reducers"
+
 const setUserData = (userData) => {
     return {
         type: "setUserData", 
@@ -19,8 +21,16 @@ const setIsSignupDisplayed = (isSignupDisplayed) => {
     }
 }
 
+const setIsUploadTemplateDisplayed = (isUploadTemplateDisplayed) => {
+    return {
+        type: "setIsUploadTemplateDisplayed",
+        payload: isUploadTemplateDisplayed
+    }
+}
+
 export { 
     setUserData,
     setIsLoginDisplayed,
     setIsSignupDisplayed,
+    setIsUploadTemplateDisplayed
 };

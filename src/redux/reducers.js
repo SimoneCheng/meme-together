@@ -25,8 +25,18 @@ const isSignupDisplayed = (state = false, action) => {
     }
 }
 
+const isUploadTemplateDisplayed = (state = false, action) => {
+    switch (action.type) {
+        case "setIsUploadTemplateDisplayed":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export { 
     userData,
     isLoginDisplayed,
-    isSignupDisplayed
+    isSignupDisplayed,
+    isUploadTemplateDisplayed
 };

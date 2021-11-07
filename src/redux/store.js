@@ -3,12 +3,14 @@ import {
     userData, 
     isLoginDisplayed, 
     isSignupDisplayed,
+    isUploadTemplateDisplayed
  } from "./reducers";
 
  const reducers = combineReducers({ 
      userData,
      isLoginDisplayed,
      isSignupDisplayed,
+     isUploadTemplateDisplayed
  })
 
 const store = createStore(

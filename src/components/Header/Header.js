@@ -8,6 +8,7 @@ import {
   setUserData,
   setIsLoginDisplayed,
   setIsSignupDisplayed,
+  setIsUploadTemplateDisplayed
 } from '../../redux/actions';
 import {
   nativeLogout,
@@ -42,6 +43,7 @@ function Header() {
   const userData = useSelector((state) => state.userData);
   const isLoginDisplayed = useSelector((state) => state.isLoginDisplayed);
   const isSignupDisplayed = useSelector((state) => state.isSignupDisplayed);
+  const isUploadTemplateDisplayed = useSelector((state) => state.isUploadTemplateDisplayed);
   const history = useHistory();
 
   useEffect(() => {
@@ -54,6 +56,10 @@ function Header() {
 
   const clickSignupButton = () => {
     dispatch(setIsSignupDisplayed(true));
+  }
+
+  const clickUploadTemplateButton = () => {
+    dispatch(setIsUploadTemplateDisplayed(true));
   }
 
   const clickAccount = () => {
@@ -129,7 +135,7 @@ function Header() {
           </LogoDesktop>
           <Ul1>
             <LiDesktop><Link to="/explorememes"><Button color={color}>探索</Button></Link></LiDesktop>
-            {userData ? <LiDesktop><Button color={color}>貢獻模板</Button></LiDesktop> : ""}
+            {userData ? <LiDesktop><Button color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</Button></LiDesktop> : ""}
           </Ul1>
           {userData ? renderDesktopLogoutAndMemberButton() : renderDesktopLoginAndSignupButton()}
         </NavDesktop>
@@ -145,7 +151,7 @@ function Header() {
           <MenuMobile>
             <ul>
               <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
-              {userData ? <LiMobile color={color}><Button color={color}>貢獻模板</Button></LiMobile> : ""}
+              {userData ? <LiMobile color={color}><Button color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</Button></LiMobile> : ""}
             </ul>
             {userData ? renderMobileLogoutAndMemberButton() : renderMobileLoginAndSignupButton()}
           </MenuMobile>
@@ -154,7 +160,7 @@ function Header() {
 
       {isLoginDisplayed ? <Login /> : ""}
       {isSignupDisplayed ? <Signup /> : ""}
-      {/* <UploadTemplate /> */}
+      {isUploadTemplateDisplayed ? <UploadTemplate /> : ""}
     </>
   );
 }
