@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import Compressor from 'compressorjs';
 
 import {
     getUserInfo,
     updateUserInfo,
-    updatePassword
+    updatePassword,
+    uploadProfileImg,
+    getProfileImg
 } from '../../utlis/firebase';
+require('dotenv').config();
 
 const Container0 = styled.div`
   padding-top: 100px;
@@ -21,7 +25,7 @@ const Container1 = styled.div`
 `;
 
 const Img0 = styled.img`
-  width: 100px;
+  width: 200px;
 `;
 
 function Setting() {
@@ -62,12 +66,36 @@ function Setting() {
         }
     }
 
+    const clickUploadProfileImg = (e) => {
+        const image = e.target.files[0];
+        if (image) {
+            new Compressor(image, {
+                quality: 0.8,
+                success: (compressedResult) => {
+                    uploadProfileImg(userData.user_id, compressedResult)
+                        .then(() => {
+                            getProfileImg(userData.user_id)
+                                .then((url) => {
+                                    const data = { user_img: url };
+                                    updateUserInfo(userData.user_id, data);
+                                })
+                        })
+                },
+            });
+        }
+    }
+
+    const clickDefaultProfileImg = () => {
+        const data = { user_img: process.env.REACT_APP_defaultProfileImg }
+        updateUserInfo(userData.user_id, data);
+    }
+
     return (
         <Container0>
             <Container1>
                 <a href="#self-info">修改個人資料</a>
                 <a href="#password">修改密碼</a>
-                <a href="#privacy">隱私設定</a>
+                {/* <a href="#privacy">隱私設定</a> */}
                 <a href="#account">刪除帳戶</a>
             </Container1>
             <div>
@@ -77,7 +105,8 @@ function Setting() {
                     <div>
                         <h2>修改頭像</h2>
                         {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
-                        {userInfo ? <button>上傳新頭像</button> : ""}
+                        {userInfo ? <input type="file" accept="img/*" onChange={(e) => clickUploadProfileImg(e)} /> : ""}
+                        {userInfo ? <button onClick={() => clickDefaultProfileImg()}>使用預設頭像</button> : ""}
                     </div>
                     <div>
                         <h2>修改個人簡介</h2>
@@ -98,7 +127,7 @@ function Setting() {
                     <br></br>
                     <button onClick={() => clickUpdatePassword()}>送出</button>
                 </div>
-                <div id="privacy">
+                {/* <div id="privacy">
                     <h1>隱私設定</h1>
                     <hr></hr>
                     <p>個人公開頁面瀏覽權限設定</p>
@@ -110,10 +139,13 @@ function Setting() {
                         <input type="radio" id="public" name="privacy" value="public" defaultChecked />
                         <label for="public">所有人</label>
                     </div>
-                </div>
+                </div> */}
                 <div id="account">
                     <h1>刪除帳戶</h1>
                     <hr></hr>
+                    <p>請輸入密碼</p>
+                    <input type="password" />
+                    <br></br>
                     <button>刪除帳戶</button>
                 </div>
             </div>

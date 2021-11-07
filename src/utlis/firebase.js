@@ -21,7 +21,7 @@ const auth = firebase.auth();
 const storageRef = firebase.storage().ref();
 
 // Header: Login & Signup & Signout & CheckLoginStatus
-async function nativeSignup(email, password, name) {
+function nativeSignup(email, password, name) {
   return auth
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
@@ -45,7 +45,7 @@ async function nativeSignup(email, password, name) {
     });
 }
 
-async function nativeLogin(email, password) {
+function nativeLogin(email, password) {
   return auth
     .signInWithEmailAndPassword(email, password)
     .then(() => {
@@ -56,7 +56,7 @@ async function nativeLogin(email, password) {
     });
 }
 
-async function nativeLogout() {
+function nativeLogout() {
   return auth
     .signOut()
     .catch((error) => {
@@ -76,6 +76,7 @@ function checkLoginStatus(dispatch, setUserData) {
     });
 }
 
+// User Setting
 function reAuth(password) {
   const user = auth.currentUser;
   const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
@@ -93,6 +94,23 @@ function updatePassword(password, newPassword) {
     .then(() => nativeLogout())
     .then(() => alert('密碼更新完成，請重新登入！'))
     .catch((error) => alert(error.message))
+}
+
+function uploadProfileImg(id, file) {
+  return storageRef
+    .child(`users/${id}`)
+    .put(file);
+}
+
+function getProfileImg(id) {
+  return storageRef.child(`users/${id}`).getDownloadURL();
+}
+
+function updateUserInfo(id, data) {
+  return db
+    .collection('users')
+    .doc(id)
+    .update(data)
 }
 
 // All Tamplates Page
@@ -117,7 +135,7 @@ function getTheTemplate(docId) {
     .then((snapShot) => snapShot.data());
 }
 
-// Functions for Member
+// Functions for User
 function getUserInfo(id, setUserInfo) {
   return db
     .collection('users')
@@ -504,13 +522,6 @@ function getAllFollowers(followersList) {
     })
 }
 
-function updateUserInfo(id, data) {
-  return db
-    .collection('users')
-    .doc(id)
-    .update(data)
-}
-
 export {
   nativeSignup,
   nativeLogin,
@@ -555,6 +566,8 @@ export {
   getAllFollowing,
   getAllFollowers,
   updateUserInfo,
-  reAuth, 
-  updatePassword
+  reAuth,
+  updatePassword,
+  uploadProfileImg,
+  getProfileImg
 };
