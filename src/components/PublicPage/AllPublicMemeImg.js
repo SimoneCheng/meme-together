@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { countClickTime } from '../../utlis/CountClickTime';
+import { countClickTime } from '../../utlis/countClickTime';
 
 const Container0 = styled.div`
 

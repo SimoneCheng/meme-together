@@ -5,6 +5,10 @@ import styled from 'styled-components';
 
 import { getAllFollowers, deleteFollower, unfollowing } from '../../utlis/firebase';
 
+const Img0 = styled.img`
+
+`;
+
 function AllFollowers(props) {
     const { id } = useParams();
     const allFollowers = props.allFollowers;
@@ -30,7 +34,7 @@ function AllFollowers(props) {
         return (
             <>
                 <div>
-                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><img src={item.user_img} alt={item.user_id} /></a>
+                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><Img0 src={item.user_img} alt={item.user_id} /></a>
                 </div>
                 <div>
                     <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>

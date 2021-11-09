@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getAllPublicMemeImg, getAllPublicMemeNextPage } from '../../utlis/firebase';
-import { countClickTime } from '../../utlis/CountClickTime';
+import { countClickTime } from '../../utlis/countClickTime';
 
 const Container0 = styled.div`
   padding-top: 100px;

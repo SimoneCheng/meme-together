@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { alertSuccess } from './alert';
 require('dotenv').config();
 
 const firebaseConfig = {
@@ -38,7 +39,9 @@ function nativeSignup(email, password, name) {
         created_time: user.metadata.creationTime,
         self_intro: "還沒有個人簡介喔！"
       });
-      alert("註冊成功！");
+    })
+    .then(() => {
+      alertSuccess('註冊成功');
     })
     .catch((error) => {
       alert(error.message);
@@ -49,7 +52,7 @@ function nativeLogin(email, password) {
   return auth
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      alert('登入成功！');
+      alertSuccess('登入成功');
     })
     .catch(error => {
       alert(error.message);
@@ -92,8 +95,16 @@ function updatePassword(password, newPassword) {
       res.updatePassword(newPassword);
     })
     .then(() => nativeLogout())
-    .then(() => alert('密碼更新完成，請重新登入！'))
-    .catch((error) => alert(error.message))
+    .then(() => alertSuccess('密碼更新完成，請重新登入！'))
+    .catch((error) => alert(error.message));
+}
+
+function deleteAccount(password) {
+  return reAuth(password)
+    .then((res) => {
+      res.delete();
+    })
+    .then(() => alert('成功刪除帳號！'));
 }
 
 function uploadProfileImg(id, file) {
@@ -242,6 +253,7 @@ function getPublicMemeImg(id, setPublicMemeImg) {
       querySnapshot.forEach(doc => {
         publicMemeImgData.push(doc.data());
       })
+      console.log(publicMemeImgData);
       setPublicMemeImg(publicMemeImgData);
     });
 }
@@ -522,6 +534,128 @@ function getAllFollowers(followersList) {
     })
 }
 
+function uploadTemplate(id, file) {
+  return storageRef
+    .child(`templates/${id}-${new Date().getTime()}`)
+    .put(file)
+    .then((snapShot) => {
+      return snapShot.ref.name;
+    })
+}
+
+function getTemplateURL(fileName) {
+  return storageRef.child(`templates/${fileName}`).getDownloadURL();
+}
+
+function saveNewTemplate(id, data) {
+  return db
+    .collection('templates')
+    .doc(id)
+    .set(data);
+}
+
+function deleteAllData(id) {
+  return db
+    .collection('users')
+    .doc(id)
+    .collection('editing_meme')
+    .get()
+    .then(querySnapshot => {
+      if (querySnapshot.docs.length > 0) {
+        querySnapshot.docs.forEach(snapshot => {
+          snapshot.ref.delete();
+        })
+      }
+    })
+    .then(() => {
+      db
+        .collection('users')
+        .doc('id')
+        .collection('following_list')
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    .then(() => {
+      db
+        .collection('users')
+        .doc('id')
+        .collection('follower_list')
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    .then(() => {
+      db
+        .collection('users')
+        .doc('id')
+        .collection('favorites')
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    .then(() => {
+      db
+        .collection('users')
+        .doc('id')
+        .delete()
+    })
+    .then(() => {
+      db
+        .collectionGroup('following_list')
+        .where('user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    .then(() => {
+      db
+      .collectionGroup('follower_list')
+      .where('user_id', '==', id)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.docs.length > 0) {
+          querySnapshot.docs.forEach(snapshot => {
+            snapshot.ref.delete();
+          })
+        }
+      })
+    })
+    .then(() => {
+      db
+      .collectionGroup('favorites')
+      .where('owner_user_id', '==', id)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.docs.length > 0) {
+          querySnapshot.docs.forEach(snapshot => {
+            snapshot.ref.delete();
+          })
+        }
+      })
+    })
+}
+
 export {
   nativeSignup,
   nativeLogin,
@@ -569,5 +703,8 @@ export {
   reAuth,
   updatePassword,
   uploadProfileImg,
-  getProfileImg
+  getProfileImg,
+  uploadTemplate,
+  getTemplateURL,
+  saveNewTemplate
 };

@@ -15,15 +15,14 @@ const Container0 = styled.div`
 
 const Container1 = styled.div`
   background-color: white;
-  padding: 60px 30px 30px 30px;
+  padding: 60px 30px 10px 30px;
   border-radius: 10px;
-  width: 20%;
   position: relative;
 `;
 
 const Input1 = styled.input`
-  width: 95%;
-  margin: 20px auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 10px;
   border-radius: 10px;
   border: 2px solid #ccc;
@@ -69,6 +68,7 @@ const SignupButton = styled.button`
   cursor: pointer;
   padding: 6px 10px;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 const CloseButton = styled.span`

@@ -70,7 +70,8 @@ function Setting() {
         const image = e.target.files[0];
         if (image) {
             new Compressor(image, {
-                quality: 0.8,
+                quality: 1,
+                width: 400,
                 success: (compressedResult) => {
                     uploadProfileImg(userData.user_id, compressedResult)
                         .then(() => {

@@ -45,6 +45,7 @@ const LogoImage = styled.img`
 
 const Ul1 = styled.ul`
   display: flex;
+  padding-left: 20px;
 `;
 
 const Ul2 = styled.ul`
@@ -55,7 +56,7 @@ const Ul2 = styled.ul`
 
 const LiDesktop = styled.li`
   list-style: none;
-  margin-right: 30px;
+  margin-right: 20px;
 `;
 
 const Button = styled.button`

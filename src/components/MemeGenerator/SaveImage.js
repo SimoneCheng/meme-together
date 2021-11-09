@@ -51,8 +51,8 @@ function SaveImage(props) {
                         context: `${context.current.value}`,
                         img_name: `${res}`,
                         owner_user_id: `${userData.user_id}`,
-                        tags: `${tagsArr}`,
-                        isPublic: `${isPublic.current.checked}`,
+                        tags: tagsArr,
+                        isPublic: isPublic.current.checked,
                         created_time: new Date(),
                         last_save_time: new Date(),
                         click_time: 0

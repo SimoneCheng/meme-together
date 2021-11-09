@@ -80,7 +80,7 @@ function Comments() {
 
     const updateTheComment = (e, commentId) => {
         if (e.keyCode === 13) {
-            const data = { comment: editCommentText.current.value };
+            const data = { comment: `${editCommentText.current.value}` };
             updateComment(id, commentId, data);
             setIsEditing(false);
         }

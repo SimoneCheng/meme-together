@@ -14,6 +14,7 @@ import {
   nativeLogout,
   checkLoginStatus,
 } from '../../utlis/firebase';
+import { alertSuccess } from '../../utlis/alert';
 import color from '../Styled/colorTheme';
 import {
   Menu,
@@ -81,7 +82,7 @@ function Header() {
   const clickLogout = () => {
     nativeLogout()
       .then(function () {
-        alert('登出成功！將跳轉至首頁！');
+        alertSuccess('登出成功！將跳轉至首頁！');
         history.push('/');
       });
   }
@@ -135,6 +136,7 @@ function Header() {
           </LogoDesktop>
           <Ul1>
             <LiDesktop><Link to="/explorememes"><Button color={color}>探索</Button></Link></LiDesktop>
+            <LiDesktop><Link to="/templates"><Button color={color}>創作</Button></Link></LiDesktop>
             {userData ? <LiDesktop><Button color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</Button></LiDesktop> : ""}
           </Ul1>
           {userData ? renderDesktopLogoutAndMemberButton() : renderDesktopLoginAndSignupButton()}
@@ -151,7 +153,8 @@ function Header() {
           <MenuMobile>
             <ul>
               <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
-              {userData ? <LiMobile color={color}><Button color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</Button></LiMobile> : ""}
+              <Link to="/templates"><LiMobile color={color}>創作</LiMobile></Link>
+              {userData ? <LiMobile color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</LiMobile> : ""}
             </ul>
             {userData ? renderMobileLogoutAndMemberButton() : renderMobileLoginAndSignupButton()}
           </MenuMobile>

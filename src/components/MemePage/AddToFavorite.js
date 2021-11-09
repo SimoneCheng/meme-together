@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { addToFavorite, checkFavoriteList, deletFromFavorite } from '../../utlis/firebase';
+import { alertSuccess } from '../../utlis/alert';
 
 function AddToFavorite(props) {
     const theMemeImage = props.theMemeImage;
@@ -18,8 +19,8 @@ function AddToFavorite(props) {
     }, [userData])
 
     const addTheMemeToFavorite = () => {
-        const data = { img_url, img_name, created_time: new Date() }
-        addToFavorite(userData.user_id, img_name, data).then(() => alert('收藏成功！'));
+        const data = { img_url, img_name, created_time: new Date(), owner_user_id }
+        addToFavorite(userData.user_id, img_name, data).then(() => alertSuccess('收藏成功！'));
     }
 
     const renderFavoriteBtn = () => {
@@ -34,7 +35,7 @@ function AddToFavorite(props) {
             && owner_user_id !== userData.user_id
             && isInFavorite.length !== 0) {
             return (
-                <button onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alert('已取消收藏！') })}>取消收藏</button>
+                <button onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alertSuccess('已取消收藏！') })}>取消收藏</button>
             );
         }
     }

@@ -1,200 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 
-import color from './Styled/colorTheme';
 import { getCampaignMeme } from '../utlis/firebase';
-import { countClickTime } from '../utlis/CountClickTime';
+import { countClickTime } from '../utlis/countClickTime';
+import loading from '../utlis/loading';
+import color from './Styled/colorTheme';
+import {
+  Container1,
+  Container2,
+  Container3,
+  Container4,
+  Container5,
+  Container6,
+  Container7,
+  Container8,
+  Container9,
+  Container10,
+  Container11,
+  Image1,
+  Image2,
+  Image3,
+  Title1,
+  Title2,
+  Title3,
+  Button1,
+  Text1,
+  Strong
+} from './Styled/Index'
 
 import robot from '../image/day27-my-robot.png';
 import canvasStand from '../image/day10-canvas-stand.png';
 import colorTools from '../image/gummy-color-tools.png';
 import floppy from '../image/day18-floppy.png';
-
-const Container1 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 125px);
-  background-color: ${props => props.color.color1.colorCode};
-  padding-top: calc(30px + 65px);
-  padding-bottom: 30px;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    padding-bottom: 0;
-  }
-`;
-
-const Container2 = styled.div`
-    width: 300px;
-    text-align: center;
-    margin-left: 100px;
-    @media screen and (max-width: 768px) {
-      margin: auto;
-    }
-`;
-
-const Container3 = styled.div`
-  @media screen and (max-width: 768px) {
-   text-align: center;
-  }
-`;
-
-const Container4 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-bottom: 50px;
-  padding-left: 50px;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    padding-left: 20px;
-  }
-`;
-
-const Container5 = styled.div`
-  @media screen and (max-width: 768px) {
-    margin-top: 20px;
-  }
-`;
-
-const Container6 = styled.div`
-    margin: 30px auto 0 auto;
-    width: 80%;
-`;
-
-const Container7 = styled.div`
-  background-color: ${props => props.color.color2.colorCode};
-  padding-top: 30px;
-  @media screen and (max-width: 768px) {
-   text-align: center;
-  }
-`;
-
-const Container8 = styled.div`
-  display: flex;
-  overflow-x: scroll;
-  margin: auto;
-`;
-
-const Container9 = styled.div`
- cursor: pointer;
- margin: 30px;
-`;
-
-const Container10 = styled.div`
-  color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 16px;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 50px;
-`;
-
-const Container11 = styled.span`
-  border-bottom: 2px solid white;
-  :hover {
-      background-color: white;
-      color: #056;
-      cursor: pointer;
-  }
-`;
-
-const Image1 = styled.img`
-  height: 25rem;
-  border-radius: 50px;
-  animation: fadein 6s ease;
-  @keyframes fadein {
-    0% {opacity: 0;}
-    50% {opacity: 1;}
-  }
-  @media screen and (max-width: 1024px) {
-    height: 24rem;
-  }
-  @media screen and (max-width: 768px) {
-    height: 20rem;
-  }
-`;
-
-const Image2 = styled.img`
-  width: 20rem;
-  @media screen and (max-width: 1024px) {
-    width: 15rem;
-  }
-  @media screen and (max-width: 425px) {
-    width: 10rem;
-  }
-`;
-
-const Image3 = styled.img`
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px gray;
-`;
-
-const Title1 = styled.h1`
-  width: 9em;
-  border-right: 2px solid;
-  overflow: hidden;
-  animation: typing 6s;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 8s steps(9), caret 1s steps(1) infinite;
-  animation-iteration-count: infinite;
-  @keyframes typing {
-    0% { width: 0 }
-    50% { width: 9em }
-  }
-  @keyframes caret {
-    50% { border-color: transparent; }
-  }
-`;
-
-const Title2 = styled.h1`
-  margin-left: 50px;
-  margin-top: 50px;
-  @media screen and (max-width: 768px) {
-    margin-left: 0;
-  }
-`;
-
-const Title3 = styled.h1`
-  color: white;
-  margin-left: 50px;
-  @media screen and (max-width: 768px) {
-    margin-left: 0;
-  }
-`;
-
-const Button1 = styled.button`
- border: none;
- border-radius: 5px;
- background-color: ${props => props.color.color2.colorCode};
- color: ${props => props.color.color3.colorCode};
- font-size: 16px;
- padding: 10px 30px;
- cursor: pointer;
- margin-top: 50px;
-`;
-
-const Text1 = styled.div`
-    margin-top: 10px;
-    font-size: 16px;
-`;
-
-const Strong = styled.strong`
-  font-size: 20px;
-  border-bottom: 2px ${props => props.color.color2.colorCode} solid;
-  margin-left: 5px;
-  transition: background-color 0.2s;
-  :hover {
-      background-color: ${props => props.color.color2.colorCode};
-      color: white;
-      cursor: pointer;
-  }
-`;
 
 function Index() {
   const [camapignMeme, setCampaignMeme] = useState();
@@ -216,7 +53,6 @@ function Index() {
       </Container9>
     );
   }
-
 
   return (
     <div>
@@ -252,7 +88,7 @@ function Index() {
       <Container7 color={color}>
         <Title3>熱門創作</Title3>
         <Container8>
-          {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : ""}
+          {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : loading('spinningBubbles', '#fff', 50, 50)}
         </Container8>
         <Link to="/explorememes"><Container10><Container11>查看更多</Container11></Container10></Link>
       </Container7>
