@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 
 import AllEditingMeme from './AllEditingMeme';
 import AllMemeImage from './AllMemeImage';
 import AllFavorite from './AllFavorite';
+import loading from '../../utlis/loading';
 import {
     getUserInfo,
     getAllEditingMeme,
@@ -13,69 +13,33 @@ import {
     getPublicMemeImg,
     getAllFavorite
 } from '../../utlis/firebase';
-
-const Img0 = styled.img`
-  width: 100px;
-`;
-
-const Container0 = styled.div`
-  padding-top: 100px;
-`;
-
-const Container1 = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Container2 = styled.div`
-  margin-right: 20px;
-  margin-top: 20px;
-  padding-bottom: 5px;
-  cursor: pointer;
-  border-bottom: ${props => props.status === 'editing' ? "4px solid black" : "none"};
-  transition: border-width 0.3s linear;
-`;
-
-const Container3 = styled.div`
-   margin-right: 20px;
-  margin-top: 20px;
-  padding-bottom: 5px;
-  cursor: pointer;
-  border-bottom: ${props => props.status === 'nopublic' ? "4px solid black" : "none"};
-  transition: border-width 0.3s linear;
-`;
-
-const Container4 = styled.div`
-  margin-right: 20px;
-  margin-top: 20px;
-  padding-bottom: 5px;
-  cursor: pointer;
-  border-bottom: ${props => props.status === 'ispublic' ? "4px solid black" : "none"};
-  transition: border-width 0.3s linear;
-`;
-
-const Container5 = styled.div`
-  margin-right: 20px;
-  margin-top: 20px;
-  padding-bottom: 5px;
-  cursor: pointer;
-  border-bottom: ${props => props.status === 'favorites' ? "4px solid black" : "none"};
-  transition: border-width 0.3s linear;
-`;
+import {
+    Img0,
+    Container,
+    Container0,
+    Container1,
+    Container2,
+    Container3,
+    Container4,
+    Container5,
+    Container6,
+    Container7,
+    Container8,
+    Button0
+} from '../Styled/Personal';
 
 function Personal() {
     const history = useHistory();
     const userData = useSelector((state) => state.userData);
     const [userInfo, setUserInfo] = useState();
     const [status, setStatus] = useState('editing');
-    const [allEditingMeme, setAllEditingMeme] = useState([]);
-    const [privateMemeImg, setPrivateMemeImg] = useState([]);
-    const [publicMemeImg, setPublicMemeImg] = useState([]);
-    const [allFavorite, setAllFavorite] = useState([]);
+    const [allEditingMeme, setAllEditingMeme] = useState();
+    const [privateMemeImg, setPrivateMemeImg] = useState();
+    const [publicMemeImg, setPublicMemeImg] = useState();
+    const [allFavorite, setAllFavorite] = useState();
 
     useEffect(() => {
-        if (userData === null || Object.keys(userData).length === 0) {
+        if (userData === null) {
             history.push('/');
         }
         if (userData != null && Object.keys(userData).length > 0) {
@@ -93,44 +57,53 @@ function Personal() {
 
     return (
         <>
-            <Container0>
-                <Container1>
-                    <Container2>
-                        {userInfo ? <Img0 alt="profile-img" src={userInfo.user_img}></Img0> : ""}
-                    </Container2>
-                    <Container2>
-                        {userInfo ? <p>使用者ID：{userInfo.user_id}</p> : ""}
-                        {userInfo ? <p>暱稱：{userInfo.user_name}</p> : ""}
-                        {userInfo ? <p>電子信箱：{userInfo.user_email}</p> : ""}
-                        {userInfo ? <p>創建時間：{userInfo.created_time}</p> : ""}
-                    </Container2>
-                    <Container2>
-                        {userData ? <Link to={`/public/${userData.user_id}`}><button>前往個人公開頁面</button></Link> : ""}
-                    </Container2>
-                </Container1>
-                <Container1>
-                    <Container2 status={status} onClick={() => { clickStatusButton('editing') }}>
-                        <span>創作中</span>
-                        <span>({allEditingMeme.length})</span>
-                    </Container2>
-                    <Container3 status={status} onClick={() => { clickStatusButton('nopublic') }}>
-                        <span>已完成，未發布</span>
-                        <span>({privateMemeImg.length})</span>
-                    </Container3>
-                    <Container4 status={status} onClick={() => { clickStatusButton('ispublic') }}>
-                        <span>已發布</span>
-                        <span>({publicMemeImg.length})</span>
-                    </Container4>
-                    <Container5 status={status} onClick={() => { clickStatusButton('favorites') }}>
-                        <span>收藏</span>
-                        <span>({allFavorite.length})</span>
-                    </Container5>
-                </Container1>
-            </Container0>
-            {status === 'editing' ? <AllEditingMeme allEditingMeme={allEditingMeme} /> : ""}
-            {status === 'nopublic' ? <AllMemeImage memeImg={privateMemeImg} /> : ""}
-            {status === 'ispublic' ? <AllMemeImage memeImg={publicMemeImg} /> : ""}
-            {status === 'favorites' ? <AllFavorite allFavorite={allFavorite} /> : ""}
+            {userData != null
+                && Object.keys(userData).length > 0
+                && userInfo
+                && allEditingMeme
+                && privateMemeImg
+                && publicMemeImg
+                && allFavorite ?
+                <Container0>
+                    <Container1>
+                        <Container2>
+                            <Img0 alt="profile-img" src={userInfo.user_img}></Img0>
+                        </Container2>
+                        <Container2>
+                            <div style={{ 'paddingBottom': '10px' }}><strong>使用者ID：</strong>{userInfo.user_id}</div>
+                            <div style={{ 'paddingBottom': '10px' }}><strong>暱稱：</strong>{userInfo.user_name}</div>
+                            <div><strong>電子信箱：</strong>{userInfo.user_email}</div>
+                        </Container2>
+                        <Container2>
+                            <Link to={`/public/${userData.user_id}`}><Button0>前往個人公開頁面</Button0></Link>
+                        </Container2>
+                    </Container1>
+                    <Container8>
+                        <Container7>
+                            <Container3 status={status} onClick={() => { clickStatusButton('editing') }}>
+                                <span> 創作中 </span>
+                                <span>({allEditingMeme.length})</span>
+                            </Container3>
+                            <Container4 status={status} onClick={() => { clickStatusButton('nopublic') }}>
+                                <span> 已完成，未發布 </span>
+                                <span>({privateMemeImg.length})</span>
+                            </Container4>
+                            <Container5 status={status} onClick={() => { clickStatusButton('ispublic') }}>
+                                <span> 已發布 </span>
+                                <span>({publicMemeImg.length})</span>
+                            </Container5>
+                            <Container6 status={status} onClick={() => { clickStatusButton('favorites') }}>
+                                <span> 收藏 </span>
+                                <span>({allFavorite.length})</span>
+                            </Container6>
+                        </Container7>
+                        {status === 'editing' ? <AllEditingMeme allEditingMeme={allEditingMeme} /> : ""}
+                        {status === 'nopublic' ? <AllMemeImage memeImg={privateMemeImg} /> : ""}
+                        {status === 'ispublic' ? <AllMemeImage memeImg={publicMemeImg} /> : ""}
+                        {status === 'favorites' ? <AllFavorite allFavorite={allFavorite} /> : ""}
+                    </Container8>
+                </Container0>
+                : <Container>{loading('spinningBubbles', '#056', 50, 50)}</Container>}
         </>
     )
 }

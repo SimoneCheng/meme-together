@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
-import { alertSuccess } from './alert';
+import { alertSuccess, alertError } from './alert';
 require('dotenv').config();
 
 const firebaseConfig = {
@@ -44,7 +44,7 @@ function nativeSignup(email, password, name) {
       alertSuccess('註冊成功');
     })
     .catch((error) => {
-      alert(error.message);
+      alertError('註冊失敗！', error.message);
     });
 }
 
@@ -55,7 +55,7 @@ function nativeLogin(email, password) {
       alertSuccess('登入成功');
     })
     .catch(error => {
-      alert(error.message);
+      alertError('登入失敗！', error.message);
     });
 }
 
@@ -253,7 +253,6 @@ function getPublicMemeImg(id, setPublicMemeImg) {
       querySnapshot.forEach(doc => {
         publicMemeImgData.push(doc.data());
       })
-      console.log(publicMemeImgData);
       setPublicMemeImg(publicMemeImgData);
     });
 }
@@ -630,29 +629,29 @@ function deleteAllData(id) {
     })
     .then(() => {
       db
-      .collectionGroup('follower_list')
-      .where('user_id', '==', id)
-      .get()
-      .then((querySnapshot) => {
-        if (querySnapshot.docs.length > 0) {
-          querySnapshot.docs.forEach(snapshot => {
-            snapshot.ref.delete();
-          })
-        }
-      })
+        .collectionGroup('follower_list')
+        .where('user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
     })
     .then(() => {
       db
-      .collectionGroup('favorites')
-      .where('owner_user_id', '==', id)
-      .get()
-      .then((querySnapshot) => {
-        if (querySnapshot.docs.length > 0) {
-          querySnapshot.docs.forEach(snapshot => {
-            snapshot.ref.delete();
-          })
-        }
-      })
+        .collectionGroup('favorites')
+        .where('owner_user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
     })
 }
 

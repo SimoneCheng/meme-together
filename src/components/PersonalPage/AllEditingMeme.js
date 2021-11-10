@@ -1,37 +1,99 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import color from '../Styled/colorTheme';
 import { deleteEditingMeme } from '../../utlis/firebase';
-
-const Container0 = styled.div`
-
-`;
+import { alertSuccess } from '../../utlis/alert';
 
 const Container1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
-  grid-gap: 16px;
-  margin: 50px;
+  grid-gap: 30px;
+  margin: 0 30px 30px 30px;
   justify-content: center;
   align-items: flex-start;
 `;
 
 const Container2 = styled.div`
-  border: 1px solid black;
+  box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  &:hover{
+    box-shadow: 2px 2px 15px grey;
+  }
+`;
+
+const Container3 = styled.div`
+ padding: 0 20px 20px 20px;
+`;
+
+const Container4 = styled.div`
+ margin-top: 5px;
+`;
+
+const Container5 = styled.div`
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+`;
+
+const Container6 = styled.div`
+  border-radius: 50%;
+  border: 2px solid #056;
+  font-size: 70px;
+  color: #056;
+  width: 60px;
+  height: 60px;
+  position: relative;
+`;
+
+const Container7 = styled.span`
+  position: absolute;
+  top: -23px;
+  left: 4px;
+  color: #056;
+`;
+
+const Container8 = styled.div`
+  padding-top: 20px;
+`;
+
+const Container9 = styled.div`
+  width: 810px;
+  text-align: center;
+  padding: 30px;
+  font-size: 30px;
 `;
 
 const Img0 = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+`;
+
+const Button = styled.button`
+  margin-top: 20px;
+  border: 1px ${props => props.color.color2.colorCode} solid;
+  border-radius: 5px;
+  color: ${props => props.color.color2.colorCode};
+  font-size: 14px;
+  background-color: ${props => props.color.color3.colorCode};
+  padding: 5px 10px;
+  cursor: pointer;
+  :active {
+    background-color: ${props => props.color.color2.colorCode};
+    color: ${props => props.color.color3.colorCode};
+  } 
 `;
 
 function AllEditingMeme(props) {
@@ -40,24 +102,49 @@ function AllEditingMeme(props) {
 
   const renderEditingMeme = (imgSrc, docId, createdTime, lastSaveTime) => {
     return (
-      <Container2>
+      <Container2 key={docId}>
         <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
-        <div>
-          <div>建立時間：{new Date(createdTime.toDate()).toLocaleString()}</div>
-          <div>上次儲存時間：{new Date(lastSaveTime.toDate()).toLocaleString()}</div>
-          <button onClick={() => { deleteEditingMeme(userData.user_id, docId).then(()=>alert('刪除成功！')) }}>刪除</button>
-        </div>
+        <Container3>
+          <Container4><strong>建立時間：</strong></Container4>
+          <Container4>{new Date(createdTime.toDate()).toLocaleString()}</Container4>
+          <Container4><strong>上次儲存時間：</strong></Container4>
+          <Container4>{new Date(lastSaveTime.toDate()).toLocaleString()}</Container4>
+          <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
+        </Container3>
       </Container2>
     );
   }
 
-  return (
-    <Container0>
+  const renderAllEditingMeme = () => {
+    return (
       <Container1>
         {allEditingMeme ? allEditingMeme.map((item) => renderEditingMeme(item.data.backgroundImage_src, item.docId, item.data.created_time, item.data.last_save_time)) : ""}
+        <Container5>
+          <Container6>
+            <Link to="/templates">
+              <Container7>+</Container7>
+            </Link>
+          </Container6>
+          <Container8>
+            <Link to="/templates" style={{ 'color': '#056' }}>新增創作</Link>
+          </Container8>
+        </Container5>
       </Container1>
-      <Link to="/templates"><button>新增創作</button></Link>
-    </Container0>
+    )
+  }
+
+  const renderNone = () => {
+    return (
+      <Container9>
+        空空的喔～
+      </Container9>
+    );
+  }
+
+  return (
+    <div>
+      {allEditingMeme.length > 0 ? renderAllEditingMeme() : renderNone()}
+    </div>
   )
 }
 

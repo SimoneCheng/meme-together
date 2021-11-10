@@ -9,13 +9,19 @@ function alertSuccess(text) {
         text: text,
         icon: 'success',
         confirmButtonColor: '#056',
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        }
     })
 }
 
-export { alertSuccess };
+function alertError(title, text) {
+    MySwal.fire({
+        title: title,
+        text: text,
+        icon: 'error',
+        confirmButtonColor: '#056',
+    })
+}
+
+export {
+    alertSuccess,
+    alertError
+};

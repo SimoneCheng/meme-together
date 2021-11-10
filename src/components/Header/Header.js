@@ -14,7 +14,7 @@ import {
   nativeLogout,
   checkLoginStatus,
 } from '../../utlis/firebase';
-import { alertSuccess } from '../../utlis/alert';
+import { alertSuccess, alertError } from '../../utlis/alert';
 import color from '../Styled/colorTheme';
 import {
   Menu,
@@ -67,7 +67,7 @@ function Header() {
     if (userData) {
       history.push('/personal');
     } else {
-      alert("尚未登入！");
+      alertError(undefined, "尚未登入！");
     }
   }
 
@@ -75,14 +75,14 @@ function Header() {
     if (userData) {
       history.push('/setting')
     } else {
-      alert("尚未登入！");
+      alertError(undefined, "尚未登入！");
     }
   }
 
   const clickLogout = () => {
     nativeLogout()
       .then(function () {
-        alertSuccess('登出成功！將跳轉至首頁！');
+        alertSuccess('登出成功！跳轉至首頁！');
         history.push('/');
       });
   }

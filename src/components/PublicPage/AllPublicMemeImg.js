@@ -4,21 +4,24 @@ import styled from 'styled-components';
 
 import { countClickTime } from '../../utlis/countClickTime';
 
-const Container0 = styled.div`
-
+const Container = styled.div`
+  color: #fff;
+  font-size: 40px;
+  padding-top: 100px;
+  text-align: center;
 `;
 
 const Container1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
-  grid-gap: 16px;
+  grid-gap: 30px;
   margin: 50px;
   justify-content: center;
   align-items: flex-start;
 `;
 
 const Container2 = styled.div`
-  border: 1px solid black;
+  box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
   display: flex;
@@ -26,12 +29,15 @@ const Container2 = styled.div`
   justify-content: space-evenly;
   overflow: hidden;
   cursor: pointer;
+  &:hover{
+    box-shadow: 2px 2px 15px grey;
+  }
 `;
 
 const Img0 = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 `;
 
 function AllPublicMemeImg(props) {
@@ -45,18 +51,32 @@ function AllPublicMemeImg(props) {
         .then(() => history.push(`/meme/${img_name}`));
     };
     return (
-      <Container2 onClick={() => { clickMemeImg() }}>
+      <Container2 key={img_name} onClick={() => { clickMemeImg() }}>
         <Img0 src={img_url} alt={img_name}></Img0>
       </Container2>
     );
   }
 
-  return (
-    <Container0>
+  const renderAllMemeImg = () => {
+    return(
       <Container1>
-        {memeImg ? memeImg.map((item) => renderMemeImg(item)) : ""}
+        {memeImg.map((item) => renderMemeImg(item))}
       </Container1>
-    </Container0>
+    )
+  }
+
+  const renderNone = () => {
+    return(
+      <Container>
+        目前沒有創作喔～
+      </Container>
+    )
+  }
+
+  return (
+    <div>
+        {memeImg.length > 0 ? renderAllMemeImg() : renderNone()}
+    </div>
   )
 
 };

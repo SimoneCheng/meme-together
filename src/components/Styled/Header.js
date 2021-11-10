@@ -22,8 +22,9 @@ const AccountImage = styled.img`
 
 // ===== Desktop Navbar Layout ===== //
 const NavDesktop = styled.nav`
+ margin: 0 auto;
  display: flex;
- width: 100%;
+ max-width: 1440px;
  height: 65px;
  @media screen and (max-width: 768px) {
    display: none;

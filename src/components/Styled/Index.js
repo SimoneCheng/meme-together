@@ -1,13 +1,22 @@
 import styled from 'styled-components';
 
+const Container0 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Container1 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
   height: calc(100vh - 125px);
   background-color: ${props => props.color.color1.colorCode};
   padding-top: calc(30px + 65px);
   padding-bottom: 30px;
+  width: 100%;
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
@@ -17,12 +26,15 @@ const Container2 = styled.div`
     width: 300px;
     text-align: center;
     margin-left: 100px;
+    max-width: 1440px;
     @media screen and (max-width: 768px) {
       margin: 20px auto 0 auto;
     }
 `;
 
 const Container3 = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
   @media screen and (max-width: 768px) {
    text-align: center;
   }
@@ -55,6 +67,8 @@ const Container6 = styled.div`
 const Container7 = styled.div`
   background-color: ${props => props.color.color2.colorCode};
   padding-top: 30px;
+  max-width: 1440px;
+  margin: 0 auto;
   @media screen and (max-width: 768px) {
    text-align: center;
   }
@@ -62,6 +76,7 @@ const Container7 = styled.div`
 
 const Container8 = styled.div`
   display: flex;
+  justify-content: center;
   overflow-x: auto;
   margin-right: 50px;
   margin-left: 50px;
@@ -86,6 +101,7 @@ const Container10 = styled.div`
 
 const Container11 = styled.span`
   border-bottom: 2px solid white;
+  color: white;
   :hover {
       background-color: white;
       color: #056;
@@ -185,6 +201,7 @@ const Strong = styled.strong`
 `;
 
 export {
+  Container0,
   Container1,
   Container2,
   Container3,

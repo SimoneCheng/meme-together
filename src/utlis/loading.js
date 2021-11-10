@@ -6,12 +6,13 @@ const Container0 = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 `;
 
 const loading = (type, color, height, width) => (
-    <Container0>
-            <ReactLoading type={type} color={color} height={height} width={width} />
-    </Container0>
+  <Container0>
+    <ReactLoading type={type} color={color} height={height} width={width} />
+  </Container0>
 );
 
 export default loading;

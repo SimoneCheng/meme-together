@@ -6,6 +6,7 @@ import { countClickTime } from '../utlis/countClickTime';
 import loading from '../utlis/loading';
 import color from './Styled/colorTheme';
 import {
+  Container0,
   Container1,
   Container2,
   Container3,
@@ -55,44 +56,50 @@ function Index() {
   }
 
   return (
-    <div>
-      <Container1 color={color}>
-        <Image1 alt='index-main-img' src={robot}></Image1>
-        <Container2>
-          <Title1>製作專屬於你的迷因</Title1>
-          <Link to="/templates"><Button1 color={color}>開始使用</Button1></Link>
-          <Text1>或是</Text1>
-          <Text1>點選右上角<Strong color={color}>登入</Strong></Text1>
-        </Container2>
-      </Container1>
-      <Container3>
-        <Title2>玩轉迷因</Title2>
-        <Container4>
-          <Container5>
-            <Image2 alt='info-img-1' src={canvasStand}></Image2>
-            <div><Strong color={color}>選擇背景圖片</Strong></div>
-            <Container6>提供許多迷因模板，幫你免去製作迷因時找不到圖片的煩惱</Container6>
-          </Container5>
-          <Container5>
-            <Image2 alt='info-img-2' src={colorTools}></Image2>
-            <div><Strong color={color}>揮灑創意</Strong></div>
-            <Container6>打開編輯器，為迷因加上有趣好笑的時事梗，或是只有你和朋友才懂的笑點</Container6>
-          </Container5>
-          <Container5>
-            <Image2 alt='info-img-3' src={floppy}></Image2>
-            <div><Strong color={color}>下載迷因</Strong></div>
-            <Container6>迷因製作完成後，支援PNG、JPG等圖片格式下載，將迷因保存在你的電腦當中</Container6>
-          </Container5>
-        </Container4>
-      </Container3>
-      <Container7 color={color}>
-        <Title3>熱門創作</Title3>
-        <Container8>
-          {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : loading('spinningBubbles', '#fff', 50, 50)}
-        </Container8>
-        <Link to="/explorememes"><Container10><Container11>查看更多</Container11></Container10></Link>
-      </Container7>
-    </div>
+    <Container0>
+      <div style={{ 'width': '100%', 'backgroundColor': '#ffc349' }}>
+        <Container1 color={color}>
+          <Image1 alt='index-main-img' src={robot}></Image1>
+          <Container2>
+            <Title1>製作專屬於你的迷因</Title1>
+            <Link to="/templates"><Button1 color={color}>開始使用</Button1></Link>
+            <Text1>或是</Text1>
+            <Text1>點選右上角<Strong color={color}>登入</Strong></Text1>
+          </Container2>
+        </Container1>
+      </div>
+      <div style={{ 'width': '100%', 'backgroundColor': '#fff' }}>
+        <Container3>
+          <Title2>玩轉迷因</Title2>
+          <Container4>
+            <Container5>
+              <Image2 alt='info-img-1' src={canvasStand}></Image2>
+              <div><Strong color={color}>選擇背景圖片</Strong></div>
+              <Container6>提供許多迷因模板，幫你免去製作迷因時找不到圖片的煩惱</Container6>
+            </Container5>
+            <Container5>
+              <Image2 alt='info-img-2' src={colorTools}></Image2>
+              <div><Strong color={color}>揮灑創意</Strong></div>
+              <Container6>打開編輯器，為迷因加上有趣好笑的時事梗，或是只有你和朋友才懂的笑點</Container6>
+            </Container5>
+            <Container5>
+              <Image2 alt='info-img-3' src={floppy}></Image2>
+              <div><Strong color={color}>下載迷因</Strong></div>
+              <Container6>迷因製作完成後，支援PNG、JPG等圖片格式下載，將迷因保存在你的電腦當中</Container6>
+            </Container5>
+          </Container4>
+        </Container3>
+      </div>
+      <div style={{ 'width': '100%', 'backgroundColor': '#056' }}>
+        <Container7 color={color}>
+          <Title3>熱門創作</Title3>
+          <Container8>
+            {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : loading('spinningBubbles', '#fff', 50, 50)}
+          </Container8>
+          <Container10><Link to="/explorememes"><Container11>查看更多</Container11></Link></Container10>
+        </Container7>
+      </div>
+    </Container0>
   );
 }
 
