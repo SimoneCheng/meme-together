@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { getCampaignMeme } from '../utlis/firebase';
 import { countClickTime } from '../utlis/countClickTime';
-import loading from '../utlis/loading';
+import { loading } from '../utlis/loading';
 import color from './Styled/colorTheme';
 import {
   Container0,

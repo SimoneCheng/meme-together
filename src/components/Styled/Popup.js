@@ -49,26 +49,32 @@ const LoginButton = styled.button`
   background-color: ${props => props.color.color1.colorCode};
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 5px;
   cursor: pointer;
   padding: 6px 10px;
   width: 100%;
   margin-bottom: 20px;
+  :hover{
+    outline: 2px solid black;
+  }
 `;
 
 const SignupButton = styled.button`
  background-color: ${props => props.color.color1.colorCode};
   border: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 5px;
   cursor: pointer;
   padding: 6px 10px;
   width: 100%;
   margin-bottom: 20px;
+  :hover{
+    outline: 2px solid black;
+  }
 `;
 
 const CloseButton = styled.span`

@@ -14,18 +14,19 @@ const Container1 = styled.div`
   margin: 0 30px 30px 30px;
   justify-content: center;
   align-items: flex-start;
+  height: 100%;
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
-  width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  transition: margin 0.3s linear;
   &:hover{
-    box-shadow: 2px 2px 15px grey;
+    box-shadow: 0 0 10px 2px grey;
   }
 `;
 
@@ -44,7 +45,7 @@ const Container5 = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  height: 100%;
+  height: 430px;
 `;
 
 const Container6 = styled.div`
@@ -72,7 +73,14 @@ const Container9 = styled.div`
   width: 810px;
   text-align: center;
   padding: 30px;
-  font-size: 30px;
+  font-size: 2rem;
+`;
+
+const Container10 = styled.div`
+  padding: 5px 0 0 5px;
+  &:hover{
+    padding: 0 0 0 0;
+  }
 `;
 
 const Img0 = styled.img`
@@ -86,11 +94,11 @@ const Button = styled.button`
   border: 1px ${props => props.color.color2.colorCode} solid;
   border-radius: 5px;
   color: ${props => props.color.color2.colorCode};
-  font-size: 14px;
+  font-size: 1rem;
   background-color: ${props => props.color.color3.colorCode};
   padding: 5px 10px;
   cursor: pointer;
-  :active {
+  :hover {
     background-color: ${props => props.color.color2.colorCode};
     color: ${props => props.color.color3.colorCode};
   } 
@@ -102,16 +110,18 @@ function AllEditingMeme(props) {
 
   const renderEditingMeme = (imgSrc, docId, createdTime, lastSaveTime) => {
     return (
-      <Container2 key={docId}>
-        <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
-        <Container3>
-          <Container4><strong>建立時間：</strong></Container4>
-          <Container4>{new Date(createdTime.toDate()).toLocaleString()}</Container4>
-          <Container4><strong>上次儲存時間：</strong></Container4>
-          <Container4>{new Date(lastSaveTime.toDate()).toLocaleString()}</Container4>
-          <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
-        </Container3>
-      </Container2>
+      <Container10 key={docId}>
+        <Container2>
+          <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
+          <Container3>
+            <Container4><strong>建立時間：</strong></Container4>
+            <Container4>{new Date(createdTime.toDate()).toLocaleString()}</Container4>
+            <Container4><strong>上次儲存時間：</strong></Container4>
+            <Container4>{new Date(lastSaveTime.toDate()).toLocaleString()}</Container4>
+            <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
+          </Container3>
+        </Container2>
+      </Container10>
     );
   }
 

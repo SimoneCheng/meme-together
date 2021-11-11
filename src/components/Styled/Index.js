@@ -12,7 +12,7 @@ const Container1 = styled.div`
   align-items: center;
   max-width: 1440px;
   margin: 0 auto;
-  height: calc(100vh - 125px);
+  min-height: calc(100vh - 125px);
   background-color: ${props => props.color.color1.colorCode};
   padding-top: calc(30px + 65px);
   padding-bottom: 30px;
@@ -76,10 +76,11 @@ const Container7 = styled.div`
 
 const Container8 = styled.div`
   display: flex;
-  justify-content: center;
-  overflow-x: auto;
+  overflow-x: scroll;
   margin-right: 50px;
   margin-left: 50px;
+  min-height: 250px;
+  align-items: center;
 `;
 
 const Container9 = styled.div`
@@ -93,7 +94,7 @@ const Container10 = styled.div`
   color: white;
   padding-top: 30px;
   padding-bottom: 20px;
-  font-size: 16px;
+  font-size: 1rem;
   display: flex;
   justify-content: flex-end;
   padding-right: 50px;
@@ -136,8 +137,11 @@ const Image2 = styled.img`
 `;
 
 const Image3 = styled.img`
-  height: 300px;
+  height: 250px;
   object-fit: fill;
+  :hover {
+   box-shadow: 0 0 10px 3px white;
+ }
 `;
 
 const Title1 = styled.h1`
@@ -179,7 +183,7 @@ const Button1 = styled.button`
  border-radius: 5px;
  background-color: ${props => props.color.color2.colorCode};
  color: ${props => props.color.color3.colorCode};
- font-size: 16px;
+ font-size: 1rem;
  padding: 10px 30px;
  cursor: pointer;
  margin-top: 50px;
@@ -191,7 +195,7 @@ const Button1 = styled.button`
 
 const Text1 = styled.div`
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 1rem;
 `;
 
 const Strong = styled.strong`

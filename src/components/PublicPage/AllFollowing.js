@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 import { getAllFollowing, unfollowing, deleteFollower, addFollowing, addFollower } from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';
-import loading from '../../utlis/loading';
+import { loading } from '../../utlis/loading';
 
 const Container = styled.div`
   color: #fff;
-  font-size: 40px;
+  font-size: 2rem;
   padding-top: 100px;
   text-align: center;
 `;
@@ -18,6 +18,7 @@ const Container0 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
 `;
 
 const Container1 = styled.div`
@@ -62,7 +63,10 @@ const Button0 = styled.button`
   background-color: #ffc349;
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
+  :hover{
+    outline: 2px solid black;
+  }
 `;
 
 function AllFollowing(props) {
@@ -125,6 +129,7 @@ function AllFollowing(props) {
         <Container0>
             {followingList ? (followingList.length > 0 ? followingList.map((item) => renderFollowing(item)) : renderNone()) : <Container>{loading('spinningBubbles', '#fff', 50, 50)}</Container>}
         </Container0>
+
     );
 
 }

@@ -168,7 +168,7 @@ function MemeGenerator() {
       stroke,
       strokeWidth,
       fontWeight: 800,
-      fontFamily: '微軟正黑'
+      fontFamily: "Arial"
     });
     canvi.add(text);
     canvi.renderAll();

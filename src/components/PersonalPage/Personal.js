@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import AllEditingMeme from './AllEditingMeme';
 import AllMemeImage from './AllMemeImage';
 import AllFavorite from './AllFavorite';
-import loading from '../../utlis/loading';
+import { wholePageLoading } from '../../utlis/loading';
 import {
     getUserInfo,
     getAllEditingMeme,
@@ -15,7 +15,6 @@ import {
 } from '../../utlis/firebase';
 import {
     Img0,
-    Container,
     Container0,
     Container1,
     Container2,
@@ -56,7 +55,7 @@ function Personal() {
     }
 
     return (
-        <>
+        <Container0>
             {userData != null
                 && Object.keys(userData).length > 0
                 && userInfo
@@ -64,7 +63,7 @@ function Personal() {
                 && privateMemeImg
                 && publicMemeImg
                 && allFavorite ?
-                <Container0>
+                <>
                     <Container1>
                         <Container2>
                             <Img0 alt="profile-img" src={userInfo.user_img}></Img0>
@@ -102,9 +101,9 @@ function Personal() {
                         {status === 'ispublic' ? <AllMemeImage memeImg={publicMemeImg} /> : ""}
                         {status === 'favorites' ? <AllFavorite allFavorite={allFavorite} /> : ""}
                     </Container8>
-                </Container0>
-                : <Container>{loading('spinningBubbles', '#056', 50, 50)}</Container>}
-        </>
+                </>
+                : wholePageLoading('spinningBubbles', '#056', 50, 50)}
+        </Container0>
     )
 }
 

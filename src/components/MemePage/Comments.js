@@ -16,7 +16,7 @@ const Container0 = styled.div`
 `;
 
 const Container1 = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   margin: 20px auto;
   width: 400px;
 `;

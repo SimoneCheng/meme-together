@@ -63,7 +63,7 @@ function nativeLogout() {
   return auth
     .signOut()
     .catch((error) => {
-      alert(error.message);
+      alertError(undefined, error.message);
     });
 }
 
@@ -86,7 +86,7 @@ function reAuth(password) {
   return user
     .reauthenticateWithCredential(credential)
     .then(() => user)
-    .catch(() => alert('舊密碼輸入錯誤！請重新輸入！'));
+    .catch(() => alertError(undefined, '舊密碼輸入錯誤！請重新輸入！'));
 }
 
 function updatePassword(password, newPassword) {
@@ -96,7 +96,7 @@ function updatePassword(password, newPassword) {
     })
     .then(() => nativeLogout())
     .then(() => alertSuccess('密碼更新完成，請重新登入！'))
-    .catch((error) => alert(error.message));
+    .catch((error) => alertError('修改密碼失敗', error.message));
 }
 
 function deleteAccount(password) {

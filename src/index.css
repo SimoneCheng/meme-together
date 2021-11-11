@@ -10,15 +10,12 @@ body {
 a:link {
   text-decoration: none;
   background-color: none;
+  color: initial;
 }
 
 a:visited {
   color: initial;
   background-color: none;
-}
-
-a:hover {
-
 }
 
 a:active {

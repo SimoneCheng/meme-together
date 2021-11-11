@@ -7,18 +7,9 @@ const Img0 = styled.img`
   border-radius: 50%;
 `;
 
-const Container = styled.div`
-  min-height: 100vh;
-  background-color: #ffc349;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Container0 = styled.div`
   padding-top: 100px;
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);
   background-color: #ffc349;
   display: flex;
   flex-direction: column;
@@ -97,12 +88,11 @@ const Button0 = styled.button`
   color: white;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
 `;
 
 export {
     Img0,
-    Container,
     Container0,
     Container1,
     Container2,

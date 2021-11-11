@@ -40,7 +40,7 @@ const Container5 = styled.div`
   width: 810px;
   text-align: center;
   padding: 30px;
-  font-size: 30px;
+  font-size: 2rem;
 `;
 
 const Img0 = styled.img`
@@ -54,11 +54,11 @@ const Button = styled.button`
   border: 1px ${props => props.color.color2.colorCode} solid;
   border-radius: 5px;
   color: ${props => props.color.color2.colorCode};
-  font-size: 14px;
+  font-size: 1rem;
   background-color: ${props => props.color.color3.colorCode};
   padding: 5px 10px;
   cursor: pointer;
-  :active {
+  :hover {
     background-color: ${props => props.color.color2.colorCode};
     color: ${props => props.color.color3.colorCode};
   } 

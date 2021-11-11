@@ -6,7 +6,7 @@ import { countClickTime } from '../../utlis/countClickTime';
 
 const Container = styled.div`
   color: #fff;
-  font-size: 40px;
+  font-size: 2rem;
   padding-top: 100px;
   text-align: center;
 `;
@@ -15,7 +15,8 @@ const Container1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
-  margin: 50px;
+  margin: 50px 50px 0 50px;
+  padding-bottom: 50px;
   justify-content: center;
   align-items: flex-start;
 `;
@@ -30,7 +31,7 @@ const Container2 = styled.div`
   overflow: hidden;
   cursor: pointer;
   &:hover{
-    box-shadow: 2px 2px 15px grey;
+    box-shadow: 0 0 10px 3px white;
   }
 `;
 

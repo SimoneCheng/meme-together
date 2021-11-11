@@ -13,25 +13,16 @@ import {
   unfollowing,
   deleteFollower
 } from '../../utlis/firebase';
-import loading from '../../utlis/loading';
+import { wholePageLoading } from '../../utlis/loading';
 import { alertSuccess } from '../../utlis/alert';
 import AllFollowing from './AllFollowing';
 import AllPublicMemeImg from './AllPublicMemeImg';
 import AllFollowers from './AllFollowers';
 
-const Container = styled.div`
-  min-height: 100vh;
-  background-color: #056;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Container0 = styled.div`
   padding-top: 100px;
   background-color: #056;
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);
 `;
 
 const Container1 = styled.div`
@@ -63,7 +54,7 @@ const Container4 = styled.div`
   width: 800px;
   color: #fff;
   border-bottom: 2px solid #fff;
-  font-size: 30px;
+  font-size: 2rem;
 `;
 
 const Img0 = styled.img`
@@ -79,8 +70,11 @@ const Button0 = styled.button`
   background-color: #ffc349;
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
   margin-top: 20px;
+  :hover{
+    outline: 2px solid black;
+  }
 `;
 
 function Public() {
@@ -129,7 +123,7 @@ function Public() {
   }
 
   return (
-    <>
+    <Container0>
       {userData != null
         && Object.keys(userData).length > 0
         && userInfo
@@ -137,7 +131,7 @@ function Public() {
         && allFollowing
         && allFollowers
         && allFollowingSelf ?
-        <Container0>
+        <>
           <Container1>
             <Container2>
               <div>
@@ -176,9 +170,9 @@ function Public() {
           {status === 'allPublicMeme' ? <AllPublicMemeImg memeImg={publicMemeImg} /> : ""}
           {status === 'followers' ? <AllFollowers allFollowers={allFollowers} allFollowingSelf={allFollowingSelf} /> : ""}
           {status === 'following' ? <AllFollowing allFollowing={allFollowing} allFollowingSelf={allFollowingSelf} /> : ""}
-        </Container0>
-        : <Container>{loading('spinningBubbles', '#fff', 50, 50)}</Container>}
-    </>
+        </>
+        : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
+    </Container0>
   )
 }
 

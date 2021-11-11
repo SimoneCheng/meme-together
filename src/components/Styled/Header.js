@@ -35,7 +35,7 @@ const LogoDesktop = styled.div`
   display: flex;
   align-items: center;
   margin-left: 30px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bolder;
 `;
 
@@ -65,10 +65,10 @@ const Button = styled.button`
   border-radius: 5px;
   color: ${props => props.color.color2.colorCode};
   background-color: ${props => props.color.color3.colorCode};
-  font-size: 16px;
+  font-size: 1rem;
   padding: 5px 15px;
   cursor: pointer;
-  :active {
+  :hover {
     background-color: ${props => props.color.color2.colorCode};
     color: ${props => props.color.color3.colorCode};
   } 
@@ -89,12 +89,12 @@ const LogoMobile = styled.div`
   display: flex;
   align-items: center;
   margin-left: 20px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bolder;
 `;
 
 const LabelBurger = styled.label`
-  font-size: 30px;
+  font-size: 2rem;
 `;
 
 const MenuMobile = styled.div`
@@ -120,7 +120,7 @@ const LiMobile = styled.li`
   list-style: none;
   text-align: center;
   color: ${props => props.color.color2.colorCode};
-  font-size: 16px;
+  font-size: 1rem;
   margin-bottom: 15px;
   cursor: pointer;
 `;
