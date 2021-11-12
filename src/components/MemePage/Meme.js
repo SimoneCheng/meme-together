@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import {
@@ -8,27 +9,72 @@ import {
 } from '../../utlis/firebase';
 import AddToFavorite from './AddToFavorite';
 import Comments from './Comments';
+import { wholePageLoading } from '../../utlis/loading';
 
 const Container0 = styled.div`
   padding-top: 100px;
+  padding-bottom: 50px;
+  background-color: #056;
+  min-height: calc(100vh - 100px);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 `;
 
 const Container1 = styled.div`
   display: flex;
-  flex-direction: column;
   font-size: 1rem;
-  margin: auto;
-  width: 400px;
 `;
 
 const Container2 = styled.div`
-  width: 400px;
+
+`;
+
+const Container3 = styled.div`
+  background-color: #fff;
+  padding: 30px;
+  border-bottom: 5px solid #056;
+`;
+
+const Container4 = styled.div`
+  border-bottom: 5px solid #ffc349;
+  padding-bottom: 10px;
+`;
+
+const Container5 = styled.div`
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 100px;
+  white-space: pre-line;
+`;
+
+const Container6 = styled.span`
+  background-color: #E0E0E0;
+  border-radius: 10px;
+  padding: 2px 5px;
+`;
+
+const Container7 = styled.div`
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const Container8 = styled.div`
+ width: 400px;
 `;
 
 const Img0 = styled.img`
   width: 400px;
+  margin-right: 50px;
+  position: sticky;
+  top: 100px;
+`;
+
+const Link0 = styled(Link)`
+  :hover{
+      text-decoration: underline dotted;
+  }
 `;
 
 function Meme() {
@@ -50,7 +96,6 @@ function Meme() {
         const {
             title,
             context,
-            created_time,
             last_save_time,
             img_url,
             img_name,
@@ -62,9 +107,9 @@ function Meme() {
         const renderTags = (item) => {
             return (
                 <span>
-                    #{item}
+                    <Container6>#{item}</Container6>&ensp;
                 </span>
-            )
+            );
         }
 
         return (
@@ -72,24 +117,27 @@ function Meme() {
                 <Container2>
                     <Img0 alt={img_name} src={img_url} />
                 </Container2>
-                <div>
-                    <div>標題：{title}</div>
-                    <div>{context}</div>
-                    <div><Link to={`/public/${owner_user_id}`}>作者：{userInfo.user_name}</Link></div>
-                    <div>tags：{tags.map((item) => renderTags(item))}</div>
-                    <div>建立日期：{new Date(created_time.toDate()).toLocaleString()}</div>
-                    <div>最新發布日期：{new Date(last_save_time.toDate()).toLocaleString()}</div>
-                    <div>瀏覽次數：{click_time}</div>
-                    <AddToFavorite theMemeImage={theMemeImage} />
-                </div>
+                <Container8>
+                    <Container3>
+                        <div><strong>標題：</strong>{title}</div>
+                        <div><Link0 to={`/public/${owner_user_id}`}><strong>作者：</strong>{userInfo.user_name}</Link0></div>
+                        <Container4><strong>發布日期：</strong>{new Date(last_save_time.toDate()).toLocaleString()}</Container4>
+                        <Container5>{context}</Container5>
+                        <div>{tags[0] !== "" ? tags.map((item) => renderTags(item)) : ""}</div>
+                        <Container7>
+                            <span><strong>瀏覽次數：</strong>{click_time}</span>
+                            <AddToFavorite theMemeImage={theMemeImage} />
+                        </Container7>
+                    </Container3>
+                    <Comments />
+                </Container8>
             </Container1>
         )
     }
 
     return (
         <Container0>
-            {theMemeImage && userInfo ? renderMemeInfo() : ""}
-            <Comments />
+            {theMemeImage && userInfo ? renderMemeInfo() : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
         </Container0>
     );
 

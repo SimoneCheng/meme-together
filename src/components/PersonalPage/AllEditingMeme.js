@@ -12,21 +12,19 @@ const Container1 = styled.div`
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
   margin: 0 30px 30px 30px;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   overflow: hidden;
-  transition: margin 0.3s linear;
+  width: 250px;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.3s linear;
   &:hover{
     box-shadow: 0 0 10px 2px grey;
+    bottom: 10px;
   }
 `;
 
@@ -76,15 +74,8 @@ const Container9 = styled.div`
   font-size: 2rem;
 `;
 
-const Container10 = styled.div`
-  padding: 5px 0 0 5px;
-  &:hover{
-    padding: 0 0 0 0;
-  }
-`;
-
 const Img0 = styled.img`
-  width: 250px;
+  width: 100%;
   height: 250px;
   object-fit: cover;
 `;
@@ -110,8 +101,7 @@ function AllEditingMeme(props) {
 
   const renderEditingMeme = (imgSrc, docId, createdTime, lastSaveTime) => {
     return (
-      <Container10 key={docId}>
-        <Container2>
+        <Container2 key={docId}>
           <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
           <Container3>
             <Container4><strong>建立時間：</strong></Container4>
@@ -121,7 +111,6 @@ function AllEditingMeme(props) {
             <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
           </Container3>
         </Container2>
-      </Container10>
     );
   }
 

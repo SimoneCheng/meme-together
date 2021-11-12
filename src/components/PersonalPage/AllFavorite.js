@@ -11,20 +11,20 @@ const Container1 = styled.div`
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
   margin: 0 30px 30px 30px;
-  justify-content: center;
-  align-items: flex-start;
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   overflow: hidden;
+  width: 250px;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.3s linear;
   &:hover{
     box-shadow: 2px 2px 15px grey;
+    bottom: 10px;
   }
 `;
 
@@ -44,7 +44,7 @@ const Container5 = styled.div`
 `;
 
 const Img0 = styled.img`
-  width: 250px;
+  width: 100%;
   height: 250px;
   object-fit: cover;
 `;

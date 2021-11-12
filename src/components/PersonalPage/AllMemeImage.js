@@ -15,21 +15,19 @@ const Container1 = styled.div`
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
   margin: 0 30px 30px 30px;;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 570px;
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   overflow: hidden;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.3s linear;
   &:hover{
     box-shadow: 0 0 10px 2px grey;
+    bottom: 10px;
   }
 `;
 
@@ -48,15 +46,8 @@ const Container5 = styled.div`
   font-size: 2rem;
 `;
 
-const Container6 = styled.div`
-  padding: 5px 0 0 5px;
-  &:hover{
-    padding: 0 0 0 0;
-  }
-`;
-
 const Img0 = styled.img`
-  width: 250px;
+  width: 100%;
   height: 250px;
   object-fit: cover;
 `;
@@ -110,8 +101,7 @@ function AllMemeImage(props) {
   const renderMemeImg = (item) => {
     const { title, img_url, img_name, created_time, last_save_time, isPublic } = item;
     return (
-      <Container6 key={img_name}>
-        <Container2>
+        <Container2 key={img_name}>
           <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
           <Container3>
             <Container4><strong>標題：</strong></Container4>
@@ -133,7 +123,6 @@ function AllMemeImage(props) {
             </div>
           </Container3>
         </Container2>
-      </Container6>
     );
   }
 

@@ -47,6 +47,7 @@ const Container2 = styled.div`
 
 const Container3 = styled.div`
   padding-top: 10px;
+  white-space: pre-line;
 `;
 
 const Container4 = styled.div`

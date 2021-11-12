@@ -22,12 +22,11 @@ const Container1 = styled.div`
 `;
 
 const Container2 = styled.div`
-  box-shadow: 0 0 3px grey;
+  box-shadow: 0 0 3px white;
+  background-color: #fff;
   border-radius: 10px;
   width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  height: 250px;
   overflow: hidden;
   cursor: pointer;
   &:hover{
@@ -36,8 +35,8 @@ const Container2 = styled.div`
 `;
 
 const Img0 = styled.img`
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 

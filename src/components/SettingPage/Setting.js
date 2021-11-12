@@ -110,6 +110,7 @@ const Input1 = styled.input`
   border-radius: 10px;
   border: 2px solid #ccc;
   width: 80%;
+  font-size: 1rem;
   :focus{
     background-color: rgba(0, 0, 0, 0.05);
     outline: none;
@@ -291,14 +292,7 @@ function Setting() {
                             <label for="public">所有人</label>
                         </div>
                     </div>
-                    <div id="account">
-                        <h1>刪除帳戶</h1>
-                        <hr></hr>
-                        <p>請輸入密碼</p>
-                        <input type="password" />
-                        <br></br>
-                        <button>刪除帳戶</button>
-                    </div> */}
+                   */}
                 </>
                 : wholePageLoading('spinningBubbles', '#056', 50, 50)}
         </Container0>

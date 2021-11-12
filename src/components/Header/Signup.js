@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setIsSignupDisplayed } from '../../redux/actions';
+import { alertError } from '../../utlis/alert';
 import { nativeSignup } from '../../utlis/firebase';
 import color from '../Styled/colorTheme';
 import {
@@ -17,16 +18,21 @@ function Signup() {
     const signupEmail = useRef(null);
     const signupPassword = useRef(null);
     const signupName = useRef(null);
-    
+
     const clickCloseButton = () => {
         dispatch(setIsSignupDisplayed(false));
     }
-    
+
     const clickSignup = () => {
-        nativeSignup(signupEmail.current.value, signupPassword.current.value, signupName.current.value)
-            .then(() => {
-                dispatch(setIsSignupDisplayed(false));
-            });
+        if (signupName.current.value === "") {
+            alertError(undefined, '請輸入暱稱！');
+            return;
+        } else {
+            nativeSignup(signupEmail.current.value, signupPassword.current.value, signupName.current.value)
+                .then(() => {
+                    dispatch(setIsSignupDisplayed(false));
+                });
+        }
     }
 
     return (

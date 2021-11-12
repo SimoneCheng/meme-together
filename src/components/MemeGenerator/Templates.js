@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 import color from '../Styled/colorTheme';
 import { getAllTemplates } from '../../utlis/firebase';
+import {loading} from '../../utlis/loading'
 
 const H1 = styled.h1`
   padding-top: 100px;
@@ -11,8 +12,15 @@ const H1 = styled.h1`
 `;
 
 const Strong = styled.strong`
-  background-color: ${props => props.color.color4.colorCode};
+  background-color: ${props => props.color.color1.colorCode};
   color: black;
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 200px)
 `;
 
 const Container0 = styled.div`
@@ -22,56 +30,66 @@ const Container0 = styled.div`
 const Container1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
-  grid-template-rows: repeat(2, 250px);
-  grid-gap: 16px;
-  margin: 50px;
+  grid-gap: 45px;
+  margin: 45px;
   justify-content: center;
-  align-items: stretch; 
 `;
 
 const Container2 = styled.div`
-  border: 1px solid black;
+  box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
+  height: 250px;
   display: flex;
-  align-items: center;
   overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.3s linear;
+  &:hover{
+    box-shadow: 0 0 10px 2px grey;
+    bottom: 15px;
+  }
 `;
 
 const Img0 = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 function Templates() {
   const { url } = useRouteMatch();
-  const [allTemplates, setAllTemplates] = useState([]);
+  const [allTemplates, setAllTemplates] = useState();
+  const history = useHistory();
 
   useEffect(() => {
-      getAllTemplates(setAllTemplates);
-    }, [])
+    getAllTemplates(setAllTemplates);
+  }, [])
+
+  const clickTheTemplate = (imgId) => {
+    history.push(`${url}/${imgId}`)
+  }
 
   const renderAllTemplates = (imgURL, imgId) => {
     return (
-      <Container2>
-        <Link to={`${url}/${imgId}`}>
-          <Img0 src={imgURL} id={imgId} alt={`template-${imgId}`}></Img0>
-        </Link>
+      <Container2 key={imgId} onClick={() => clickTheTemplate(imgId)}>
+        <Img0 src={imgURL} id={imgId} alt={`template-${imgId}`}></Img0>
       </Container2>
     );
   }
 
   return (
-      <Container0>
-        <H1><Strong color={color}>選擇模板</Strong></H1>
+    <Container0>
+      <H1><Strong color={color}>選擇模板</Strong></H1>
+      {allTemplates ?
         <Container1>
           {allTemplates.map((item) => {
             const { image_url, image_id } = item;
             return renderAllTemplates(image_url, image_id);
           })}
-        </Container1>
-      </Container0>
+        </Container1> : <Container>{loading('spinningBubbles', '#056', 50, 50)}</Container>}
+    </Container0>
   )
 }
 

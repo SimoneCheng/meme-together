@@ -7,26 +7,34 @@ import { countClickTime } from '../../utlis/countClickTime';
 
 const Container0 = styled.div`
   padding-top: 100px;
+  background-color: #ffc349;
+  min-height: calc(100vh - 100px);
 `;
 
 const Container1 = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
-  grid-gap: 16px;
-  margin: 50px;
+  grid-gap: 45px;
+  margin-top: 45px;
+  padding-bottom: 45px;
   justify-content: center;
   align-items: flex-start;
 `;
 
 const Container2 = styled.div`
-  border: 1px solid black;
+  box-shadow: 0 0 3px grey;
   border-radius: 10px;
   width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  height: 250px;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.3s linear;
+  &:hover{
+    box-shadow: 0 0 10px 2px grey;
+    bottom: 10px;
+  }
 `;
 
 const Container3 = styled.div`
@@ -37,7 +45,7 @@ const Container3 = styled.div`
 const Img0 = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 function AllMemes() {

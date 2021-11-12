@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 import styled from 'styled-components';
 
 import { addToFavorite, checkFavoriteList, deletFromFavorite } from '../../utlis/firebase';
@@ -28,20 +29,20 @@ function AddToFavorite(props) {
             && Object.keys(userData).length > 0
             && owner_user_id !== userData.user_id
             && isInFavorite.length === 0) {
-            return (<button onClick={() => addTheMemeToFavorite()}>加入收藏</button>);
+            return (<MdFavoriteBorder onClick={() => addTheMemeToFavorite()} style={{ 'fontSize': '2rem', 'cursor': 'pointer' }} />);
         }
         if (userData !== null
             && Object.keys(userData).length > 0
             && owner_user_id !== userData.user_id
             && isInFavorite.length !== 0) {
             return (
-                <button onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alertSuccess('已取消收藏！') })}>取消收藏</button>
+                <MdFavorite onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => { alertSuccess('已取消收藏！') })} style={{ 'color': '#EA0000', 'fontSize': '2rem', 'cursor': 'pointer' }} />
             );
         }
     }
     return (
         <>
-            {theMemeImage ? renderFavoriteBtn() : ""}
+            {renderFavoriteBtn()}
         </>
     )
 }
