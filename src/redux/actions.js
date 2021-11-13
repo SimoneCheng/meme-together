@@ -28,9 +28,17 @@ const setIsUploadTemplateDisplayed = (isUploadTemplateDisplayed) => {
     }
 }
 
+const setCanvas = (canvas) => {
+    return {
+        type: "setCanvas",
+        payload: canvas
+    }
+}
+
 export { 
     setUserData,
     setIsLoginDisplayed,
     setIsSignupDisplayed,
-    setIsUploadTemplateDisplayed
+    setIsUploadTemplateDisplayed,
+    setCanvas
 };

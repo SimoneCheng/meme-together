@@ -1,29 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom';
+import {
+  MdTextFields,
+  MdEdit,
+  MdDelete,
+  MdSaveAlt,
+  MdImage
+} from 'react-icons/md';
+import { FaShapes } from 'react-icons/fa';
 import styled from 'styled-components';
 import { fabric } from 'fabric';
 
+import { setCanvas } from '../../redux/actions';
 import color from '../Styled/colorTheme';
-import { getTheTemplate ,getTheEditingMeme } from '../../utlis/firebase';
-import SaveStatus from './SaveStatus';
-import SaveImage from './SaveImage';
-
-import shapeIcon from '../../image/outline_category_black_36dp.png';
-import textIcon from '../../image/outline_title_black_36dp.png';
-import drawIcon from '../../image/outline_border_color_black_36dp.png';
-import deleteIcon from '../../image/outline_delete_black_36dp.png';
-import rectangleIcon from '../../image/outline_rectangle_black_36dp.png';
-import circleIcon from '../../image/outline_circle_black_36dp.png';
-import triangleIcon from '../../image/outline_change_history_black_36dp.png';
-import textBoxIcon from '../../image/outline_format_shapes_black_36dp.png';
-import pencilIcon from '../../image/outline_mode_edit_black_36dp.png';
+import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
+import TextEditor from './TextEditor';
+import ShapeEditor from './ShapeEditor';
+import DrawEditor from './DrawEditor';
+import SaveButtons from './SaveButtons';
+import { alertWarning } from '../../utlis/alert';
 
 const Container0 = styled.div`
-  text-align: center;
-  height: auto;
-  background-color: ${props => props.color.color1.colorCode};
-  padding: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: ${props => props.color.color3.colorCode};
+  padding-bottom: 50px;
+`;
+
+const Container1 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+const Container2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  color: #ccc;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 10px;
+`;
+
+const Container3 = styled.div`
+  width: 170px;
+`;
+
+const Input0 = styled.input`
+  display: none;
+`;
+
+const Label0 = styled.label`
+  cursor: pointer;
+  padding: 8px;
+  background-color: #EFEFEF;
+  outline: 2px solid #ccc;
+  border-radius: 10px;
+  &:hover{
+      outline: 3px solid #056;
+  }
 `;
 
 const H1 = styled.h1`
@@ -36,28 +75,98 @@ const Strong = styled.strong`
   color: black;
 `;
 
+const TextEditorBtn = styled(MdTextFields)`
+  cursor: pointer;
+  color: ${props => props.status === 'text' ? '#056' : 'inherit'};
+  outline: ${props => props.status === 'text' ? '2px solid #056' : 'none'};
+  border-radius: 10px;
+  margin-bottom: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
+const ShapeEditorBtn = styled(FaShapes)`
+  cursor: pointer;
+  color: ${props => props.status === 'shape' ? '#056' : 'inherit'};
+  outline: ${props => props.status === 'shape' ? '2px solid #056' : 'none'};
+  border-radius: 10px;
+  margin-bottom: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
+const DrawEditorBtn = styled(MdEdit)`
+  cursor: pointer;
+  color: ${props => props.status === 'draw' ? '#056' : 'inherit'};
+  outline: ${props => props.status === 'draw' ? '2px solid #056' : 'none'};
+  border-radius: 10px;
+  margin-bottom: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
+const DeleteBtn = styled(MdDelete)`
+  cursor: pointer;
+  margin-bottom: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
+const ChangeImageBtn = styled(MdImage)`
+  cursor: pointer;
+  color: ${props => props.status === 'image' ? '#056' : 'inherit'};
+  outline: ${props => props.status === 'image' ? '2px solid #056' : 'none'};
+  border-radius: 10px;
+  margin-bottom: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
+const SaveBtn = styled(MdSaveAlt)`
+  cursor: pointer;
+  color: ${props => props.status === 'save' ? '#056' : 'inherit'};
+  outline: ${props => props.status === 'save' ? '2px solid #056' : 'none'};
+  border-radius: 10px;
+  &:hover{
+    color: #056;
+  }
+`;
+
 function MemeGenerator() {
   const { id } = useParams();
   const { path } = useRouteMatch();
-  const [canvas, setCanvas] = useState('');
-  const [shapeEditorIsDisplayed, setShapeEditorIsDisplayed] = useState(true);
-  const [textEditorIsDisplayed, setTextEditorIsDisplayed] = useState(true);
-  const [drawEditorIsDisplayed, setDrawEditorIsDisplayed] = useState(true);
+  const dispatch = useDispatch();
+  const canvas = useSelector((state) => state.canvas);
+  const [status, setStatus] = useState('text');
   const userData = useSelector((state) => state.userData);
 
   useEffect(() => {
     if (path === "/templates/:id") {
       getTemplate();
     }
+    fabric.Object.prototype.transparentCorners = false;
+    fabric.Object.prototype.cornerColor = 'blue';
+    fabric.Object.prototype.cornerStyle = 'circle';
   }, []);
 
   useEffect(() => {
     if (path === "/personal/meme-generator/:id"
-    && userData !== null  
-    && Object.keys(userData).length > 0) {
+      && userData !== null
+      && Object.keys(userData).length > 0) {
       getEditingMeme();
     }
   }, [userData])
+
+  useEffect(() => {
+    if (canvas !== '') {
+      document.body.addEventListener('keydown', (e) => pressDelete(e, canvas));
+    }
+  }, [canvas])
 
   const getEditingMeme = () => {
     getTheEditingMeme(userData.user_id, id).then((res) => {
@@ -72,7 +181,7 @@ function MemeGenerator() {
         isDrawingMode: false, // 設置成 true 一秒變身小畫家
       });
       canvas.loadFromJSON(canvasStatus);
-      setCanvas(canvas);
+      dispatch(setCanvas(canvas));
     })
   }
 
@@ -90,7 +199,7 @@ function MemeGenerator() {
     newImg.crossOrigin = 'Anonymous';
     newImg.src = imgSrc;
     newImg.onload = function () {
-      setCanvas(initCanvas(newImg, this.width, this.height));
+      dispatch(setCanvas(initCanvas(newImg, this.width, this.height)));
     }
   }
 
@@ -105,95 +214,18 @@ function MemeGenerator() {
     })
   }
 
-  const controlDisplayOrNot = (status, setStatus, className) => {
-    const item = document.getElementsByClassName(className)[0];
-    if (status === false) {
-      item.classList.add('hidden');
-    } else {
-      item.classList.remove('hidden');
-    }
-    status ? setStatus(false) : setStatus(true);
-  }
-
-  const getShapeData = (shape) => {
-    const fill = document.getElementById('shape-fill-color').value;
-    const stroke = document.getElementById('shape-stroke-color').value;
-    const strokeWidth = parseInt(document.getElementById('shape-stroke-weight').value);
-    const initData = { height: 200, width: 150, radius: 100 };
-    const { height, width, radius } = initData;
-    const shapeData = { height, width, fill, stroke, strokeWidth };
-    switch (shape) {
-      case 'circle':
-        shapeData.radius = radius;
-        break;
-      default:
-        break;
-    }
-    return shapeData;
-  }
-
-  const addRect = (canvi) => {
-    const rect = new fabric.Rect(getShapeData());
-    canvi.add(rect);
-    canvi.renderAll();
-  }
-
-  const addCircle = (canvi) => {
-    const rect = new fabric.Circle(getShapeData('circle'));
-    canvi.add(rect);
-    canvi.renderAll();
-  }
-
-  const addTriangle = (canvi) => {
-    const rect = new fabric.Triangle(getShapeData());
-    canvi.add(rect);
-    canvi.renderAll();
-  }
-
-  const updateRange = (divId, countDivId) => {
-    const item = document.getElementById(divId).value;
-    const count = document.getElementById(countDivId);
-    count.innerHTML = '';
-    count.innerHTML = item;
-  }
-
-  const addText = (canvi) => {
-    const fill = document.getElementById('text-fill-color').value;
-    const stroke = document.getElementById('text-stroke-color').value;
-    const strokeWidth = parseInt(document.getElementById('text-stroke-weight').value);
-    const text = new fabric.IText('請輸入文字', {
-      top: 0,
-      left: 0,
-      fill,
-      stroke,
-      strokeWidth,
-      fontWeight: 800,
-      fontFamily: "Arial"
-    });
-    canvi.add(text);
-    canvi.renderAll();
-  }
-
-  const drawing = (canvi) => {
-    canvi.isDrawingMode ? canvi.isDrawingMode = false : canvi.isDrawingMode = true;
-    if (canvi.isDrawingMode) {
-      const color = document.getElementById('pencil-color').value;
-      const width = document.getElementById('pencil-stroke-weight').value;
-      canvi.freeDrawingBrush = new fabric.PencilBrush(canvi);
-      canvi.freeDrawingBrush.color = color;
-      canvi.freeDrawingBrush.width = width;
-    }
-  }
-
   const deleteItem = (canvi) => {
-    canvi.remove(canvi.getActiveObject());
+    if (canvi.getActiveObject() === undefined || canvi.getActiveObject() === null) {
+      alertWarning(undefined, '請先選擇物件再進行刪除！')
+    } else {
+      canvi.remove(canvi.getActiveObject());
+    }
   }
 
-  const downloadImage = (canvi, imageFormat) => {
-    const link = document.createElement("a");
-    link.href = canvi.toDataURL();
-    link.download = `meme-generator-${new Date().getTime()}.${imageFormat}`;
-    link.click();
+  const pressDelete = (e, canvi) => {
+    if (e.keyCode === 46) {
+      canvi.remove(canvi.getActiveObject());
+    }
   }
 
   const changeBackgroundImage = (e, canvi) => {
@@ -217,9 +249,9 @@ function MemeGenerator() {
 
   const renderUploadImageButton = () => {
     return (
-      <div>
-        <span>上傳一張圖片：</span>
-        <input id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
+      <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'flex-start' }}>
+        <Label0 htmlFor="uploadImage">更換背景圖片</Label0>
+        <Input0 id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
       </div>
     );
   }
@@ -227,64 +259,25 @@ function MemeGenerator() {
   return (
     <Container0 color={color}>
       <H1><Strong color={color}>迷因產生器</Strong></H1>
-      <div>
-        <button onClick={() => controlDisplayOrNot(shapeEditorIsDisplayed, setShapeEditorIsDisplayed, 'shape-editor')}><img alt="shapeIcon" src={shapeIcon}></img></button>
-        <button onClick={() => controlDisplayOrNot(textEditorIsDisplayed, setTextEditorIsDisplayed, 'text-editor')}><img alt="textIcon" src={textIcon}></img></button>
-        <button onClick={() => controlDisplayOrNot(drawEditorIsDisplayed, setDrawEditorIsDisplayed, 'draw-editor')}><img alt="drawIcon" src={drawIcon}></img></button>
-        <button onClick={() => deleteItem(canvas)}><img alt="deleteIcon" src={deleteIcon}></img></button>
-      </div>
-      <div className='shape-editor hidden'>
-        <div>
-          <label htmlFor="shape-fill-color">填滿</label>
-          <input type="color" id="shape-fill-color" defaultValue="#000000" />
-        </div>
-        <div>
-          <label htmlFor="shape-stroke-color">外框</label>
-          <input type="color" id="shape-stroke-color" defaultValue="#ffffff" />
-        </div>
-        <div>
-          <label htmlFor="shape-stroke-weight">外框粗細</label>
-          <input type="range" id="shape-stroke-weight" min="0" max="20" defaultValue="0" onMouseMove={() => updateRange('shape-stroke-weight', 'shape-stroke-weight-count')} onChange={() => updateRange('shape-stroke-weight', 'shape-stroke-weight-count')} />
-          <span id="shape-stroke-weight-count">0</span>
-        </div>
-        <button onClick={() => addRect(canvas)}><img alt="rectangleIcon" src={rectangleIcon}></img></button>
-        <button onClick={() => addCircle(canvas)}><img alt="circleIcon" src={circleIcon}></img></button>
-        <button onClick={() => addTriangle(canvas)}><img alt="triangleIcon" src={triangleIcon}></img></button>
-      </div>
-      <div className='text-editor hidden'>
-        <div>
-          <label htmlFor="text-fill-color">填滿</label>
-          <input type="color" id="text-fill-color" defaultValue="#ffffff" />
-        </div>
-        <div>
-          <label htmlFor="text-stroke-color">外框</label>
-          <input type="color" id="text-stroke-color" defaultValue="#000000" />
-        </div>
-        <div>
-          <label htmlFor="text-stroke-weight">外框粗細</label>
-          <input type="range" id="text-stroke-weight" min="0" max="3" step="0.1" defaultValue="2" onMouseMove={() => updateRange('text-stroke-weight', 'text-stroke-weight-count')} onChange={() => updateRange('text-stroke-weight', 'text-stroke-weight-count')} />
-          <span id="text-stroke-weight-count">2</span>
-        </div>
-        <button onClick={() => addText(canvas)}><img alt="textBoxIcon" src={textBoxIcon}></img></button>
-      </div>
-      <div className='draw-editor hidden'>
-        <div>
-          <label htmlFor="pencil-color">筆刷顏色</label>
-          <input type="color" id="pencil-color" defaultValue="#000000" />
-        </div>
-        <div>
-          <label htmlFor="pencil-stroke-weight">筆刷粗細</label>
-          <input type="range" id="pencil-stroke-weight" min="0" max="50" defaultValue="5" onMouseMove={() => updateRange('pencil-stroke-weight', 'pencil-stroke-weight-count')} onChange={() => updateRange('pencil-stroke-weight', 'pencil-stroke-weight-count')} />
-          <span id="pencil-stroke-weight-count">2</span>
-        </div>
-        <button onClick={() => drawing(canvas)}><img alt="pencilIcon" src={pencilIcon}></img></button>
-      </div>
-      <canvas id="c"></canvas>
-      <button onClick={() => downloadImage(canvas, 'png')}>Download in png</button>
-      <button onClick={() => downloadImage(canvas, 'jpg')}>Download in jpg</button>
-      {path === "/templates/:id" && userData === null ? renderUploadImageButton() : ""}
-      {userData ? <SaveStatus canvas={canvas} /> : ""}
-      {userData ? <SaveImage canvas={canvas} /> : ""}
+      <Container1>
+        <Container2>
+          <TextEditorBtn status={status} onClick={() => setStatus('text')} />
+          <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
+          <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
+          {path === "/templates/:id" ? (userData === null || Object.keys(userData).length === 0 ? <ChangeImageBtn status={status} onClick={() => setStatus('image')} /> : "") : ""}
+          <DeleteBtn onClick={() => deleteItem(canvas)} />
+          <SaveBtn status={status} onClick={() => setStatus('save')} />
+        </Container2>
+        <Container3>
+          {status === 'shape' ? <ShapeEditor /> : ""}
+          {status === 'text' ? <TextEditor /> : ""}
+          {status === 'draw' ? <DrawEditor /> : ""}
+          {status === 'save' ? <SaveButtons /> : ""}
+          {status === 'image' ? renderUploadImageButton() : ""}
+        </Container3>
+        {canvas === '' ? "讀取中" : ""}
+        <canvas id="c"></canvas>
+      </Container1>
     </Container0>
   );
 }

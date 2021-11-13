@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom'
+import styled from 'styled-components';
 
 import {
     getCompletedMemeImageUrl,
@@ -9,6 +10,19 @@ import {
 } from '../../utlis/firebase';
 import color from '../Styled/colorTheme';
 import { CloseButton, Container0, Container1, Input1, Input2, LoginButton } from '../Styled/Popup';
+
+const Button0 = styled.button`
+  border: none;
+  border-radius: 10px;
+  outline: 2px solid #ccc;
+  font-size: 1rem;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  &:hover{
+      outline: 3px solid #056;
+  }
+`;
 
 function SaveImage(props) {
     const canvas = props.canvas;
@@ -73,7 +87,7 @@ function SaveImage(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <button onClick={() => TemplateSaveImg()}>製作完成，儲存圖片到個人空間</button>
+                <Button0 onClick={() => TemplateSaveImg()}>製作完成，儲存圖片到個人空間</Button0>
             </div>
         );
 
@@ -82,7 +96,7 @@ function SaveImage(props) {
     const renderPersonalSave = () => {
         return (
             <div>
-                <button onClick={() => PersonalSaveImg()}>製作完成，輸出圖片</button>
+                <Button0 onClick={() => PersonalSaveImg()}>完成並發布圖片</Button0>
             </div>
         );
     }

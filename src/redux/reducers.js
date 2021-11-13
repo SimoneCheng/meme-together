@@ -34,9 +34,19 @@ const isUploadTemplateDisplayed = (state = false, action) => {
     }
 }
 
+const canvas = (state = '', action) => {
+    switch (action.type) {
+        case "setCanvas":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export { 
     userData,
     isLoginDisplayed,
     isSignupDisplayed,
-    isUploadTemplateDisplayed
+    isUploadTemplateDisplayed,
+    canvas
 };

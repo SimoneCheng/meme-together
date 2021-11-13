@@ -21,7 +21,17 @@ function alertError(title, text) {
     })
 }
 
+function alertWarning(title, text) {
+    MySwal.fire({
+        title: title,
+        text: text,
+        icon: 'warning',
+        confirmButtonColor: '#056',
+    })
+}
+
 export {
     alertSuccess,
-    alertError
+    alertError,
+    alertWarning
 };
