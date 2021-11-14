@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Index from './components/Index';
-import Templates from './components/MemeGenerator/Templates';
+import Templates from './components/Templates/Templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
 import Setting from './components/SettingPage/Setting';
 import AllMemes from './components/ExplorePage/AllMemes';
 import Meme from './components/MemePage/Meme';
+import UploadTemplate from './components/Templates/UploadTemplate';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/meme/:id" component={Meme} />
         <Route path="/public/:id" exact component={Public} />
         <Route path="/explorememes" component={AllMemes} />
+        <Route path="/uploadtemplate" component={UploadTemplate} />
+        <Route path="/search" component={AllMemes} />
       </Switch>
     </Router>
   );

@@ -76,7 +76,7 @@ const Container7 = styled.div`
 
 const Container8 = styled.div`
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-right: 50px;
   margin-left: 50px;
   min-height: 250px;

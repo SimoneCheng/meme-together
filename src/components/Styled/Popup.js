@@ -6,7 +6,7 @@ const Container0 = styled.div`
   left: 0;
   z-index: 1000;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
@@ -18,6 +18,9 @@ const Container1 = styled.div`
   padding: 60px 30px 10px 30px;
   border-radius: 10px;
   position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Input1 = styled.input`

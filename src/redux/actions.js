@@ -21,13 +21,6 @@ const setIsSignupDisplayed = (isSignupDisplayed) => {
     }
 }
 
-const setIsUploadTemplateDisplayed = (isUploadTemplateDisplayed) => {
-    return {
-        type: "setIsUploadTemplateDisplayed",
-        payload: isUploadTemplateDisplayed
-    }
-}
-
 const setCanvas = (canvas) => {
     return {
         type: "setCanvas",
@@ -39,6 +32,5 @@ export {
     setUserData,
     setIsLoginDisplayed,
     setIsSignupDisplayed,
-    setIsUploadTemplateDisplayed,
     setCanvas
 };

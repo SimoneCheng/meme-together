@@ -261,7 +261,21 @@ function deleteMemeImgInDb(docId) {
   return db
     .collection('completed_meme')
     .doc(docId)
-    .delete();
+    .collection('comments')
+    .get()
+    .then(querySnapshot => {
+      if (querySnapshot.docs.length > 0) {
+        querySnapshot.docs.forEach(snapshot => {
+          snapshot.ref.delete();
+        })
+      }
+    })
+    .then(() => {
+      db
+        .collection('completed_meme')
+        .doc(docId)
+        .delete();
+    })
 }
 
 function deleteMemeImgInStorage(fileName) {
@@ -553,6 +567,21 @@ function saveNewTemplate(id, data) {
     .set(data);
 }
 
+function searchPublicMeme(keyword) {
+  return db
+    .collection('completed_meme')
+    .where('isPublic', '==', true)
+    .where('search_array_term', 'array-contains', keyword)
+    .get()
+    .then((querySnapshot) => {
+      const result = [];
+      querySnapshot.forEach(doc => {
+        result.push(doc.data());
+      })
+      return result;
+    });
+}
+
 function deleteAllData(id) {
   return db
     .collection('users')
@@ -705,5 +734,6 @@ export {
   getProfileImg,
   uploadTemplate,
   getTemplateURL,
-  saveNewTemplate
+  saveNewTemplate, 
+  searchPublicMeme
 };

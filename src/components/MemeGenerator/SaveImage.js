@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components';
+import { alertSuccess } from '../../utlis/alert';
 
 import {
     getCompletedMemeImageUrl,
@@ -55,11 +56,16 @@ function SaveImage(props) {
     const sendCompleteMemeInfo = () => {
         if (title.current.value === "") {
             alert('請填寫標題！');
-        } else {
+        } else {     
             const imgURL = canvas.toDataURL();
             uploadCompletedMeme(user_id, imgURL)
                 .then((res) => {
                     const tagsArr = tags.current.value.split(' ');
+                    const search_array_term = [];
+                    for (let i = 1; i <= title.current.value.length; i++) {
+                        const term = title.current.value.substring(0, i);
+                        search_array_term.push(term);
+                    }
                     const memeInfo = {
                         title: `${title.current.value}`,
                         context: `${context.current.value}`,
@@ -69,7 +75,8 @@ function SaveImage(props) {
                         isPublic: isPublic.current.checked,
                         created_time: new Date(),
                         last_save_time: new Date(),
-                        click_time: 0
+                        click_time: 0,
+                        search_array_term: tagsArr[0] === "" ? search_array_term : search_array_term.concat(tagsArr)
                     }
                     return memeInfo;
                 })
@@ -78,7 +85,7 @@ function SaveImage(props) {
                         .then((url) => {
                             res.img_url = url;
                             saveCompletedMeme(res.img_name, res);
-                            alert('成功輸出！')
+                            alertSuccess('成功輸出！')
                         })
                 });
         }
@@ -87,7 +94,7 @@ function SaveImage(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <Button0 onClick={() => TemplateSaveImg()}>製作完成，儲存圖片到個人空間</Button0>
+                <Button0 onClick={() => TemplateSaveImg()}>發布圖片</Button0>
             </div>
         );
 
@@ -112,7 +119,7 @@ function SaveImage(props) {
                     </div>
                     <div>
                         <div style={{ 'textAlign': 'left' }}>發發廢文（非必填）</div>
-                        <Input2 cols="33" rows="10" placeholder="輸入文字" ref={context}></Input2>
+                        <Input2 cols="20" rows="6" placeholder="輸入文字" ref={context}></Input2>
                     </div>
                     <div>
                         <div style={{ 'textAlign': 'left' }}>加 tags？（非必填）</div>

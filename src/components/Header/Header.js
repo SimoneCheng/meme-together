@@ -8,7 +8,6 @@ import {
   setUserData,
   setIsLoginDisplayed,
   setIsSignupDisplayed,
-  setIsUploadTemplateDisplayed
 } from '../../redux/actions';
 import {
   nativeLogout,
@@ -37,14 +36,12 @@ import {
 import logo from '../../image/outline_bug_report_black_36dp.png';
 import account from '../../image/outline_account_circle_black_36dp.png';
 import setting from '../../image/outline_settings_black_36dp.png';
-import UploadTemplate from './UploadTemplate';
 
 function Header() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
   const isLoginDisplayed = useSelector((state) => state.isLoginDisplayed);
   const isSignupDisplayed = useSelector((state) => state.isSignupDisplayed);
-  const isUploadTemplateDisplayed = useSelector((state) => state.isUploadTemplateDisplayed);
   const history = useHistory();
 
   useEffect(() => {
@@ -57,10 +54,6 @@ function Header() {
 
   const clickSignupButton = () => {
     dispatch(setIsSignupDisplayed(true));
-  }
-
-  const clickUploadTemplateButton = () => {
-    dispatch(setIsUploadTemplateDisplayed(true));
   }
 
   const clickAccount = () => {
@@ -137,7 +130,7 @@ function Header() {
           <Ul1>
             <LiDesktop><Link to="/explorememes"><Button color={color}>探索</Button></Link></LiDesktop>
             <LiDesktop><Link to="/templates"><Button color={color}>創作</Button></Link></LiDesktop>
-            {userData ? <LiDesktop><Button color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</Button></LiDesktop> : ""}
+            {userData ? <LiDesktop><Link to="/uploadtemplate"><Button color={color}>貢獻模板</Button></Link></LiDesktop> : ""}
           </Ul1>
           {userData ? renderDesktopLogoutAndMemberButton() : renderDesktopLoginAndSignupButton()}
         </NavDesktop>
@@ -154,7 +147,7 @@ function Header() {
             <ul>
               <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
               <Link to="/templates"><LiMobile color={color}>創作</LiMobile></Link>
-              {userData ? <LiMobile color={color} onClick={() => clickUploadTemplateButton()}>貢獻模板</LiMobile> : ""}
+              {userData ? <Link to="/uploadtemplate"><LiMobile color={color}>貢獻模板</LiMobile></Link> : ""}
             </ul>
             {userData ? renderMobileLogoutAndMemberButton() : renderMobileLoginAndSignupButton()}
           </MenuMobile>
@@ -163,7 +156,6 @@ function Header() {
 
       {isLoginDisplayed ? <Login /> : ""}
       {isSignupDisplayed ? <Signup /> : ""}
-      {isUploadTemplateDisplayed ? <UploadTemplate /> : ""}
     </>
   );
 }

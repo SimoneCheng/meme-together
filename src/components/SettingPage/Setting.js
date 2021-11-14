@@ -18,6 +18,7 @@ require('dotenv').config();
 
 const Container0 = styled.div`
   padding-top: 100px;
+  padding-bottom: 50px;
   min-height: calc(100vh - 100px);
 `;
 

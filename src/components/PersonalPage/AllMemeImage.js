@@ -74,7 +74,7 @@ function AllMemeImage(props) {
     deleteMemeImgInDb(docId)
       .then(() => {
         deleteMemeImgInStorage(docId)
-          .then(() => alert('成功刪除！'))
+          .then(() => alertSuccess('成功刪除！'))
       })
   }
 

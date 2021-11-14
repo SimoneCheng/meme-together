@@ -63,7 +63,7 @@ function SaveStatus(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <Button0 onClick={() => TemplateCanvasToJSON(canvas)}>製作中，儲存編輯狀態到個人空間</Button0>
+                <Button0 style={{ 'fontSize': '12px' }} onClick={() => TemplateCanvasToJSON(canvas)}>儲存編輯狀態到個人空間</Button0>
             </div>
         );
     }

@@ -3,7 +3,6 @@ import {
     userData, 
     isLoginDisplayed, 
     isSignupDisplayed,
-    isUploadTemplateDisplayed,
     canvas
  } from "./reducers";
 
@@ -11,7 +10,6 @@ import {
      userData,
      isLoginDisplayed,
      isSignupDisplayed,
-     isUploadTemplateDisplayed,
      canvas
  })
 
