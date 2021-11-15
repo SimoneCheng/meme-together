@@ -13,7 +13,8 @@ import {
     getAllComments,
     addComment,
     deleteComment,
-    updateComment
+    updateComment,
+    getUserInfo
 } from '../../utlis/firebase';
 import { alertError } from '../../utlis/alert';
 
@@ -123,11 +124,18 @@ function Comments() {
     const editCommentText = useRef(null);
     const userData = useSelector((state) => state.userData);
     const [isEditing, setIsEditing] = useState();
+    const [userInfo, setUserInfo] = useState();
 
     useEffect(() => {
         getAllComments(id, setAllComments);
-        setIsEditing(false);
+        setIsEditing(false);      
     }, [])
+
+    useEffect(() => {
+        if (userData !== null && Object.keys(userData) && userData.user_name === null) {
+            getUserInfo(userData.user_id, setUserInfo);
+        }
+    }, [userData])
 
     const addTheCommentClick = () => {
         if (addCommentText.current.value === "") {
@@ -138,7 +146,7 @@ function Comments() {
                 comment: `${addCommentText.current.value}`,
                 created_time: new Date(),
                 user_id: `${userData.user_id}`,
-                user_name: `${userData.user_name}`
+                user_name: `${userData.user_name === null ? userInfo.user_name : userData.user_name}`
             }
             addComment(id, data);
             addCommentText.current.value = "";
@@ -155,7 +163,7 @@ function Comments() {
                     comment: `${addCommentText.current.value}`,
                     created_time: new Date(),
                     user_id: `${userData.user_id}`,
-                    user_name: `${userData.user_name}`
+                    user_name: `${userData.user_name === null ? userInfo.user_name : userData.user_name}`
                 }
                 addComment(id, data);
                 addCommentText.current.value = "";

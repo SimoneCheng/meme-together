@@ -247,14 +247,14 @@ function MemeGenerator() {
     } else { return; }
   }
 
-  const renderUploadImageButton = () => {
-    return (
-      <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'flex-start' }}>
-        <Label0 htmlFor="uploadImage">更換背景圖片</Label0>
-        <Input0 id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
-      </div>
-    );
-  }
+  // const renderUploadImageButton = () => {
+  //   return (
+  //     <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'flex-start' }}>
+  //       <Label0 htmlFor="uploadImage">更換背景圖片</Label0>
+  //       <Input0 id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <Container0 color={color}>
@@ -264,7 +264,7 @@ function MemeGenerator() {
           <TextEditorBtn status={status} onClick={() => setStatus('text')} />
           <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
           <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
-          {path === "/templates/:id" ? (userData === null || Object.keys(userData).length === 0 ? <ChangeImageBtn status={status} onClick={() => setStatus('image')} /> : "") : ""}
+          {/* {path === "/templates/:id" ? (userData === null || Object.keys(userData).length === 0 ? <ChangeImageBtn status={status} onClick={() => setStatus('image')} /> : "") : ""} */}
           <DeleteBtn onClick={() => deleteItem(canvas)} />
           <SaveBtn status={status} onClick={() => setStatus('save')} />
         </Container2>
@@ -273,9 +273,11 @@ function MemeGenerator() {
           {status === 'text' ? <TextEditor /> : ""}
           {status === 'draw' ? <DrawEditor /> : ""}
           {status === 'save' ? <SaveButtons /> : ""}
-          {status === 'image' ? renderUploadImageButton() : ""}
+          {/* {status === 'image' ? renderUploadImageButton() : ""} */}
         </Container3>
-        {canvas === '' ? "讀取中" : ""}
+        <div>
+          {canvas === '' ? <h1>模板讀取中......</h1> : ""}
+        </div>
         <canvas id="c"></canvas>
       </Container1>
     </Container0>

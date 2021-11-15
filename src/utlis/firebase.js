@@ -86,7 +86,7 @@ function reAuth(password) {
   return user
     .reauthenticateWithCredential(credential)
     .then(() => user)
-    .catch(() => alertError(undefined, '舊密碼輸入錯誤！請重新輸入！'));
+    .catch(() => alertError(undefined, '密碼輸入錯誤！請重新輸入！'));
 }
 
 function updatePassword(password, newPassword) {
@@ -104,7 +104,7 @@ function deleteAccount(password) {
     .then((res) => {
       res.delete();
     })
-    .then(() => alert('成功刪除帳號！'));
+    .then(() => alertSuccess('成功刪除帳號！'));
 }
 
 function uploadProfileImg(id, file) {
@@ -267,7 +267,7 @@ function deleteMemeImgInDb(docId) {
       if (querySnapshot.docs.length > 0) {
         querySnapshot.docs.forEach(snapshot => {
           snapshot.ref.delete();
-        })
+        });
       }
     })
     .then(() => {
@@ -598,7 +598,7 @@ function deleteAllData(id) {
     .then(() => {
       db
         .collection('users')
-        .doc('id')
+        .doc(id)
         .collection('following_list')
         .get()
         .then(querySnapshot => {
@@ -612,7 +612,7 @@ function deleteAllData(id) {
     .then(() => {
       db
         .collection('users')
-        .doc('id')
+        .doc(id)
         .collection('follower_list')
         .get()
         .then(querySnapshot => {
@@ -626,7 +626,7 @@ function deleteAllData(id) {
     .then(() => {
       db
         .collection('users')
-        .doc('id')
+        .doc(id)
         .collection('favorites')
         .get()
         .then(querySnapshot => {
@@ -640,7 +640,7 @@ function deleteAllData(id) {
     .then(() => {
       db
         .collection('users')
-        .doc('id')
+        .doc(id)
         .delete()
     })
     .then(() => {
@@ -682,6 +682,53 @@ function deleteAllData(id) {
           }
         })
     })
+    .then(() => {
+      db
+        .collection('completed_meme')
+        .where('owner_user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.collection("comments").get().then((querySnapshot) => {
+              if (querySnapshot.docs.length > 0) {
+                querySnapshot.docs.forEach(snapshot => {
+                  snapshot.ref.delete();
+                })
+              }
+            });
+          });
+        })
+    })
+    .then(() => {
+      db
+        .collection('completed_meme')
+        .where('owner_user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.forEach(doc => {
+              storageRef.child(`completed_meme/${doc.data().img_name}`).delete();
+            })
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    .then(() => {
+      db
+        .collectionGroup('comments')
+        .where('user_id', '==', id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.docs.length > 0) {
+            querySnapshot.docs.forEach(snapshot => {
+              snapshot.ref.delete();
+            })
+          }
+        })
+    })
+    // .then(() => storageRef.child(`users/${id}`).delete())
 }
 
 export {
@@ -734,6 +781,8 @@ export {
   getProfileImg,
   uploadTemplate,
   getTemplateURL,
-  saveNewTemplate, 
-  searchPublicMeme
+  saveNewTemplate,
+  searchPublicMeme,
+  deleteAllData,
+  deleteAccount
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components';
-import { alertSuccess } from '../../utlis/alert';
+import { alertSuccess, alertWarning } from '../../utlis/alert';
 
 import {
     getCompletedMemeImageUrl,
@@ -55,7 +55,7 @@ function SaveImage(props) {
 
     const sendCompleteMemeInfo = () => {
         if (title.current.value === "") {
-            alert('請填寫標題！');
+            alertWarning(undefined, '請填寫標題！');
         } else {     
             const imgURL = canvas.toDataURL();
             uploadCompletedMeme(user_id, imgURL)
@@ -85,8 +85,9 @@ function SaveImage(props) {
                         .then((url) => {
                             res.img_url = url;
                             saveCompletedMeme(res.img_name, res);
-                            alertSuccess('成功輸出！')
+                            alertSuccess('成功輸出！');
                         })
+                        .then(() => setIsDisplayed(false));
                 });
         }
     }

@@ -10,7 +10,7 @@ import { loading } from '../../utlis/loading';
 const Container = styled.div`
   color: #fff;
   font-size: 2rem;
-  padding-top: 100px;
+  padding-top: 50px;
   text-align: center;
 `;
 
