@@ -36,7 +36,7 @@ const Input1 = styled.input`
 
 const Button0 = styled.div`
   background-color: ${props => props.color.color1.colorCode};
-  border: none;
+  border: 2px solid transparent;
   border-radius: 10px;
   text-align: center;
   font-size: 1rem;
@@ -44,7 +44,7 @@ const Button0 = styled.div`
   padding: 10px 20px;
   align-self: flex-start;
   :hover{
-    outline: 2px solid black;
+    border: 2px solid black;
   }
 `;
 

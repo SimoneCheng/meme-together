@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { MdAddCircleOutline } from 'react-icons/md';
 import styled from 'styled-components';
 
 import color from '../Styled/colorTheme';
@@ -46,28 +47,12 @@ const Container5 = styled.div`
   height: 430px;
 `;
 
-const Container6 = styled.div`
-  border-radius: 50%;
-  border: 2px solid #056;
+const Container6 = styled.span`
   font-size: 70px;
   color: #056;
-  width: 60px;
-  height: 60px;
-  position: relative;
 `;
 
-const Container7 = styled.span`
-  position: absolute;
-  top: -23px;
-  left: 4px;
-  color: #056;
-`;
-
-const Container8 = styled.div`
-  padding-top: 20px;
-`;
-
-const Container9 = styled.div`
+const Container7 = styled.div`
   width: 810px;
   text-align: center;
   padding: 30px;
@@ -101,16 +86,16 @@ function AllEditingMeme(props) {
 
   const renderEditingMeme = (imgSrc, docId, createdTime, lastSaveTime) => {
     return (
-        <Container2 key={docId}>
-          <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
-          <Container3>
-            <Container4><strong>建立時間：</strong></Container4>
-            <Container4>{new Date(createdTime.toDate()).toLocaleString()}</Container4>
-            <Container4><strong>上次儲存時間：</strong></Container4>
-            <Container4>{new Date(lastSaveTime.toDate()).toLocaleString()}</Container4>
-            <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
-          </Container3>
-        </Container2>
+      <Container2 key={docId}>
+        <Link to={`/personal/meme-generator/${docId}`}><Img0 src={imgSrc} alt={docId}></Img0></Link>
+        <Container3>
+          <Container4><strong>建立時間：</strong></Container4>
+          <Container4>{new Date(createdTime.toDate()).toLocaleString()}</Container4>
+          <Container4><strong>上次儲存時間：</strong></Container4>
+          <Container4>{new Date(lastSaveTime.toDate()).toLocaleString()}</Container4>
+          <Button color={color} onClick={() => { deleteEditingMeme(userData.user_id, docId).then(() => alertSuccess('刪除成功！')) }}>刪除</Button>
+        </Container3>
+      </Container2>
     );
   }
 
@@ -119,14 +104,12 @@ function AllEditingMeme(props) {
       <Container1>
         {allEditingMeme ? allEditingMeme.map((item) => renderEditingMeme(item.data.backgroundImage_src, item.docId, item.data.created_time, item.data.last_save_time)) : ""}
         <Container5>
-          <Container6>
-            <Link to="/templates">
-              <Container7>+</Container7>
-            </Link>
-          </Container6>
-          <Container8>
+          <Link to="/templates">
+            <Container6><MdAddCircleOutline /></Container6>
+          </Link>
+          <div>
             <Link to="/templates" style={{ 'color': '#056' }}>新增創作</Link>
-          </Container8>
+          </div>
         </Container5>
       </Container1>
     )
@@ -134,9 +117,9 @@ function AllEditingMeme(props) {
 
   const renderNone = () => {
     return (
-      <Container9>
+      <Container7>
         空空的喔～
-      </Container9>
+      </Container7>
     );
   }
 

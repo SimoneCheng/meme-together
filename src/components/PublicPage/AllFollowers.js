@@ -117,12 +117,14 @@ function AllFollowers(props) {
                     <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>
                 </Container3>
                 <Container4>
-                    {userData.user_id === id ?
-                        <Button0 onClick={() => deleteFollowers(item.user_id)}>移除</Button0>
-                        : (item.user_id === userData.user_id ? ""
-                            : (allFollowingSelf.includes(item.user_id) ?
-                                <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
-                                : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>))}
+                    {userData != null
+                        && Object.keys(userData).length > 0 ?
+                        (userData.user_id === id ?
+                            <Button0 onClick={() => deleteFollowers(item.user_id)}>移除</Button0>
+                            : (item.user_id === userData.user_id ? ""
+                                : (allFollowingSelf.includes(item.user_id) ?
+                                    <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
+                                    : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>))) : ""}
                 </Container4>
             </Container1>
         );

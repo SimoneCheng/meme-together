@@ -183,7 +183,7 @@ function UploadTemplate() {
     return (
       <Container2>
         <Label0 htmlFor="uploadimage"><MdOutlineAddPhotoAlternate style={{ 'fontSize': '6rem', 'marginBottom': '20px' }} />上傳一張圖片</Label0>
-        <Input0 id="uploadimage" type="file" accept="image/*" onChange={(e) => clickUploadTemplate(e)} />
+        <Input0 id="uploadimage" type="file" accept=".jpg, .png" onChange={(e) => clickUploadTemplate(e)} />
       </Container2>
     )
   }
@@ -206,7 +206,7 @@ function UploadTemplate() {
     <Container0>
       <Container1>
         <ul style={{'counterReset': 'step'}}>
-          <Li0 imagePreview={imagePreview}>選擇圖片上傳</Li0>
+          <Li0 imagePreview={imagePreview}>選擇圖片（jpg或png）</Li0>
           <Li0 imagePreview={imagePreview}>預覽圖片然後上傳新模板</Li0>
         </ul>
       </Container1>

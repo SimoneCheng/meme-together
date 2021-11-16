@@ -7,15 +7,14 @@ import { saveEditingMeme, updateEditingMeme } from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';
 
 const Button0 = styled.button`
-  border: none;
   border-radius: 10px;
-  outline: 2px solid #ccc;
+  border: 2px solid #ccc;
   font-size: 1rem;
   padding: 8px;
   cursor: pointer;
   margin-bottom: 20px;
   &:hover{
-      outline: 3px solid #056;
+      border: 2px solid #056;
   }
 `;
 

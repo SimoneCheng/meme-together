@@ -44,6 +44,7 @@ const Container4 = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 0;
+  word-break: break-all;
 `;
 
 const Container5 = styled.div`

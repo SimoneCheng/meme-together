@@ -28,10 +28,10 @@ const RectBtn = styled(IoSquareOutline)`
   padding: 8px;
   margin-right: 10px;
   background-color: #EFEFEF;
-  outline: 2px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 10px;
   &:hover{
-      outline: 3px solid #056;
+      border: 2px solid #056;
   }
 `;
 
@@ -40,10 +40,10 @@ const TriangleBtn = styled(IoTriangleOutline)`
   cursor: pointer;
   padding: 8px;
   background-color: #EFEFEF;
-  outline: 2px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 10px;
   &:hover{
-      outline: 3px solid #056;
+      border: 2px solid #056;
   }
 `;
 
@@ -53,10 +53,10 @@ const CircleBtn = styled(IoRadioButtonOffOutline)`
   padding: 8px;
   margin-right: 10px;
   background-color: #EFEFEF;
-  outline: 2px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 10px;
   &:hover{
-      outline: 3px solid #056;
+      border: 2px solid #056;
   }
 `;
 

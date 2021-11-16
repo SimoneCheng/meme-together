@@ -69,7 +69,6 @@ function Personal() {
                             <Img0 alt="profile-img" src={userInfo.user_img}></Img0>
                         </Container2>
                         <Container2>
-                            <div style={{ 'paddingBottom': '10px' }}><strong>使用者ID：</strong>{userInfo.user_id}</div>
                             <div style={{ 'paddingBottom': '10px' }}><strong>暱稱：</strong>{userInfo.user_name}</div>
                             <div><strong>電子信箱：</strong>{userInfo.user_email}</div>
                         </Container2>

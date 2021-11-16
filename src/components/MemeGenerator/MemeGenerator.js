@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useRouteMatch } from 'react-router-dom';
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import {
   MdTextFields,
   MdEdit,
@@ -140,6 +140,7 @@ const SaveBtn = styled(MdSaveAlt)`
 function MemeGenerator() {
   const { id } = useParams();
   const { path } = useRouteMatch();
+  const history = useHistory();
   const dispatch = useDispatch();
   const canvas = useSelector((state) => state.canvas);
   const [status, setStatus] = useState('text');
@@ -155,18 +156,21 @@ function MemeGenerator() {
   }, []);
 
   useEffect(() => {
-    if (path === "/personal/meme-generator/:id"
-      && userData !== null
-      && Object.keys(userData).length > 0) {
-      getEditingMeme();
+    if (path === "/personal/meme-generator/:id") {
+      if (userData !== null
+        && Object.keys(userData).length > 0) {
+        getEditingMeme();
+      } else {
+        history.push('/');
+      }
     }
   }, [userData])
 
-  useEffect(() => {
-    if (canvas !== '') {
-      document.body.addEventListener('keydown', (e) => pressDelete(e, canvas));
-    }
-  }, [canvas])
+  // useEffect(() => {
+  //   if (canvas !== '') {
+  //     document.body.addEventListener('keydown', (e) => pressDelete(e, canvas));
+  //   }
+  // }, [canvas])
 
   const getEditingMeme = () => {
     getTheEditingMeme(userData.user_id, id).then((res) => {
@@ -189,8 +193,10 @@ function MemeGenerator() {
     const image_id = id;
     let image_url;
     getTheTemplate(image_id).then((res) => {
-      image_url = res.image_url;
-      getTemplateSize(image_url);
+      if (res) {
+        image_url = res.image_url;
+        getTemplateSize(image_url);
+      }
     });
   }
 
@@ -222,30 +228,30 @@ function MemeGenerator() {
     }
   }
 
-  const pressDelete = (e, canvi) => {
-    if (e.keyCode === 46) {
-      canvi.remove(canvi.getActiveObject());
-    }
-  }
+  // const pressDelete = (e, canvi) => {
+  //   if (e.keyCode === 46) {
+  //     canvi.remove(canvi.getActiveObject());
+  //   }
+  // }
 
-  const changeBackgroundImage = (e, canvi) => {
-    const file = e.target.files[0];
-    const img = new Image();
-    if (file) {
-      img.src = window.URL.createObjectURL(file);
-      img.onload = () => {
-        const ratio = 600 / img.width;
-        canvi.setBackgroundImage(img.src, canvi.renderAll.bind(canvi), {
-          top: 0,
-          left: 0,
-          scaleX: ratio,
-          scaleY: ratio,
-        });
-        canvi.setWidth(600);
-        canvi.setHeight(img.height * ratio);
-      }
-    } else { return; }
-  }
+  // const changeBackgroundImage = (e, canvi) => {
+  //   const file = e.target.files[0];
+  //   const img = new Image();
+  //   if (file) {
+  //     img.src = window.URL.createObjectURL(file);
+  //     img.onload = () => {
+  //       const ratio = 600 / img.width;
+  //       canvi.setBackgroundImage(img.src, canvi.renderAll.bind(canvi), {
+  //         top: 0,
+  //         left: 0,
+  //         scaleX: ratio,
+  //         scaleY: ratio,
+  //       });
+  //       canvi.setWidth(600);
+  //       canvi.setHeight(img.height * ratio);
+  //     }
+  //   } else { return; }
+  // }
 
   // const renderUploadImageButton = () => {
   //   return (

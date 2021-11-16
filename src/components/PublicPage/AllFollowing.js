@@ -70,67 +70,71 @@ const Button0 = styled.button`
 `;
 
 function AllFollowing(props) {
-    const { id } = useParams();
-    const allFollowing = props.allFollowing;
-    const allFollowingSelf = props.allFollowingSelf;
-    const [followingList, setFollowingList] = useState();
-    const userData = useSelector((state) => state.userData);
+  const allFollowing = props.allFollowing;
+  const allFollowingSelf = props.allFollowingSelf;
+  const [followingList, setFollowingList] = useState();
+  const userData = useSelector((state) => state.userData);
 
-    useEffect(() => {
-        if (allFollowing.length > 0) {
-            getAllFollowing(allFollowing)
-                .then((res) => {
-                    setFollowingList(res);
-                })
-        } else {
-            setFollowingList([]);
-        }
-    }, [allFollowing]);
-
-    const followUser = (id) => {
-        const data = { user_id: id };
-        const selfData = { user_id: userData.user_id };
-        addFollowing(userData.user_id, id, data)
-            .then(() => addFollower(id, userData.user_id, selfData))
-            .then(() => alertSuccess('追蹤成功！'));
+  useEffect(() => {
+    if (allFollowing.length > 0) {
+      getAllFollowing(allFollowing)
+        .then((res) => {
+          setFollowingList(res);
+        })
+    } else {
+      setFollowingList([]);
     }
+  }, [allFollowing]);
 
-    const unfollowUser = (id) => {
-        unfollowing(userData.user_id, id)
-            .then(() => deleteFollower(id, userData.user_id))
-            .then(() => alertSuccess('已取消追蹤！'));
-    }
+  const followUser = (id) => {
+    const data = { user_id: id };
+    const selfData = { user_id: userData.user_id };
+    addFollowing(userData.user_id, id, data)
+      .then(() => addFollower(id, userData.user_id, selfData))
+      .then(() => alertSuccess('追蹤成功！'));
+  }
 
-    const renderFollowing = (item) => {
-        return (
-            <Container1 key={item.user_id}>
-                <Container2>
-                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><Img0 src={item.user_img} alt={item.user_id} /></a>
-                </Container2>
-                <Container3>
-                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>
-                </Container3>
-                <Container4>
-                    {allFollowingSelf.includes(item.user_id) ? <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0> : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>}
-                </Container4>
-            </Container1>
-        );
-    }
+  const unfollowUser = (id) => {
+    unfollowing(userData.user_id, id)
+      .then(() => deleteFollower(id, userData.user_id))
+      .then(() => alertSuccess('已取消追蹤！'));
+  }
 
-    const renderNone = () => {
-        return (
-            <Container>
-                目前沒有追蹤任何人喔～
-            </Container>
-        )
-    }
-
+  const renderFollowing = (item) => {
     return (
-        <Container0>
-            {followingList ? (followingList.length > 0 ? followingList.map((item) => renderFollowing(item)) : renderNone()) : <Container>{loading('spinningBubbles', '#fff', 50, 50)}</Container>}
-        </Container0>
-
+      <Container1 key={item.user_id}>
+        <Container2>
+          <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><Img0 src={item.user_img} alt={item.user_id} /></a>
+        </Container2>
+        <Container3>
+          <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>
+        </Container3>
+        <Container4>
+          {userData != null
+            && Object.keys(userData).length > 0 ?
+            (allFollowingSelf.includes(item.user_id) ?
+              <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
+              : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>)
+            : ""}
+        </Container4>
+      </Container1>
     );
+  }
+
+  const renderNone = () => {
+    return (
+      <Container>
+        目前沒有追蹤任何人喔～
+      </Container>
+    )
+  }
+
+  return (
+    <Container0>
+      {followingList ? (followingList.length > 0 ? followingList.map((item) => renderFollowing(item)) : renderNone()) : <Container>{loading('spinningBubbles', '#fff', 50, 50)}</Container>}
+    </Container0>
+
+  );
 
 }
 

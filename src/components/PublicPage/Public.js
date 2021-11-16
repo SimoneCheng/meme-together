@@ -37,7 +37,6 @@ const Container1 = styled.div`
 `;
 
 const Container2 = styled.div`
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +55,20 @@ const Container4 = styled.div`
   color: #fff;
   border-bottom: 2px solid #fff;
   font-size: 2rem;
+`;
+
+const Container5 = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+  width: 100px;
+  padding-top: 20px;
+  &:hover{
+    box-shadow: 0 0 5px #ccc;
+  }
 `;
 
 const Img0 = styled.img`
@@ -80,11 +93,11 @@ const Button0 = styled.button`
 
 function Public() {
   const { id } = useParams();
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState({});
   const [publicMemeImg, setPublicMemeImg] = useState();
   const [allFollowing, setAllFollowing] = useState();
   const [allFollowers, setAllFlowers] = useState();
-  const [allFollowingSelf, setAllFollowingSelf] = useState();
+  const [allFollowingSelf, setAllFollowingSelf] = useState([]);
   const [status, setStatus] = useState('allPublicMeme');
   const userData = useSelector((state) => state.userData);
 
@@ -125,9 +138,7 @@ function Public() {
 
   return (
     <Container0>
-      {userData != null
-        && Object.keys(userData).length > 0
-        && userInfo
+      {userInfo
         && publicMemeImg
         && allFollowing
         && allFollowers
@@ -144,27 +155,31 @@ function Public() {
               <Container3>
                 {userInfo.self_intro}
               </Container3>
-              {userInfo.user_id !== userData.user_id
+              {userData != null
+                && Object.keys(userData).length > 0
+                && userInfo.user_id !== userData.user_id
                 && allFollowingSelf.includes(id) === false ?
                 <Button0 onClick={() => followUser()}>追蹤</Button0>
                 : ""}
-              {userInfo.user_id !== userData.user_id
+              {userData != null
+                && Object.keys(userData).length > 0
+                && userInfo.user_id !== userData.user_id
                 && allFollowingSelf.includes(id) === true ?
                 <Button0 onClick={() => unfollowUser()}>取消追蹤</Button0>
                 : ""}
             </Container2>
-            <Container2 onClick={() => setStatus('allPublicMeme')}>
+            <Container5 onClick={() => setStatus('allPublicMeme')}>
               <div>我的創作</div>
               <p><strong>{publicMemeImg.length}</strong></p>
-            </Container2>
-            <Container2 onClick={() => setStatus('followers')}>
+            </Container5>
+            <Container5 onClick={() => setStatus('followers')}>
               <div>粉絲</div>
               <p><strong>{allFollowers.length}</strong></p>
-            </Container2>
-            <Container2 onClick={() => setStatus('following')}>
+            </Container5>
+            <Container5 onClick={() => setStatus('following')}>
               <div>追蹤中</div>
               <p><strong>{allFollowing.length}</strong></p>
-            </Container2>
+            </Container5>
           </Container1>
           {status === 'followers' ? renderTitle('粉絲名單') : ""}
           {status === 'following' ? renderTitle('追蹤名單') : ""}

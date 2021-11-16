@@ -71,7 +71,7 @@ const Input2 = styled.textarea`
 
 const Button0 = styled.div`
   background-color: ${props => props.color.color1.colorCode};
-  border: none;
+  border: 2px solid transparent;
   border-radius: 10px;
   text-align: center;
   font-size: 1rem;
@@ -79,7 +79,7 @@ const Button0 = styled.div`
   padding: 10px 20px;
   align-self: flex-start;
   :hover{
-    outline: 2px solid black;
+    border: 2px solid black;
   }
 `;
 
@@ -129,7 +129,7 @@ function UserInfo(props) {
     }
 
     const clickUpdateSelfIntro = () => {
-        const data = { self_intro: selfIntroTxt.current.value }
+        const data = { self_intro: `${selfIntroTxt.current.value}` }
         updateUserInfo(userData.user_id, data).then(() => alertSuccess('個人簡介更新成功！'));
     }
 
