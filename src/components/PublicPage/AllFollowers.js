@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getAllFollowers, deleteFollower, unfollowing, addFollower, addFollowing } from '../../utlis/firebase';
@@ -111,10 +111,10 @@ function AllFollowers(props) {
         return (
             <Container1 key={item.user_id}>
                 <Container2>
-                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><Img0 src={item.user_img} alt={item.user_id} /></a>
+                    <Link to={`/public/${item.user_id}`}><Img0 src={item.user_img} alt={item.user_id} /></Link>
                 </Container2>
                 <Container3>
-                    <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>
+                    <Link to={`/public/${item.user_id}`}>{item.user_name}</Link>
                 </Container3>
                 <Container4>
                     {userData != null

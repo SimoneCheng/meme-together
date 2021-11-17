@@ -5,6 +5,7 @@ const Img0 = styled.img`
   width: 150px;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
 `;
 
 const Container0 = styled.div`

@@ -49,7 +49,7 @@ function Index() {
         .then(() => history.push(`/meme/${img_name}`));
     };
     return (
-      <Container9 onClick={() => clickMemeImg()}>
+      <Container9 key={img_name} onClick={() => clickMemeImg()}>
         <Image3 src={img_url} alt={img_name} />
       </Container9>
     );

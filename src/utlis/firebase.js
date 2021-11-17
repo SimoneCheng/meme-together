@@ -85,18 +85,18 @@ function reAuth(password) {
   const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
   return user
     .reauthenticateWithCredential(credential)
-    .then(() => user)
-    .catch(() => alertError(undefined, '密碼輸入錯誤！請重新輸入！'));
+    .then(() => user);
 }
 
 function updatePassword(password, newPassword) {
   return reAuth(password)
     .then((res) => {
-      res.updatePassword(newPassword);
+      res.updatePassword(newPassword)
+        .then(() => alertSuccess('密碼更新完成，請重新登入！'))
+        .then(() => nativeLogout())
+        .catch((error) => alertError('修改密碼失敗！', error.message));
     })
-    .then(() => nativeLogout())
-    .then(() => alertSuccess('密碼更新完成，請重新登入！'))
-    .catch((error) => alertError('修改密碼失敗', error.message));
+    .catch(() => alertError('舊密碼輸入錯誤', undefined));
 }
 
 function deleteAccount(password) {
@@ -502,7 +502,7 @@ function checkAllFollowing(id, setResult) {
         result.push(doc.id);
       })
       setResult(result);
-    })
+    });
 }
 
 function checkAllFollowers(id, setResult) {
@@ -728,7 +728,7 @@ function deleteAllData(id) {
           }
         })
     })
-    // .then(() => storageRef.child(`users/${id}`).delete())
+  // .then(() => storageRef.child(`users/${id}`).delete())
 }
 
 export {

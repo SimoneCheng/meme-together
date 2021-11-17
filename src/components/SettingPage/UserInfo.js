@@ -49,6 +49,7 @@ const Img0 = styled.img`
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 0 10px #ccc;
 `;
 
 const Input0 = styled.input`

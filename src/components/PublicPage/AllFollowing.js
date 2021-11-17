@@ -70,6 +70,7 @@ const Button0 = styled.button`
 `;
 
 function AllFollowing(props) {
+  const { id } = useParams();
   const allFollowing = props.allFollowing;
   const allFollowingSelf = props.allFollowingSelf;
   const [followingList, setFollowingList] = useState();
@@ -104,17 +105,18 @@ function AllFollowing(props) {
     return (
       <Container1 key={item.user_id}>
         <Container2>
-          <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer"><Img0 src={item.user_img} alt={item.user_id} /></a>
+          <Link to={`/public/${item.user_id}`}><Img0 src={item.user_img} alt={item.user_id} /></Link>
         </Container2>
         <Container3>
-          <a target='_blank' href={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</a>
+          <Link to={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</Link>
         </Container3>
         <Container4>
           {userData != null
             && Object.keys(userData).length > 0 ?
-            (allFollowingSelf.includes(item.user_id) ?
-              <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
-              : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>)
+            (item.user_id === userData.user_id ? "" :
+              (allFollowingSelf.includes(item.user_id) ?
+                <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
+                : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>))
             : ""}
         </Container4>
       </Container1>

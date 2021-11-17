@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useRouteMatch } from 'react-router';
 import { fabric } from 'fabric';
 import styled from 'styled-components';
 import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri';
@@ -31,6 +32,13 @@ const Input0 = styled.input`
 
 function TextEditor(props) {
     const canvas = useSelector((state) => state.canvas);
+    const { path } = useRouteMatch();
+
+    useEffect(() => {
+        if (path === '/templates/:id' && canvas !== '') { 
+            addText(canvas); 
+        }
+    }, [canvas])
 
     const updateRange = (divId, countDivId) => {
         const item = document.getElementById(divId).value;
@@ -44,12 +52,13 @@ function TextEditor(props) {
         const stroke = document.getElementById('text-stroke-color').value;
         const strokeWidth = parseInt(document.getElementById('text-stroke-weight').value);
         const text = new fabric.IText('請輸入文字', {
-            top: 0,
-            left: 0,
+            top: 50,
+            left: 50,
             fill,
             stroke,
             strokeWidth,
             fontWeight: 800,
+            fontSize: 60,
             fontFamily: "Arial"
         });
         canvi.add(text);

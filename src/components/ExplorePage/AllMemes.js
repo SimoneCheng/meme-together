@@ -153,7 +153,7 @@ function AllMemes() {
         .then(() => history.push(`/meme/${img_name}`));
     };
     return (
-      <Container2 onClick={() => clickMemeImg()}>
+      <Container2 key={img_name} onClick={() => clickMemeImg()}>
         <Img0 src={img_url} alt={img_name} />
       </Container2>
     );

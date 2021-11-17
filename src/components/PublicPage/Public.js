@@ -76,6 +76,7 @@ const Img0 = styled.img`
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
 `;
 
 const Button0 = styled.button`
@@ -96,17 +97,34 @@ function Public() {
   const [userInfo, setUserInfo] = useState({});
   const [publicMemeImg, setPublicMemeImg] = useState();
   const [allFollowing, setAllFollowing] = useState();
-  const [allFollowers, setAllFlowers] = useState();
+  const [allFollowers, setAllFollowers] = useState();
   const [allFollowingSelf, setAllFollowingSelf] = useState([]);
   const [status, setStatus] = useState('allPublicMeme');
   const userData = useSelector((state) => state.userData);
 
   useEffect(() => {
-    getUserInfo(id, setUserInfo);
-    getPublicMemeImg(id, setPublicMemeImg);
-    checkAllFollowing(id, setAllFollowing);
-    checkAllFollowers(id, setAllFlowers)
-  }, [])
+    const unsubscribe = getUserInfo(id, setUserInfo);
+    return () => { unsubscribe() };
+  }, [id])
+
+  useEffect(() => {
+    const unsubscribe = checkAllFollowers(id, setAllFollowers);
+    return () => { unsubscribe() };
+  }, [id]);
+
+  useEffect(() => {
+    const unsubscribe = checkAllFollowing(id, setAllFollowing);
+    return () => { unsubscribe() };
+  }, [id])
+
+  useEffect(() => {
+    const unsubscribe = getPublicMemeImg(id, setPublicMemeImg);
+    return () => { unsubscribe() };
+  }, [id])
+
+  useEffect(() => {
+    setStatus('allPublicMeme');
+  }, [id])
 
   useEffect(() => {
     if (userData !== null && Object.keys(userData).length > 0) {
@@ -115,16 +133,16 @@ function Public() {
   }, [userData])
 
   const followUser = () => {
-    const data = { user_id: id };
+    const data = { user_id: userInfo.user_id };
     const selfData = { user_id: userData.user_id };
-    addFollowing(userData.user_id, id, data)
-      .then(() => addFollower(id, userData.user_id, selfData))
+    addFollowing(userData.user_id, userInfo.user_id, data)
+      .then(() => addFollower(userInfo.user_id, userData.user_id, selfData))
       .then(() => alertSuccess('追蹤成功！'));
   }
 
   const unfollowUser = () => {
-    unfollowing(userData.user_id, id)
-      .then(() => deleteFollower(id, userData.user_id))
+    unfollowing(userData.user_id, userInfo.user_id)
+      .then(() => deleteFollower(userInfo.user_id, userData.user_id))
       .then(() => alertSuccess('已取消追蹤！'));
   }
 

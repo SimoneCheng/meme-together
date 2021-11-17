@@ -5,7 +5,7 @@ import Compressor from 'compressorjs';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
 
 import { uploadTemplate, getTemplateURL, saveNewTemplate } from '../../utlis/firebase';
-import { alertSuccess } from '../../utlis/alert';
+import { alertError, alertSuccess } from '../../utlis/alert';
 
 const Container0 = styled.div`
   padding-top: 100px;
@@ -98,13 +98,13 @@ const Li0 = styled.li`
     color: white;
   }
   :nth-child(2):before {
-    border-color: ${props => props.imagePreview ? '#056' : '#bebebe' };
-    background: ${props => props.imagePreview ? '#056' : 'white' };
-    color: ${props => props.imagePreview ? '#fff' : '#bebebe' };
+    border-color: ${props => props.imagePreview ? '#056' : '#bebebe'};
+    background: ${props => props.imagePreview ? '#056' : 'white'};
+    color: ${props => props.imagePreview ? '#fff' : '#bebebe'};
     transition: 0.5s ease;
   }
   :nth-child(2):after {
-    background: ${props => props.imagePreview ? '#056' : '#bebebe' };
+    background: ${props => props.imagePreview ? '#056' : '#bebebe'};
     transition: 0.5s ease;
   }
 `;
@@ -145,7 +145,7 @@ function UploadTemplate() {
 
   const clickUploadTemplate = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
       const src = window.URL.createObjectURL(file);
       new Compressor(file, {
         quality: 1,
@@ -155,6 +155,8 @@ function UploadTemplate() {
           setImagePreview(src);
         },
       });
+    } else {
+      alertError(undefined, '請上傳圖片（支援jpg、png檔）！');
     }
   }
 
@@ -205,7 +207,7 @@ function UploadTemplate() {
   return (
     <Container0>
       <Container1>
-        <ul style={{'counterReset': 'step'}}>
+        <ul style={{ 'counterReset': 'step' }}>
           <Li0 imagePreview={imagePreview}>選擇圖片（jpg或png）</Li0>
           <Li0 imagePreview={imagePreview}>預覽圖片然後上傳新模板</Li0>
         </ul>
