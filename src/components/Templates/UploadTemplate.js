@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Compressor from 'compressorjs';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
@@ -141,6 +142,13 @@ function UploadTemplate() {
   const [imagePreview, setImagePreview] = useState();
   const [compressedFile, setCompressedFile] = useState();
   const userData = useSelector((state) => state.userData);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userData === null) {
+      history.push('/');
+    }
+  }, [userData])
 
 
   const clickUploadTemplate = (e) => {

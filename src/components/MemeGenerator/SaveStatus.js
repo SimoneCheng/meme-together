@@ -12,7 +12,8 @@ const Button0 = styled.button`
   font-size: 1rem;
   padding: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
   &:hover{
       border: 2px solid #056;
   }
@@ -62,7 +63,7 @@ function SaveStatus(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <Button0 style={{ 'fontSize': '12px' }} onClick={() => TemplateCanvasToJSON(canvas)}>儲存編輯狀態到個人空間</Button0>
+                <Button0 onClick={() => TemplateCanvasToJSON(canvas)}>儲存編輯狀態到個人空間</Button0>
             </div>
         );
     }

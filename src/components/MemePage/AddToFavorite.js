@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
-import styled from 'styled-components';
 
 import { addToFavorite, checkFavoriteList, deletFromFavorite } from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';

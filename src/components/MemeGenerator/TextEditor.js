@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router';
 import { fabric } from 'fabric';
 import styled from 'styled-components';
 import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri';
@@ -30,27 +29,24 @@ const Input0 = styled.input`
   cursor: pointer;
 `;
 
-function TextEditor(props) {
+function TextEditor() {
     const canvas = useSelector((state) => state.canvas);
-    const { path } = useRouteMatch();
+    const fillInput = useRef(null);
+    const strokeInput = useRef(null);
+    const strokeWidthInput = useRef(null);
 
-    useEffect(() => {
-        if (path === '/templates/:id' && canvas !== '') { 
-            addText(canvas); 
-        }
-    }, [canvas])
-
-    const updateRange = (divId, countDivId) => {
-        const item = document.getElementById(divId).value;
+    const updateRange = (countDivId) => {
+        const item = strokeWidthInput.current.value;
         const count = document.getElementById(countDivId);
         count.innerHTML = '';
         count.innerHTML = item;
+        changeStrokeWidth(canvas);
     }
 
     const addText = (canvi) => {
-        const fill = document.getElementById('text-fill-color').value;
-        const stroke = document.getElementById('text-stroke-color').value;
-        const strokeWidth = parseInt(document.getElementById('text-stroke-weight').value);
+        const fill = fillInput.current.value;
+        const stroke = strokeInput.current.value;
+        const strokeWidth = parseInt(strokeWidthInput.current.value);
         const text = new fabric.IText('請輸入文字', {
             top: 50,
             left: 50,
@@ -66,21 +62,51 @@ function TextEditor(props) {
         canvi.renderAll();
     }
 
+    const changeFill = (canvi) => {
+        const activeObject = canvi.getActiveObject();
+        if (activeObject) {
+            if (activeObject.type === 'i-text') {
+                activeObject.set('fill', `${fillInput.current.value}`);
+                canvi.renderAll();
+            } else { return; }
+        }
+    }
+
+    const changeStroke = (canvi) => {
+        const activeObject = canvi.getActiveObject();
+        if (activeObject) {
+            if (activeObject.type === 'i-text') {
+                activeObject.set('stroke', `${strokeInput.current.value}`);
+                canvi.renderAll();
+            } else { return; }
+        }
+    }
+
+    const changeStrokeWidth = (canvi) => {
+        const activeObject = canvi.getActiveObject();
+        if (activeObject) {
+            if (activeObject.type === 'i-text') {
+                activeObject.set('strokeWidth', parseInt(strokeWidthInput.current.value));
+                canvi.renderAll();
+            } else { return; }
+        }
+    }
+
     return (
         <div>
             <Container1><strong>選擇字體樣式</strong></Container1>
             <Container1>
                 <label htmlFor="text-fill-color"><RiPaintFill /> 填滿　</label>
-                <Input0 type="color" id="text-fill-color" defaultValue="#ffffff" />
+                <Input0 type="color" id="text-fill-color" defaultValue="#ffffff" ref={fillInput} onChange={() => changeFill(canvas)} />
             </Container1>
             <Container1>
                 <label htmlFor="text-stroke-color"><RiEditBoxLine /> 外框　</label>
-                <Input0 type="color" id="text-stroke-color" defaultValue="#000000" />
+                <Input0 type="color" id="text-stroke-color" defaultValue="#000000" ref={strokeInput} onChange={() => changeStroke(canvas)} />
             </Container1>
             <Container1>
                 <label htmlFor="text-stroke-weight"><RiAlignCenter /> 外框粗細　</label>
                 <Container2>
-                    <Input0 type="range" id="text-stroke-weight" min="0" max="3" step="0.1" defaultValue="2" onMouseMove={() => updateRange('text-stroke-weight', 'text-stroke-weight-count')} onChange={() => updateRange('text-stroke-weight', 'text-stroke-weight-count')} />
+                    <Input0 type="range" id="text-stroke-weight" min="0" max="3" step="0.1" defaultValue="2" onChange={() => updateRange('text-stroke-weight-count')} ref={strokeWidthInput} />
                     <span id="text-stroke-weight-count">2</span>
                 </Container2>
             </Container1>
