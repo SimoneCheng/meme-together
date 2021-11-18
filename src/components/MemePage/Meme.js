@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import {
@@ -10,6 +9,7 @@ import {
 import AddToFavorite from './AddToFavorite';
 import Comments from './Comments';
 import { wholePageLoading } from '../../utlis/loading';
+import PageNotFound from '../404';
 
 const Container0 = styled.div`
   padding-top: 100px;
@@ -80,10 +80,10 @@ const Link0 = styled(Link)`
 function Meme() {
     const { id } = useParams();
     const [userInfo, setUserInfo] = useState();
-    const [theMemeImage, setTheMemeImg] = useState();
+    const [theMemeImage, setTheMemeImg] = useState({});
 
     useEffect(() => {
-        getTheMemeImage(id, setTheMemeImg)
+        getTheMemeImage(id, setTheMemeImg);
     }, [])
 
     useEffect(() => {
@@ -136,9 +136,14 @@ function Meme() {
     }
 
     return (
-        <Container0>
-            {theMemeImage && userInfo ? renderMemeInfo() : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
-        </Container0>
+        <>
+            {theMemeImage ?
+                <Container0>
+                    {Object.keys(theMemeImage).length > 0 && userInfo ? renderMemeInfo() : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
+                </Container0>
+                : <PageNotFound />}
+        </>
+
     );
 
 }

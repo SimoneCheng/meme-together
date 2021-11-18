@@ -85,7 +85,7 @@ function SaveImage(props) {
                         .then((url) => {
                             res.img_url = url;
                             saveCompletedMeme(res.img_name, res);
-                            alertSuccess('成功輸出！');
+                            alertSuccess('成功發布！');
                         })
                         .then(() => setIsDisplayed(false));
                 });

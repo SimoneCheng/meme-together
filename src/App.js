@@ -12,6 +12,7 @@ import Setting from './components/SettingPage/Setting';
 import AllMemes from './components/ExplorePage/AllMemes';
 import Meme from './components/MemePage/Meme';
 import UploadTemplate from './components/Templates/UploadTemplate';
+import PageNotFound from './components/404';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/explorememes" component={AllMemes} />
         <Route path="/uploadtemplate" component={UploadTemplate} />
         <Route path="/search" component={AllMemes} />
+        <Route path="*" component={PageNotFound} />
       </Switch>
     </Router>
   );

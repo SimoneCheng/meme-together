@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import {
   MdTextFields,
-  MdEdit,
-  MdSaveAlt,
-  MdImage
+  MdEdit
 } from 'react-icons/md';
 import { FaShapes } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -58,21 +56,6 @@ const Container5 = styled.div`
   flex-direction: column;
 `;
 
-const Input0 = styled.input`
-  display: none;
-`;
-
-const Label0 = styled.label`
-  cursor: pointer;
-  padding: 8px;
-  background-color: #EFEFEF;
-  outline: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      outline: 3px solid #056;
-  }
-`;
-
 const H1 = styled.h1`
   padding-top: 100px;
   font-weight: bolder;
@@ -104,15 +87,6 @@ const ShapeEditorBtn = styled(FaShapes)`
 const DrawEditorBtn = styled(MdEdit)`
   cursor: pointer;
   color: ${props => props.status === 'draw' ? '#056' : 'inherit'};
-  &:hover{
-    color: #056;
-  }
-`;
-
-const ChangeImageBtn = styled(MdImage)`
-  cursor: pointer;
-  color: ${props => props.status === 'image' ? '#056' : 'inherit'};
-  margin-bottom: 10px;
   &:hover{
     color: #056;
   }
@@ -168,24 +142,28 @@ function MemeGenerator() {
   }, []);
 
   useEffect(() => {
-    if (path === "/templates/:id" && canvas !== '') {
-      initObject(canvas);
+    if (path === "/templates/:id") {
+      if (canvas !== '' && canvas !== null) {
+        initObject(canvas);
+      }
+      if (canvas === null) {
+        history.push('/404');
+      }
+    }
+    if (path === "/personal/meme-generator/:id") {
+      if (canvas === null) {
+        history.push('/404');
+      }
     }
   }, [canvas])
 
   useEffect(() => {
     if (path === "/personal/meme-generator/:id") {
-      if (userData !== null
-        && Object.keys(userData).length > 0) {
-        getEditingMeme();
-      }
-    }
-  }, [userData])
-
-  useEffect(() => {
-    if (path === "/personal/meme-generator/:id") {
       if (userData === null) {
         history.push('/');
+      } else if (userData !== null
+        && Object.keys(userData).length > 0) {
+        getEditingMeme();
       }
     }
   }, [userData])
@@ -197,20 +175,27 @@ function MemeGenerator() {
   // }, [canvas])
 
   const getEditingMeme = () => {
-    getTheEditingMeme(userData.user_id, id).then((res) => {
-      const canvasStatus = res.canvas_status;
-      const canvasWidth = res.canvas_width;
-      const canvasHeight = res.canvas_height;
-      const canvas = new fabric.Canvas('c', {
-        width: canvasWidth,
-        height: canvasHeight,
-        hoverCursor: 'grab', // 移動時鼠標顯示
-        freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
-        isDrawingMode: false, // 設置成 true 一秒變身小畫家
-      });
-      canvas.loadFromJSON(canvasStatus);
-      dispatch(setCanvas(canvas));
-    })
+    getTheEditingMeme(userData.user_id, id)
+      .then((res) => {
+        if (res) {
+          const div = document.createAttribute('canvas');
+          div.id = 'c';
+          const canvasStatus = res.canvas_status;
+          const canvasWidth = res.canvas_width;
+          const canvasHeight = res.canvas_height;
+          const canvas = new fabric.Canvas('c', {
+            width: canvasWidth,
+            height: canvasHeight,
+            hoverCursor: 'grab', // 移動時鼠標顯示
+            freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
+            isDrawingMode: false, // 設置成 true 一秒變身小畫家
+          });
+          canvas.loadFromJSON(canvasStatus);
+          dispatch(setCanvas(canvas));
+        } else {
+          dispatch(setCanvas(null));
+        }
+      })
   }
 
   const getTemplate = () => {
@@ -220,6 +205,8 @@ function MemeGenerator() {
       if (res) {
         image_url = res.image_url;
         getTemplateSize(image_url);
+      } else {
+        dispatch(setCanvas(null));
       }
     });
   }
@@ -266,61 +253,33 @@ function MemeGenerator() {
   //   }
   // }
 
-  // const changeBackgroundImage = (e, canvi) => {
-  //   const file = e.target.files[0];
-  //   const img = new Image();
-  //   if (file) {
-  //     img.src = window.URL.createObjectURL(file);
-  //     img.onload = () => {
-  //       const ratio = 600 / img.width;
-  //       canvi.setBackgroundImage(img.src, canvi.renderAll.bind(canvi), {
-  //         top: 0,
-  //         left: 0,
-  //         scaleX: ratio,
-  //         scaleY: ratio,
-  //       });
-  //       canvi.setWidth(600);
-  //       canvi.setHeight(img.height * ratio);
-  //     }
-  //   } else { return; }
-  // }
-
-  // const renderUploadImageButton = () => {
-  //   return (
-  //     <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'flex-start' }}>
-  //       <Label0 htmlFor="uploadImage">更換背景圖片</Label0>
-  //       <Input0 id="uploadImage" type="file" accept="image/*" onChange={(e) => { changeBackgroundImage(e, canvas); }} />
-  //     </div>
-  //   );
-  // }
-
   return (
-    <Container0 color={color}>
-      <H1><Strong color={color}>迷因產生器</Strong></H1>
-      <Container5>
-        <Container1>
-          <Container2>
-            <TextEditorBtn status={status} onClick={() => setStatus('text')} />
-            <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
-            <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
-            {/* {path === "/templates/:id" ? (userData === null || Object.keys(userData).length === 0 ? <ChangeImageBtn status={status} onClick={() => setStatus('image')} /> : "") : ""} */}
-          </Container2>
-          <Container3>
-            {status === 'shape' ? <ShapeEditor /> : ""}
-            {status === 'text' ? <TextEditor /> : ""}
-            {status === 'draw' ? <DrawEditor /> : ""}
-            {/* {status === 'image' ? renderUploadImageButton() : ""} */}
-          </Container3>
-          <div>
-            {canvas === '' ? <h1>模板讀取中......</h1> : ""}
-          </div>
-          <canvas id="c"></canvas>
-        </Container1>
-        <Container4>
-          <SaveButtons />
-        </Container4>
-      </Container5>
-    </Container0>
+    <>
+      <Container0 color={color}>
+        <H1><Strong color={color}>迷因產生器</Strong></H1>
+        <Container5>
+          <Container1>
+            <Container2>
+              <TextEditorBtn status={status} onClick={() => setStatus('text')} />
+              <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
+              <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
+            </Container2>
+            <Container3>
+              {status === 'shape' ? <ShapeEditor /> : ""}
+              {status === 'text' ? <TextEditor /> : ""}
+              {status === 'draw' ? <DrawEditor /> : ""}
+            </Container3>
+            <div>
+              {canvas === '' ? <h1>模板讀取中......</h1> : ""}
+            </div>
+            <canvas id="c"></canvas>
+          </Container1>
+          <Container4>
+            <SaveButtons />
+          </Container4>
+        </Container5>
+      </Container0>
+    </>
   );
 }
 
