@@ -21,6 +21,15 @@ const Container1 = styled.div`
   width: 600px;
   z-index: 1;
   margin-bottom: 50px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 300px;
+  }
 `;
 
 const Container2 = styled.div`
@@ -34,6 +43,15 @@ const Container2 = styled.div`
   &:hover{
     border: 5px solid #056;
     border-style: dashed;
+  }
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 300px;
   }
 `;
 
@@ -107,6 +125,12 @@ const Li0 = styled.li`
   :nth-child(2):after {
     background: ${props => props.imagePreview ? '#056' : '#bebebe'};
     transition: 0.5s ease;
+  }
+  @media screen and (max-width: 660px) {
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 550px) {
+    font-size: 0.6rem;
   }
 `;
 

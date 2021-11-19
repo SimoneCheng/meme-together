@@ -23,6 +23,18 @@ const Container1 = styled.div`
   grid-gap: 45px;
   margin-top: 45px;
   padding-bottom: 45px;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 200px);
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 250px);
+  }
+  @media screen and (max-width: 660px) {
+    grid-template-columns: repeat(2, 200px);
+  }
+  @media screen and (max-width: 524px) {
+    grid-template-columns: repeat(1, 250px);
+  }
 `;
 
 const Container2 = styled.div`
@@ -39,17 +51,52 @@ const Container2 = styled.div`
     box-shadow: 0 0 10px 2px grey;
     bottom: 10px;
   }
+  @media screen and (max-width: 1024px) {
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 524px) {
+    width: 250px;
+    height: 250px;
+  }
 `;
 
 const Container3 = styled.div`
   display: flex;
   width: 850px;
   justify-content: space-between;
+  @media screen and (max-width: 1024px) {
+    width: 690px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 545px;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 660px) {
+    width: 445px;
+  }
+  @media screen and (max-width: 524px) {
+    width: 345px;
+  }
 `;
 
 const Container4 = styled.div`
   display: flex;
   width: 400px;
+  @media screen and (max-width: 768px) {
+   margin-bottom: 20px;
+  }
+  @media screen and (max-width: 524px) {
+    width: 100%;
+  }
 `;
 
 const Img0 = styled.img`

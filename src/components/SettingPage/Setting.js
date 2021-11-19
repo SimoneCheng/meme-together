@@ -23,6 +23,9 @@ const Container1 = styled.div`
   border: 1px solid #D0D0D0;
   overflow: hidden;
   width: 200px;
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 100px);
+  }
 `;
 
 const Container2 = styled.div`
@@ -30,6 +33,13 @@ const Container2 = styled.div`
   display: flex;
   align-items: flex-start;
   width: 800px;
+  @media screen and (max-width: 800px) {   
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Container3 = styled.div`

@@ -11,6 +11,11 @@ const Container6 = styled.div`
   padding-left: 50px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    padding-left: 0px;
+    padding-top: 50px;
+    width: calc(100% - 50px);
+  }
 `;
 
 const Container7 = styled.div`
@@ -32,6 +37,9 @@ const Input1 = styled.input`
     background-color: rgba(0, 0, 0, 0.05);
     outline: none;
   }
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 30px);
+  }
 `;
 
 const Button0 = styled.div`
@@ -41,7 +49,7 @@ const Button0 = styled.div`
   text-align: center;
   font-size: 1rem;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 8px 18px;
   align-self: flex-start;
   :hover{
     border: 2px solid black;

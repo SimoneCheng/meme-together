@@ -6,6 +6,9 @@ const Img0 = styled.img`
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 0 10px #ccc;
+  @media screen and (max-width: 680px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Container0 = styled.div`
@@ -27,6 +30,12 @@ const Container1 = styled.div`
   border-radius: 10px;
   width: 830px;
   margin-bottom: 20px;
+  @media screen and (max-width: 970px) {
+    width: calc(100% - 140px);
+  }
+  @media screen and (max-width: 680px) {
+    flex-direction: column;
+  }
 `;
 
 const Container2 = styled.div`
@@ -36,28 +45,37 @@ flex-direction: column;
 
 const Container3 = styled.div`
   cursor: pointer;
-  border-bottom: ${props => props.status === 'editing' ? "4px solid #056" : "none"};
+  border-bottom: ${props => props.status === 'editing' ? "4px solid #056" : "4px solid transparent"};
   font-weight: ${props => props.status === 'editing' ? "bold" : "normal"};
   transition: border-width 0.3s linear;
+  @media screen and (max-width: 680px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Container4 = styled.div`
   cursor: pointer;
-  border-bottom: ${props => props.status === 'nopublic' ? "4px solid #056" : "none"};
+  border-bottom: ${props => props.status === 'nopublic' ? "4px solid #056" : "4px solid transparent"};
   font-weight: ${props => props.status === 'nopublic' ? "bold" : "normal"};
   transition: border-width 0.3s linear;
+  @media screen and (max-width: 680px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Container5 = styled.div`
   cursor: pointer;
-  border-bottom: ${props => props.status === 'ispublic' ? "4px solid #056" : "none"};
+  border-bottom: ${props => props.status === 'ispublic' ? "4px solid #056" : "4px solid transparent"};
   font-weight: ${props => props.status === 'ispublic' ? "bold" : "normal"};
   transition: border-width 0.3s linear;
+  @media screen and (max-width: 680px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Container6 = styled.div`
   cursor: pointer;
-  border-bottom: ${props => props.status === 'favorites' ? "4px solid #056" : "none"};
+  border-bottom: ${props => props.status === 'favorites' ? "4px solid #056" : "4px solid transparent"};
   font-weight: ${props => props.status === 'favorites' ? "bold" : "normal"};
   transition: border-width 0.3s linear;
 `;
@@ -70,6 +88,18 @@ const Container7 = styled.div`
   width: 750px;
   margin-bottom: 20px;
   height: 30px;
+  @media screen and (max-width: 970px) {
+    width: calc(100% - 140px);
+  }
+  @media screen and (max-width: 680px) {
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
+    padding: 20px 0 0 0;
+  }
+  @media screen and (max-width: 425px) {
+    font-size: 14px;
+  }
 `;
 
 const Container8 = styled.div`
@@ -80,6 +110,16 @@ const Container8 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
   margin-bottom: 30px;
+  @media screen and (max-width: 970px) {
+    width: calc(100% - 100px);
+  }
+`;
+
+const Container9 = styled.div`
+  padding-bottom: 0px;
+  @media screen and (max-width: 680px) {
+    padding-bottom: 20px;
+  }
 `;
 
 const Button0 = styled.button`
@@ -103,5 +143,6 @@ export {
     Container6,
     Container7,
     Container8,
+    Container9,
     Button0
 }

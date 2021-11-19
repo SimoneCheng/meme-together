@@ -24,6 +24,7 @@ import {
     Container6,
     Container7,
     Container8,
+    Container9,
     Button0
 } from '../Styled/Personal';
 
@@ -70,7 +71,7 @@ function Personal() {
                         </Container2>
                         <Container2>
                             <div style={{ 'paddingBottom': '10px' }}><strong>暱稱：</strong>{userInfo.user_name}</div>
-                            <div><strong>電子信箱：</strong>{userInfo.user_email}</div>
+                            <Container9><strong>電子信箱：</strong>{userInfo.user_email}</Container9>
                         </Container2>
                         <Container2>
                             <Link to={`/public/${userData.user_id}`}><Button0>前往個人公開頁面</Button0></Link>

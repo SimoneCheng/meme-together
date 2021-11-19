@@ -1,5 +1,3 @@
-import { isUploadTemplateDisplayed } from "./reducers"
-
 const setUserData = (userData) => {
     return {
         type: "setUserData", 

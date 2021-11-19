@@ -23,10 +23,9 @@ const Container0 = styled.div`
 const Container1 = styled.div`
   display: flex;
   font-size: 1rem;
-`;
-
-const Container2 = styled.div`
-
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 
 const Container3 = styled.div`
@@ -45,6 +44,7 @@ const Container5 = styled.div`
   padding-bottom: 30px;
   min-height: 100px;
   white-space: pre-line;
+  word-break: break-word;
 `;
 
 const Container6 = styled.span`
@@ -62,6 +62,22 @@ const Container7 = styled.div`
 
 const Container8 = styled.div`
  width: 400px;
+ @media screen and (max-width: 950px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 850px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 750px) {
+    width: 500px;
+    margin-right: 0px;
+  }
+  @media screen and (max-width: 570px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 425px) {
+    width: 300px;
+  }
 `;
 
 const Img0 = styled.img`
@@ -69,6 +85,23 @@ const Img0 = styled.img`
   margin-right: 50px;
   position: sticky;
   top: 100px;
+  @media screen and (max-width: 950px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 850px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 750px) {
+    width: 500px;
+    margin-right: 0px;
+    position: initial;
+  }
+  @media screen and (max-width: 570px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 425px) {
+    width: 300px;
+  }
 `;
 
 const Link0 = styled(Link)`
@@ -114,9 +147,9 @@ function Meme() {
 
         return (
             <Container1>
-                <Container2>
+                <div>
                     <Img0 alt={img_name} src={img_url} />
-                </Container2>
+                </div>
                 <Container8>
                     <Container3>
                         <div><strong>標題：</strong>{title}</div>

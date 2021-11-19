@@ -11,14 +11,37 @@ const Container1 = styled.div`
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
   margin: 0 30px 30px 30px;
+  @media screen and (max-width: 970px) {
+    grid-template-columns: repeat(2, 350px);
+  }
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 300px);
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(2, 250px);
+  }
+  @media screen and (max-width: 680px) {
+    grid-template-columns: repeat(1, 400px);
+  }
+  @media screen and (max-width: 580px) {
+    grid-template-columns: repeat(1, 350px);
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 300px);
+  }
+  @media screen and (max-width: 450px) {
+    grid-template-columns: repeat(1, 250px);
+  }
+  @media screen and (max-width: 400px) {
+    grid-template-columns: repeat(1, 200px);
+  }
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
-  width: 250px;
+  width: 100%;
   overflow: hidden;
-  width: 250px;
   position: relative;
   bottom: 0;
   transition: bottom 0.3s linear;
@@ -41,6 +64,9 @@ const Container5 = styled.div`
   text-align: center;
   padding: 30px;
   font-size: 2rem;
+  @media screen and (max-width: 810px) {
+    width: 100%;
+  }
 `;
 
 const Img0 = styled.img`

@@ -56,6 +56,10 @@ const Container5 = styled.div`
   flex-direction: column;
 `;
 
+const Container6 = styled.div`
+  border: ${props => props.canvas !== '' && props.canvas !== null ? '2px solid #ccc' : 'none' }
+`;
+
 const H1 = styled.h1`
   padding-top: 100px;
   font-weight: bolder;
@@ -272,7 +276,9 @@ function MemeGenerator() {
             <div>
               {canvas === '' ? <h1>模板讀取中......</h1> : ""}
             </div>
-            <canvas id="c"></canvas>
+            <Container6 canvas={canvas}>
+              <canvas id="c"></canvas>
+            </Container6>
           </Container1>
           <Container4>
             <SaveButtons />

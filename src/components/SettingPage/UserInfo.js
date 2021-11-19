@@ -17,6 +17,11 @@ const Container6 = styled.div`
   padding-left: 50px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    padding-left: 0px;
+    padding-top: 50px;
+    width: calc(100% - 50px);
+  }
 `;
 
 const Container7 = styled.div`
@@ -42,6 +47,18 @@ const Container10 = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+const Container11 = styled.div`
+  @media screen and (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Img0 = styled.img`
@@ -77,7 +94,7 @@ const Button0 = styled.div`
   text-align: center;
   font-size: 1rem;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 8px 18px;
   align-self: flex-start;
   :hover{
     border: 2px solid black;
@@ -87,13 +104,16 @@ const Button0 = styled.div`
 const Label0 = styled.label`
   background-color: ${props => props.color.color1.colorCode};
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 8px 18px;
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 80px;
   :hover{
     outline: 2px solid black;
+  }
+  @media screen and (max-width: 425px) {
+    margin-bottom: 0px;
   }
 `;
 
@@ -141,13 +161,13 @@ function UserInfo(props) {
                 <Container8>頭像</Container8>
                 <Container10>
                     <Img0 alt="profile-img" src={userInfo.user_img}></Img0>
-                    <div>
+                    <Container11>
                         <Label0 color={color} htmlFor="image">
                             上傳新頭像
                             <Input0 id="image" type="file" accept="image/*" onChange={(e) => clickUploadProfileImg(e)} />
                         </Label0>
-                        <Button0 style={{ 'marginTop': '30px' }} color={color} onClick={() => clickDefaultProfileImg()}>使用預設頭像</Button0 >
-                    </div>
+                        <Button0 style={{ 'marginTop': '20px' }} color={color} onClick={() => clickDefaultProfileImg()}>使用預設頭像</Button0 >
+                    </Container11>
                 </Container10>
             </Container9>
             <div>

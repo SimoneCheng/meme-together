@@ -17,7 +17,6 @@ const Container1 = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 50px;
   height: 100vh;
 `;
 
@@ -33,6 +32,9 @@ const Container2 = styled.div`
 const Container3 = styled.div`
   margin-top: 30px;
   font-size: 60px;
+  @media screen and (max-width: 375px) {
+    font-size: 40px;
+  }
 `;
 
 const Link0 = styled(Link)`
@@ -44,6 +46,10 @@ const Link0 = styled(Link)`
   &:hover{
       border: 2px solid black;
   }
+`;
+
+const Img0 = styled.img`
+  width: 100%;
 `;
 
 function PageNotFound() {
@@ -69,7 +75,7 @@ function PageNotFound() {
         <Link0 to='/'>點我回首頁</Link0>
       </Container1>
       <div>
-        <img alt='404' src={imgSrc} />
+        <Img0 alt='404' src={imgSrc} />
       </div>
     </Container0>
   );

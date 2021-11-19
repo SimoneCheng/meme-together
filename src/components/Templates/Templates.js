@@ -33,6 +33,18 @@ const Container1 = styled.div`
   grid-gap: 45px;
   margin: 45px;
   justify-content: center;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 200px);
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 250px);
+  }
+  @media screen and (max-width: 660px) {
+    grid-template-columns: repeat(2, 200px);
+  }
+  @media screen and (max-width: 524px) {
+    grid-template-columns: repeat(1, 250px);
+  }
 `;
 
 const Container2 = styled.div`
@@ -49,6 +61,22 @@ const Container2 = styled.div`
   &:hover{
     box-shadow: 0 0 10px 2px grey;
     bottom: 15px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 524px) {
+    width: 250px;
+    height: 250px;
   }
 `;
 
