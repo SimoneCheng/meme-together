@@ -23,12 +23,17 @@ const Container0 = styled.div`
   flex-direction: column;
   background-color: ${props => props.color.color3.colorCode};
   padding-bottom: 50px;
+  overflow-y: auto;
 `;
 
 const Container1 = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Container2 = styled.div`
@@ -49,6 +54,10 @@ const Container3 = styled.div`
 const Container4 = styled.div`
   display: flex;
   align-self: flex-end;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-self: center;
+  }
 `;
 
 const Container5 = styled.div`
@@ -57,7 +66,7 @@ const Container5 = styled.div`
 `;
 
 const Container6 = styled.div`
-  border: ${props => props.canvas !== '' && props.canvas !== null ? '2px solid #ccc' : 'none' }
+  border: ${props => props.canvas !== '' && props.canvas !== null ? '2px solid #ccc' : 'none'}
 `;
 
 const H1 = styled.h1`
@@ -182,8 +191,6 @@ function MemeGenerator() {
     getTheEditingMeme(userData.user_id, id)
       .then((res) => {
         if (res) {
-          const div = document.createAttribute('canvas');
-          div.id = 'c';
           const canvasStatus = res.canvas_status;
           const canvasWidth = res.canvas_width;
           const canvasHeight = res.canvas_height;
@@ -263,16 +270,18 @@ function MemeGenerator() {
         <H1><Strong color={color}>迷因產生器</Strong></H1>
         <Container5>
           <Container1>
-            <Container2>
-              <TextEditorBtn status={status} onClick={() => setStatus('text')} />
-              <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
-              <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
-            </Container2>
-            <Container3>
-              {status === 'shape' ? <ShapeEditor /> : ""}
-              {status === 'text' ? <TextEditor /> : ""}
-              {status === 'draw' ? <DrawEditor /> : ""}
-            </Container3>
+            <div style={{ 'display': 'flex', 'alignItems': 'flex-start' }}>
+              <Container2>
+                <TextEditorBtn status={status} onClick={() => setStatus('text')} />
+                <ShapeEditorBtn status={status} onClick={() => setStatus('shape')} />
+                <DrawEditorBtn status={status} onClick={() => setStatus('draw')} />
+              </Container2>
+              <Container3>
+                {status === 'shape' ? <ShapeEditor /> : ""}
+                {status === 'text' ? <TextEditor /> : ""}
+                {status === 'draw' ? <DrawEditor /> : ""}
+              </Container3>
+            </div>
             <div>
               {canvas === '' ? <h1>模板讀取中......</h1> : ""}
             </div>

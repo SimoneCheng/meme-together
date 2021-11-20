@@ -304,7 +304,7 @@ function getAllPublicMemeImg(sort) {
     .collection('completed_meme')
     .where('isPublic', '==', true)
     .orderBy('last_save_time', sort)
-    .limit(3)
+    .limit(15)
     .get()
     .then((querySnapshot) => {
       let lastKey;
@@ -323,7 +323,7 @@ function getAllPublicMemeNextPage(lastOne, sort = 'desc') {
     .where('isPublic', '==', true)
     .orderBy('last_save_time', sort)
     .startAfter(lastOne)
-    .limit(3)
+    .limit(15)
     .get()
     .then((querySnapshot) => {
       let lastKey;
