@@ -104,6 +104,10 @@ function Public() {
   const userData = useSelector((state) => state.userData);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  
+  useEffect(() => {
     const unsubscribe = getUserInfo(id, setUserInfo);
     return () => { unsubscribe() };
   }, [id])

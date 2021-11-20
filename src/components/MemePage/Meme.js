@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
-    getUserInfo,
-    getTheMemeImage,
+  getUserInfo,
+  getTheMemeImage,
 } from '../../utlis/firebase';
 import AddToFavorite from './AddToFavorite';
 import Comments from './Comments';
@@ -111,73 +111,74 @@ const Link0 = styled(Link)`
 `;
 
 function Meme() {
-    const { id } = useParams();
-    const [userInfo, setUserInfo] = useState();
-    const [theMemeImage, setTheMemeImg] = useState({});
+  const { id } = useParams();
+  const [userInfo, setUserInfo] = useState();
+  const [theMemeImage, setTheMemeImg] = useState({});
 
-    useEffect(() => {
-        getTheMemeImage(id, setTheMemeImg);
-    }, [])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getTheMemeImage(id, setTheMemeImg);
+  }, [])
 
-    useEffect(() => {
-        if (theMemeImage) {
-            getUserInfo(theMemeImage.owner_user_id, setUserInfo);
-        }
-    }, [theMemeImage])
+  useEffect(() => {
+    if (theMemeImage) {
+      getUserInfo(theMemeImage.owner_user_id, setUserInfo);
+    }
+  }, [theMemeImage])
 
-    const renderMemeInfo = () => {
-        const {
-            title,
-            context,
-            last_save_time,
-            img_url,
-            img_name,
-            tags,
-            click_time,
-            owner_user_id
-        } = theMemeImage;
+  const renderMemeInfo = () => {
+    const {
+      title,
+      context,
+      last_save_time,
+      img_url,
+      img_name,
+      tags,
+      click_time,
+      owner_user_id
+    } = theMemeImage;
 
-        const renderTags = (item) => {
-            return (
-                <span>
-                    <Container6>#{item}</Container6>&ensp;
-                </span>
-            );
-        }
-
-        return (
-            <Container1>
-                <div>
-                    <Img0 alt={img_name} src={img_url} />
-                </div>
-                <Container8>
-                    <Container3>
-                        <div><strong>標題：</strong>{title}</div>
-                        <div><Link0 to={`/public/${owner_user_id}`}><strong>作者：</strong>{userInfo.user_name}</Link0></div>
-                        <Container4><strong>發布日期：</strong>{new Date(last_save_time.toDate()).toLocaleString()}</Container4>
-                        <Container5>{context}</Container5>
-                        <div>{tags[0] !== "" ? tags.map((item) => renderTags(item)) : ""}</div>
-                        <Container7>
-                            <span><strong>瀏覽次數：</strong>{click_time}</span>
-                            <AddToFavorite theMemeImage={theMemeImage} />
-                        </Container7>
-                    </Container3>
-                    <Comments />
-                </Container8>
-            </Container1>
-        )
+    const renderTags = (item) => {
+      return (
+        <span>
+          <Container6>#{item}</Container6>&ensp;
+        </span>
+      );
     }
 
     return (
-        <>
-            {theMemeImage ?
-                <Container0>
-                    {Object.keys(theMemeImage).length > 0 && userInfo ? renderMemeInfo() : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
-                </Container0>
-                : <PageNotFound />}
-        </>
+      <Container1>
+        <div>
+          <Img0 alt={img_name} src={img_url} />
+        </div>
+        <Container8>
+          <Container3>
+            <div><strong>標題：</strong>{title}</div>
+            <div><Link0 to={`/public/${owner_user_id}`}><strong>作者：</strong>{userInfo.user_name}</Link0></div>
+            <Container4><strong>發布日期：</strong>{new Date(last_save_time.toDate()).toLocaleString()}</Container4>
+            <Container5>{context}</Container5>
+            <div>{tags[0] !== "" ? tags.map((item) => renderTags(item)) : ""}</div>
+            <Container7>
+              <span><strong>瀏覽次數：</strong>{click_time}</span>
+              <AddToFavorite theMemeImage={theMemeImage} />
+            </Container7>
+          </Container3>
+          <Comments />
+        </Container8>
+      </Container1>
+    )
+  }
 
-    );
+  return (
+    <>
+      {theMemeImage ?
+        <Container0>
+          {Object.keys(theMemeImage).length > 0 && userInfo ? renderMemeInfo() : wholePageLoading('spinningBubbles', '#fff', 50, 50)}
+        </Container0>
+        : <PageNotFound />}
+    </>
+
+  );
 
 }
 

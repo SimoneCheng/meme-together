@@ -58,6 +58,7 @@ function PageNotFound() {
   const imgSrc = "https://firebasestorage.googleapis.com/v0/b/meme-together.appspot.com/o/404image.jpeg?alt=media&token=9540dd77-03cd-4ea9-9931-086e29cc338d";
   
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (canvas === null) {
       dispatch(setCanvas(''));
     }

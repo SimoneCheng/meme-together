@@ -92,6 +92,7 @@ function Templates() {
   const history = useHistory();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getAllTemplates(setAllTemplates);
   }, [])
 

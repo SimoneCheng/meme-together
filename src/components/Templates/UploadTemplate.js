@@ -167,13 +167,16 @@ function UploadTemplate() {
   const [compressedFile, setCompressedFile] = useState();
   const userData = useSelector((state) => state.userData);
   const history = useHistory();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   useEffect(() => {
     if (userData === null) {
       history.push('/');
     }
   }, [userData])
-
 
   const clickUploadTemplate = (e) => {
     const file = e.target.files[0];

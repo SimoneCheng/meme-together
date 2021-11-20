@@ -39,6 +39,10 @@ function Personal() {
     const [allFavorite, setAllFavorite] = useState();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [])
+      
+    useEffect(() => {
         if (userData === null) {
             history.push('/');
         }

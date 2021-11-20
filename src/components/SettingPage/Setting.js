@@ -83,6 +83,10 @@ function Setting() {
   const history = useHistory();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
     if (userData === null) {
       history.push('/');
     }
@@ -90,7 +94,6 @@ function Setting() {
       getUserInfo(userData.user_id, setUserInfo);
     }
   }, [userData])
-
 
   return (
     <Container0>

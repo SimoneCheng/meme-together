@@ -159,6 +159,10 @@ function AllMemes() {
   const { url } = useRouteMatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
     if (url === '/explorememes') {
       getAllPublicMemeImg(sort).then((res) => {
         setAllPublicMemeImg(res.allPublicMemeImgData);

@@ -39,7 +39,8 @@ function Index() {
   const history = useHistory();
 
   useEffect(() => {
-    getCampaignMeme().then((res) => setCampaignMeme(res))
+    window.scrollTo(0, 0);
+    getCampaignMeme().then((res) => setCampaignMeme(res));
   }, [])
 
   const renderCampaignMeme = (item) => {
