@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import color from '../Styled/colorTheme';
 import { deletFromFavorite } from '../../utlis/firebase';
+import { alertSuccess } from '../../utlis/alert';
 
 const Container1 = styled.div`
   display: grid;
@@ -103,7 +104,7 @@ function AllFavorite(props) {
                 <Container3>
                     <Container4><strong>建立時間：</strong></Container4>
                     <Container4>{new Date(created_time.toDate()).toLocaleString()}</Container4>
-                    <Button color={color} onClick={() => deletFromFavorite(userData.user_id, img_name)}>移除收藏</Button>
+                    <Button color={color} onClick={() => deletFromFavorite(userData.user_id, img_name).then(() => alertSuccess('已取消收藏'))}>移除收藏</Button>
                 </Container3>
             </Container2>
         );

@@ -160,7 +160,10 @@ function AllMemes() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+    if (url === '/explorememes') {
+      keyword.current.value = '';
+    }
+  }, [url])
 
   useEffect(() => {
     if (url === '/explorememes') {
