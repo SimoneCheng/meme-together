@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -27,7 +27,6 @@ import {
   Button,
   NavMobile,
   LogoMobile,
-  Checkbox,
   LabelBurger,
   MenuMobile,
   LiMobile
@@ -42,6 +41,7 @@ function Header() {
   const userData = useSelector((state) => state.userData);
   const isLoginDisplayed = useSelector((state) => state.isLoginDisplayed);
   const isSignupDisplayed = useSelector((state) => state.isSignupDisplayed);
+  const [isMobileNavBarDisplayed, setIsMobileNavBarDisplayed] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -92,8 +92,8 @@ function Header() {
   const renderMobileLoginAndSignupButton = () => {
     return (
       <ul>
-        <LiMobile onClick={() => clickLoginButton()} color={color}>登入</LiMobile>
-        <LiMobile onClick={() => clickSignupButton()} color={color}>註冊</LiMobile>
+        <LiMobile onClick={() => { clickLoginButton(); setIsMobileNavBarDisplayed(false); }} color={color}>登入</LiMobile>
+        <LiMobile onClick={() => { clickSignupButton(); setIsMobileNavBarDisplayed(false); }} color={color}>註冊</LiMobile>
       </ul>
     )
   }
@@ -111,11 +111,19 @@ function Header() {
   const renderMobileLogoutAndMemberButton = () => {
     return (
       <ul>
-        <LiMobile color={color}><AccountImage src={account} onClick={() => clickAccount()}></AccountImage></LiMobile>
-        <LiMobile color={color}><AccountImage src={setting} onClick={() => clickSetting()}></AccountImage></LiMobile>
-        <LiMobile onClick={() => clickLogout()} color={color}>登出</LiMobile>
+        <LiMobile color={color} onClick={() => { clickAccount(); setIsMobileNavBarDisplayed(false); }}><AccountImage src={account}></AccountImage></LiMobile>
+        <LiMobile color={color} onClick={() => { clickSetting(); setIsMobileNavBarDisplayed(false); }}><AccountImage src={setting}></AccountImage></LiMobile>
+        <LiMobile onClick={() => { clickLogout(); setIsMobileNavBarDisplayed(false); }} color={color}>登出</LiMobile>
       </ul>
     )
+  }
+
+  const clickHamburgerMenu = () => {
+    if (isMobileNavBarDisplayed === false) {
+      setIsMobileNavBarDisplayed(true);
+    } else {
+      setIsMobileNavBarDisplayed(false);
+    }
   }
 
   return (
@@ -141,19 +149,17 @@ function Header() {
             <Link to='/'><LogoImage alt='logo' src={logo}></LogoImage></Link>
             <Link to='/'><span>together</span></Link>
           </LogoMobile>
-          <LabelBurger htmlFor="burger">&#9776;</LabelBurger>
-          <Checkbox type="checkbox" id="burger" />
-          <MenuMobile>
+          <LabelBurger onClick={() => clickHamburgerMenu()} htmlFor="burger">&#9776;</LabelBurger>
+          <MenuMobile isDisplayed={isMobileNavBarDisplayed}>
             <ul>
-              <Link to="/explorememes"><LiMobile color={color}>探索</LiMobile></Link>
-              <Link to="/templates"><LiMobile color={color}>創作</LiMobile></Link>
-              {userData ? <Link to="/uploadtemplate"><LiMobile color={color}>貢獻模板</LiMobile></Link> : ""}
+              <Link to="/explorememes" onClick={() => setIsMobileNavBarDisplayed(false)}><LiMobile color={color}>探索</LiMobile></Link>
+              <Link to="/templates" onClick={() => setIsMobileNavBarDisplayed(false)}><LiMobile color={color}>創作</LiMobile></Link>
+              {userData ? <Link to="/uploadtemplate" onClick={() => setIsMobileNavBarDisplayed(false)}><LiMobile color={color}>貢獻模板</LiMobile></Link> : ""}
             </ul>
             {userData ? renderMobileLogoutAndMemberButton() : renderMobileLoginAndSignupButton()}
           </MenuMobile>
         </NavMobile>
       </Menu>
-
       {isLoginDisplayed ? <Login /> : ""}
       {isSignupDisplayed ? <Signup /> : ""}
     </>

@@ -95,25 +95,19 @@ const LogoMobile = styled.div`
 
 const LabelBurger = styled.label`
   font-size: 2rem;
+  cursor: pointer;
 `;
 
 const MenuMobile = styled.div`
-  max-height: 0;
+  max-height: ${props => props.isDisplayed ? '100%' : '0'};
   overflow: hidden;
   position: fixed;
   top: 60px;
   left: 0;
   background-color: white;
   width: 100%;
-  transition: 0.8s linear;
+  transition: 0.5s ease;
   box-shadow: 5px 5px 5px gray;
-`;
-
-const Checkbox = styled.input`
-  display: none;
-  &:checked + ${MenuMobile} {
-  max-height: 100%;
-  }
 `;
 
 const LiMobile = styled.li`
@@ -137,7 +131,6 @@ export {
     Button,
     NavMobile,
     LogoMobile,
-    Checkbox,
     LabelBurger,
     MenuMobile,
     LiMobile
