@@ -29,8 +29,12 @@ function Signup() {
             return;
         } else {
             nativeSignup(signupEmail.current.value, signupPassword.current.value, signupName.current.value)
-                .then(() => {
-                    dispatch(setIsSignupDisplayed(false));
+                .then((res) => {
+                    if (res) {
+                        dispatch(setIsSignupDisplayed(false));
+                    } else {
+                        return;
+                    }
                 });
         }
     }

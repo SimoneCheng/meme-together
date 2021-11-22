@@ -42,9 +42,11 @@ function nativeSignup(email, password, name) {
     })
     .then(() => {
       alertSuccess('註冊成功');
+      return true;
     })
     .catch((error) => {
       alertError('註冊失敗！', error.message);
+      return false;
     });
 }
 
