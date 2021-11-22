@@ -35,6 +35,13 @@ const Container1 = styled.div`
   padding: 20px 10px;
   margin: 0 auto;
   width: 800px;
+  @media screen and (max-width: 850px) {
+    width: auto;
+    margin: 0 30px;
+  }
+  @media screen and (max-width: 650px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Container2 = styled.div`
@@ -43,6 +50,9 @@ const Container2 = styled.div`
   justify-content: center;
   align-items: center;
   padding-right: 30px;
+  @media screen and (max-width: 650px) {
+    padding-right: 0px;
+  }
 `;
 
 const Container3 = styled.div`
@@ -56,6 +66,9 @@ const Container4 = styled.div`
   color: #fff;
   border-bottom: 2px solid #fff;
   font-size: 2rem;
+  @media screen and (max-width: 850px) {
+    width: calc(100% - 40px);
+  }
 `;
 
 const Container5 = styled.div`
@@ -70,6 +83,9 @@ const Container5 = styled.div`
   &:hover{
     box-shadow: 0 0 5px #ccc;
   }
+  @media screen and (max-width: 500px) {
+    margin-right: 0px;
+  }
 `;
 
 const Img0 = styled.img`
@@ -78,6 +94,10 @@ const Img0 = styled.img`
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 0 10px #ccc;
+  @media screen and (max-width: 650px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const Button0 = styled.button`

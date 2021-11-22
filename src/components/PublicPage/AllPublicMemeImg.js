@@ -20,18 +20,49 @@ const Container1 = styled.div`
   padding-bottom: 50px;
   justify-content: center;
   align-items: flex-start;
+  @media screen and (max-width: 850px) {
+    grid-template-columns: repeat(3, 220px);
+    grid-gap: 20px;
+  }
+  @media screen and (max-width: 760px) {
+    grid-template-columns: repeat(3, 200px);
+  }
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(2, 250px);
+  }
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 200px);
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(2, 150px);
+  }
 `;
 
 const Container2 = styled.div`
   box-shadow: 0 0 3px white;
   background-color: #fff;
   border-radius: 10px;
-  width: 250px;
+  width: 100%;
   height: 250px;
   overflow: hidden;
   cursor: pointer;
   &:hover{
     box-shadow: 0 0 10px 3px white;
+  }
+  @media screen and (max-width: 850px) {
+    height: 220px;
+  }
+  @media screen and (max-width: 760px) {
+    height: 200px;
+  }
+  @media screen and (max-width: 700px) {
+    height: 250px;
+  }
+  @media screen and (max-width: 600px) {
+    height: 200px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 150px;
   }
 `;
 
@@ -59,7 +90,7 @@ function AllPublicMemeImg(props) {
   }
 
   const renderAllMemeImg = () => {
-    return(
+    return (
       <Container1>
         {memeImg.map((item) => renderMemeImg(item))}
       </Container1>
@@ -67,7 +98,7 @@ function AllPublicMemeImg(props) {
   }
 
   const renderNone = () => {
-    return(
+    return (
       <Container>
         目前沒有創作喔～
       </Container>
@@ -76,7 +107,7 @@ function AllPublicMemeImg(props) {
 
   return (
     <div>
-        {memeImg.length > 0 ? renderAllMemeImg() : renderNone()}
+      {memeImg.length > 0 ? renderAllMemeImg() : renderNone()}
     </div>
   )
 

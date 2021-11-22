@@ -29,6 +29,9 @@ const Container1 = styled.div`
   border-radius: 10px;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 850px) {
+    width: calc(100% - 60px);
+  }
 `;
 
 const Container2 = styled.div`
