@@ -214,7 +214,7 @@ function Public() {
                     : ""}
                 </Container2>
                 <Container5 onClick={() => setStatus('allPublicMeme')}>
-                  <div>我的創作</div>
+                  <div>創作</div>
                   <p><strong>{publicMemeImg.length}</strong></p>
                 </Container5>
                 <Container5 onClick={() => setStatus('followers')}>
