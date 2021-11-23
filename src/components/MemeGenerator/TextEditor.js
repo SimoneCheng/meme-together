@@ -1,33 +1,14 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { fabric } from 'fabric';
-import styled from 'styled-components';
 import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri';
 
-const Container1 = styled.div`
-  margin-bottom: 30px;
-  white-space: pre-line;
-`;
-
-const Container2 = styled.div`
-  margin-top: 8px
-`;
-
-const Button0 = styled.button`
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  font-size: 1rem;
-  padding: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
-
-const Input0 = styled.input`
-  cursor: pointer;
-`;
+import {
+    Container0,
+    Container1,
+    Button0,
+    Input0
+} from '../Styled/MemeGenerator/Common';
 
 function TextEditor() {
     const canvas = useSelector((state) => state.canvas);
@@ -94,22 +75,22 @@ function TextEditor() {
 
     return (
         <div>
-            <Container1><strong>選擇字體樣式</strong></Container1>
-            <Container1>
+            <Container0><strong>選擇字體樣式</strong></Container0>
+            <Container0>
                 <label htmlFor="text-fill-color"><RiPaintFill /> 填滿　</label>
                 <Input0 type="color" id="text-fill-color" defaultValue="#ffffff" ref={fillInput} onChange={() => changeFill(canvas)} />
-            </Container1>
-            <Container1>
+            </Container0>
+            <Container0>
                 <label htmlFor="text-stroke-color"><RiEditBoxLine /> 外框　</label>
                 <Input0 type="color" id="text-stroke-color" defaultValue="#000000" ref={strokeInput} onChange={() => changeStroke(canvas)} />
-            </Container1>
-            <Container1>
+            </Container0>
+            <Container0>
                 <label htmlFor="text-stroke-weight"><RiAlignCenter /> 外框粗細　</label>
-                <Container2>
+                <Container1>
                     <Input0 type="range" id="text-stroke-weight" min="0" max="3" step="0.1" defaultValue="2" onChange={() => updateRange('text-stroke-weight-count')} ref={strokeWidthInput} />
                     <span id="text-stroke-weight-count">2</span>
-                </Container2>
-            </Container1>
+                </Container1>
+            </Container0>
             <div>
                 <Button0 onClick={() => addText(canvas)}>新增文字方塊</Button0>
             </div>

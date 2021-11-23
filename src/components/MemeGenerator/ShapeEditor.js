@@ -1,64 +1,16 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import {
-    IoTriangleOutline,
-    IoSquareOutline,
-    IoRadioButtonOffOutline
-} from 'react-icons/io5';
 import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri';
-import styled from 'styled-components';
 import { fabric } from 'fabric';
 
-const Container1 = styled.div`
-  margin-bottom: 30px;
-  white-space: pre-line;
-`;
-
-const Container2 = styled.div`
-  margin-top: 8px
-`;
-
-const Input0 = styled.input`
-  cursor: pointer;
-`;
-
-const RectBtn = styled(IoSquareOutline)`
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 8px;
-  margin-right: 10px;
-  background-color: #EFEFEF;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
-
-const TriangleBtn = styled(IoTriangleOutline)`
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 8px;
-  background-color: #EFEFEF;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
-
-const CircleBtn = styled(IoRadioButtonOffOutline)`
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 8px;
-  margin-right: 10px;
-  background-color: #EFEFEF;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
+import {
+    Container0,
+    Container1,
+    Input0,
+    RectBtn,
+    TriangleBtn,
+    CircleBtn
+} from '../Styled/MemeGenerator/Common';
 
 function ShapeEditor() {
     const canvas = useSelector((state) => state.canvas);
@@ -145,22 +97,22 @@ function ShapeEditor() {
 
     return (
         <div>
-            <Container1><strong>選擇物件樣式</strong></Container1>
-            <Container1>
+            <Container0><strong>選擇物件樣式</strong></Container0>
+            <Container0>
                 <label htmlFor="shape-fill-color"><RiPaintFill /> 填滿　</label>
                 <Input0 type="color" id="shape-fill-color" defaultValue="#000000" ref={fillInput} onChange={() => changeFill(canvas)} />
-            </Container1>
-            <Container1>
+            </Container0>
+            <Container0>
                 <label htmlFor="shape-stroke-color"><RiEditBoxLine /> 外框　</label>
                 <Input0 type="color" id="shape-stroke-color" defaultValue="#ffffff" ref={strokeInput} onChange={() => changeStroke(canvas)} />
-            </Container1>
-            <Container1>
+            </Container0>
+            <Container0>
                 <label><RiAlignCenter /> 外框粗細　</label>
-                <Container2>
+                <Container1>
                     <Input0 type="range" min="0" max="20" defaultValue="0" onChange={() => { updateRange('shape-stroke-weight-count'); }} ref={strokeWidthInput} />
                     <span id="shape-stroke-weight-count">0</span>
-                </Container2>
-            </Container1>
+                </Container1>
+            </Container0>
             <div>
                 <RectBtn onClick={() => addRect(canvas)} />
                 <CircleBtn onClick={() => addCircle(canvas)} />

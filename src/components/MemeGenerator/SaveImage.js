@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams, useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components';
+import { useRouteMatch } from 'react-router-dom'
 import { alertSuccess, alertWarning } from '../../utlis/alert';
 
 import {
@@ -10,24 +9,18 @@ import {
     uploadCompletedMeme
 } from '../../utlis/firebase';
 import color from '../Styled/colorTheme';
-import { CloseButton, Container0, Container1, Input1, Input2, LoginButton } from '../Styled/Popup';
-
-const Button0 = styled.button`
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  padding: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-left: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
+import { Button1 } from '../Styled/MemeGenerator/Common';
+import {
+    CloseButton,
+    Container0,
+    Container1,
+    Input1,
+    Input2,
+    LoginButton
+} from '../Styled/Popup';
 
 function SaveImage(props) {
     const canvas = props.canvas;
-    const { id } = useParams();
     const { path } = useRouteMatch();
     const userData = useSelector((state) => state.userData);
     const { user_id } = userData;
@@ -41,22 +34,10 @@ function SaveImage(props) {
         setIsDisplayed(false);
     }, [])
 
-    const TemplateSaveImg = () => {
-        setIsDisplayed(true);
-    }
-
-    const clickCloseButton = () => {
-        setIsDisplayed(false);
-    }
-
-    const PersonalSaveImg = () => {
-        setIsDisplayed(true);
-    }
-
     const sendCompleteMemeInfo = () => {
         if (title.current.value === "") {
             alertWarning(undefined, '請填寫標題！');
-        } else {     
+        } else {
             const imgURL = canvas.toDataURL();
             uploadCompletedMeme(user_id, imgURL)
                 .then((res) => {
@@ -95,16 +76,15 @@ function SaveImage(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <Button0 onClick={() => TemplateSaveImg()}>發布圖片</Button0>
+                <Button1 onClick={() => setIsDisplayed(true)}>發布圖片</Button1>
             </div>
         );
-
     }
 
     const renderPersonalSave = () => {
         return (
             <div>
-                <Button0 onClick={() => PersonalSaveImg()}>完成並發布圖片</Button0>
+                <Button1 onClick={() => setIsDisplayed(true)}>完成並發布圖片</Button1>
             </div>
         );
     }
@@ -113,7 +93,7 @@ function SaveImage(props) {
         return (
             <Container0>
                 <Container1>
-                    <CloseButton onClick={() => { clickCloseButton() }}></CloseButton>
+                    <CloseButton onClick={() => setIsDisplayed(false)}></CloseButton>
                     <div>
                         <div style={{ 'textAlign': 'left' }}>為你的迷因加個標題（必填）</div>
                         <Input1 type="text" placeholder="輸入標題" ref={title}></Input1>

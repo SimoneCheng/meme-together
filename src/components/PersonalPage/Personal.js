@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import AllEditingMeme from './AllEditingMeme';
-import AllMemeImage from './AllMemeImage';
-import AllFavorite from './AllFavorite';
 import { wholePageLoading } from '../../utlis/loading';
 import {
     getUserInfo,
@@ -26,7 +23,10 @@ import {
     Container8,
     Container9,
     Button0
-} from '../Styled/Personal';
+} from '../Styled/PersonalPage/Personal';
+import AllEditingMeme from './AllEditingMeme';
+import AllMemeImage from './AllMemeImage';
+import AllFavorite from './AllFavorite';
 
 function Personal() {
     const history = useHistory();

@@ -1,109 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
-import {
-  MdTextFields,
-  MdEdit
-} from 'react-icons/md';
-import { FaShapes } from 'react-icons/fa';
-import styled from 'styled-components';
 import { fabric } from 'fabric';
 
 import { setCanvas } from '../../redux/actions';
 import color from '../Styled/colorTheme';
+import {
+  Container0,
+  Container1,
+  Container2,
+  Container3,
+  Container4,
+  Container5,
+  Container6,
+  H1,
+  Strong,
+  TextEditorBtn,
+  ShapeEditorBtn,
+  DrawEditorBtn
+} from '../Styled/MemeGenerator/MemeGenerator';
 import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
 import TextEditor from './TextEditor';
 import ShapeEditor from './ShapeEditor';
 import DrawEditor from './DrawEditor';
 import SaveButtons from './SaveButtons';
-
-const Container0 = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${props => props.color.color3.colorCode};
-  padding-bottom: 50px;
-  overflow-y: auto;
-`;
-
-const Container1 = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  @media screen and (max-width: 900px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-const Container2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 2rem;
-  color: #ccc;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  margin-right: 20px;
-  padding: 10px;
-`;
-
-const Container3 = styled.div`
-  width: 170px;
-`;
-
-const Container4 = styled.div`
-  display: flex;
-  align-self: flex-end;
-  @media screen and (max-width: 700px) {
-    flex-direction: column;
-    align-self: center;
-  }
-`;
-
-const Container5 = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Container6 = styled.div`
-  border: ${props => props.canvas !== '' && props.canvas !== null ? '2px solid #ccc' : 'none'}
-`;
-
-const H1 = styled.h1`
-  padding-top: 100px;
-  font-weight: bolder;
-`;
-
-const Strong = styled.strong`
-  background-color: ${props => props.color.color4.colorCode};
-  color: black;
-`;
-
-const TextEditorBtn = styled(MdTextFields)`
-  cursor: pointer;
-  color: ${props => props.status === 'text' ? '#056' : 'inherit'};
-  margin-bottom: 10px;
-  &:hover{
-    color: #056;
-  }
-`;
-
-const ShapeEditorBtn = styled(FaShapes)`
-  cursor: pointer;
-  color: ${props => props.status === 'shape' ? '#056' : 'inherit'};
-  margin-bottom: 10px;
-  &:hover{
-    color: #056;
-  }
-`;
-
-const DrawEditorBtn = styled(MdEdit)`
-  cursor: pointer;
-  color: ${props => props.status === 'draw' ? '#056' : 'inherit'};
-  &:hover{
-    color: #056;
-  }
-`;
 
 function MemeGenerator() {
   const { id } = useParams();
@@ -161,12 +81,12 @@ function MemeGenerator() {
         initObject(canvas);
       }
       if (canvas === null) {
-        history.push('/404');
+        history.replace('/404');
       }
     }
     if (path === "/personal/meme-generator/:id") {
       if (canvas === null) {
-        history.push('/404');
+        history.replace('/404');
       }
     }
   }, [canvas])
@@ -182,12 +102,6 @@ function MemeGenerator() {
     }
   }, [userData])
 
-  // useEffect(() => {
-  //   if (canvas !== '') {
-  //     document.body.addEventListener('keydown', (e) => pressDelete(e, canvas));
-  //   }
-  // }, [canvas])
-
   const getEditingMeme = () => {
     getTheEditingMeme(userData.user_id, id)
       .then((res) => {
@@ -198,9 +112,9 @@ function MemeGenerator() {
           const canvas = new fabric.Canvas('c', {
             width: canvasWidth,
             height: canvasHeight,
-            hoverCursor: 'grab', // 移動時鼠標顯示
-            freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
-            isDrawingMode: false, // 設置成 true 一秒變身小畫家
+            hoverCursor: 'grab',
+            freeDrawingCursor: 'crosshair',
+            isDrawingMode: false,
           });
           canvas.loadFromJSON(canvasStatus);
           dispatch(setCanvas(canvas));
@@ -236,9 +150,9 @@ function MemeGenerator() {
     return new fabric.Canvas('c', {
       width: width,
       height: height,
-      hoverCursor: 'grab', // 移動時鼠標顯示
-      freeDrawingCursor: 'crosshair', // 畫畫模式時鼠標模式
-      isDrawingMode: false, // 設置成 true 一秒變身小畫家
+      hoverCursor: 'grab',
+      freeDrawingCursor: 'crosshair',
+      isDrawingMode: false,
       backgroundImage: new fabric.Image(imgSrc)
     })
   }
@@ -258,12 +172,6 @@ function MemeGenerator() {
     canvi.setActiveObject(text);
     canvi.renderAll();
   }
-
-  // const pressDelete = (e, canvi) => {
-  //   if (e.keyCode === 46) {
-  //     canvi.remove(canvi.getActiveObject());
-  //   }
-  // }
 
   return (
     <>

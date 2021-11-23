@@ -4,7 +4,7 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 import color from '../Styled/colorTheme';
 import { getAllTemplates } from '../../utlis/firebase';
-import {loading} from '../../utlis/loading'
+import { loading } from '../../utlis/loading'
 
 const H1 = styled.h1`
   padding-top: 100px;
@@ -117,7 +117,8 @@ function Templates() {
             const { image_url, image_id } = item;
             return renderAllTemplates(image_url, image_id);
           })}
-        </Container1> : <Container>{loading('spinningBubbles', '#056', 50, 50)}</Container>}
+        </Container1>
+        : <Container>{loading('spinningBubbles', '#056', 50, 50)}</Container>}
     </Container0>
   )
 }

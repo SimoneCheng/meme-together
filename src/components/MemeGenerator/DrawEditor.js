@@ -1,47 +1,15 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { FaPencilAlt, FaMousePointer } from 'react-icons/fa';
 import { RiSipLine, RiAlignCenter } from 'react-icons/ri';
 import { fabric } from 'fabric';
-import styled from 'styled-components';
 
-const Container1 = styled.div`
-  margin-bottom: 30px;
-  white-space: pre-line;
-`;
-
-const Container2 = styled.div`
-  margin-top: 8px
-`;
-
-const Input0 = styled.input`
-  cursor: pointer;
-`;
-
-const PencilBtn = styled(FaPencilAlt)`
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 8px;
-  margin-right: 10px;
-  background-color: #EFEFEF;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
-
-const PointerBtn = styled(FaMousePointer)`
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 8px;
-  background-color: #EFEFEF;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
+import {
+    Container0,
+    Container1,
+    Input0,
+    PencilBtn,
+    PointerBtn
+} from '../Styled/MemeGenerator/Common';
 
 function DrawEditor() {
     const canvas = useSelector((state) => state.canvas);
@@ -81,18 +49,18 @@ function DrawEditor() {
 
     return (
         <div>
-            <Container1><strong>選擇筆刷樣式</strong></Container1>
-            <Container1>
+            <Container0><strong>選擇筆刷樣式</strong></Container0>
+            <Container0>
                 <label htmlFor="pencil-color"><RiSipLine /> 顏色　</label>
                 <input type="color" id="pencil-color" defaultValue="#000000" ref={colorInput} onChange={() => changeDrawingBrushColor(canvas)} />
-            </Container1>
-            <Container1>
+            </Container0>
+            <Container0>
                 <label><RiAlignCenter /> 粗細　</label>
-                <Container2>
+                <Container1>
                     <Input0 type="range" min="0" max="50" defaultValue="5" onChange={() => updateRange('pencil-stroke-weight-count')} ref={widthInput} />
                     <span id="pencil-stroke-weight-count">2</span>
-                </Container2>
-            </Container1>
+                </Container1>
+            </Container0>
             <div>
                 <PencilBtn onClick={() => drawing(canvas)} />
                 <PointerBtn onClick={() => canvas.isDrawingMode = false} />

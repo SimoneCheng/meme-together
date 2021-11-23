@@ -1,22 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 
+import { Button1 } from '../Styled/MemeGenerator/Common';
 import SaveStatus from './SaveStatus';
 import SaveImage from './SaveImage';
-
-const Button0 = styled.button`
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  padding: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-left: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
 
 function SaveButtons() {
     const userData = useSelector((state) => state.userData);
@@ -34,10 +21,10 @@ function SaveButtons() {
             {userData ? <SaveStatus canvas={canvas} /> : ""}
             {userData ? <SaveImage canvas={canvas} /> : ""}
             <div>
-                <Button0 onClick={() => downloadImage(canvas, 'png')}>下載圖片（png）</Button0>
+                <Button1 onClick={() => downloadImage(canvas, 'png')}>下載圖片（png）</Button1>
             </div>
             <div>
-                <Button0 onClick={() => downloadImage(canvas, 'jpg')}>下載圖片（jpg）</Button0>
+                <Button1 onClick={() => downloadImage(canvas, 'jpg')}>下載圖片（jpg）</Button1>
             </div>
         </>
     )

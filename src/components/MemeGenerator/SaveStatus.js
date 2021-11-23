@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { saveEditingMeme, updateEditingMeme } from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';
-
-const Button0 = styled.button`
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  font-size: 1rem;
-  padding: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-left: 10px;
-  &:hover{
-      border: 2px solid #056;
-  }
-`;
+import { Button1 } from '../Styled/MemeGenerator/Common';
 
 function SaveStatus(props) {
     const canvas = props.canvas;
@@ -63,7 +50,7 @@ function SaveStatus(props) {
     const renderTemplateSave = () => {
         return (
             <div>
-                <Button0 onClick={() => TemplateCanvasToJSON(canvas)}>儲存編輯狀態到個人空間</Button0>
+                <Button1 onClick={() => TemplateCanvasToJSON(canvas)}>儲存編輯狀態到個人空間</Button1>
             </div>
         );
     }
@@ -71,7 +58,7 @@ function SaveStatus(props) {
     const renderPersonalSave = () => {
         return (
             <div>
-                <Button0 onClick={() => PersonalCanvasToJSON(canvas)}>儲存編輯狀態</Button0>
+                <Button1 onClick={() => PersonalCanvasToJSON(canvas)}>儲存編輯狀態</Button1>
             </div>
         );
     }

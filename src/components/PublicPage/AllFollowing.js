@@ -1,79 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { getAllFollowing, unfollowing, deleteFollower, addFollowing, addFollower } from '../../utlis/firebase';
+import {
+  getAllFollowing,
+  unfollowing,
+  deleteFollower,
+  addFollowing,
+  addFollower
+} from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';
 import { loading } from '../../utlis/loading';
-
-const Container = styled.div`
-  color: #fff;
-  font-size: 2rem;
-  padding-top: 50px;
-  text-align: center;
-`;
-
-const Container0 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 50px;
-`;
-
-const Container1 = styled.div`
-  width: 800px;
-  padding: 10px 10px;
-  background-color: #fff;
-  margin-top: 20px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  @media screen and (max-width: 850px) {
-    width: calc(100% - 60px);
-  }
-`;
-
-const Container2 = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Container3 = styled.div`
-  flex: 1;
-`;
-
-const Container4 = styled.div`
-  flex: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 30px;
-`;
-
-const Img0 = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
-
-const Button0 = styled.button`
-  border: none;
-  border-radius: 10px;
-  background-color: #ffc349;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  :hover{
-    outline: 2px solid black;
-  }
-`;
+import { 
+  Container0,
+  Container3,
+  Container4,
+  Container5,
+  Container6,
+  Container7,
+  Img1,
+  Button0
+ } from '../Styled/PublicPage/Common';
 
 function AllFollowing(props) {
-  const { id } = useParams();
   const allFollowing = props.allFollowing;
   const allFollowingSelf = props.allFollowingSelf;
   const [followingList, setFollowingList] = useState();
@@ -106,14 +55,14 @@ function AllFollowing(props) {
 
   const renderFollowing = (item) => {
     return (
-      <Container1 key={item.user_id}>
-        <Container2>
-          <Link to={`/public/${item.user_id}`}><Img0 src={item.user_img} alt={item.user_id} /></Link>
-        </Container2>
-        <Container3>
+      <Container4 key={item.user_id}>
+        <Container5>
+          <Link to={`/public/${item.user_id}`}><Img1 src={item.user_img} alt={item.user_id} /></Link>
+        </Container5>
+        <Container6>
           <Link to={`/public/${item.user_id}`} rel="noreferrer">{item.user_name}</Link>
-        </Container3>
-        <Container4>
+        </Container6>
+        <Container7>
           {userData != null
             && Object.keys(userData).length > 0 ?
             (item.user_id === userData.user_id ? "" :
@@ -121,26 +70,24 @@ function AllFollowing(props) {
                 <Button0 onClick={() => unfollowUser(item.user_id)}>取消追蹤</Button0>
                 : <Button0 onClick={() => followUser(item.user_id)}>追蹤</Button0>))
             : ""}
-        </Container4>
-      </Container1>
+        </Container7>
+      </Container4>
     );
   }
 
   const renderNone = () => {
     return (
-      <Container>
+      <Container0>
         目前沒有追蹤任何人喔～
-      </Container>
+      </Container0>
     )
   }
 
   return (
-    <Container0>
-      {followingList ? (followingList.length > 0 ? followingList.map((item) => renderFollowing(item)) : renderNone()) : <Container>{loading('spinningBubbles', '#fff', 50, 50)}</Container>}
-    </Container0>
-
+    <Container3>
+      {followingList ? (followingList.length > 0 ? followingList.map((item) => renderFollowing(item)) : renderNone()) : <Container0>{loading('spinningBubbles', '#fff', 50, 50)}</Container0>}
+    </Container3>
   );
-
 }
 
 export default AllFollowing;

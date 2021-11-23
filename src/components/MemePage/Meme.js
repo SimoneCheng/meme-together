@@ -1,114 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
+import {
+  Container0,
+  Container1,
+  Container2,
+  Container3,
+  Container4,
+  Container5,
+  Container6,
+  Container7,
+  Img0,
+  Link0
+} from '../Styled/MemePage/Meme';
 import {
   getUserInfo,
   getTheMemeImage,
 } from '../../utlis/firebase';
+import { wholePageLoading } from '../../utlis/loading';
 import AddToFavorite from './AddToFavorite';
 import Comments from './Comments';
-import { wholePageLoading } from '../../utlis/loading';
 import PageNotFound from '../404';
-
-const Container0 = styled.div`
-  padding-top: 100px;
-  padding-bottom: 50px;
-  background-color: #056;
-  min-height: calc(100vh - 100px);
-  display: flex;
-  justify-content: center;
-`;
-
-const Container1 = styled.div`
-  display: flex;
-  font-size: 1rem;
-  @media screen and (max-width: 750px) {
-    flex-direction: column;
-  }
-`;
-
-const Container3 = styled.div`
-  background-color: #fff;
-  padding: 30px;
-  border-bottom: 5px solid #056;
-`;
-
-const Container4 = styled.div`
-  border-bottom: 5px solid #ffc349;
-  padding-bottom: 10px;
-`;
-
-const Container5 = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-  min-height: 100px;
-  white-space: pre-line;
-  word-break: break-word;
-`;
-
-const Container6 = styled.span`
-  background-color: #E0E0E0;
-  border-radius: 10px;
-  padding: 2px 5px;
-`;
-
-const Container7 = styled.div`
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const Container8 = styled.div`
- width: 400px;
- @media screen and (max-width: 950px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 850px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 750px) {
-    width: 500px;
-    margin-right: 0px;
-  }
-  @media screen and (max-width: 570px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 425px) {
-    width: 300px;
-  }
-`;
-
-const Img0 = styled.img`
-  width: 400px;
-  margin-right: 50px;
-  position: sticky;
-  top: 100px;
-  @media screen and (max-width: 950px) {
-    width: 350px;
-  }
-  @media screen and (max-width: 850px) {
-    width: 300px;
-  }
-  @media screen and (max-width: 750px) {
-    width: 500px;
-    margin-right: 0px;
-    position: initial;
-  }
-  @media screen and (max-width: 570px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 425px) {
-    width: 300px;
-  }
-`;
-
-const Link0 = styled(Link)`
-  :hover{
-      text-decoration: underline dotted;
-  }
-`;
 
 function Meme() {
   const { id } = useParams();
@@ -141,7 +53,7 @@ function Meme() {
     const renderTags = (item) => {
       return (
         <span>
-          <Container6>#{item}</Container6>&ensp;
+          <Container5>#{item}</Container5>&ensp;
         </span>
       );
     }
@@ -151,20 +63,20 @@ function Meme() {
         <div>
           <Img0 alt={img_name} src={img_url} />
         </div>
-        <Container8>
-          <Container3>
+        <Container7>
+          <Container2>
             <div><strong>標題：</strong>{title}</div>
             <div><Link0 to={`/public/${owner_user_id}`}><strong>作者：</strong>{userInfo.user_name}</Link0></div>
-            <Container4><strong>發布日期：</strong>{new Date(last_save_time.toDate()).toLocaleString()}</Container4>
-            <Container5>{context}</Container5>
+            <Container3><strong>發布日期：</strong>{new Date(last_save_time.toDate()).toLocaleString()}</Container3>
+            <Container4>{context}</Container4>
             <div>{tags[0] !== "" ? tags.map((item) => renderTags(item)) : ""}</div>
-            <Container7>
+            <Container6>
               <span><strong>瀏覽次數：</strong>{click_time}</span>
               <AddToFavorite theMemeImage={theMemeImage} />
-            </Container7>
-          </Container3>
+            </Container6>
+          </Container2>
           <Comments />
-        </Container8>
+        </Container7>
       </Container1>
     )
   }
@@ -177,9 +89,7 @@ function Meme() {
         </Container0>
         : <PageNotFound />}
     </>
-
   );
-
 }
 
 export default Meme;

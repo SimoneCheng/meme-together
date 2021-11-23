@@ -1,101 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import color from '../Styled/colorTheme';
+import {
+  Container0,
+  Container1,
+  Container2,
+  Container3,
+  Container6,
+  Img0,
+  Button0
+} from '../Styled/PersonalPage/Common';
 import {
   deleteMemeImgInDb,
   deleteMemeImgInStorage,
   changeMemePublicStatus
 } from '../../utlis/firebase';
 import { alertSuccess } from '../../utlis/alert';
-
-const Container1 = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 250px);
-  grid-gap: 30px;
-  margin: 0 30px 30px 30px;
-  @media screen and (max-width: 970px) {
-    grid-template-columns: repeat(2, 350px);
-  }
-  @media screen and (max-width: 900px) {
-    grid-template-columns: repeat(2, 300px);
-  }
-  @media screen and (max-width: 800px) {
-    grid-template-columns: repeat(2, 250px);
-  }
-  @media screen and (max-width: 680px) {
-    grid-template-columns: repeat(1, 400px);
-  }
-  @media screen and (max-width: 580px) {
-    grid-template-columns: repeat(1, 350px);
-  }
-  @media screen and (max-width: 500px) {
-    grid-template-columns: repeat(1, 300px);
-  }
-  @media screen and (max-width: 450px) {
-    grid-template-columns: repeat(1, 250px);
-  }
-  @media screen and (max-width: 400px) {
-    grid-template-columns: repeat(1, 200px);
-  }
-`;
-
-const Container2 = styled.div`
-  box-shadow: 0 0 3px grey;
-  border-radius: 10px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  bottom: 0;
-  transition: bottom 0.3s linear;
-  &:hover{
-    box-shadow: 0 0 10px 2px grey;
-    bottom: 10px;
-  }
-`;
-
-const Container3 = styled.div`
- padding: 0 20px 20px 20px;
-`;
-
-const Container4 = styled.div`
- margin-top: 5px;
-`;
-
-const Container5 = styled.div`
-  width: 810px;
-  text-align: center;
-  padding: 30px;
-  font-size: 2rem;
-  @media screen and (max-width: 970px) {
-    width: 100%;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    padding: 0;
-  }
-`;
-
-const Img0 = styled.img`
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-`;
-
-const Button = styled.button`
-  margin-top: 10px;
-  border: 1px ${props => props.color.color2.colorCode} solid;
-  border-radius: 5px;
-  color: ${props => props.color.color2.colorCode};
-  font-size: 1rem;
-  background-color: ${props => props.color.color3.colorCode};
-  padding: 5px 10px;
-  cursor: pointer;
-  :hover {
-    background-color: ${props => props.color.color2.colorCode};
-    color: ${props => props.color.color3.colorCode};
-  } 
-`;
 
 function AllMemeImage(props) {
   const memeImg = props.memeImg;
@@ -131,53 +52,52 @@ function AllMemeImage(props) {
   const renderMemeImg = (item) => {
     const { title, img_url, img_name, created_time, last_save_time, isPublic } = item;
     return (
-        <Container2 key={img_name}>
-          <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
-          <Container3>
-            <Container4><strong>標題：</strong></Container4>
-            <Container4>{title}</Container4>
-            <Container4><strong>建立時間：</strong></Container4>
-            <Container4>{new Date(created_time.toDate()).toLocaleString()}</Container4>
-            <Container4><strong>上次儲存時間：</strong></Container4>
-            <Container4>{new Date(last_save_time.toDate()).toLocaleString()}</Container4>
-            <div style={{ 'marginTop': '10px' }}>
-              {isPublic ? <Button color={color} onClick={() => clickPublicStatus(img_name, false)}>取消公開發布</Button> : <Button color={color} onClick={() => clickPublicStatus(img_name, true)}>公開發布</Button>}
-            </div>
-            <div>
-              下載圖片：
-              <Button color={color} onClick={() => clickDownloadImage(img_url, "jpg")}>jpg</Button>
-              <Button style={{ 'marginLeft': '10px' }} color={color} onClick={() => clickDownloadImage(img_url, "png")}>png</Button>
-            </div>
-            <div>
-              <Button color={color} onClick={() => deleteImg(img_name)}>刪除</Button>
-            </div>
-          </Container3>
+      <Container1 key={img_name}>
+        <Link to={`/meme/${img_name}`}><Img0 src={img_url} alt={img_name}></Img0></Link>
+        <Container2>
+          <Container3><strong>標題：</strong></Container3>
+          <Container3>{title}</Container3>
+          <Container3><strong>建立時間：</strong></Container3>
+          <Container3>{new Date(created_time.toDate()).toLocaleString()}</Container3>
+          <Container3><strong>上次儲存時間：</strong></Container3>
+          <Container3>{new Date(last_save_time.toDate()).toLocaleString()}</Container3>
+          <div style={{ 'marginTop': '10px' }}>
+            {isPublic ? <Button0 color={color} onClick={() => clickPublicStatus(img_name, false)}>取消公開發布</Button0> : <Button0 color={color} onClick={() => clickPublicStatus(img_name, true)}>公開發布</Button0>}
+          </div>
+          <div>
+            下載圖片：
+            <Button0 color={color} onClick={() => clickDownloadImage(img_url, "jpg")}>jpg</Button0>
+            <Button0 style={{ 'marginLeft': '10px' }} color={color} onClick={() => clickDownloadImage(img_url, "png")}>png</Button0>
+          </div>
+          <div>
+            <Button0 color={color} onClick={() => deleteImg(img_name)}>刪除</Button0>
+          </div>
         </Container2>
+      </Container1>
     );
   }
 
   const renderAllMemeImg = () => {
     return (
-      <Container1>
+      <Container0>
         {memeImg.map((item) => renderMemeImg(item))}
-      </Container1>
+      </Container0>
     )
   }
 
   const renderNone = () => {
     return (
-      <Container5>
+      <Container6>
         空空的喔～
-      </Container5>
+      </Container6>
     );
   }
 
   return (
-    <div>
+    <>
       {memeImg.length > 0 ? renderAllMemeImg() : renderNone()}
-    </div>
+    </>
   )
-
 };
 
 export default AllMemeImage;
