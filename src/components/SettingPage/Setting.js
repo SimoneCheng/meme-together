@@ -16,7 +16,6 @@ import {
   Container5,
   Container6
 } from '../Styled/SettingPage/Setting';
-require('dotenv').config();
 
 function Setting() {
   const userData = useSelector((state) => state.userData);
@@ -29,12 +28,14 @@ function Setting() {
   }, [])
 
   useEffect(() => {
+    let unsubscribe;
     if (userData === null) {
       history.push('/');
     }
     if (userData !== null && Object.keys(userData).length > 0) {
-      getUserInfo(userData.user_id, setUserInfo);
+      unsubscribe = getUserInfo(userData.user_id, setUserInfo);
     }
+    return () => unsubscribe && unsubscribe();
   }, [userData])
 
   return (

@@ -40,20 +40,53 @@ function Personal() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-      }, [])
-      
+    }, [])
+
     useEffect(() => {
         if (userData === null) {
             history.push('/');
         }
-        if (userData != null && Object.keys(userData).length > 0) {
-            getUserInfo(userData.user_id, setUserInfo)
-            getAllEditingMeme(userData.user_id, setAllEditingMeme);
-            getPublicMemeImg(userData.user_id, setPublicMemeImg);
-            getPrivateMemeImg(userData.user_id, setPrivateMemeImg);
-            getAllFavorite(userData.user_id, setAllFavorite);
-        }
     }, [userData])
+
+    useEffect(() => {
+        let unsubscribe;
+        if (userData != null && Object.keys(userData).length > 0) {
+            unsubscribe = getUserInfo(userData.user_id, setUserInfo);
+        }
+        return () => unsubscribe && unsubscribe();
+    }, [userData]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (userData != null && Object.keys(userData).length > 0) {
+            unsubscribe = getAllEditingMeme(userData.user_id, setAllEditingMeme);
+        }
+        return () => unsubscribe && unsubscribe();
+    }, [userData]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (userData != null && Object.keys(userData).length > 0) {
+            unsubscribe = getPublicMemeImg(userData.user_id, setPublicMemeImg);
+        }
+        return () => unsubscribe && unsubscribe();
+    }, [userData]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (userData != null && Object.keys(userData).length > 0) {
+            unsubscribe = getPrivateMemeImg(userData.user_id, setPrivateMemeImg);
+        }
+        return () => unsubscribe && unsubscribe();
+    }, [userData]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (userData != null && Object.keys(userData).length > 0) {
+            unsubscribe = getAllFavorite(userData.user_id, setAllFavorite);
+        }
+        return () => unsubscribe && unsubscribe();
+    }, [userData]);
 
     const clickStatusButton = (status) => {
         setStatus(status);

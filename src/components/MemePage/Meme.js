@@ -33,9 +33,11 @@ function Meme() {
   }, [])
 
   useEffect(() => {
-    if (theMemeImage) {
-      getUserInfo(theMemeImage.owner_user_id, setUserInfo);
+    let unsubscribe;
+    if (theMemeImage && Object.keys(theMemeImage).length > 0) {
+      unsubscribe = getUserInfo(theMemeImage.owner_user_id, setUserInfo);
     }
+    return () => unsubscribe && unsubscribe();
   }, [theMemeImage])
 
   const renderMemeInfo = () => {
@@ -52,7 +54,7 @@ function Meme() {
 
     const renderTags = (item) => {
       return (
-        <span>
+        <span key={item}>
           <Container5>#{item}</Container5>&ensp;
         </span>
       );

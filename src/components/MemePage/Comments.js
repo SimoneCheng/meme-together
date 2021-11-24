@@ -32,18 +32,20 @@ function Comments() {
     const addCommentText = useRef(null);
     const editCommentText = useRef(null);
     const userData = useSelector((state) => state.userData);
-    const [isEditing, setIsEditing] = useState();
+    const [isEditing, setIsEditing] = useState(false);
     const [userInfo, setUserInfo] = useState();
 
     useEffect(() => {
-        getAllComments(id, setAllComments);
-        setIsEditing(false);      
+        const unsubscribe = getAllComments(id, setAllComments);
+        return () => unsubscribe();  
     }, [])
 
     useEffect(() => {
+        let unsubscribe;
         if (userData !== null && Object.keys(userData) && userData.user_name === null) {
-            getUserInfo(userData.user_id, setUserInfo);
+            unsubscribe = getUserInfo(userData.user_id, setUserInfo);
         }
+        return () => unsubscribe && unsubscribe();
     }, [userData])
 
     const addTheCommentClick = () => {

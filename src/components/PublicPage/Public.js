@@ -68,9 +68,11 @@ function Public() {
   }, [id])
 
   useEffect(() => {
+    let unsubscribe;
     if (userData !== null && Object.keys(userData).length > 0) {
-      checkAllFollowing(userData.user_id, setAllFollowingSelf);
+      unsubscribe = checkAllFollowing(userData.user_id, setAllFollowingSelf);
     }
+    return () => unsubscribe && unsubscribe();
   }, [userData])
 
   const followUser = () => {

@@ -12,9 +12,11 @@ function AddToFavorite(props) {
     const [isInFavorite, setIsInFavorite] = useState([]);
 
     useEffect(() => {
+        let unsubscribe;
         if (userData != null && Object.keys(userData).length > 0) {
-            checkFavoriteList(userData.user_id, img_name, setIsInFavorite);
+            unsubscribe = checkFavoriteList(userData.user_id, img_name, setIsInFavorite);
         }
+        return () => unsubscribe && unsubscribe();
     }, [userData])
 
     const addTheMemeToFavorite = () => {

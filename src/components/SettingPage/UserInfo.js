@@ -22,7 +22,6 @@ import {
   Button0,
   Label0
 } from '../Styled/SettingPage/Common';
-require('dotenv').config();
 
 function UserInfo(props) {
   const userData = useSelector((state) => state.userData);

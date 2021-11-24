@@ -3,7 +3,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { alertSuccess, alertError } from './alert';
-require('dotenv').config();
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
