@@ -127,16 +127,39 @@ function updateUserInfo(id, data) {
 }
 
 // All Tamplates Page
-function getAllTemplates(setAllTemplates) {
+function getAllTemplates() {
   return db
     .collection('templates')
-    .onSnapshot((querySnapshot) => {
-      const templatesData = [];
+    .orderBy('created_time', 'desc')
+    .limit(15)
+    .get()
+    .then((querySnapshot) => {
+      let lastKey;
+      const allTemplatesData = [];
       querySnapshot.forEach(doc => {
-        templatesData.push(doc.data());
+        allTemplatesData.push(doc.data());
+        lastKey = doc;
+      });
+      return { allTemplatesData, lastKey };
+    });
+}
+
+function getAllTemplatesNextPage(lastKey) {
+  return db
+    .collection('templates')
+    .orderBy('created_time', 'desc')
+    .startAfter(lastKey)
+    .limit(15)
+    .get()
+    .then((querySnapshot) => {
+      let lastKey;
+      const allTemplatesData = [];
+      querySnapshot.forEach(doc => {
+        allTemplatesData.push(doc.data());
+        lastKey = doc;
       })
-      setAllTemplates(templatesData);
-    })
+      return { allTemplatesData, lastKey }
+    });
 }
 
 // Meme Generator Page: Template
@@ -319,12 +342,12 @@ function getAllPublicMemeImg(sort) {
     });
 }
 
-function getAllPublicMemeNextPage(lastOne, sort = 'desc') {
+function getAllPublicMemeNextPage(lastKey, sort = 'desc') {
   return db
     .collection('completed_meme')
     .where('isPublic', '==', true)
     .orderBy('last_save_time', sort)
-    .startAfter(lastOne)
+    .startAfter(lastKey)
     .limit(15)
     .get()
     .then((querySnapshot) => {
@@ -335,7 +358,7 @@ function getAllPublicMemeNextPage(lastOne, sort = 'desc') {
         lastKey = doc;
       })
       return { allPublicMemeImgData, lastKey }
-    })
+    });
 }
 
 function getAllComments(docId, setAllComments) {
@@ -739,6 +762,7 @@ export {
   nativeLogout,
   checkLoginStatus,
   getAllTemplates,
+  getAllTemplatesNextPage,
   getTheTemplate,
   saveEditingMeme,
   updateEditingMeme,
