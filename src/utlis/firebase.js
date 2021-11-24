@@ -753,7 +753,11 @@ function deleteAllData(id) {
           }
         })
     })
-  // .then(() => storageRef.child(`users/${id}`).delete())
+    .then(() => {
+      if (storageRef.child(`users/${id}`)) {
+        storageRef.child(`users/${id}`).delete();
+      }
+    });
 }
 
 export {
