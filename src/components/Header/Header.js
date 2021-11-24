@@ -45,7 +45,7 @@ function Header() {
   const history = useHistory();
 
   useEffect(() => {
-    return checkLoginStatus(dispatch, setUserData);
+    checkLoginStatus(dispatch, setUserData);
   }, []);
 
   const clickLoginButton = () => {

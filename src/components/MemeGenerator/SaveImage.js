@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom'
 import { alertSuccess, alertWarning } from '../../utlis/alert';
@@ -28,11 +28,7 @@ function SaveImage(props) {
     const context = useRef(null);
     const tags = useRef(null);
     const isPublic = useRef(null);
-    const [isDisplayed, setIsDisplayed] = useState();
-
-    useEffect(() => {
-        setIsDisplayed(false);
-    }, [])
+    const [isDisplayed, setIsDisplayed] = useState(false);
 
     const sendCompleteMemeInfo = () => {
         if (title.current.value === "") {
@@ -47,6 +43,11 @@ function SaveImage(props) {
                         const term = title.current.value.substring(0, i);
                         search_array_term.push(term);
                     }
+                    canvas.getObjects().forEach((item) => {
+                        if (item.type === "i-text") {
+                            search_array_term.push(item.text);
+                        };
+                    })
                     const memeInfo = {
                         title: `${title.current.value}`,
                         context: `${context.current.value}`,
