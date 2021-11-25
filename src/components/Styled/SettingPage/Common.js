@@ -66,7 +66,7 @@ const Input1 = styled.input`
   padding: 10px;
   border-radius: 10px;
   border: 2px solid #ccc;
-  width: 80%;
+  width: calc(100% - 20px);
   font-size: 1rem;
   :focus{
     background-color: rgba(0, 0, 0, 0.05);

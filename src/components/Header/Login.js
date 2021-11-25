@@ -16,12 +16,13 @@ function Login() {
   const dispatch = useDispatch();
   const loginEmail = useRef(null);
   const loginPassword = useRef(null);
-  
+
   const clickCloseButton = () => {
     dispatch(setIsLoginDisplayed(false));
   }
-  
-  const clickLogin = () => {
+
+  const clickLogin = (e) => {
+    e.preventDefault();
     nativeLogin(loginEmail.current.value, loginPassword.current.value)
       .then(() => {
         dispatch(setIsLoginDisplayed(false));
@@ -32,15 +33,17 @@ function Login() {
     <Container0>
       <Container1>
         <CloseButton onClick={() => { clickCloseButton() }}></CloseButton>
-        <div>
-          <div>電子信箱</div>
-          <Input1 type="email" placeholder="email" ref={loginEmail} />
-        </div>
-        <div>
-          <div>密碼</div>
-          <Input1 type="password" placeholder="password" ref={loginPassword} />
-        </div>
-        <LoginButton color={color} onClick={() => { clickLogin(); }}>登入</LoginButton>
+        <form>
+          <div>
+            <div>電子信箱</div>
+            <Input1 type="email" placeholder="email" ref={loginEmail} autoComplete="on" />
+          </div>
+          <div>
+            <div>密碼</div>
+            <Input1 type="password" placeholder="password" ref={loginPassword} autoComplete="on" />
+          </div>
+          <LoginButton color={color} onClick={(e) => { clickLogin(e); }}>登入</LoginButton>
+        </form>
       </Container1>
     </Container0>
   )

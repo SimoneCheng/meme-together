@@ -86,7 +86,8 @@ function reAuth(password) {
   const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
   return user
     .reauthenticateWithCredential(credential)
-    .then(() => user);
+    .then(() => user)
+    .catch(() => false);
 }
 
 function updatePassword(password, newPassword) {

@@ -15,7 +15,8 @@ function DeleteAccount() {
   const userData = useSelector((state) => state.userData);
   const password = useRef(null);
 
-  const deleteTheUser = () => {
+  const deleteTheUser = (e) => {
+    e.preventDefault();
     reAuth(password.current.value)
       .then((res) => {
         if (!res) {
@@ -33,10 +34,12 @@ function DeleteAccount() {
   return (
     <Container0>
       <Container1>刪除帳戶</Container1>
-      <p>請輸入密碼：</p>
-      <Input1 type="password" ref={password} />
-      <br></br>
-      <Button0 color={color} onClick={() => alertDelete(deleteTheUser)}>刪除帳戶</Button0>
+      <form>
+        <p>請輸入密碼：</p>
+        <Input1 type="password" ref={password} autoComplete="on" />
+        <br></br>
+        <Button0 color={color} onClick={(e) => { alertDelete(() => deleteTheUser(e)); }}>刪除帳戶</Button0>
+      </form>
     </Container0>
   )
 }

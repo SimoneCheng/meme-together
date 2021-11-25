@@ -23,7 +23,8 @@ function Signup() {
         dispatch(setIsSignupDisplayed(false));
     }
 
-    const clickSignup = () => {
+    const clickSignup = (e) => {
+        e.preventDefault();
         if (signupName.current.value === "") {
             alertError(undefined, '請輸入暱稱！');
             return;
@@ -43,19 +44,21 @@ function Signup() {
         <Container0 >
             <Container1>
                 <CloseButton onClick={() => { clickCloseButton() }}></CloseButton>
-                <div>
-                    <div>暱稱</div>
-                    <Input1 type="text" placeholder="name" ref={signupName} />
-                </div>
-                <div>
-                    <div>電子信箱</div>
-                    <Input1 type="email" placeholder="email" ref={signupEmail} />
-                </div>
-                <div>
-                    <div>密碼</div>
-                    <Input1 type="password" placeholder="password" ref={signupPassword} />
-                </div>
-                <SignupButton color={color} onClick={() => { clickSignup() }}>註冊</SignupButton>
+                <form>
+                    <div>
+                        <div>暱稱</div>
+                        <Input1 type="text" placeholder="name" ref={signupName} autoComplete="on" />
+                    </div>
+                    <div>
+                        <div>電子信箱</div>
+                        <Input1 type="email" placeholder="email" ref={signupEmail} autoComplete="on" />
+                    </div>
+                    <div>
+                        <div>密碼</div>
+                        <Input1 type="password" placeholder="password" ref={signupPassword} autoComplete="on" />
+                    </div>
+                    <SignupButton color={color} onClick={(e) => { clickSignup(e) }}>註冊</SignupButton>
+                </form>
             </Container1>
         </Container0>
     )
