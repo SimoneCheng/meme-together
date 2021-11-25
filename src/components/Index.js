@@ -33,6 +33,7 @@ import robot from '../image/day27-my-robot.png';
 import canvasStand from '../image/day10-canvas-stand.png';
 import colorTools from '../image/gummy-color-tools.png';
 import floppy from '../image/day18-floppy.png';
+import Footer from './Footer';
 
 function Index() {
   const [camapignMeme, setCampaignMeme] = useState();
@@ -100,6 +101,7 @@ function Index() {
           <Container10><Link to="/explorememes"><Container11>查看更多</Container11></Link></Container10>
         </Container7>
       </div>
+      <Footer />
     </Container0>
   );
 }

@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  position: relative;
+}
+
 a:link {
   text-decoration: none;
   background-color: none;
@@ -31,14 +35,6 @@ code {
 
 .canvas-container {
   margin: auto;
-}
-
-.hidden {
-  display: none;
-}
-
-#hidden {
-  display: none;
 }
 
 /*  Scroll Layout */
