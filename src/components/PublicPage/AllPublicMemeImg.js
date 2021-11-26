@@ -36,7 +36,7 @@ function AllPublicMemeImg(props) {
 
   const renderNone = () => {
     return (
-      <Container0>
+      <Container0 style={{ 'paddingBottom': '50px' }}>
         目前沒有創作喔～
       </Container0>
     )

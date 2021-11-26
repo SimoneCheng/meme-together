@@ -19,6 +19,37 @@ import {
     LoginButton
 } from '../Styled/Popup';
 
+function buildSearchTerm(title, tagsArr, canvas) {
+    const search_array_term = [];
+    for (let i = 1; i <= title.length; i++) {
+        const term = title.substring(0, i);
+        search_array_term.push(term);
+    }
+    canvas.getObjects().forEach((item) => {
+        if (item.type === "i-text") {
+            search_array_term.push(item.text);
+        };
+    })
+    if (tagsArr[0] !== "") { search_array_term.concat(tagsArr) };
+    return search_array_term;
+}
+
+function collectMemeInfo(title, context, imgName, userId, tags, isPublic, searchArrayTerm) {
+    const memeInfo = {
+        title: `${title}`,
+        context: `${context}`,
+        img_name: `${imgName}`,
+        owner_user_id: `${userId}`,
+        tags: tags,
+        isPublic: isPublic,
+        created_time: new Date(),
+        last_save_time: new Date(),
+        click_time: 0,
+        search_array_term: searchArrayTerm
+    }
+    return memeInfo;
+}
+
 function SaveImage(props) {
     const canvas = props.canvas;
     const { path } = useRouteMatch();
@@ -33,34 +64,22 @@ function SaveImage(props) {
     const sendCompleteMemeInfo = () => {
         if (title.current.value === "") {
             alertWarning(undefined, '請填寫標題！');
+            return;
         } else {
             const imgURL = canvas.toDataURL();
             uploadCompletedMeme(user_id, imgURL)
                 .then((res) => {
                     const tagsArr = tags.current.value.split(' ');
-                    const search_array_term = [];
-                    for (let i = 1; i <= title.current.value.length; i++) {
-                        const term = title.current.value.substring(0, i);
-                        search_array_term.push(term);
-                    }
-                    canvas.getObjects().forEach((item) => {
-                        if (item.type === "i-text") {
-                            search_array_term.push(item.text);
-                        };
-                    })
-                    const memeInfo = {
-                        title: `${title.current.value}`,
-                        context: `${context.current.value}`,
-                        img_name: `${res}`,
-                        owner_user_id: `${userData.user_id}`,
-                        tags: tagsArr,
-                        isPublic: isPublic.current.checked,
-                        created_time: new Date(),
-                        last_save_time: new Date(),
-                        click_time: 0,
-                        search_array_term: tagsArr[0] === "" ? search_array_term : search_array_term.concat(tagsArr)
-                    }
-                    return memeInfo;
+                    const searchArrayTerm = buildSearchTerm(title.current.value, tagsArr, canvas)
+                    return collectMemeInfo(
+                        title.current.value,
+                        context.current.value,
+                        res,
+                        userData.user_id,
+                        tagsArr,
+                        isPublic.current.checked,
+                        searchArrayTerm
+                    );
                 })
                 .then((res) => {
                     getCompletedMemeImageUrl(res.img_name)
@@ -133,3 +152,4 @@ function SaveImage(props) {
 }
 
 export default SaveImage;
+export { collectMemeInfo };
