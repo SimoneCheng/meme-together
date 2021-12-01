@@ -46,13 +46,18 @@ A website for users to produce meme and share to their friends. Let's have fun!
 ## 🦀 Features
 - Edit your meme and save the editing status
 ![](./ReadmeImage/feature1.gif)
+
 - Release your wonderful meme
 ![](./ReadmeImage/feature2.gif)
+
 - Explore other person's meme and follow the person you like
+![](./ReadmeImage/feature3.gif)
 
 - Search other meme, add it to your favorite list, and leave a message
+![](./ReadmeImage/feature4.gif)
 
-- Manage your profile info, revise your password, or leave **Meme Together**
+- Manage your profile info, change your password, or leave **Meme Together**
+![](./ReadmeImage/feature5.gif)
 
 ## 🦀 Future Features
 - Build GIF meme generator
