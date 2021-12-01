@@ -36,11 +36,11 @@ function Login() {
         <form>
           <div>
             <div>電子信箱</div>
-            <Input1 type="email" placeholder="email" ref={loginEmail} autoComplete="on" />
+            <Input1 type="email" placeholder="email" defaultValue="456@456.com" ref={loginEmail} autoComplete="on" />
           </div>
           <div>
             <div>密碼</div>
-            <Input1 type="password" placeholder="password" ref={loginPassword} autoComplete="on" />
+            <Input1 type="password" placeholder="password" defaultValue="123456"  ref={loginPassword} autoComplete="on" />
           </div>
           <LoginButton color={color} onClick={(e) => { clickLogin(e); }}>登入</LoginButton>
         </form>

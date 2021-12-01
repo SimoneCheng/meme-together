@@ -1,23 +1,29 @@
 # 🐳 Meme Together
 A website for users to produce meme and share to their friends. Let's have fun!
+- Use `fabric.js` to create a meme generator.
+- Use `React` and `Styled` Components for page layout.
+- Use `React Router` for navigation.
+- Use `Redux` for state management.
+- Integrate member system and database with `Firebase` service, including `Firestore`, `Storage`, and `Authentication`.
+
+![](./ReadmeImage/landingpage.png)
 
 ## 🦀 Demo
 - Website Link: https://meme-together.web.app/
 - Test Account:
-    - email: 456@456.com
-    - password: 123456
+    - Email: 456@456.com
+    - Password: 123456
 
 ## 🦀 Techniques
 ### Fundamental
 - HTML
 - CSS
-- Javascript (ES6)
+- JavaScript (ES6)
 
 ### Framework
-- React (Hook)
+- React (Hooks)
 - React Router
 - Redux
-- Styled Component
 
 ### Firebase
 - Authentication
@@ -26,18 +32,33 @@ A website for users to produce meme and share to their friends. Let's have fun!
 - Hosting
 
 ### Packages
+- Styled Component
 - fabric.js
 - compressjs
 - Sweetalert2
 - Animated.css
+- react-icons
+- react-loading
 
 ## 🦀 Flow Chart
-![](./mermaid-diagram-20211129152855.svg)
+![](./ReadmeImage/mermaid-flowchart.svg)
 
 ## 🦀 Features
+- Edit your meme and save the editing status
+![](./ReadmeImage/feature1.gif)
+- Release your wonderful meme
+![](./ReadmeImage/feature2.gif)
+- Explore other person's meme and follow the person you like
+
+- Search other meme, add it to your favorite list, and leave a message
+
+- Manage your profile info, revise your password, or leave **Meme Together**
 
 ## 🦀 Future Features
+- Build GIF meme generator
+- Build notification function for users
+- Build server with back-end tools such as AWS, Docker, EC2, Node.js, SQL to integrate more meme data into project
 
 ## 🦀 Contact
-**Name** - Simone Cheng  
+**Author** - Simone Cheng  
 **Email** - bleach1827@gmail.com
