@@ -19,7 +19,7 @@ A website for users to produce meme and share to their friends. Let's have fun!
 ### Fundamental
 - HTML
 - CSS
-- JavaScript (ES6)
+- JavaScript (ES6+)
 
 ### Framework
 - React (Hooks)
@@ -33,7 +33,7 @@ A website for users to produce meme and share to their friends. Let's have fun!
 - Hosting
 
 ### Packages
-- Styled Component
+- Styled Components
 - fabric.js
 - compressjs
 - Sweetalert2
