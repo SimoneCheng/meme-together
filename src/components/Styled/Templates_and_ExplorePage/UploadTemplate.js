@@ -128,6 +128,15 @@ const Li0 = styled.li`
 
 const Img0 = styled.img`
   width: 600px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 300px;
+  }
 `;
 
 const Button0 = styled.button`
