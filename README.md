@@ -1,8 +1,9 @@
 # 🐳 Meme Together
 A website for users to produce meme and share to their friends. Let's have fun!
 - Use `fabric.js` to create a meme generator.
-- Use `React` and `Styled` Components for page layout.
-- Use `React Router` for navigation.
+- Use `React` for Single Page Application.
+- Use `Styled Components` for CSS in JS.
+- Use `React Router` for client side routing.
 - Use `Redux` for state management.
 - Integrate member system and database with `Firebase` service, including `Firestore`, `Storage`, and `Authentication`.
 
