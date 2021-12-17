@@ -24,8 +24,8 @@ function Login() {
   const clickLogin = (e) => {
     e.preventDefault();
     nativeLogin(loginEmail.current.value, loginPassword.current.value)
-      .then(() => {
-        dispatch(setIsLoginDisplayed(false));
+      .then((res) => {
+        res && dispatch(setIsLoginDisplayed(false));
       });
   }
 

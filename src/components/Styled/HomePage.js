@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const Container0 = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const Container1 = styled.div`
+const StyledSloganDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@ const Container1 = styled.div`
   }
 `;
 
-const Container2 = styled.div`
+const SloganText = styled.div`
     width: 300px;
     text-align: center;
     margin-left: 100px;
@@ -32,7 +32,7 @@ const Container2 = styled.div`
     }
 `;
 
-const Container3 = styled.div`
+const StyledInfoDiv = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   @media screen and (max-width: 768px) {
@@ -40,7 +40,7 @@ const Container3 = styled.div`
   }
 `;
 
-const Container4 = styled.div`
+const InfoText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,18 +53,18 @@ const Container4 = styled.div`
   }
 `;
 
-const Container5 = styled.div`
+const InfoContent = styled.div`
   @media screen and (max-width: 768px) {
     margin-top: 20px;
   }
 `;
 
-const Container6 = styled.div`
+const InfoSubContent = styled.div`
     margin: 30px auto 0 auto;
     width: 80%;
 `;
 
-const Container7 = styled.div`
+const StyledHotMemesDiv = styled.div`
   background-color: ${props => props.color.color2.colorCode};
   padding-top: 30px;
   max-width: 1440px;
@@ -74,7 +74,7 @@ const Container7 = styled.div`
   }
 `;
 
-const Container8 = styled.div`
+const AllHotMemesImg = styled.div`
   display: flex;
   overflow-x: auto;
   margin-right: 50px;
@@ -83,26 +83,21 @@ const Container8 = styled.div`
   align-items: center;
 `;
 
-const Container9 = styled.div`
+const EachMemeDiv = styled.div`
  cursor: pointer;
  margin-top: 20px;
  margin-bottom: 10px;
  margin-right: 30px;
 `;
 
-const Container10 = styled.div`
-  color: white;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  font-size: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 50px;
-`;
-
-const Container11 = styled.span`
+const LinkToMoreMemes = styled.div`
+  width: fit-content;
+  margin-top: 30px;
+  margin-bottom: 20px;
   border-bottom: 2px solid white;
   color: white;
+  position: relative;
+  left: 50%;
   :hover {
       background-color: white;
       color: #056;
@@ -110,7 +105,7 @@ const Container11 = styled.span`
   }
 `;
 
-const Image1 = styled.img`
+const SloganImg = styled.img`
   height: 30rem;
   border-radius: 50px;
   animation: fadein 6s ease;
@@ -126,7 +121,7 @@ const Image1 = styled.img`
   }
 `;
 
-const Image2 = styled.img`
+const InfoImg = styled.img`
   width: 20rem;
   @media screen and (max-width: 1024px) {
     width: 15rem;
@@ -136,7 +131,7 @@ const Image2 = styled.img`
   }
 `;
 
-const Image3 = styled.img`
+const EachMemeImg = styled.img`
   height: 250px;
   object-fit: fill;
   :hover {
@@ -144,7 +139,7 @@ const Image3 = styled.img`
  }
 `;
 
-const Title1 = styled.h1`
+const SloganTitle = styled.h1`
   width: 9em;
   border-right: 2px solid;
   overflow: hidden;
@@ -162,7 +157,7 @@ const Title1 = styled.h1`
   }
 `;
 
-const Title2 = styled.h1`
+const InfoTitle = styled.h1`
   margin-left: 50px;
   margin-top: 50px;
   @media screen and (max-width: 768px) {
@@ -170,7 +165,7 @@ const Title2 = styled.h1`
   }
 `;
 
-const Title3 = styled.h1`
+const HotMemesTitle = styled.h1`
   color: white;
   margin-left: 50px;
   @media screen and (max-width: 768px) {
@@ -178,7 +173,7 @@ const Title3 = styled.h1`
   }
 `;
 
-const Button1 = styled.button`
+const SloganButton = styled.button`
  border: none;
  border-radius: 5px;
  background-color: ${props => props.color.color2.colorCode};
@@ -193,7 +188,7 @@ const Button1 = styled.button`
   }
 `;
 
-const Text1 = styled.div`
+const SloganContent = styled.div`
     margin-top: 10px;
     font-size: 1rem;
 `;
@@ -205,25 +200,24 @@ const Strong = styled.strong`
 `;
 
 export {
-  Container0,
-  Container1,
-  Container2,
-  Container3,
-  Container4,
-  Container5,
-  Container6,
-  Container7,
-  Container8,
-  Container9,
-  Container10,
-  Container11,
-  Image1,
-  Image2,
-  Image3,
-  Title1,
-  Title2,
-  Title3,
-  Button1,
-  Text1,
+  Wrapper,
+  StyledSloganDiv,
+  SloganText,
+  StyledInfoDiv,
+  InfoText,
+  InfoContent,
+  InfoSubContent,
+  StyledHotMemesDiv,
+  AllHotMemesImg,
+  EachMemeDiv,
+  LinkToMoreMemes,
+  SloganImg,
+  InfoImg,
+  EachMemeImg,
+  SloganTitle,
+  InfoTitle,
+  HotMemesTitle,
+  SloganButton,
+  SloganContent,
   Strong
 }

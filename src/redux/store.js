@@ -3,14 +3,20 @@ import {
     userData, 
     isLoginDisplayed, 
     isSignupDisplayed,
-    canvas
+    canvas,
+    textStyleInCanvas,
+    shapeStyleInCanvas,
+    drawingStyleInCanvas
  } from "./reducers";
 
  const reducers = combineReducers({ 
      userData,
      isLoginDisplayed,
      isSignupDisplayed,
-     canvas
+     canvas,
+     textStyleInCanvas,
+     shapeStyleInCanvas,
+     drawingStyleInCanvas
  })
 
 const store = createStore(

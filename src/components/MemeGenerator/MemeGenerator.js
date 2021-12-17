@@ -20,6 +20,16 @@ import {
   DrawEditorBtn
 } from '../Styled/MemeGenerator/MemeGenerator';
 import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
+import {
+  setTextFillColor,
+  setTextStrokeColor,
+  setTextStrokeWidth,
+  setShapeFillColor,
+  setShapeStrokeColor,
+  setShapeStrokeWidth,
+  setDrawingColor,
+  setDrawingWidth
+} from '../../redux/actions';
 import TextEditor from './TextEditor';
 import ShapeEditor from './ShapeEditor';
 import DrawEditor from './DrawEditor';
@@ -101,6 +111,19 @@ function MemeGenerator() {
       }
     }
   }, [userData])
+
+  useEffect(() => {
+    return () => {
+      dispatch(setTextFillColor('#ffffff'));
+      dispatch(setTextStrokeColor('#000000'));
+      dispatch(setTextStrokeWidth('2'));
+      dispatch(setShapeFillColor('#000000'));
+      dispatch(setShapeStrokeColor('#ffffff'));
+      dispatch(setShapeStrokeWidth('2'));
+      dispatch(setDrawingColor('#000000'));
+      dispatch(setDrawingWidth('2'));
+    }
+  }, [])
 
   const getEditingMeme = () => {
     getTheEditingMeme(userData.user_id, id)

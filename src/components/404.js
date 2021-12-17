@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import 'animate.css';
 import { setCanvas } from '../redux/actions';
 
-const Container0 = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-const Container1 = styled.div`
+const StyledText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@ const Container1 = styled.div`
   height: 100vh;
 `;
 
-const Container2 = styled.div`
+const WarningMessage = styled.div`
   font-size: 40px;
   font-family: 'Comic Sans MS';
   background-color: #056;
@@ -29,7 +29,7 @@ const Container2 = styled.div`
   padding: 10px;
 `;
 
-const Container3 = styled.div`
+const GobackToHomepageText = styled.div`
   margin-top: 30px;
   font-size: 60px;
   @media screen and (max-width: 375px) {
@@ -37,7 +37,7 @@ const Container3 = styled.div`
   }
 `;
 
-const Link0 = styled(Link)`
+const LinkToHomepage = styled(Link)`
   margin-top: 30px;
   background-color: #ffc349;
   padding: 10px 15px;
@@ -48,7 +48,7 @@ const Link0 = styled(Link)`
   }
 `;
 
-const Img0 = styled.img`
+const Img404 = styled.img`
   width: 100%;
 `;
 
@@ -65,20 +65,20 @@ function PageNotFound() {
   }, [])
 
   return (
-    <Container0>
-      <Container1>
-        <Container2 className="animate__hinge">
+    <Wrapper>
+      <StyledText>
+        <WarningMessage className="animate__hinge">
           Oops...
-        </Container2>
-        <Container3>
+        </WarningMessage>
+        <GobackToHomepageText>
           此頁不存在！
-        </Container3>
-        <Link0 to='/'>點我回首頁</Link0>
-      </Container1>
+        </GobackToHomepageText>
+        <LinkToHomepage to='/'>點我回首頁</LinkToHomepage>
+      </StyledText>
       <div>
-        <Img0 alt='404' src={imgSrc} />
+        <Img404 alt='404' src={imgSrc} />
       </div>
-    </Container0>
+    </Wrapper>
   );
 
 }

@@ -54,9 +54,11 @@ function nativeLogin(email, password) {
     .signInWithEmailAndPassword(email, password)
     .then(() => {
       alertSuccess('登入成功');
+      return true;
     })
     .catch(error => {
       alertError('登入失敗！', error.message);
+      return false;
     });
 }
 

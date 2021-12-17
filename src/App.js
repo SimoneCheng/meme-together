@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import Index from './components/Index';
+import HomePage from './components/HomePage';
 import Templates from './components/Templates/Templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
@@ -19,7 +19,7 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={HomePage} />
         <Route path="/templates" exact component={Templates} />
         <Route path="/templates/:id" component={MemeGenerator} />
         <Route path="/personal" exact component={Personal} />

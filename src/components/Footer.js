@@ -4,7 +4,7 @@ import { GoLinkExternal } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container0 = styled.div`
+const Wrapper = styled.div`
   background-color: #888;
   color: white;
   font-size: 0.8rem;
@@ -15,10 +15,12 @@ const Container0 = styled.div`
   height: 50px;
   @media screen and (max-width: 500px) {
       flex-direction: column;
+      padding-top: 5px;
+      padding-bottom: 5px;
   }
 `;
 
-const Container1 = styled.div`
+const StyledFooterInfo = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -45,14 +47,14 @@ const LinkExternal = styled(GoLinkExternal)`
 
 function Footer() {
     return (
-        <Container0>
-            <Container1>
+        <Wrapper>
+            <StyledFooterInfo>
                 Open source illustrations kit<Link to={{ pathname: "https://illlustrations.co/" }} target="_blank"><LinkExternal /></Link>，
-            </Container1>
-            <Container1>
+            </StyledFooterInfo>
+            <StyledFooterInfo>
                 Copyright © Simone Cheng, 2021<Link to={{ pathname: "https://github.com/SimoneCheng/meme-together" }} target="_blank"><GithubLink /></Link>
-            </Container1>
-        </Container0>
+            </StyledFooterInfo>
+        </Wrapper>
     )
 }
 
