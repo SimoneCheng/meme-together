@@ -133,8 +133,8 @@ function MemeGenerator() {
           const canvasWidth = res.canvas_width;
           const canvasHeight = res.canvas_height;
           const canvas = new fabric.Canvas('c', {
-            width: canvasWidth,
-            height: canvasHeight,
+            width: canvasWidth > 600 ? 600 : canvasWidth,
+            height: canvasWidth > 600 ? canvasHeight * (600 / canvasWidth) : canvasHeight,
             hoverCursor: 'grab',
             freeDrawingCursor: 'crosshair',
             isDrawingMode: false,
@@ -171,12 +171,15 @@ function MemeGenerator() {
 
   const initCanvas = (imgSrc, width, height) => {
     return new fabric.Canvas('c', {
-      width: width,
-      height: height,
+      width: 600,
+      height: height * (600 / width),
       hoverCursor: 'grab',
       freeDrawingCursor: 'crosshair',
       isDrawingMode: false,
-      backgroundImage: new fabric.Image(imgSrc)
+      backgroundImage: new fabric.Image(imgSrc, {
+        scaleX: 600 / width,
+        scaleY: 600 / width
+      }),
     })
   }
 

@@ -51,7 +51,7 @@ function DrawEditor() {
             <Container0>
                 <label><RiAlignCenter /> 粗細　</label>
                 <Container1>
-                    <Input0 type="range" min="0" max="50" value={drawingStyle.width} onChange={(e) => changeDrawingBrushWidth(e, canvas)} />
+                    <Input0 type="range" min="1" max="50" value={drawingStyle.width} onChange={(e) => changeDrawingBrushWidth(e, canvas)} />
                     <span id="pencil-stroke-weight-count">{drawingStyle.width}</span>
                 </Container1>
             </Container0>
