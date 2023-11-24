@@ -59,7 +59,7 @@ function PrimarySection() {
 
 function SecondarySection() {
   return (
-    <div style={{ 'width': '100%', 'backgroundColor': '#fff' }}>
+    <section style={{ 'width': '100%', 'backgroundColor': '#fff' }}>
       <StyledInfoDiv>
         <InfoTitle>
           玩轉迷因
@@ -97,7 +97,7 @@ function SecondarySection() {
           </InfoContent>
         </InfoText>
       </StyledInfoDiv>
-    </div>
+    </section>
   );
 }
 
