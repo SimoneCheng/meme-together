@@ -20,7 +20,7 @@ import {
 import { wholePageLoading } from '../../utlis/loading';
 import AddToFavorite from './AddToFavorite';
 import Comments from './Comments';
-import PageNotFound from '../404';
+import { PageNotFound } from '@/pages/page-not-found';
 
 function Meme() {
   const { id } = useParams();
