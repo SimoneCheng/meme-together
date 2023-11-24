@@ -36,7 +36,7 @@ const StyledInfoDiv = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   @media screen and (max-width: 768px) {
-   text-align: center;
+    text-align: center;
   }
 `;
 
@@ -64,47 +64,6 @@ const InfoSubContent = styled.div`
     width: 80%;
 `;
 
-const StyledHotMemesDiv = styled.div`
-  background-color: ${props => props.color.color2.colorCode};
-  padding-top: 30px;
-  max-width: 1440px;
-  margin: 0 auto;
-  @media screen and (max-width: 768px) {
-   text-align: center;
-  }
-`;
-
-const AllHotMemesImg = styled.div`
-  display: flex;
-  overflow-x: auto;
-  margin-right: 50px;
-  margin-left: 50px;
-  min-height: 250px;
-  align-items: center;
-`;
-
-const EachMemeDiv = styled.div`
- cursor: pointer;
- margin-top: 20px;
- margin-bottom: 10px;
- margin-right: 30px;
-`;
-
-const LinkToMoreMemes = styled.div`
-  width: fit-content;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid white;
-  color: white;
-  position: relative;
-  left: 50%;
-  :hover {
-      background-color: white;
-      color: #056;
-      cursor: pointer;
-  }
-`;
-
 const SloganImg = styled.img`
   height: 30rem;
   border-radius: 50px;
@@ -129,14 +88,6 @@ const InfoImg = styled.img`
   @media screen and (max-width: 425px) {
     width: 10rem;
   }
-`;
-
-const EachMemeImg = styled.img`
-  height: 250px;
-  object-fit: fill;
-  :hover {
-   box-shadow: 0 0 10px 3px white;
- }
 `;
 
 const SloganTitle = styled.h1`
@@ -174,16 +125,16 @@ const HotMemesTitle = styled.h1`
 `;
 
 const SloganButton = styled.button`
- border: none;
- border-radius: 5px;
- background-color: ${props => props.color.color2.colorCode};
- color: ${props => props.color.color3.colorCode};
- font-size: 1rem;
- padding: 10px 30px;
- cursor: pointer;
- margin-top: 50px;
- margin-bottom: 10px;
- @media screen and (max-width: 768px) {
+  border: none;
+  border-radius: 5px;
+  background-color: ${props => props.color.color2.colorCode};
+  color: ${props => props.color.color3.colorCode};
+  font-size: 1rem;
+  padding: 10px 30px;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  @media screen and (max-width: 768px) {
     margin-top: 20px;
   }
 `;
@@ -207,13 +158,8 @@ export {
   InfoText,
   InfoContent,
   InfoSubContent,
-  StyledHotMemesDiv,
-  AllHotMemesImg,
-  EachMemeDiv,
-  LinkToMoreMemes,
   SloganImg,
   InfoImg,
-  EachMemeImg,
   SloganTitle,
   InfoTitle,
   HotMemesTitle,
