@@ -1,24 +1,6 @@
 import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
-import { alertSuccess, alertError } from './alert';
-
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
-  measurementId: process.env.REACT_APP_measurementId
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storageRef = firebase.storage().ref();
+import { db, auth, storageRef } from "@/libs/firebase";
+import { alertSuccess, alertError } from "./alert";
 
 // Header: Login & Signup & Signout & CheckLoginStatus
 function nativeSignup(email, password, name) {
@@ -467,22 +449,6 @@ function updateClickTime(docId, data) {
     .update(data);
 }
 
-function getCampaignMeme() {
-  return db
-    .collection('completed_meme')
-    .where('isPublic', '==', true)
-    .orderBy('click_time', 'desc')
-    .limit(6)
-    .get()
-    .then((querySnapshot) => {
-      const campaignMeme = [];
-      querySnapshot.forEach(doc => {
-        campaignMeme.push(doc.data());
-      })
-      return campaignMeme;
-    });
-}
-
 function addFollowing(id, id2, data) {
   return db
     .collection('users')
@@ -797,7 +763,6 @@ export {
   checkFavoriteList,
   getClickTime,
   updateClickTime,
-  getCampaignMeme,
   addFollowing,
   addFollower,
   unfollowing,

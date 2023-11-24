@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { getCampaignMeme } from '../utlis/firebase';
-import { countClickTime } from '../utlis/countClickTime';
-import { loading } from '../utlis/loading';
 import color from './Styled/colorTheme';
 import {
   Wrapper,
@@ -19,13 +16,7 @@ import {
   InfoContent,
   InfoImg,
   InfoSubContent,
-  StyledHotMemesDiv,
-  HotMemesTitle,
-  AllHotMemesImg,
-  LinkToMoreMemes,
-  EachMemeDiv,
-  EachMemeImg,
-  Strong, 
+  Strong,
 } from './Styled/HomePage';
 
 import robot from '../image/day27-my-robot.png';
@@ -34,28 +25,9 @@ import colorTools from '../image/gummy-color-tools.png';
 import floppy from '../image/day18-floppy.png';
 import Footer from './Footer';
 
+import { HotMemes } from '@/features/hot-memes/components';
+
 function Index() {
-  const [camapignMeme, setCampaignMeme] = useState();
-  const history = useHistory();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    getCampaignMeme().then((res) => setCampaignMeme(res));
-  }, [])
-
-  const renderCampaignMeme = (item) => {
-    const { img_url, img_name } = item;
-    const clickMemeImg = () => {
-      countClickTime(img_name)
-        .then(() => history.push(`/meme/${img_name}`));
-    };
-    return (
-      <EachMemeDiv key={img_name} onClick={() => clickMemeImg()}>
-        <EachMemeImg src={img_url} alt={img_name} />
-      </EachMemeDiv>
-    );
-  }
-
   return (
     <Wrapper>
       <div style={{ 'width': '100%', 'backgroundColor': '#ffc349' }}>
@@ -91,15 +63,7 @@ function Index() {
           </InfoText>
         </StyledInfoDiv>
       </div>
-      <div style={{ 'width': '100%', 'backgroundColor': '#056' }}>
-        <StyledHotMemesDiv color={color}>
-          <HotMemesTitle>熱門創作</HotMemesTitle>
-          <AllHotMemesImg>
-            {camapignMeme ? camapignMeme.map((item) => renderCampaignMeme(item)) : loading('spinningBubbles', '#fff', 50, 50)}
-          </AllHotMemesImg>
-          <Link to="/explorememes"><LinkToMoreMemes>查看更多</LinkToMoreMemes></Link>
-        </StyledHotMemesDiv>
-      </div>
+      <HotMemes />
       <Footer />
     </Wrapper>
   );
