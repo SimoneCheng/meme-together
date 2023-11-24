@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import { LandingPage } from '@/pages/landing';
+import { PageNotFound } from '@/pages/page-not-found';
 import Templates from './components/Templates/Templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
@@ -12,7 +13,6 @@ import Setting from './components/SettingPage/Setting';
 import AllMemes from './components/ExplorePage/AllMemes';
 import Meme from './components/MemePage/Meme';
 import UploadTemplate from './components/Templates/UploadTemplate';
-import PageNotFound from './components/404';
 
 function App() {
   return (

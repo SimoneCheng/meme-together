@@ -27,7 +27,7 @@ import {
 import AllFollowing from './AllFollowing';
 import AllPublicMemeImg from './AllPublicMemeImg';
 import AllFollowers from './AllFollowers';
-import PageNotFound from '../404';
+import { PageNotFound } from '@/pages/page-not-found';
 
 function Public() {
   const { id } = useParams();
