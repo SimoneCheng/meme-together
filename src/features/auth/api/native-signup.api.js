@@ -19,6 +19,6 @@ export const nativeSignup = ({ email, password, name }) => {
       });
     })
     .catch((error) => {
-      throw Error(error.message);
+      throw new Error(error.message);
     });
 };
