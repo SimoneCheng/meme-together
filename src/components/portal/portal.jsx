@@ -1,10 +1,10 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 
-function Portal({
+const Portal = ({
   children,
   containerRef: containerRefProp
-}) {
+}) => {
   const containerRef = containerRefProp ?? document.body;
 
   if (containerRef) {
