@@ -12,7 +12,6 @@ export const StyledDialogOverlay = styled.div`
 `;
 
 export const StyledDialogContent = styled.section`
-  width: 100%;
   max-width: 500px;
   margin: auto;
   border-radius: 4px;
@@ -32,12 +31,16 @@ export const StyledDialogBody = styled.div`
 
 export const StyledDialogFooter = styled.footer`
   padding: 1rem 1.5rem;
+  display: flex;
 `;
 
-export const StyledDialogCloseButton = styled.button`
+export const StyledDialogFooterCloseButton = styled.button`
   border: none;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
   padding: 8px 16px;
+  &:first-child {
+    margin-left: auto;
+  }
 `;
