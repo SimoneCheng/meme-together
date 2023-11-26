@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { useDialogContext } from './dialog';
-import { StyledDialogCloseButton } from './dialog.style';
+import { StyledDialogFooterCloseButton } from './dialog.style';
 
 const DialogFooterCloseButton = forwardRef((props, ref) => {
   const {
@@ -16,7 +16,7 @@ const DialogFooterCloseButton = forwardRef((props, ref) => {
   }
 
   return (
-    <StyledDialogCloseButton
+    <StyledDialogFooterCloseButton
       ref={ref}
       type="button"
       onClick={handleClick}
@@ -24,7 +24,7 @@ const DialogFooterCloseButton = forwardRef((props, ref) => {
       {...rest}
     >
       {children}
-    </StyledDialogCloseButton>
+    </StyledDialogFooterCloseButton>
   )
 });
 
