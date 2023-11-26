@@ -5,13 +5,6 @@ const setUserData = (userData) => {
     }
 }
 
-const setIsLoginDisplayed = (isLoginDisplayed) => {
-    return {
-        type: "setIsLoginDisplayed",
-        payload: isLoginDisplayed
-    }
-}
-
 const setIsSignupDisplayed = (isSignupDisplayed) => {
     return {
         type: "setIsSignupDisplayed",
@@ -86,7 +79,6 @@ const setDrawingWidth = (width) => {
 
 export { 
     setUserData,
-    setIsLoginDisplayed,
     setIsSignupDisplayed,
     setCanvas,
     setTextFillColor,

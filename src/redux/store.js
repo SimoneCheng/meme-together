@@ -1,7 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import { 
     userData, 
-    isLoginDisplayed, 
     isSignupDisplayed,
     canvas,
     textStyleInCanvas,
@@ -11,7 +10,6 @@ import {
 
  const reducers = combineReducers({ 
      userData,
-     isLoginDisplayed,
      isSignupDisplayed,
      canvas,
      textStyleInCanvas,

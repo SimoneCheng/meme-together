@@ -7,15 +7,6 @@ const userData = (state = {}, action) => {
     }
 }
 
-const isLoginDisplayed = (state = false, action) => {
-    switch (action.type) {
-        case "setIsLoginDisplayed":
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
 const isSignupDisplayed = (state = false, action) => {
     switch (action.type) {
         case "setIsSignupDisplayed":
@@ -73,7 +64,6 @@ const drawingStyleInCanvas = (state = { color: '#000000', width: '2' }, action) 
 
 export {
     userData,
-    isLoginDisplayed,
     isSignupDisplayed,
     canvas,
     textStyleInCanvas,

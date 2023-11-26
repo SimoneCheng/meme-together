@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import Login from './Login';
 import Signup from './Signup';
 import {
   setUserData,
-  setIsLoginDisplayed,
   setIsSignupDisplayed,
 } from '../../redux/actions';
 import {
@@ -36,21 +34,21 @@ import logo from '../../image/outline_bug_report_black_36dp.png';
 import account from '../../image/outline_account_circle_black_36dp.png';
 import setting from '../../image/outline_settings_black_36dp.png';
 
+import { useDisclosure } from '@/hooks';
+import { LoginDialog } from '@/features/auth/components';
+
 function Header() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
-  const isLoginDisplayed = useSelector((state) => state.isLoginDisplayed);
   const isSignupDisplayed = useSelector((state) => state.isSignupDisplayed);
   const [isMobileNavBarDisplayed, setIsMobileNavBarDisplayed] = useState(false);
   const history = useHistory();
 
+  const loginDialog = useDisclosure();
+
   useEffect(() => {
     checkLoginStatus(dispatch, setUserData);
   }, []);
-
-  const clickLoginButton = () => {
-    dispatch(setIsLoginDisplayed(true));
-  }
 
   const clickSignupButton = () => {
     dispatch(setIsSignupDisplayed(true));
@@ -83,7 +81,7 @@ function Header() {
   const renderDesktopLoginAndSignupButton = () => {
     return (
       <Ul2>
-        <LiDesktop><Button onClick={() => clickLoginButton()} color={color}>登入</Button></LiDesktop>
+        <LiDesktop><Button onClick={loginDialog.onOpen} color={color}>登入</Button></LiDesktop>
         <LiDesktop><Button onClick={() => clickSignupButton()} color={color}>註冊</Button></LiDesktop>
       </Ul2>
     )
@@ -92,7 +90,7 @@ function Header() {
   const renderMobileLoginAndSignupButton = () => {
     return (
       <ul>
-        <LiMobile onClick={() => { clickLoginButton(); setIsMobileNavBarDisplayed(false); }} color={color}>登入</LiMobile>
+        <LiMobile onClick={() => { loginDialog.onOpen(); setIsMobileNavBarDisplayed(false); }} color={color}>登入</LiMobile>
         <LiMobile onClick={() => { clickSignupButton(); setIsMobileNavBarDisplayed(false); }} color={color}>註冊</LiMobile>
       </ul>
     )
@@ -160,7 +158,12 @@ function Header() {
           </MenuMobile>
         </NavMobile>
       </Menu>
-      {isLoginDisplayed ? <Login /> : ""}
+      {loginDialog.isOpen && (
+        <LoginDialog
+          isOpen={loginDialog.isOpen}
+          onClose={loginDialog.onClose}
+        />
+      )}
       {isSignupDisplayed ? <Signup /> : ""}
     </>
   );
