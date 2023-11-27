@@ -5,13 +5,6 @@ const setUserData = (userData) => {
     }
 }
 
-const setIsSignupDisplayed = (isSignupDisplayed) => {
-    return {
-        type: "setIsSignupDisplayed",
-        payload: isSignupDisplayed
-    }
-}
-
 const setCanvas = (canvas) => {
     return {
         type: "setCanvas",
@@ -79,7 +72,6 @@ const setDrawingWidth = (width) => {
 
 export { 
     setUserData,
-    setIsSignupDisplayed,
     setCanvas,
     setTextFillColor,
     setTextStrokeColor,
