@@ -11,9 +11,14 @@ import {
   DialogFooter,
   DialogFooterCloseButton
 } from '@/components/dialog';
+import { Input } from '@/components/input';
 import color from '@/components/Styled/colorTheme';
 // styles
-import { StyledInput, StyledButton } from './login-dialog.style';
+import {
+  StyledButton,
+  StyledFormControl,
+  StyledFormLabel
+} from './login-dialog.style';
 // utils
 import { alertSuccess, alertError } from '@/utlis/alert';
 
@@ -47,29 +52,37 @@ const LoginDialog = ({ isOpen, onClose }) => {
     <Dialog isOpen={isOpen} onClose={onClose}>
       <DialogOverlay>
         <DialogContent>
-          <DialogHeader>登入</DialogHeader>
+          <DialogHeader>
+            登入
+          </DialogHeader>
           <DialogBody>
             <form>
-              <div>
-                <div>電子信箱</div>
-                <StyledInput
+              <StyledFormControl>
+                <StyledFormLabel>
+                  電子信箱
+                </StyledFormLabel>
+                <Input
+                  variant="outline"
                   type="email"
                   placeholder="email"
                   value={email}
                   onChange={handleEmailChange}
                   autoComplete="on"
                 />
-              </div>
-              <div>
-                <div>密碼</div>
-                <StyledInput
+              </StyledFormControl>
+              <StyledFormControl>
+                <StyledFormLabel>
+                  密碼
+                </StyledFormLabel>
+                <Input
+                  variant="outline"
                   type="password"
                   placeholder="password"
                   value={password}
                   onChange={handlePasswordChange}
                   autoComplete="on"
                 />
-              </div>
+              </StyledFormControl>
             </form>
           </DialogBody>
           <DialogFooter>
@@ -77,6 +90,7 @@ const LoginDialog = ({ isOpen, onClose }) => {
               取消
             </DialogFooterCloseButton>
             <StyledButton
+              type="button"
               color={color}
               onClick={handleLoginClick}
             >
