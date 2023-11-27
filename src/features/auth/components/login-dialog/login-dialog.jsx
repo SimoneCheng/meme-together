@@ -90,6 +90,7 @@ const LoginDialog = ({ isOpen, onClose }) => {
               取消
             </DialogFooterCloseButton>
             <StyledButton
+              type="button"
               color={color}
               onClick={handleLoginClick}
             >
