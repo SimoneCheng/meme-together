@@ -23,27 +23,28 @@ import {
 import { alertSuccess, alertError } from '@/utlis/alert';
 
 const LoginDialog = ({ isOpen, onClose }) => {
-  const [email, setEmail] = useState('456@456.com');
-  const [password, setPassword] = useState('123456');
+  const [userData, setUserData] = useState({
+    email: '456@456.com',
+    password: '123456'
+  });
 
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.targe.value;
-    setPassword(value);
+  const handleChange = (e) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+    setUserData({
+      ...userData,
+      [inputName]: inputValue
+    });
   };
 
   const handleLoginClick = () => {
+    const { email, password } = userData
     nativeLogin({ email, password })
       .then(() => {
         onClose();
         return alertSuccess('登入成功');
       })
       .catch((error) => {
-        onClose();
         return alertError('登入失敗', error.message);
       });
   };
@@ -65,8 +66,9 @@ const LoginDialog = ({ isOpen, onClose }) => {
                   variant="outline"
                   type="email"
                   placeholder="email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  name="email"
+                  value={userData.email}
+                  onChange={handleChange}
                   autoComplete="on"
                 />
               </StyledFormControl>
@@ -78,8 +80,9 @@ const LoginDialog = ({ isOpen, onClose }) => {
                   variant="outline"
                   type="password"
                   placeholder="password"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
                   autoComplete="on"
                 />
               </StyledFormControl>
