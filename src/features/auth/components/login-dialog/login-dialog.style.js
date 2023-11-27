@@ -1,17 +1,13 @@
 import styled from "styled-components";
 
-export const StyledInput = styled.input`
+export const StyledFormControl = styled.div`
   width: 300px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  font-size: 1rem;
-  :focus{
-    background-color: rgba(0, 0, 0, 0.05);
-    outline: none;
-  }
+`;
+
+export const StyledFormLabel = styled.label`
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
 `;
 
 export const StyledButton = styled.button`
