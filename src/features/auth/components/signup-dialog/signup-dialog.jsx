@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// api
-import { nativeLogin } from '../../api';
+// apis
+import { nativeSignup } from '../../api';
 // components
 import {
   Dialog,
@@ -12,20 +12,21 @@ import {
   DialogFooterCloseButton
 } from '@/components/dialog';
 import { Input } from '@/components/input';
-import color from '@/components/Styled/colorTheme';
 // styles
+import color from '@/components/Styled/colorTheme';
 import {
-  StyledButton,
   StyledFormControl,
-  StyledFormLabel
-} from './login-dialog.style';
+  StyledFormLabel,
+  StyledButton
+} from './signup-dialog.style';
 // utils
-import { alertSuccess, alertError } from '@/utlis/alert';
+import { alertError, alertSuccess } from '@/utlis/alert';
 
-const LoginDialog = ({ isOpen, onClose }) => {
+const SignupDialog = ({ isOpen, onClose }) => {
   const [userData, setUserData] = useState({
-    email: '456@456.com',
-    password: '123456'
+    name: '',
+    email: '',
+    password: ''
   });
 
   const handleChange = (e) => {
@@ -37,15 +38,16 @@ const LoginDialog = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleLoginClick = () => {
-    const { email, password } = userData
-    nativeLogin({ email, password })
+  const handleSignupClick = () => {
+    if (!userData.name) return alertError(undefined, '請輸入暱稱！');
+    const { email, password, name } = userData;
+    nativeSignup({ email, password, name })
       .then(() => {
         onClose();
-        return alertSuccess('登入成功');
+        return alertSuccess('註冊成功');
       })
       .catch((error) => {
-        return alertError('登入失敗', error.message);
+        return alertError('註冊失敗', error.message);
       });
   };
 
@@ -54,10 +56,24 @@ const LoginDialog = ({ isOpen, onClose }) => {
       <DialogOverlay>
         <DialogContent>
           <DialogHeader>
-            登入
+            註冊
           </DialogHeader>
           <DialogBody>
             <form>
+              <StyledFormControl>
+                <StyledFormLabel>
+                  暱稱
+                </StyledFormLabel>
+                <Input
+                  variant="outline"
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  autoComplete="on"
+                  value={userData.name}
+                  onChange={handleChange}
+                />
+              </StyledFormControl>
               <StyledFormControl>
                 <StyledFormLabel>
                   電子信箱
@@ -67,9 +83,9 @@ const LoginDialog = ({ isOpen, onClose }) => {
                   type="email"
                   placeholder="email"
                   name="email"
+                  autoComplete="on"
                   value={userData.email}
                   onChange={handleChange}
-                  autoComplete="on"
                 />
               </StyledFormControl>
               <StyledFormControl>
@@ -81,9 +97,9 @@ const LoginDialog = ({ isOpen, onClose }) => {
                   type="password"
                   placeholder="password"
                   name="password"
+                  autoComplete="on"
                   value={userData.password}
                   onChange={handleChange}
-                  autoComplete="on"
                 />
               </StyledFormControl>
             </form>
@@ -95,15 +111,15 @@ const LoginDialog = ({ isOpen, onClose }) => {
             <StyledButton
               type="button"
               color={color}
-              onClick={handleLoginClick}
+              onClick={handleSignupClick}
             >
-              登入
+              註冊
             </StyledButton>
           </DialogFooter>
         </DialogContent>
       </DialogOverlay>
     </Dialog>
   );
-}
+};
 
-export default LoginDialog;
+export default SignupDialog

@@ -23,8 +23,8 @@ import robot from '@/image/day27-my-robot.png';
 import canvasStand from '@/image/day10-canvas-stand.png';
 import colorTools from '@/image/gummy-color-tools.png';
 import floppy from '@/image/day18-floppy.png';
-import Footer from '@/components/Footer';
 // components
+import { AppFooter } from '@/features/layout/components';
 import { HotMemes } from '@/features/hot-memes/components';
 
 function PrimarySection() {
@@ -107,7 +107,7 @@ function Landing() {
       <PrimarySection />
       <SecondarySection />
       <HotMemes />
-      <Footer />
+      <AppFooter />
     </Wrapper>
   );
 }
