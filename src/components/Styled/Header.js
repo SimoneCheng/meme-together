@@ -6,6 +6,7 @@ const Menu = styled.header`
  left: 0;
  width: 100%;
  height: 65px;
+ z-index: 10;
  background-color: ${props => props.color.color3.colorCode};
  box-shadow: 5px 5px 5px gray;
  @media screen and (max-width: 768px) {
