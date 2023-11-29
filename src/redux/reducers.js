@@ -1,4 +1,4 @@
-const userData = (state = {}, action) => {
+const userData = (state = null, action) => {
     switch (action.type) {
         case "setUserData":
             return action.payload;
