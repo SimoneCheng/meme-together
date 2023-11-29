@@ -23,13 +23,13 @@ const StyledSloganDiv = styled.div`
 `;
 
 const SloganText = styled.div`
-    width: 300px;
-    text-align: center;
-    margin-left: 100px;
-    max-width: 1440px;
-    @media screen and (max-width: 768px) {
-      margin: 20px auto 0 auto;
-    }
+  width: 300px;
+  text-align: center;
+  margin-left: 100px;
+  max-width: 1440px;
+  @media screen and (max-width: 768px) {
+    margin: 20px auto 0 auto;
+  }
 `;
 
 const StyledInfoDiv = styled.div`
@@ -60,8 +60,8 @@ const InfoContent = styled.div`
 `;
 
 const InfoSubContent = styled.div`
-    margin: 30px auto 0 auto;
-    width: 80%;
+  margin: 30px auto 0 auto;
+  width: 80%;
 `;
 
 const SloganImg = styled.img`
@@ -140,8 +140,8 @@ const SloganButton = styled.button`
 `;
 
 const SloganContent = styled.div`
-    margin-top: 10px;
-    font-size: 1rem;
+  margin-top: 10px;
+  font-size: 1rem;
 `;
 
 const Strong = styled.strong`

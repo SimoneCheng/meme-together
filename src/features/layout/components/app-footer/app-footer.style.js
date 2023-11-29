@@ -29,7 +29,7 @@ export const StyledGithubLinkIcon = styled(BsGithub)`
   cursor: pointer;
   margin-left: 5px;
   &:hover {
-      color: #ccc;
+    color: #ccc;
   }
 `;
 
@@ -39,6 +39,6 @@ export const StyledGoLinkExternalIcon = styled(GoLinkExternal)`
   cursor: pointer;
   margin-left: 3px;
   &:hover {
-      color: #ccc;
+    color: #ccc;
   }
 `;
