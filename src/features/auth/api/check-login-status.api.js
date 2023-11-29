@@ -1,12 +1,11 @@
 import { auth } from "@/libs/firebase";
 
-export const checkLoginStatus = () => {
-  return auth
-    .onAuthStateChanged((user) => {
-      if (!user) return null;
-      return {
-        user_id: user.uid,
-        user_name: user.displayName
-      };
-    });
+export const checkLoginStatus = (callback) => {
+  auth.onAuthStateChanged((user) => {
+    const formattedUser = user ? {
+      user_id: user.uid,
+      user_name: user.displayName
+    } : null;
+    callback(formattedUser);
+  });
 };
