@@ -18,7 +18,8 @@ const AppFooter = () => {
         >
           <StyledGoLinkExternalIcon />
         </Link>
-        ，
+      </StyledFooterInfo>
+      <StyledFooterInfo>
         Copyright © Simone Cheng, 2021
         <Link
           to="https://github.com/SimoneCheng/meme-together"

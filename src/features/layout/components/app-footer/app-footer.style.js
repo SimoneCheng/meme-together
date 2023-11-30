@@ -10,11 +10,10 @@ export const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   @media screen and (max-width: 500px) {
     flex-direction: column;
-    padding-top: 5px;
-    padding-bottom: 5px;
   }
 `;
 

@@ -18,4 +18,5 @@ export const StyledButton = styled.button`
   cursor: pointer;
   padding: 8px 16px;
   margin-left: 16px;
+  color: inherit;
 `;

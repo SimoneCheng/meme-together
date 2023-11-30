@@ -41,6 +41,7 @@ export const StyledDialogFooterCloseButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   padding: 8px 16px;
+  color: inherit;
   &:first-child {
     margin-left: auto;
   }
