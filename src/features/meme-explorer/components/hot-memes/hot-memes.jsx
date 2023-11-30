@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // api
-import { getHotMemes, countClickTime } from "../api";
+import { getHotMemes, countClickTime } from "../../api";
 // styles
 import color from "@/components/Styled/colorTheme";
 import {
