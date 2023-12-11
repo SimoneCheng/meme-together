@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const StyledSloganDiv = styled.div`
+export const StyledSloganDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@ const StyledSloganDiv = styled.div`
   }
 `;
 
-const SloganText = styled.div`
+export const SloganText = styled.div`
   width: 300px;
   text-align: center;
   margin-left: 100px;
@@ -32,7 +32,7 @@ const SloganText = styled.div`
   }
 `;
 
-const StyledInfoDiv = styled.div`
+export const StyledInfoDiv = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   @media screen and (max-width: 768px) {
@@ -40,7 +40,7 @@ const StyledInfoDiv = styled.div`
   }
 `;
 
-const InfoText = styled.div`
+export const InfoText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,18 +53,18 @@ const InfoText = styled.div`
   }
 `;
 
-const InfoContent = styled.div`
+export const InfoContent = styled.div`
   @media screen and (max-width: 768px) {
     margin-top: 20px;
   }
 `;
 
-const InfoSubContent = styled.div`
+export const InfoSubContent = styled.div`
   margin: 30px auto 0 auto;
   width: 80%;
 `;
 
-const SloganImg = styled.img`
+export const SloganImg = styled.img`
   height: 30rem;
   border-radius: 50px;
   animation: fadein 6s ease;
@@ -80,7 +80,7 @@ const SloganImg = styled.img`
   }
 `;
 
-const InfoImg = styled.img`
+export const InfoImg = styled.img`
   width: 20rem;
   @media screen and (max-width: 1024px) {
     width: 15rem;
@@ -90,7 +90,7 @@ const InfoImg = styled.img`
   }
 `;
 
-const SloganTitle = styled.h1`
+export const SloganTitle = styled.h1`
   width: 9em;
   border-right: 2px solid;
   overflow: hidden;
@@ -108,7 +108,7 @@ const SloganTitle = styled.h1`
   }
 `;
 
-const InfoTitle = styled.h1`
+export const InfoTitle = styled.h1`
   margin-left: 50px;
   margin-top: 50px;
   @media screen and (max-width: 768px) {
@@ -116,7 +116,7 @@ const InfoTitle = styled.h1`
   }
 `;
 
-const HotMemesTitle = styled.h1`
+export const HotMemesTitle = styled.h1`
   color: white;
   margin-left: 50px;
   @media screen and (max-width: 768px) {
@@ -124,7 +124,7 @@ const HotMemesTitle = styled.h1`
   }
 `;
 
-const SloganButton = styled.button`
+export const SloganButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: ${props => props.color.color2.colorCode};
@@ -139,31 +139,13 @@ const SloganButton = styled.button`
   }
 `;
 
-const SloganContent = styled.div`
+export const SloganContent = styled.div`
   margin-top: 10px;
   font-size: 1rem;
 `;
 
-const Strong = styled.strong`
+export const Strong = styled.strong`
   font-size: 20px;
   border-bottom: 2px ${props => props.color.color2.colorCode} solid;
   margin-left: 5px;
 `;
-
-export {
-  Wrapper,
-  StyledSloganDiv,
-  SloganText,
-  StyledInfoDiv,
-  InfoText,
-  InfoContent,
-  InfoSubContent,
-  SloganImg,
-  InfoImg,
-  SloganTitle,
-  InfoTitle,
-  HotMemesTitle,
-  SloganButton,
-  SloganContent,
-  Strong
-}

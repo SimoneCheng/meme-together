@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // store
 import { setUserData } from "@/redux/actions";
 // api
-import { checkLoginStatus, nativeLogout } from "@/features/auth/api";
+import { checkLoginStatus, nativeLogout } from "@/features/auth";
 // components
-import { LoginDialog, SignupDialog } from "@/features/auth/components";
+import { LoginDialog, SignupDialog } from "@/features/auth";
 // hooks
 import { useDisclosure } from "@/hooks";
 // utils

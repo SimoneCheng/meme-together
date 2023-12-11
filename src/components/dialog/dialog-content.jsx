@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledDialogContent } from './dialog.style';
 
 const DialogContent = ({ children, ...rest }) => {

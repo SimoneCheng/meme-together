@@ -8,10 +8,7 @@ export const getHotMemes = () => {
     .limit(6)
     .get()
     .then((querySnapshot) => {
-      const campaignMeme = [];
-      querySnapshot.forEach(doc => {
-        campaignMeme.push(doc.data());
-      })
+      const campaignMeme = querySnapshot.docs.map((doc) => doc.data());
       return campaignMeme;
     });
 }

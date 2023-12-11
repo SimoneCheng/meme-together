@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 // apis
 import { nativeSignup } from '../../api';
 // components

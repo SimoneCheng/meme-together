@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useInputProps } from './use-input-props';
 import { StyledInput } from './input.style';
 

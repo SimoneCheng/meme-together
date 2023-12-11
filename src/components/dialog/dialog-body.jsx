@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledDialogBody } from './dialog.style';
 
 const DialogBody = ({ children, ...rest }) => {
