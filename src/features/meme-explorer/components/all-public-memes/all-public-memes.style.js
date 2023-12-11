@@ -67,3 +67,10 @@ export const StyledAllPublicMemesWrapper = styled.div`
     grid-template-columns: repeat(1, 250px);
   }
 `;
+
+export const StyledLoadingWrapper = styled.div`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`

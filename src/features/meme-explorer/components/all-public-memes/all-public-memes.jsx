@@ -11,7 +11,8 @@ import {
   StyledPublicMemeWrapper,
   StyledPublicMemeImg,
   StyledButton,
-  StyledAllPublicMemesWrapper
+  StyledAllPublicMemesWrapper,
+  StyledLoadingWrapper
 } from "./all-public-memes.style";
 // utils
 import { loading } from "@/utlis/loading";
@@ -51,9 +52,9 @@ const AllPublicMemes = () => {
 
   if (allPublicMemeImg.length === 0) {
     return (
-      <>
+      <StyledLoadingWrapper>
         {loading('spinningBubbles', '#056', 50, 50)}
-      </>
+      </StyledLoadingWrapper>
     );
   }
 
