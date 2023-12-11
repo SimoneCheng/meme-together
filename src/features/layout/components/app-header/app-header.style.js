@@ -72,6 +72,7 @@ export const StyledIconButton = styled.button`
   align-items: center;
   background: transparent;
   border: none;
+  color: inherit;
 `;
 
 export const StyledMobileNav = styled.nav`
@@ -119,4 +120,5 @@ export const StyledMobileButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  color: inherit;
 `;

@@ -24,7 +24,7 @@ function PageNotFound() {
     if (canvas === null) {
       dispatch(setCanvas(''));
     }
-  }, [])
+  }, [canvas, dispatch])
 
   return (
     <Wrapper>

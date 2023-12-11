@@ -24,8 +24,8 @@ import canvasStand from '@/image/day10-canvas-stand.png';
 import colorTools from '@/image/gummy-color-tools.png';
 import floppy from '@/image/day18-floppy.png';
 // components
-import { AppFooter } from '@/features/layout/components';
-import { HotMemes } from '@/features/hot-memes/components';
+import { AppFooter } from '@/features/layout';
+import { HotMemes } from '@/features/meme-explorer';
 
 function PrimarySection() {
   return (

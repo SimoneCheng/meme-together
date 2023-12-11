@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledDialogFooter } from './dialog.style';
 
 const DialogFooter = ({ children, ...rest }) => {

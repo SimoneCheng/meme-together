@@ -2,9 +2,10 @@ import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { AppHeader } from '@/features/layout/components';
+import { AppHeader } from '@/features/layout';
 import { LandingPage } from '@/pages/landing';
 import { PageNotFound } from '@/pages/page-not-found';
+import { ExploreMemes } from '@/pages/explore-memes';
 import Templates from './components/Templates/Templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
@@ -27,7 +28,7 @@ function App() {
         <Route path="/setting" component={Setting} />
         <Route path="/meme/:id" component={Meme} />
         <Route path="/public/:id" exact component={Public} />
-        <Route path="/explorememes" component={AllMemes} />
+        <Route path="/explorememes" component={ExploreMemes} />
         <Route path="/uploadtemplate" component={UploadTemplate} />
         <Route path="/search" component={AllMemes} />
         <Route path="*" component={PageNotFound} />

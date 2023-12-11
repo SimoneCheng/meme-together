@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useDialogContext } from './dialog';
 import { StyledDialogFooterCloseButton } from './dialog.style';
 
