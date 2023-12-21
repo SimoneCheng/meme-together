@@ -1,5 +1,24 @@
 import styled from "styled-components";
 
+export const StyledSearchAndSortWrapper = styled.div`
+  display: flex;
+  width: 850px;
+  justify-content: space-between;
+  @media screen and (max-width: 1024px) {
+    width: 690px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 545px;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 660px) {
+    width: 445px;
+  }
+  @media screen and (max-width: 524px) {
+    width: 345px;
+  }
+`;
+
 export const StyledPublicMemeWrapper = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
@@ -74,3 +93,13 @@ export const StyledLoadingWrapper = styled.div`
   justify-content: center;
   width: 100%;
 `
+
+export const StyledSelect = styled.select`
+  border: 0;
+  outline: 0;
+  font: inherit;
+  height: 2rem;
+  padding: 0 1rem 0 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+`;

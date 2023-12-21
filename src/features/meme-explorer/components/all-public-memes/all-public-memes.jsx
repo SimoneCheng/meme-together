@@ -1,21 +1,25 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // api
 import {
   getAllPublicMemes,
   getAllPublicMemesNextPage,
   countClickTime
-} from "../../api";
+} from '../../api';
+// components
+import { PublicMemesSearchBar } from '../public-memes-search-bar';
 // styles
 import {
+  StyledSearchAndSortWrapper,
   StyledPublicMemeWrapper,
   StyledPublicMemeImg,
   StyledButton,
   StyledAllPublicMemesWrapper,
-  StyledLoadingWrapper
-} from "./all-public-memes.style";
+  StyledLoadingWrapper,
+  StyledSelect
+} from './all-public-memes.style';
 // utils
-import { loading } from "@/utlis/loading";
+import { loading } from '@/utlis/loading';
 
 const PublicMeme = (props) => {
   const { img_url, img_name } = props;
@@ -37,18 +41,19 @@ const PublicMeme = (props) => {
 const AllPublicMemes = () => {
   const [allPublicMemeImg, setAllPublicMemeImg] = useState([]);
   const [lastKey, setLastKey] = useState();
+  const [sort, setSort] = useState('desc');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
 
   useEffect(() => {
-    getAllPublicMemes('desc').then((res) => {
+    getAllPublicMemes(sort).then((res) => {
       const { allPublicMemeImgData, lastKey } = res;
       setAllPublicMemeImg(allPublicMemeImgData);
       setLastKey(lastKey);
     });
-  }, [])
+  }, [sort])
 
   if (allPublicMemeImg.length === 0) {
     return (
@@ -68,8 +73,26 @@ const AllPublicMemes = () => {
       });
   }
 
+  const handleSortChange = (e) => {
+    setSort(e.target.value);
+  }
+
   return (
     <>
+      <StyledSearchAndSortWrapper>
+        <PublicMemesSearchBar />
+        <div>
+          <span>排序：</span>
+          <StyledSelect onChange={handleSortChange}>
+            <option value='desc'>
+              依發布日期：由新到舊
+            </option>
+            <option value='asc'>
+              依發布日期：由舊到新
+            </option>
+          </StyledSelect>
+        </div>
+      </StyledSearchAndSortWrapper>
       <StyledAllPublicMemesWrapper>
         {allPublicMemeImg.map((item) => (<PublicMeme {...item} />))}
       </StyledAllPublicMemesWrapper>
