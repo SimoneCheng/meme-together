@@ -28,7 +28,7 @@ function App() {
         <Route path="/setting" component={Setting} />
         <Route path="/meme/:id" component={Meme} />
         <Route path="/public/:id" exact component={Public} />
-        <Route path="/explorememes" component={ExploreMemes} />
+        <Route path="/explore-memes" component={ExploreMemes} />
         <Route path="/uploadtemplate" component={UploadTemplate} />
         <Route path="/search" component={AllMemes} />
         <Route path="*" component={PageNotFound} />
