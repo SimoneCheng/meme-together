@@ -81,7 +81,7 @@ const AppHeader = () => {
           </StyledLogoLink>
           <StyledDesktopUl>
             <li>
-              <StyledButtonLink to="/explorememes" color={color}>
+              <StyledButtonLink to="/explore-memes" color={color}>
                 探索
               </StyledButtonLink>
             </li>
@@ -176,7 +176,7 @@ const AppHeader = () => {
           {mobileNav.isOpen && (
             <StyledMobileUl>
               <li>
-                <StyledMobileLink to="/explorememes" onClick={mobileNav.onClose}>
+                <StyledMobileLink to="/explore-memes" onClick={mobileNav.onClose}>
                   探索
                 </StyledMobileLink>
               </li>

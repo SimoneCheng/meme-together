@@ -42,7 +42,7 @@ function HotMemes() {
             })
           )}
         </AllHotMemesImg>
-        <Link to="/explorememes">
+        <Link to="/explore-memes">
           <LinkToMoreMemes>
             查看更多
           </LinkToMoreMemes>
