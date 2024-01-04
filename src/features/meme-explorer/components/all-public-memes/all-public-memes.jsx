@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 // api
 import {
   getAllPublicMemes,
   getAllPublicMemesNextPage,
-  countClickTime
 } from '../../api';
 // components
 import { PublicMemesSearchBar } from '../public-memes-search-bar';
+import PublicMemeItem from './public-meme-item';
 // styles
 import {
   StyledSearchAndSortWrapper,
-  StyledPublicMemeWrapper,
-  StyledPublicMemeImg,
   StyledButton,
   StyledAllPublicMemesWrapper,
   StyledLoadingWrapper,
@@ -20,23 +17,6 @@ import {
 } from './all-public-memes.style';
 // utils
 import { loading } from '@/utlis/loading';
-
-const PublicMeme = (props) => {
-  const { img_url, img_name } = props;
-  const history = useHistory();
-
-  const handleClick = () => {
-    countClickTime(img_name);
-    history.push(`/meme/${img_name}`);
-  };
-
-  return (
-    <StyledPublicMemeWrapper key={img_name} onClick={handleClick}>
-      <StyledPublicMemeImg src={img_url} alt={img_name} />
-    </StyledPublicMemeWrapper>
-  );
-
-};
 
 const AllPublicMemes = () => {
   const [allPublicMemeImg, setAllPublicMemeImg] = useState([]);
@@ -94,7 +74,7 @@ const AllPublicMemes = () => {
         </div>
       </StyledSearchAndSortWrapper>
       <StyledAllPublicMemesWrapper>
-        {allPublicMemeImg.map((item) => (<PublicMeme {...item} />))}
+        {allPublicMemeImg.map((item, index) => (<PublicMemeItem key={index} {...item} />))}
       </StyledAllPublicMemesWrapper>
       {lastKey ? (
         <StyledButton type="button" onClick={getMoreMeme}>
