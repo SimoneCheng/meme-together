@@ -1,1 +1,1 @@
-export * from './use-disclosure';
+export { default as useDisclosure } from './use-disclosure';
