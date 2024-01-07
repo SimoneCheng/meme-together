@@ -5,7 +5,7 @@ import { LandingPage } from '@/pages/landing';
 import { PageNotFound } from '@/pages/page-not-found';
 import { ExploreMemes } from '@/pages/explore-memes';
 import { Search } from '@/pages/search';
-import Templates from './components/Templates/Templates';
+import { Templates } from '@/pages/templates';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
