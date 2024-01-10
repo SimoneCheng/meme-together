@@ -92,7 +92,7 @@ const AppHeader = () => {
             </li>
             {userData && (
               <li>
-                <StyledButtonLink to="/uploadtemplate" color={color}>
+                <StyledButtonLink to="/template-uploading" color={color}>
                   貢獻模板
                 </StyledButtonLink>
               </li>
@@ -187,7 +187,7 @@ const AppHeader = () => {
               </li>
               {userData && (
                 <li>
-                  <StyledMobileLink to="/uploadtemplate" onClick={mobileNav.onClose}>
+                  <StyledMobileLink to="/template-uploading" onClick={mobileNav.onClose}>
                     貢獻模板
                   </StyledMobileLink>
                 </li>

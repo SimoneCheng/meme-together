@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { PrivateRoute } from './features/auth';
 
 import { AppHeader } from '@/features/layout';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
@@ -7,13 +8,13 @@ import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
 import Setting from './components/SettingPage/Setting';
 import Meme from './components/MemePage/Meme';
-import UploadTemplate from './components/Templates/UploadTemplate';
 
 const LandingPage = lazy(() => import('./pages/landing/landing.page'));
 const PageNotFound = lazy(() => import('./pages/page-not-found/page-not-found.page'));
 const ExploreMemes = lazy(() => import('./pages/explore-memes/explore-memes.page'));
 const Search = lazy(() => import('./pages/search/search.page'));
 const Templates = lazy(() => import('./pages/templates/templates.page'));
+const TemplateUploading = lazy(() => import('./pages/template-uploading/template-uploading.page'));
 
 function App() {
   return (
@@ -48,9 +49,9 @@ function App() {
           <Route path="/explore-memes">
             <ExploreMemes />
           </Route>
-          <Route path="/uploadtemplate">
-            <UploadTemplate />
-          </Route>
+          <PrivateRoute path="/template-uploading">
+            <TemplateUploading />
+          </PrivateRoute>
           <Route path="/search/:query">
             <Search />
           </Route>
