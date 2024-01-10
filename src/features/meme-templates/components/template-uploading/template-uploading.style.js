@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const Container0 = styled.div`
+export const StyledWrapper = styled.div`
   padding-top: 100px;
   padding-bottom: 50px;
   min-height: calc(100vh - 100px);
@@ -9,22 +9,7 @@ const Container0 = styled.div`
   align-items: center;
 `;
 
-const Container1 = styled.div`
-  width: 600px;
-  z-index: 1;
-  margin-bottom: 50px;
-  @media screen and (max-width: 768px) {
-    width: 500px;
-  }
-  @media screen and (max-width: 660px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 550px) {
-    width: 300px;
-  }
-`;
-
-const Container2 = styled.div`
+export const StyledUploadTemplateWrapper = styled.div`
   width: 600px;
   height: 300px;
   border: 5px solid #ccc;
@@ -47,17 +32,7 @@ const Container2 = styled.div`
   }
 `;
 
-const Container3 = styled.div`
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Input0 = styled.input`
-  display: none;
-`;
-
-const Label0 = styled.label`
+export const StyledUploadTemplateLabel = styled.label`
   font-size: 1.5rem;
   cursor: pointer;
   width: 100%;
@@ -69,7 +44,73 @@ const Label0 = styled.label`
   justify-content: center;
 `;
 
-const Li0 = styled.li`
+export const StyledInput = styled.input`
+  visibility: hidden;
+`;
+
+export const StyledPrimaryButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  background-color: #056;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+`;
+
+export const StyledOutlineButton = styled.button`
+  border: 1px #056 solid;
+  border-radius: 5px;
+  color: #056;
+  background-color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  :hover {
+    background-color:#056;
+    color: #fff;
+  }
+`;
+
+export const StyledButtonGroup = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const StyledImg = styled.img`
+  width: 600px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 300px;
+  }
+`;
+
+export const StyledProgressbar = styled.div`
+  width: 600px;
+  z-index: 1;
+  margin-bottom: 50px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 660px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 300px;
+  }
+`;
+
+export const StyledUl = styled.ul`
+  counter-reset: step;
+`;
+
+export const StyledLi = styled.li`
   list-style: none;
   float: left;
   width: 50%;
@@ -125,53 +166,3 @@ const Li0 = styled.li`
     font-size: 0.6rem;
   }
 `;
-
-const Img0 = styled.img`
-  width: 600px;
-  @media screen and (max-width: 768px) {
-    width: 500px;
-  }
-  @media screen and (max-width: 660px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 550px) {
-    width: 300px;
-  }
-`;
-
-const Button0 = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: #056;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-`;
-
-const Button1 = styled.button`
-  border: 1px #056 solid;
-  border-radius: 5px;
-  color: #056;
-  background-color: #fff;
-  font-size: 1rem;
-  padding: 10px 20px;
-  cursor: pointer;
-  :hover {
-    background-color:#056;
-    color: #fff;
-  } 
-`;
-
-export {
-    Container0,
-    Container1,
-    Container2,
-    Container3,
-    Input0,
-    Label0,
-    Li0,
-    Img0,
-    Button0,
-    Button1
-}
