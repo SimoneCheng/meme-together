@@ -17,7 +17,7 @@ export const StyledButton = styled.button`
   &[data-variant="solid"] {
     border: none;
     background:  ${props => colorSchemeMapping[props.colorScheme]};
-    color: ${props => props.colorScheme === 'navyBlue' ? '#fff' : 'auto'};
+    color: ${props => props.colorScheme === 'navyBlue' ? '#fff' : 'initial'};
   }
 
   &[data-variant="outline"] {

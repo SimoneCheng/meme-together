@@ -8,7 +8,6 @@ import { setUserData } from './redux/actions';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
-import Setting from './components/SettingPage/Setting';
 import Meme from './components/MemePage/Meme';
 
 const LandingPage = lazy(() => import('./pages/landing/landing.page'));
