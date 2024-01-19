@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-// store
-import { setUserData } from "@/redux/actions";
+import { useSelector } from "react-redux";
 // api
-import { checkLoginStatus, nativeLogout } from "@/features/auth";
+import { nativeLogout } from "@/features/auth";
 // components
 import { LoginDialog, SignupDialog } from "@/features/auth";
 // hooks
@@ -32,18 +29,11 @@ import {
 } from "./app-header.style";
 
 const AppHeader = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const userData = useSelector((state) => state.userData);
   const mobileNav = useDisclosure();
   const loginDialog = useDisclosure();
   const signupDialog = useDisclosure();
-
-  useEffect(() => {
-    checkLoginStatus((user) => {
-      dispatch(setUserData(user));
-    });
-  }, [dispatch]);
 
   const handleAccountClick = () => {
     if (!userData) return alertError(undefined, '尚未登入');
@@ -54,7 +44,7 @@ const AppHeader = () => {
   const handleSettingClick = () => {
     if (!userData) return alertError(undefined, "尚未登入！");
     if (mobileNav.isOpen) mobileNav.onClose();
-    history.push('/setting');
+    history.push('/settings');
   }
 
   const handleLogoutClick = () => {

@@ -1,8 +1,10 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { PrivateRoute } from './features/auth';
+import { useDispatch } from 'react-redux';
 
+import { PrivateRoute, checkLoginStatus } from '@/features/auth';
 import { AppHeader } from '@/features/layout';
+import { setUserData } from './redux/actions';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
 import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
@@ -15,8 +17,16 @@ const ExploreMemes = lazy(() => import('./pages/explore-memes/explore-memes.page
 const Search = lazy(() => import('./pages/search/search.page'));
 const Templates = lazy(() => import('./pages/templates/templates.page'));
 const TemplateUploading = lazy(() => import('./pages/template-uploading/template-uploading.page'));
+const Settings = lazy(() => import('./pages/settings/settings.page'));
 
 function App() {
+  const dispatch = useDispatch();
+  useLayoutEffect(() => {
+    checkLoginStatus((user) => {
+      dispatch(setUserData(user));
+    });
+  }, [dispatch]);
+
   return (
     <>
       <AppHeader />
@@ -37,9 +47,9 @@ function App() {
           <Route path="/personal/meme-generator/:id">
             <MemeGenerator />
           </Route>
-          <Route path="/setting">
-            <Setting />
-          </Route>
+          <PrivateRoute path="/settings">
+            <Settings />
+          </PrivateRoute>
           <Route path="/meme/:id">
             <Meme />
           </Route>
