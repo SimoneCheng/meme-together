@@ -65,13 +65,3 @@ export const StyledLoadingWrapper = styled.div`
   justify-content: center;
   width: 100%;
 `
-
-export const StyledButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: #056;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-`;

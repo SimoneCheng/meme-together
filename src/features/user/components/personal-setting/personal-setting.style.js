@@ -26,3 +26,54 @@ export const StyledH2 = styled.h2`
   margin-bottom: 20px;
   margin-top: 20px;
 `;
+
+export const StyledProfileImgWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const StyledButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledImg = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px #ccc;
+`;
+
+export const StyledLabel = styled.label`
+  display: inline-block;
+  background-color: #ffc349;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  input {
+    display: none;
+  }
+`;
+
+export const StyledTextarea = styled.textarea`
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  resize: none;
+  font-size: 1rem;
+  :focus{
+    background-color: rgba(0, 0, 0, 0.05);
+    outline: none;
+  }
+`;

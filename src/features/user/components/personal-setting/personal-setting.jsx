@@ -7,12 +7,18 @@ import {
   getProfileImg,
   uploadProfileImg
 } from '../../api';
+import { Button } from '@/components/button';
 import { wholePageLoading } from '@/utlis/loading';
 import { alertSuccess } from '@/utlis/alert';
 import {
   StyledWrapper,
   StyledH1,
-  StyledH2
+  StyledH2,
+  StyledImg,
+  StyledLabel,
+  StyledButtonGroup,
+  StyledProfileImgWrapper,
+  StyledTextarea
 } from './personal-setting.style';
 
 const PersonalSetting = () => {
@@ -91,13 +97,13 @@ const PersonalSetting = () => {
     <StyledWrapper>
       <StyledH1>修改個人資料</StyledH1>
       <StyledH2>頭像</StyledH2>
-      <div>
-        <img
+      <StyledProfileImgWrapper>
+        <StyledImg
           alt="profile-img"
           src={personalInfo.user_img}
         />
-        <div>
-          <label htmlFor="image">
+        <StyledButtonGroup>
+          <StyledLabel htmlFor="image">
             上傳新頭像
             <input
               id="image"
@@ -105,28 +111,31 @@ const PersonalSetting = () => {
               accept="image/*"
               onChange={handleProfileImgUploading}
             />
-          </label>
-          <button
-            type="button"
+          </StyledLabel>
+          <Button
+            colorScheme="yellow"
+            variant="solid"
             onClick={handleDefaultProfileImgUsing}
           >
             使用預設頭像
-          </button>
-        </div>
-      </div>
+          </Button>
+        </StyledButtonGroup>
+      </StyledProfileImgWrapper>
       <StyledH2>個人簡介</StyledH2>
-      <textarea
+      <StyledTextarea
         cols="20"
         rows="5"
         value={selfIntro}
         onChange={handleChange}
       />
-      <button
-        type="button"
+      <Button
+        colorScheme="yellow"
+        variant="solid"
+        width="100%"
         onClick={handleSelfIntroUpdating}
       >
         儲存
-      </button>
+      </Button>
     </StyledWrapper>
   );
 };
