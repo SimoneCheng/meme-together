@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { SettingListGroup, PersonalSetting } from '@/features/user';
+import {
+  SettingListGroup,
+  PersonalSetting,
+  PasswordChanging
+} from '@/features/user';
 import { StyledWrapper } from './settings.style';
 
 const PersonalSettings = () => {
@@ -12,6 +16,7 @@ const PersonalSettings = () => {
         setActiveOption={setActiveOption}
       />
       {activeOption === 'userInfo' && <PersonalSetting />}
+      {activeOption === 'password' && <PasswordChanging />}
     </StyledWrapper>
   );
 };
