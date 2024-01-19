@@ -12,10 +12,9 @@ import {
   DialogFooterCloseButton
 } from '@/components/dialog';
 import { Input } from '@/components/input';
-import color from '@/components/Styled/colorTheme';
+import { Button } from '@/components/button';
 // styles
 import {
-  StyledButton,
   StyledFormControl,
   StyledFormLabel
 } from './login-dialog.style';
@@ -92,13 +91,12 @@ const LoginDialog = ({ isOpen, onClose }) => {
             <DialogFooterCloseButton>
               取消
             </DialogFooterCloseButton>
-            <StyledButton
-              type="button"
-              color={color}
+            <Button
+              colorScheme="yellow"
               onClick={handleLoginClick}
             >
               登入
-            </StyledButton>
+            </Button>
           </DialogFooter>
         </DialogContent>
       </DialogOverlay>

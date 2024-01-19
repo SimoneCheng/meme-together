@@ -27,7 +27,11 @@ const PublicMemesSearchBar = () => {
         value={value}
         onChange={handleChange}
       />
-      <StyledButton onClick={handleClick}>
+      <StyledButton
+        colorScheme="navyBlue"
+        variant="solid"
+        onClick={handleClick}
+      >
         <FaSearch />
       </StyledButton>
     </StyledWrapper>

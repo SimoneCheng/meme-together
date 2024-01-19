@@ -7,14 +7,13 @@ import {
   getTemplateURL,
   saveNewTemplate
 } from '../../api';
+import { Button } from '@/components/button';
 import { alertError, alertSuccess } from '@/utlis/alert';
 import {
   StyledWrapper,
   StyledUploadTemplateWrapper,
   StyledUploadTemplateLabel,
   StyledInput,
-  StyledPrimaryButton,
-  StyledOutlineButton,
   StyledButtonGroup,
   StyledImg,
   StyledProgressbar,
@@ -122,18 +121,20 @@ const TemplateUploading = () => {
               />
             </div>
             <StyledButtonGroup>
-              <StyledOutlineButton
-                type="button"
+              <Button
+                colorScheme="navyBlue"
+                variant="outline"
                 onClick={handleCleanImagePreview}
               >
                 上一步
-              </StyledOutlineButton>
-              <StyledPrimaryButton
-                type="button"
+              </Button>
+              <Button
+                colorScheme="navyBlue"
+                variant="solid"
                 onClick={clickDonateTemplate}
               >
                 上傳模板
-              </StyledPrimaryButton>
+              </Button>
             </StyledButtonGroup>
           </div>
         ) : (

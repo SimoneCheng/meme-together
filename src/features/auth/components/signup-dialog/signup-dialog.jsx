@@ -12,12 +12,11 @@ import {
   DialogFooterCloseButton
 } from '@/components/dialog';
 import { Input } from '@/components/input';
+import { Button } from '@/components/button';
 // styles
-import color from '@/components/Styled/colorTheme';
 import {
   StyledFormControl,
   StyledFormLabel,
-  StyledButton
 } from './signup-dialog.style';
 // utils
 import { alertError, alertSuccess } from '@/utlis/alert';
@@ -108,13 +107,12 @@ const SignupDialog = ({ isOpen, onClose }) => {
             <DialogFooterCloseButton>
               取消
             </DialogFooterCloseButton>
-            <StyledButton
-              type="button"
-              color={color}
+            <Button
+              colorScheme="yellow"
               onClick={handleSignupClick}
             >
               註冊
-            </StyledButton>
+            </Button>
           </DialogFooter>
         </DialogContent>
       </DialogOverlay>

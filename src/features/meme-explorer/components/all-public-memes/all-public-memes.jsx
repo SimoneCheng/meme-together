@@ -7,10 +7,10 @@ import {
 // components
 import { PublicMemesSearchBar } from '../public-memes-search-bar';
 import PublicMemeItem from './public-meme-item';
+import { Button } from '@/components/button';
 // styles
 import {
   StyledSearchAndSortWrapper,
-  StyledButton,
   StyledAllPublicMemesWrapper,
   StyledLoadingWrapper,
   StyledSelect
@@ -77,9 +77,13 @@ const AllPublicMemes = () => {
         {allPublicMemeImg.map((item, index) => (<PublicMemeItem key={index} {...item} />))}
       </StyledAllPublicMemesWrapper>
       {lastKey ? (
-        <StyledButton type="button" onClick={getMoreMeme}>
+        <Button
+          colorScheme="navyBlue"
+          variant="solid"
+          onClick={getMoreMeme}
+        >
           載入更多
-        </StyledButton>
+        </Button>
       ) : (
         <div>沒有囉！</div>
       )}

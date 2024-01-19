@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../button';
 
 export const StyledDialogOverlay = styled.div`
   position: fixed;
@@ -35,14 +36,9 @@ export const StyledDialogFooter = styled.footer`
   display: flex;
 `;
 
-export const StyledDialogFooterCloseButton = styled.button`
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 8px 16px;
-  color: inherit;
+export const StyledDialogFooterCloseButton = styled(Button)`
   &:first-child {
     margin-left: auto;
+    margin-right: 8px;
   }
 `;

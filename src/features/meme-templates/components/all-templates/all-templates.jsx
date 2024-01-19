@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getAllTemplates, getAllTemplatesNextPage } from '../../api';
 import TemplatesItem from './templates-item';
+import { Button } from '@/components/button';
 import { loading } from '@/utlis/loading';
 import {
   StyledAllTemplatesWrapper,
   StyledLoadingWrapper,
-  StyledButton
 } from './all-templates.style';
 
 const AllTemplates = () => {
@@ -51,9 +51,13 @@ const AllTemplates = () => {
         {allTemplates.map((item, index) => <TemplatesItem key={index} {...item} />)}
       </StyledAllTemplatesWrapper>
       {lastKey ? (
-        <StyledButton type="button" onClick={getMoreTemplates}>
+        <Button
+          colorScheme="navyBlue"
+          variant="solid"
+          onClick={getMoreTemplates}
+        >
           載入更多
-        </StyledButton>
+        </Button>
       ) : (
         <div>沒有囉！</div>
       )}

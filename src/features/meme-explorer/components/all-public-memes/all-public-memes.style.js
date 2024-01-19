@@ -57,16 +57,6 @@ export const StyledPublicMemeImg = styled.img`
   object-fit: cover;
 `;
 
-export const StyledButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: #056;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-`;
-
 export const StyledAllPublicMemesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);

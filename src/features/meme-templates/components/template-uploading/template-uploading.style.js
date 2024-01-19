@@ -48,30 +48,6 @@ export const StyledInput = styled.input`
   visibility: hidden;
 `;
 
-export const StyledPrimaryButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: #056;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-`;
-
-export const StyledOutlineButton = styled.button`
-  border: 1px #056 solid;
-  border-radius: 5px;
-  color: #056;
-  background-color: #fff;
-  font-size: 1rem;
-  padding: 10px 20px;
-  cursor: pointer;
-  :hover {
-    background-color:#056;
-    color: #fff;
-  }
-`;
-
 export const StyledButtonGroup = styled.div`
   margin-top: 30px;
   display: flex;

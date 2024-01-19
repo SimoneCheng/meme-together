@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "@/components/button";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -23,14 +24,6 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledButton = styled.button`
-  width: 40px;
-  height: 36px;
-  border: 1px solid #056;
-  background: #056;
-  text-align: center;
-  color: #fff;
+export const StyledButton = styled(Button)`
   border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
 `;

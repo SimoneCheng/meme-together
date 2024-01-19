@@ -18,7 +18,6 @@ const DialogFooterCloseButton = forwardRef((props, ref) => {
   return (
     <StyledDialogFooterCloseButton
       ref={ref}
-      type="button"
       onClick={handleClick}
       data-dialog-close-button=""
       {...rest}
