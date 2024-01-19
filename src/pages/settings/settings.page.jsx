@@ -2,7 +2,8 @@ import { useState } from 'react';
 import {
   SettingListGroup,
   PersonalSetting,
-  PasswordChanging
+  PasswordChanging,
+  AccountDeleting
 } from '@/features/user';
 import { StyledWrapper } from './settings.style';
 
@@ -17,6 +18,7 @@ const PersonalSettings = () => {
       />
       {activeOption === 'userInfo' && <PersonalSetting />}
       {activeOption === 'password' && <PasswordChanging />}
+      {activeOption === 'deleteAccount' && <AccountDeleting />}
     </StyledWrapper>
   );
 };

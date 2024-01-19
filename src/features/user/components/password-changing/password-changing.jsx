@@ -58,7 +58,6 @@ const PasswordChanging = () => {
         <StyledButton
           colorScheme="yellow"
           variant="solid"
-          width="100%"
           onClick={handlePasswordChange}
         >
             送出

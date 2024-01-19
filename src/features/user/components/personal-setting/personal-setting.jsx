@@ -131,7 +131,6 @@ const PersonalSetting = () => {
       <Button
         colorScheme="yellow"
         variant="solid"
-        width="100%"
         onClick={handleSelfIntroUpdating}
       >
         儲存
