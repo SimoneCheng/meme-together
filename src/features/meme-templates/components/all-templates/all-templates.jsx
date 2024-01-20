@@ -13,10 +13,6 @@ const AllTemplates = () => {
   const [lastKey, setLastKey] = useState();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
-
-  useEffect(() => {
     getAllTemplates()
       .then((res) => {
         setAllTemplates(res.allTemplatesData);

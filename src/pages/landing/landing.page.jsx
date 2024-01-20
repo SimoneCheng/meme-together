@@ -26,6 +26,8 @@ import floppy from '@/image/day18-floppy.png';
 // components
 import { AppFooter } from '@/features/layout';
 import { HotMemes } from '@/features/meme-explorer';
+// hooks
+import { useScrollTo } from '@/hooks';
 
 function PrimarySection() {
   return (
@@ -102,6 +104,7 @@ function SecondarySection() {
 }
 
 function Landing() {
+  useScrollTo();
   return (
     <Wrapper>
       <PrimarySection />
