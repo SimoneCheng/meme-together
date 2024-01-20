@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'animate.css';
+// hooks
+import { useScrollTo } from '@/hooks';
 // store
 import { setCanvas } from '@/redux/actions';
 // styles
@@ -19,8 +21,9 @@ function PageNotFound() {
   const dispatch = useDispatch();
   const canvas = useSelector((state) => state.canvas);
 
+  useScrollTo();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (canvas === null) {
       dispatch(setCanvas(''));
     }

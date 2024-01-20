@@ -24,10 +24,6 @@ const AllPublicMemes = () => {
   const [sort, setSort] = useState('desc');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
-
-  useEffect(() => {
     getAllPublicMemes(sort).then((res) => {
       const { allPublicMemeImgData, lastKey } = res;
       setAllPublicMemeImg(allPublicMemeImgData);

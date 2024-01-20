@@ -27,10 +27,6 @@ const PersonalSetting = () => {
   const [selfIntro, setSelfIntro] = useState('');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
-
-  useEffect(() => {
     if (!userData) return;
     const unsubscribe = getUserInfo({
       id: userData.user_id,

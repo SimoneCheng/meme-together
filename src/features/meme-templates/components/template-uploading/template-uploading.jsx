@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
@@ -47,10 +47,6 @@ const TemplateUploading = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const compressedFile = useRef(null);
   const userData = useSelector((state) => state.userData);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
 
   const clickUploadTemplate = (e) => {
     const file = e.target.files[0];

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useScrollTo } from '@/hooks';
 import {
   searchPublicMemes,
   PublicMemesSearchBar,
@@ -10,6 +11,8 @@ import { StyledWrapper, StyledSearchedMemesWrapper } from './search.style';
 const Search = () => {
   const { query } = useParams();
   const [searchResult, setSearchResult] = useState([]);
+
+  useScrollTo();
 
   useEffect(() => {
     searchPublicMemes(query).then((response) => {

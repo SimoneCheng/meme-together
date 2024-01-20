@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useScrollTo } from '@/hooks';
 import {
   SettingListGroup,
   PersonalSetting,
@@ -9,6 +10,8 @@ import { StyledWrapper } from './settings.style';
 
 const PersonalSettings = () => {
   const [activeOption, setActiveOption] = useState('userInfo');
+
+  useScrollTo();
 
   return (
     <StyledWrapper>
