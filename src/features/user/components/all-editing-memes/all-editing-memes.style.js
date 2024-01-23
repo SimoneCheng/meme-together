@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
-const Container0 = styled.div`
+export const StyledNoContentWrapper = styled.div`
+  width: 810px;
+  text-align: center;
+  padding: 30px;
+  font-size: 2rem;
+  @media screen and (max-width: 810px) {
+    width: 100%;
+  }
+`;
+
+export const StyledAllEditingMemesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 250px);
   grid-gap: 30px;
@@ -31,7 +41,7 @@ const Container0 = styled.div`
   }
 `;
 
-const Container1 = styled.div`
+export const StyledEditingMemeWrapper = styled.div`
   box-shadow: 0 0 3px grey;
   border-radius: 10px;
   overflow: hidden;
@@ -45,15 +55,17 @@ const Container1 = styled.div`
   }
 `;
 
-const Container2 = styled.div`
- padding: 0 20px 20px 20px;
+export const StyledImg = styled.img`
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 `;
 
-const Container3 = styled.div`
- margin-top: 5px;
+export const StyledWrapper = styled.div`
+  padding: 0 20px 20px 20px;
 `;
 
-const Container4 = styled.div`
+export const StyledAddNewEditingMemeWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -62,50 +74,7 @@ const Container4 = styled.div`
   overflow: hidden;
 `;
 
-const Container5 = styled.span`
+export const StyledIconWrapper = styled.div`
   font-size: 70px;
   color: #056;
 `;
-
-const Container6 = styled.div`
-  width: 810px;
-  text-align: center;
-  padding: 30px;
-  font-size: 2rem;
-  @media screen and (max-width: 810px) {
-    width: 100%;
-  }
-`;
-
-const Img0 = styled.img`
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-`;
-
-const Button0 = styled.button`
-  margin-top: 20px;
-  border: 1px ${props => props.color.color2.colorCode} solid;
-  border-radius: 5px;
-  color: ${props => props.color.color2.colorCode};
-  font-size: 1rem;
-  background-color: ${props => props.color.color3.colorCode};
-  padding: 5px 10px;
-  cursor: pointer;
-  :hover {
-    background-color: ${props => props.color.color2.colorCode};
-    color: ${props => props.color.color3.colorCode};
-  } 
-`;
-
-export {
-    Container0,
-    Container1,
-    Container2,
-    Container3,
-    Container4,
-    Container5,
-    Container6,
-    Img0,
-    Button0
-}

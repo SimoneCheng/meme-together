@@ -6,17 +6,17 @@ import { PrivateRoute, checkLoginStatus } from '@/features/auth';
 import { AppHeader } from '@/features/layout';
 import { setUserData } from './redux/actions';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
-import Personal from './components/PersonalPage/Personal';
 import Public from './components/PublicPage/Public';
 import Meme from './components/MemePage/Meme';
 
-const LandingPage = lazy(() => import('./pages/landing/landing.page'));
-const PageNotFound = lazy(() => import('./pages/page-not-found/page-not-found.page'));
-const ExploreMemes = lazy(() => import('./pages/explore-memes/explore-memes.page'));
-const Search = lazy(() => import('./pages/search/search.page'));
-const Templates = lazy(() => import('./pages/templates/templates.page'));
-const TemplateUploading = lazy(() => import('./pages/template-uploading/template-uploading.page'));
-const Settings = lazy(() => import('./pages/settings/settings.page'));
+const LandingPage = lazy(() => import('@/pages/landing/landing.page'));
+const PageNotFound = lazy(() => import('@/pages/page-not-found/page-not-found.page'));
+const ExploreMemes = lazy(() => import('@/pages/explore-memes/explore-memes.page'));
+const Search = lazy(() => import('@/pages/search/search.page'));
+const Templates = lazy(() => import('@/pages/templates/templates.page'));
+const TemplateUploading = lazy(() => import('@/pages/template-uploading/template-uploading.page'));
+const Settings = lazy(() => import('@/pages/settings/settings.page'));
+const Personal = lazy(() => import('@/pages/personal/personal.page'));
 
 function App() {
   const dispatch = useDispatch();
@@ -40,9 +40,9 @@ function App() {
           <Route path="/templates/:id">
             <MemeGenerator />
           </Route>
-          <Route path="/personal" exact>
+          <PrivateRoute path="/personal" exact>
             <Personal />
-          </Route>
+          </PrivateRoute>
           <Route path="/personal/meme-generator/:id">
             <MemeGenerator />
           </Route>
