@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/button";
-import { getUserInfo } from "../../api";
+import { getUserInfo } from "../../../api";
 import { StyledImg, StyledItem, StyledWrapper } from "./user-info-summary.style";
 
 const UserInfoSummary = () => {

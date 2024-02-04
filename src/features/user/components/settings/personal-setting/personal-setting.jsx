@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
+// store
+import { usePersonalInfo } from '@/features/user/store';
+// apis
 import {
   getUserInfo,
   updateUserInfo,
   getProfileImg,
   uploadProfileImg
-} from '../../api';
+} from '../../../api';
+// components
 import { Button } from '@/components/button';
+// utils
 import { wholePageLoading } from '@/utlis/loading';
 import { alertSuccess } from '@/utlis/alert';
+// styles
 import {
   StyledWrapper,
   StyledH1,
@@ -23,7 +29,7 @@ import {
 
 const PersonalSetting = () => {
   const userData = useSelector((state) => state.userData);
-  const [personalInfo, setPersonalInfo] = useState();
+  const [personalInfo, setPersonalInfo] = usePersonalInfo();
   const [selfIntro, setSelfIntro] = useState('');
 
   useEffect(() => {
@@ -31,14 +37,21 @@ const PersonalSetting = () => {
     const unsubscribe = getUserInfo({
       id: userData.user_id,
       callback: (data) => {
-        setPersonalInfo(data);
+        setPersonalInfo({
+          createdTime: data.created_time,
+          selfIntro: data.self_intro,
+          userEmail: data.user_email,
+          userId: data.user_id,
+          userImg: data.user_img,
+          userName: data.user_name,
+        });
         setSelfIntro(data.self_intro);
       },
     });
     return () => unsubscribe();
-  }, [userData])
+  }, [setPersonalInfo, userData])
 
-  if (!personalInfo) {
+  if (!personalInfo.userName) {
     return (
       <StyledWrapper>
         {wholePageLoading('spinningBubbles', '#056', 50, 50)}
@@ -96,7 +109,7 @@ const PersonalSetting = () => {
       <StyledProfileImgWrapper>
         <StyledImg
           alt="profile-img"
-          src={personalInfo.user_img}
+          src={personalInfo.userImg}
         />
         <StyledButtonGroup>
           <StyledLabel htmlFor="image">
