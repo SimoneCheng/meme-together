@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  getPrivateMemeImage,
+  getPublicMemeImage,
   changeMemePublicStatus,
   deleteMemeImageInDb,
   deleteMemeImageInStorage
-} from "../../api";
+} from "../../../api";
 import { Button } from "@/components/button";
 import {
   StyledNoContentWrapper,
@@ -17,7 +17,7 @@ import {
 } from "./all-meme-image.style";
 import { alertSuccess } from "@/utlis/alert";
 
-const PrivateMemeImage = (props) => {
+const PublicMemeImage = (props) => {
   const {
     title,
     imgSrc,
@@ -29,10 +29,10 @@ const PrivateMemeImage = (props) => {
   const handleMemePublicStatusChange = () => {
     changeMemePublicStatus({
       docId: imgName,
-      isPublic: true,
+      isPublic: false,
     })
       .then(() => {
-        alertSuccess('已公開發布！');
+        alertSuccess('已取消發布！');
       });
   };
 
@@ -98,7 +98,7 @@ const PrivateMemeImage = (props) => {
             variant="outline"
             onClick={handleMemePublicStatusChange}
           >
-            公開發布
+            取消公開發布
           </Button>
         </div>
         <div style={{ 'marginTop': '16px' }}>
@@ -117,18 +117,18 @@ const PrivateMemeImage = (props) => {
 
 const AllPublicMemeImage = () => {
   const userId = useSelector((state) => state.userData?.user_id);
-  const [allPrivateMeme, setAllPrivateMeme] = useState([]);
+  const [allPublicMeme, setAllPublicMeme] = useState([]);
 
   useEffect(() => {
     if (!userId) return;
-    const unsubscribe = getPrivateMemeImage({
+    const unsubscribe = getPublicMemeImage({
       id: userId,
-      callback: setAllPrivateMeme
+      callback: setAllPublicMeme
     });
     return () => unsubscribe();
   }, [userId])
 
-  if (allPrivateMeme.length === 0) {
+  if (allPublicMeme.length === 0) {
     return (
       <StyledNoContentWrapper>
         空空的喔～
@@ -138,7 +138,7 @@ const AllPublicMemeImage = () => {
 
   return (
     <StyledAllMemeImageWrapper>
-      {allPrivateMeme.map((item) => {
+      {allPublicMeme.map((item) => {
         const {
           title,
           img_url,
@@ -147,7 +147,7 @@ const AllPublicMemeImage = () => {
           last_save_time,
         } = item;
         return (
-          <PrivateMemeImage
+          <PublicMemeImage
             key={img_name}
             title={title}
             imgSrc={img_url}

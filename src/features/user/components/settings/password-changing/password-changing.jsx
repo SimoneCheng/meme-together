@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input } from "@/components/input";
-import { changePassword } from "../../api";
+import { changePassword } from "../../../api";
 import { alertError } from "@/utlis/alert";
 import { StyledWrapper, StyledH1, StyledButton } from "./password-changing.style";
 

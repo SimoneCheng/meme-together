@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdAddCircleOutline } from "react-icons/md";
-import { getAllEditingMemes, deletEditingMeme } from "../../api";
+import { getAllEditingMemes, deletEditingMeme } from "../../../api";
 import { Button } from "@/components/button";
 import { alertSuccess } from "@/utlis/alert";
 import {

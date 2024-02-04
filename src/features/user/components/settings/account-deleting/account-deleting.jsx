@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { reAuth, deleteAccount } from "@/features/auth";
-import { deleteAllUserData } from "../../api";
+import { deleteAllUserData } from "../../../api";
 import { Input } from "@/components/input";
 import { alertError, alertDelete } from "@/utlis/alert";
 import { StyledWrapper, StyledH1, StyledButton } from "./account-deleting.style";

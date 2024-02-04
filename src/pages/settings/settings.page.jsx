@@ -1,24 +1,21 @@
-import { useState } from 'react';
 import { useScrollTo } from '@/hooks';
 import {
   SettingListGroup,
   PersonalSetting,
   PasswordChanging,
-  AccountDeleting
+  AccountDeleting,
+  useActiveOption
 } from '@/features/user';
 import { StyledWrapper } from './settings.style';
 
 const PersonalSettings = () => {
-  const [activeOption, setActiveOption] = useState('userInfo');
+  const [activeOption] = useActiveOption();
 
   useScrollTo();
 
   return (
     <StyledWrapper>
-      <SettingListGroup
-        activeOption={activeOption}
-        setActiveOption={setActiveOption}
-      />
+      <SettingListGroup />
       {activeOption === 'userInfo' && <PersonalSetting />}
       {activeOption === 'password' && <PasswordChanging />}
       {activeOption === 'deleteAccount' && <AccountDeleting />}

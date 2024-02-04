@@ -1,3 +1,4 @@
+import { useActiveOption } from "@/features/user/store";
 import {
   StyledWrapper,
   StyledH3,
@@ -5,8 +6,8 @@ import {
   StyledButton
 } from "./setting-list-group.style";
 
-const SettingListGroup = (props) => {
-  const { activeOption, setActiveOption } = props;
+const SettingListGroup = () => {
+  const [activeOption, setActiveOption] = useActiveOption();
 
   return (
     <StyledWrapper>
