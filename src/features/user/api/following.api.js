@@ -18,7 +18,7 @@ export const unfollowing = (id, id2) => {
     .delete();
 };
 
-export const checkAllFollowing = (id, callback) => {
+export const checkAllFollowing = ({ id, callback }) => {
   return db
     .collection('users')
     .doc(id)

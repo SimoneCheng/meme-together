@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useActiveOption } from "@/features/user/store";
+import { useSettingActiveOption } from "@/features/user/store";
 import {
   StyledWrapper,
   StyledH3,
@@ -8,7 +8,7 @@ import {
 } from "./setting-list-group.style";
 
 const SettingListGroup = () => {
-  const [activeOption, setActiveOption] = useActiveOption();
+  const [activeOption, setActiveOption] = useSettingActiveOption();
 
   useEffect(() => {
     return () => setActiveOption('userInfo');

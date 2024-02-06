@@ -20,14 +20,26 @@ export const usePersonalInfo = () => {
   return [personalInfo, setPersonalInfo];
 }
 
-const activeOptionStore = proxy({
+const settingActiveOptionStore = proxy({
   activeOption: 'userInfo'
 });
 
-export const useActiveOption = () => {
-  const { activeOption } = useSnapshot(activeOptionStore);
+export const useSettingActiveOption = () => {
+  const { activeOption } = useSnapshot(settingActiveOptionStore);
   const setActiveOption = useCallback((data) => {
-    activeOptionStore.activeOption = data;
+    settingActiveOptionStore.activeOption = data;
   }, []);
   return [activeOption, setActiveOption];
 }
+
+const personalFollowingStore = proxy({
+  ids: []
+});
+
+export const usePersonalFollowing = () => {
+  const { ids } = useSnapshot(personalFollowingStore);
+  const setPersonalFollowing = useCallback((data) => {
+    personalFollowingStore.ids = data;
+  }, []);
+  return [ids, setPersonalFollowing];
+};

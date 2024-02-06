@@ -17,6 +17,7 @@ const Templates = lazy(() => import('@/pages/templates/templates.page'));
 const TemplateUploading = lazy(() => import('@/pages/template-uploading/template-uploading.page'));
 const Settings = lazy(() => import('@/pages/settings/settings.page'));
 const Personal = lazy(() => import('@/pages/personal/personal.page'));
+const NewPublic = lazy(() => import('@/pages/public/public.page'));
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +54,8 @@ function App() {
             <Meme />
           </Route>
           <Route path="/public/:id" exact>
-            <Public />
+            {/* <Public /> */}
+            <NewPublic />
           </Route>
           <Route path="/explore-memes">
             <ExploreMemes />
@@ -63,6 +65,9 @@ function App() {
           </PrivateRoute>
           <Route path="/search/:query">
             <Search />
+          </Route>
+          <Route path="/404" exact>
+            <PageNotFound />
           </Route>
           <Route path="*">
             <PageNotFound />
