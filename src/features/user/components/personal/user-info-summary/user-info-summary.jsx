@@ -1,39 +1,32 @@
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/button";
-import { getUserInfo } from "../../../api";
+import { useWatchPersonalInfo } from "@/features/user/hooks";
+import { usePersonalInfo } from "@/features/user/store";
 import { StyledImg, StyledItem, StyledWrapper } from "./user-info-summary.style";
 
 const UserInfoSummary = () => {
   const userId = useSelector((state) => state.userData?.user_id);
-  const [userInfo, setUserInfo] = useState();
+  const [personalInfo] = usePersonalInfo();
 
-  useEffect(() => {
-    if (!userId) return;
-    const unsubscribe = getUserInfo({
-      id: userId,
-      callback: setUserInfo
-    });
-    return () => unsubscribe();
-  }, [userId])
+  useWatchPersonalInfo();
 
   return (
     <StyledWrapper>
       <StyledItem>
         <StyledImg
           alt="profile-img"
-          src={userInfo?.user_img}
+          src={personalInfo.userImg}
         />
       </StyledItem>
       <StyledItem>
         <p>
           <strong>暱稱：</strong>
-          {userInfo?.user_name}
+          {personalInfo.userName}
         </p>
         <p>
           <strong>電子信箱：</strong>
-          {userInfo?.user_email}
+          {personalInfo.userEmail}
         </p>
       </StyledItem>
       <StyledItem>

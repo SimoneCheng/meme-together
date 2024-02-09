@@ -4,12 +4,12 @@ import {
   PersonalSetting,
   PasswordChanging,
   AccountDeleting,
-  useActiveOption
+  useSettingActiveOption
 } from '@/features/user';
 import { StyledWrapper } from './settings.style';
 
 const PersonalSettings = () => {
-  const [activeOption] = useActiveOption();
+  const [activeOption] = useSettingActiveOption();
 
   useScrollTo();
 

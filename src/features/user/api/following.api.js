@@ -18,7 +18,7 @@ export const unfollowing = (id, id2) => {
     .delete();
 };
 
-export const checkAllFollowing = (id, callback) => {
+export const checkAllFollowing = ({ id, callback }) => {
   return db
     .collection('users')
     .doc(id)
@@ -29,5 +29,19 @@ export const checkAllFollowing = (id, callback) => {
         result.push(doc.id);
       })
       callback(result);
+    });
+}
+
+export const getAllFollowing = (followingList) => {
+  return db
+    .collection('users')
+    .where('user_id', 'in', followingList)
+    .get()
+    .then((querySnapshot) => {
+      const allFollowing = [];
+      querySnapshot.forEach(doc => {
+        allFollowing.push(doc.data());
+      })
+      return allFollowing;
     });
 }

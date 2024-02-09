@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 // store
 import { usePersonalInfo } from '@/features/user/store';
 // apis
 import {
-  getUserInfo,
   updateUserInfo,
   getProfileImg,
   uploadProfileImg
-} from '../../../api';
+} from '@/features/user/api';
 // components
 import { Button } from '@/components/button';
 // utils
 import { wholePageLoading } from '@/utlis/loading';
 import { alertSuccess } from '@/utlis/alert';
+// hooks
+import { useWatchPersonalInfo } from '@/features/user/hooks';
 // styles
 import {
   StyledWrapper,
@@ -29,27 +30,14 @@ import {
 
 const PersonalSetting = () => {
   const userData = useSelector((state) => state.userData);
-  const [personalInfo, setPersonalInfo] = usePersonalInfo();
+  const [personalInfo] = usePersonalInfo();
   const [selfIntro, setSelfIntro] = useState('');
 
-  useEffect(() => {
-    if (!userData) return;
-    const unsubscribe = getUserInfo({
-      id: userData.user_id,
-      callback: (data) => {
-        setPersonalInfo({
-          createdTime: data.created_time,
-          selfIntro: data.self_intro,
-          userEmail: data.user_email,
-          userId: data.user_id,
-          userImg: data.user_img,
-          userName: data.user_name,
-        });
-        setSelfIntro(data.self_intro);
-      },
-    });
-    return () => unsubscribe();
-  }, [setPersonalInfo, userData])
+  const setDefaultSelfIntro = useCallback((data) => {
+    setSelfIntro(data.self_intro)
+  }, []);
+
+  useWatchPersonalInfo(setDefaultSelfIntro);
 
   if (!personalInfo.userName) {
     return (

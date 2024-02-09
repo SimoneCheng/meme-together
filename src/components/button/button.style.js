@@ -25,4 +25,9 @@ export const StyledButton = styled.button`
     background: transparent;
     color: ${props => colorSchemeMapping[props.colorScheme]};
   }
+
+  &[data-variant="unstyled"] {
+    border: none;
+    background: transparent;
+  }
 `;

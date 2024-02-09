@@ -9,7 +9,7 @@ export const addFollower = (id2, id, data) => {
     .set(data);
 };
 
-export const  deleteFollower = (id2, id) => {
+export const deleteFollower = (id2, id) => {
   return db.collection('users')
     .doc(id2)
     .collection('follower_list')
@@ -17,7 +17,7 @@ export const  deleteFollower = (id2, id) => {
     .delete();
 };
 
-export const checkAllFollowers = (id, callback) => {
+export const checkAllFollowers = ({ id, callback }) => {
   return db
     .collection('users')
     .doc(id)
@@ -28,5 +28,19 @@ export const checkAllFollowers = (id, callback) => {
         result.push(doc.id);
       })
       callback(result);
+    })
+};
+
+export const getAllFollowers = (followersList) => {
+  return db
+    .collection('users')
+    .where('user_id', 'in', followersList)
+    .get()
+    .then((querySnapshot) => {
+      const allFollowers = [];
+      querySnapshot.forEach(doc => {
+        allFollowers.push(doc.data());
+      })
+      return allFollowers;
     })
 };
