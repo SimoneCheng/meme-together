@@ -14,8 +14,7 @@ export const useWatchPersonalFollowing = () => {
     const unsubscribe = checkAllFollowing({
       id: userData.user_id,
       callback: (data) => {
-        if (!data) return;
-        setPersonalFollowing(data)
+        setPersonalFollowing(data ?? [])
       }
     });
     return () => unsubscribe();

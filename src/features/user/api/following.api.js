@@ -31,3 +31,17 @@ export const checkAllFollowing = ({ id, callback }) => {
       callback(result);
     });
 }
+
+export const getAllFollowing = (followingList) => {
+  return db
+    .collection('users')
+    .where('user_id', 'in', followingList)
+    .get()
+    .then((querySnapshot) => {
+      const allFollowing = [];
+      querySnapshot.forEach(doc => {
+        allFollowing.push(doc.data());
+      })
+      return allFollowing;
+    });
+}

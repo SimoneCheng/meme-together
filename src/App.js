@@ -1,12 +1,10 @@
 import { lazy, Suspense, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import { PrivateRoute, checkLoginStatus } from '@/features/auth';
 import { AppHeader } from '@/features/layout';
 import { setUserData } from './redux/actions';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
-import Public from './components/PublicPage/Public';
 import Meme from './components/MemePage/Meme';
 
 const LandingPage = lazy(() => import('@/pages/landing/landing.page'));
@@ -17,7 +15,7 @@ const Templates = lazy(() => import('@/pages/templates/templates.page'));
 const TemplateUploading = lazy(() => import('@/pages/template-uploading/template-uploading.page'));
 const Settings = lazy(() => import('@/pages/settings/settings.page'));
 const Personal = lazy(() => import('@/pages/personal/personal.page'));
-const NewPublic = lazy(() => import('@/pages/public/public.page'));
+const Public = lazy(() => import('@/pages/public/public.page'));
 
 function App() {
   const dispatch = useDispatch();
@@ -54,8 +52,7 @@ function App() {
             <Meme />
           </Route>
           <Route path="/public/:id" exact>
-            {/* <Public /> */}
-            <NewPublic />
+            <Public />
           </Route>
           <Route path="/explore-memes">
             <ExploreMemes />

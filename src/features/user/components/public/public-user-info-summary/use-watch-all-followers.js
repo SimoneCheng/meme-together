@@ -9,8 +9,7 @@ export const useWatchAllFollowers = (userId) => {
     const unsubscribe = checkAllFollowers({
       id: userId,
       callback: (data) => {
-        if (!data) return;
-        setAllFollowers({ ids: data });
+        setAllFollowers({ ids: data ?? [] });
       }
     });
     return () => unsubscribe();
