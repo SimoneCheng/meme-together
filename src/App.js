@@ -5,7 +5,6 @@ import { PrivateRoute, checkLoginStatus } from '@/features/auth';
 import { AppHeader } from '@/features/layout';
 import { setUserData } from './redux/actions';
 import MemeGenerator from './components/MemeGenerator/MemeGenerator';
-import Meme from './components/MemePage/Meme';
 
 const LandingPage = lazy(() => import('@/pages/landing/landing.page'));
 const PageNotFound = lazy(() => import('@/pages/page-not-found/page-not-found.page'));
@@ -16,6 +15,7 @@ const TemplateUploading = lazy(() => import('@/pages/template-uploading/template
 const Settings = lazy(() => import('@/pages/settings/settings.page'));
 const Personal = lazy(() => import('@/pages/personal/personal.page'));
 const Public = lazy(() => import('@/pages/public/public.page'));
+const Meme = lazy(() => import('@/pages/meme/meme.page'));
 
 function App() {
   const dispatch = useDispatch();
