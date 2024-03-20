@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { PrivateRoute, checkLoginStatus } from '@/features/auth';
 import { AppHeader } from '@/features/layout';
 import { setUserData } from './redux/actions';
-import MemeGenerator from './components/MemeGenerator/MemeGenerator';
+import MemeGenerator from './features/meme-generator/components/MemeGenerator';
 
 const LandingPage = lazy(() => import('@/pages/landing/landing.page'));
 const PageNotFound = lazy(() => import('@/pages/page-not-found/page-not-found.page'));

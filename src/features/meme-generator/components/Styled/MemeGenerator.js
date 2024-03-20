@@ -94,16 +94,16 @@ const DrawEditorBtn = styled(MdEdit)`
 `;
 
 export {
-    Container0,
-    Container1,
-    Container2,
-    Container3,
-    Container4,
-    Container5,
-    Container6,
-    H1,
-    Strong,
-    TextEditorBtn,
-    ShapeEditorBtn,
-    DrawEditorBtn
+  Container0,
+  Container1,
+  Container2,
+  Container3,
+  Container4,
+  Container5,
+  Container6,
+  H1,
+  Strong,
+  TextEditorBtn,
+  ShapeEditorBtn,
+  DrawEditorBtn
 }

@@ -13,7 +13,7 @@ import logo from '@/image/outline_bug_report_black_36dp.png';
 import account from '@/image/outline_account_circle_black_36dp.png';
 import setting from '@/image/outline_settings_black_36dp.png';
 // styles
-import color from "@/components/Styled/colorTheme";
+import color from "@/features/meme-generator/components/Styled/colorTheme";
 import {
   StyledHeader,
   StyledDesktopNav,

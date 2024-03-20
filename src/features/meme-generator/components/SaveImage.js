@@ -1,15 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom'
-import { alertSuccess, alertWarning } from '../../utlis/alert';
+import { alertSuccess, alertWarning } from '../../../utlis/alert';
 
 import {
     getCompletedMemeImageUrl,
     saveCompletedMeme,
     uploadCompletedMeme
-} from '../../utlis/firebase';
-import color from '../Styled/colorTheme';
-import { Button1 } from '../Styled/MemeGenerator/Common';
+} from '../../../utlis/firebase';
+import color from './Styled/colorTheme';
+import { Button1 } from './Styled/Common';
 import {
     CloseButton,
     Container0,
@@ -17,7 +17,7 @@ import {
     Input1,
     Input2,
     LoginButton
-} from '../Styled/Popup';
+} from './Styled/Popup';
 
 function buildSearchTerm(title, tagsArr, canvas) {
     const search_array_term = [];

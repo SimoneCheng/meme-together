@@ -10,12 +10,12 @@ import {
     RectBtn,
     TriangleBtn,
     CircleBtn
-} from '../Styled/MemeGenerator/Common';
+} from './Styled/Common';
 import {
     setShapeFillColor,
     setShapeStrokeColor,
     setShapeStrokeWidth
-} from '../../redux/actions';
+} from '../../../redux/actions';
 
 function ShapeEditor() {
     const dispatch = useDispatch();
