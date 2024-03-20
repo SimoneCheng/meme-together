@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
 import { fabric } from 'fabric';
 
-import { setCanvas } from '../../redux/actions';
-import color from '../Styled/colorTheme';
+import { setCanvas } from '../../../redux/actions';
+import color from './Styled/colorTheme';
 import {
   Container0,
   Container1,
@@ -18,8 +18,8 @@ import {
   TextEditorBtn,
   ShapeEditorBtn,
   DrawEditorBtn
-} from '../Styled/MemeGenerator/MemeGenerator';
-import { getTheTemplate, getTheEditingMeme } from '../../utlis/firebase';
+} from './Styled/MemeGenerator';
+import { getTheTemplate, getTheEditingMeme } from '../../../utlis/firebase';
 import {
   setTextFillColor,
   setTextStrokeColor,
@@ -29,7 +29,7 @@ import {
   setShapeStrokeWidth,
   setDrawingColor,
   setDrawingWidth
-} from '../../redux/actions';
+} from '../../../redux/actions';
 import TextEditor from './TextEditor';
 import ShapeEditor from './ShapeEditor';
 import DrawEditor from './DrawEditor';

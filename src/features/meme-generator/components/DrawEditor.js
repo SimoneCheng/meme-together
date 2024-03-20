@@ -9,11 +9,11 @@ import {
     Input0,
     PencilBtn,
     PointerBtn
-} from '../Styled/MemeGenerator/Common';
+} from './Styled/Common';
 import {
     setDrawingColor,
     setDrawingWidth
-} from '../../redux/actions';
+} from '../../../redux/actions';
 
 function DrawEditor() {
     const dispatch = useDispatch();

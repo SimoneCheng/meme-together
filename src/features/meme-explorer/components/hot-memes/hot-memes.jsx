@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // api
 import { getHotMemes, countClickTime } from "../../api";
 // styles
-import color from "@/components/Styled/colorTheme";
+import color from "@/features/meme-generator/components/Styled/colorTheme";
 import {
   StyledHotMemesDiv,
   HotMemesTitle,

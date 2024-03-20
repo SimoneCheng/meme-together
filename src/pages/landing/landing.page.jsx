@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // styles
-import color from '@/components/Styled/colorTheme';
+import color from '@/features/meme-generator/components/Styled/colorTheme';
 import {
   Wrapper,
   StyledSloganDiv,

@@ -1,7 +1,7 @@
 import ReactLoading from 'react-loading';
 import styled from 'styled-components';
 
-const Container0 = styled.div`
+const StyledLoadingWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@ const Container0 = styled.div`
   height: 100%;
 `;
 
-const Container1 = styled.div`
+const StyledWholeLoadingWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,16 +17,14 @@ const Container1 = styled.div`
   height: calc(100vh - 100px);
 `;
 
-const loading = (type, color, height, width) => (
-  <Container0>
+export const loading = (type, color, height, width) => (
+  <StyledLoadingWrapper>
     <ReactLoading type={type} color={color} height={height} width={width} />
-  </Container0>
+  </StyledLoadingWrapper>
 );
 
-const wholePageLoading = (type, color, height, width) => (
-  <Container1>
+export const wholePageLoading = (type, color, height, width) => (
+  <StyledWholeLoadingWrapper>
     <ReactLoading type={type} color={color} height={height} width={width} />
-  </Container1>
-)
-
-export { loading, wholePageLoading };
+  </StyledWholeLoadingWrapper>
+);

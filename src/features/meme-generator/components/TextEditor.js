@@ -8,12 +8,12 @@ import {
     Container1,
     Button0,
     Input0
-} from '../Styled/MemeGenerator/Common';
+} from './Styled/Common';
 import {
     setTextFillColor,
     setTextStrokeColor,
     setTextStrokeWidth
-} from '../../redux/actions';
+} from '../../../redux/actions';
 
 function TextEditor() {
     const dispatch = useDispatch();

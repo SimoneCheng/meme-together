@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Button1 } from '../Styled/MemeGenerator/Common';
+import { Button1 } from './Styled/Common';
 import SaveStatus from './SaveStatus';
 import SaveImage from './SaveImage';
 

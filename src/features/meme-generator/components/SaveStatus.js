@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom';
 
-import { saveEditingMeme, updateEditingMeme } from '../../utlis/firebase';
-import { alertSuccess } from '../../utlis/alert';
-import { Button1 } from '../Styled/MemeGenerator/Common';
+import { saveEditingMeme, updateEditingMeme } from '../../../utlis/firebase';
+import { alertSuccess } from '../../../utlis/alert';
+import { Button1 } from './Styled/Common';
 
 function SaveStatus(props) {
     const canvas = props.canvas;
