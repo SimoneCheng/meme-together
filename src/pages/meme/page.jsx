@@ -1,6 +1,6 @@
 import { SingleMeme } from "@/features/meme-explorer";
 import { useScrollTo } from "@/hooks";
-import { StyledWrapper } from "./meme.style";
+import { StyledWrapper } from "./style";
 
 const Meme = () => {
   useScrollTo();

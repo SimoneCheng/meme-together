@@ -6,7 +6,7 @@ import {
   AccountDeleting,
   useSettingActiveOption
 } from '@/features/user';
-import { StyledWrapper } from './settings.style';
+import { StyledWrapper } from './style';
 
 const PersonalSettings = () => {
   const [activeOption] = useSettingActiveOption();

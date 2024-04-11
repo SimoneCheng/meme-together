@@ -6,7 +6,7 @@ import {
   PublicMemesSearchBar,
   PublicMemeItem
 } from '@/features/meme-explorer';
-import { StyledWrapper, StyledSearchedMemesWrapper } from './search.style';
+import { StyledWrapper, StyledSearchedMemesWrapper } from './style';
 
 const Search = () => {
   const { query } = useParams();
