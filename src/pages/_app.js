@@ -8,7 +8,6 @@ import {
   useAuthId
 } from '@/features/auth';
 import { AppHeader } from './_app-header';
-import { setUserData } from '../redux/actions';
 
 // pages
 import MemeGenerator from '../features/meme-generator/components/MemeGenerator';
@@ -29,7 +28,6 @@ function App() {
   const [, setAuthId] = useAuthId();
   useLayoutEffect(() => {
     checkLoginStatus((user) => {
-      dispatch(setUserData(user));
       setIsAuthenticated(!!user);
       setAuthId(user.user_id);
     });
