@@ -17,14 +17,14 @@ import {
   InfoImg,
   InfoSubContent,
   Strong,
-} from './landing.style';
+} from './style';
 // images
 import robot from '@/image/day27-my-robot.png';
 import canvasStand from '@/image/day10-canvas-stand.png';
 import colorTools from '@/image/gummy-color-tools.png';
 import floppy from '@/image/day18-floppy.png';
 // components
-import { AppFooter } from '@/features/layout';
+import { AppFooter } from '../_app-footer';
 import { HotMemes } from '@/features/meme-explorer';
 // hooks
 import { useScrollTo } from '@/hooks';

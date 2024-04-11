@@ -1,5 +1,5 @@
 import { AllPublicMemes } from '@/features/meme-explorer';
-import { StyledWrapper } from './explore-memes.style';
+import { StyledWrapper } from './style';
 import { useScrollTo } from '@/hooks';
 
 const ExploresMemes = () => {

@@ -2,7 +2,7 @@ import {
   PublicUserInfoSummary,
   PublicActiveContent
 } from "@/features/user";
-import { StyledWrapper } from "./public.style";
+import { StyledWrapper } from "./style";
 
 const Public = () => {
   return (

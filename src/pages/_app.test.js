@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from '../redux/store';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import App from './_app';
 
 test('renders learn react link', () => {
   window.scrollTo = jest.fn();

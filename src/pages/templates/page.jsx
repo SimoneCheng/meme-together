@@ -1,6 +1,6 @@
 import { useScrollTo } from "@/hooks";
 import { AllTemplates } from "@/features/meme-templates";
-import { StyledH1, StyledWrapper } from "./templates.style";
+import { StyledH1, StyledWrapper } from "./style";
 
 const Templates = () => {
   useScrollTo();

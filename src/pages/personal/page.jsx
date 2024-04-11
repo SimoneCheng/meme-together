@@ -12,7 +12,7 @@ import {
   StyledMemeManagementWrapper,
   StyledButtonGroup,
   StyledButton
-} from './personal.style';
+} from './style';
 
 function Personal() {
   const [status, setStatus] = useState('editing');
