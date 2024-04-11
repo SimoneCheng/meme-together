@@ -12,6 +12,6 @@ export const useWatchAllFollowing = (userId) => {
         setAllFollowing({ ids: data ?? [] })
       }
     });
-    return () => unsubscribe();
+    return unsubscribe;
   }, [setAllFollowing, userId])
 };

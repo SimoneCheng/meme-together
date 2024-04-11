@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAuthId } from "@/features/auth";
 import { getAllFavorite, deletFromFavorite } from "../../../api";
 import { Button } from "@/components/button";
 import {
@@ -13,7 +13,7 @@ import {
 import { alertSuccess } from "@/utlis/alert";
 
 const Favorite = (props) => {
-  const userId = useSelector((state) => state.userData?.user_id);
+  const [authId] = useAuthId();
   const {
     imgName,
     imgSrc,
@@ -22,7 +22,7 @@ const Favorite = (props) => {
 
   const handleClick = () => {
     deletFromFavorite({
-      id: userId,
+      id: authId,
       docId: imgName
     }).then(() => {
       alertSuccess('已取消收藏');
@@ -52,17 +52,17 @@ const Favorite = (props) => {
 };
 
 const AllFavorite = () => {
-  const userId = useSelector((state) => state.userData?.user_id);
+  const [authId] = useAuthId();
   const [allFavorite, setAllFavorite] = useState([]);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!authId) return;
     const unsubscribe = getAllFavorite({
-      id: userId,
+      id: authId,
       callback: setAllFavorite
     });
-    return () => unsubscribe();
-  }, [userId])
+    return unsubscribe;
+  }, [authId])
 
   if (allFavorite.length === 0) {
     return (

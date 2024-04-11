@@ -1,11 +1,17 @@
 import { lazy, Suspense, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { PrivateRoute, checkLoginStatus } from '@/features/auth';
+import {
+  PrivateRoute,
+  checkLoginStatus,
+  useIsAuthenticated,
+  useAuthId
+} from '@/features/auth';
 import { AppHeader } from './_app-header';
 import { setUserData } from '../redux/actions';
-import MemeGenerator from '../features/meme-generator/components/MemeGenerator';
 
+// pages
+import MemeGenerator from '../features/meme-generator/components/MemeGenerator';
 const Landing = lazy(() => import('./landing/page'));
 const PageNotFound = lazy(() => import('./not-found/page'));
 const ExploreMemes = lazy(() => import('./explore-memes/page'));
@@ -19,11 +25,15 @@ const Meme = lazy(() => import('./meme/page'));
 
 function App() {
   const dispatch = useDispatch();
+  const [, setIsAuthenticated] = useIsAuthenticated();
+  const [, setAuthId] = useAuthId();
   useLayoutEffect(() => {
     checkLoginStatus((user) => {
       dispatch(setUserData(user));
+      setIsAuthenticated(!!user);
+      setAuthId(user.user_id);
     });
-  }, [dispatch]);
+  }, [dispatch, setAuthId, setIsAuthenticated]);
 
   return (
     <>

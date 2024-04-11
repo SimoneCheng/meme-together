@@ -1,13 +1,13 @@
 import { Route, Redirect, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useIsAuthenticated } from '../../store';
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const userData = useSelector((state) => state.userData);
   const location = useLocation();
+  const [isAuthenticated] = useIsAuthenticated();
 
   return (
     <Route {...rest}>
-      {userData ? children : (
+      {isAuthenticated ? children : (
         <Redirect
           to={{
             pathname: "/",

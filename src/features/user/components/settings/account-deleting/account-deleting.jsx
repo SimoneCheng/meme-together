@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { reAuth, deleteAccount } from "@/features/auth";
+import { reAuth, deleteAccount, useAuthId } from "@/features/auth";
 import { deleteAllUserData } from "../../../api";
 import { Input } from "@/components/input";
 import { alertError, alertDelete } from "@/utlis/alert";
 import { StyledWrapper, StyledH1, StyledButton } from "./account-deleting.style";
 
 const AccountDeleting = () => {
-  const userData = useSelector((state) => state.userData);
+  const [authId] = useAuthId();
   const [password, setPassword] = useState('');
 
   const handleDelete = () => {
@@ -16,7 +15,7 @@ const AccountDeleting = () => {
         if (!res) {
           alertError(undefined, '密碼輸入錯誤！請重新輸入！');
         }
-        deleteAllUserData(userData.user_id)
+        deleteAllUserData(authId)
           .then(() => {
             deleteAccount(password);
           });

@@ -1,12 +1,3 @@
-const userData = (state = null, action) => {
-    switch (action.type) {
-        case "setUserData":
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
 const canvas = (state = '', action) => {
     switch (action.type) {
         case "setCanvas":
@@ -54,7 +45,6 @@ const drawingStyleInCanvas = (state = { color: '#000000', width: '2' }, action) 
 }
 
 export {
-    userData,
     canvas,
     textStyleInCanvas,
     shapeStyleInCanvas,

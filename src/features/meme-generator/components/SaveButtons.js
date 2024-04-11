@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import { useIsAuthenticated } from '@/features/auth';
 import { Button1 } from './Styled/Common';
 import SaveStatus from './SaveStatus';
 import SaveImage from './SaveImage';
 
 function SaveButtons() {
-    const userData = useSelector((state) => state.userData);
+    const [isAuthenticated] = useIsAuthenticated();
     const canvas = useSelector((state) => state.canvas);
 
     const downloadImage = (canvi, imageFormat) => {
@@ -18,8 +18,8 @@ function SaveButtons() {
 
     return (
         <>
-            {userData ? <SaveStatus canvas={canvas} /> : ""}
-            {userData ? <SaveImage canvas={canvas} /> : ""}
+            {isAuthenticated ? <SaveStatus canvas={canvas} /> : ""}
+            {isAuthenticated ? <SaveImage canvas={canvas} /> : ""}
             <div>
                 <Button1 onClick={() => downloadImage(canvas, 'png')}>下載圖片（png）</Button1>
             </div>

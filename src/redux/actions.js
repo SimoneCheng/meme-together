@@ -1,10 +1,3 @@
-const setUserData = (userData) => {
-    return {
-        type: "setUserData", 
-        payload: userData
-    }
-}
-
 const setCanvas = (canvas) => {
     return {
         type: "setCanvas",
@@ -70,8 +63,7 @@ const setDrawingWidth = (width) => {
     }
 }
 
-export { 
-    setUserData,
+export {
     setCanvas,
     setTextFillColor,
     setTextStrokeColor,

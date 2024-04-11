@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom'
+import { useAuthId } from '@/features/auth';
 import { alertSuccess, alertWarning } from '../../../utlis/alert';
 
 import {
@@ -53,8 +53,7 @@ function collectMemeInfo(title, context, imgName, userId, tags, isPublic, search
 function SaveImage(props) {
     const canvas = props.canvas;
     const { path } = useRouteMatch();
-    const userData = useSelector((state) => state.userData);
-    const { user_id } = userData;
+    const [authId] = useAuthId();
     const title = useRef(null);
     const context = useRef(null);
     const tags = useRef(null);
@@ -67,7 +66,7 @@ function SaveImage(props) {
             return;
         } else {
             const imgURL = canvas.toDataURL();
-            uploadCompletedMeme(user_id, imgURL)
+            uploadCompletedMeme(authId, imgURL)
                 .then((res) => {
                     const tagsArr = tags.current.value.split(' ');
                     const searchArrayTerm = buildSearchTerm(title.current.value, tagsArr, canvas)
@@ -75,7 +74,7 @@ function SaveImage(props) {
                         title.current.value,
                         context.current.value,
                         res,
-                        userData.user_id,
+                        authId,
                         tagsArr,
                         isPublic.current.checked,
                         searchArrayTerm
