@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom';
-
+import { useAuthId } from '@/features/auth';
 import { saveEditingMeme, updateEditingMeme } from '../../../utlis/firebase';
 import { alertSuccess } from '../../../utlis/alert';
 import { Button1 } from './Styled/Common';
@@ -10,8 +9,7 @@ function SaveStatus(props) {
     const canvas = props.canvas;
     const { path } = useRouteMatch();
     const { id } = useParams();
-    const userData = useSelector((state) => state.userData);
-    const { user_id } = userData;
+    const [authId] = useAuthId();
     const [docID, setdocID] = useState('');
 
     const TemplateCanvasToJSON = (canvas) => {
@@ -25,13 +23,13 @@ function SaveStatus(props) {
             last_save_time: new Date()
         }
         if (!docID) {
-            saveEditingMeme(user_id, data)
+            saveEditingMeme(authId, data)
                 .then((docRef) => {
                     setdocID(docRef.id);
                     alertSuccess('已儲存編輯狀態！可以到個人頁面看看喔！');
                 })
         } else {
-            updateEditingMeme(user_id, docID, { canvas_status: status, last_save_time: new Date() })
+            updateEditingMeme(authId, docID, { canvas_status: status, last_save_time: new Date() })
                 .then(alertSuccess('已更新編輯狀態！可以到個人頁面看看喔！'));
         }
     }
@@ -43,7 +41,7 @@ function SaveStatus(props) {
             canvas_status: status,
             last_save_time: time
         }
-        updateEditingMeme(user_id, id, data)
+        updateEditingMeme(authId, id, data)
             .then(alertSuccess('已更新編輯狀態！'));
     }
 

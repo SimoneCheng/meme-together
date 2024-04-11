@@ -1,22 +1,20 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useAuthId } from "@/features/auth";
 import { checkAllFollowing } from "@/features/user/api";
 import { usePersonalFollowing } from "@/features/user/store";
 
 export const useWatchPersonalFollowing = () => {
-  const userData = useSelector((state) => state.userData);
+  const [authId] = useAuthId();
   const [, setPersonalFollowing] = usePersonalFollowing();
 
   useEffect(() => {
-    if (!userData || !userData.user_id) {
-      return;
-    }
+    if (!authId) return;
     const unsubscribe = checkAllFollowing({
-      id: userData.user_id,
+      id: authId,
       callback: (data) => {
         setPersonalFollowing(data ?? [])
       }
     });
-    return () => unsubscribe();
-  }, [setPersonalFollowing, userData])
+    return unsubscribe;
+  }, [authId, setPersonalFollowing])
 };

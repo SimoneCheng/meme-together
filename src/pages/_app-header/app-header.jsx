@@ -1,7 +1,8 @@
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-// api
-import { nativeLogout } from "@/features/auth";
+import {
+  nativeLogout,
+  useIsAuthenticated
+} from "@/features/auth";
 // components
 import { LoginDialog, SignupDialog } from "@/features/auth";
 // hooks
@@ -30,19 +31,19 @@ import {
 
 const AppHeader = () => {
   const history = useHistory();
-  const userData = useSelector((state) => state.userData);
+  const [isAuthenticated] = useIsAuthenticated();
   const mobileNav = useDisclosure();
   const loginDialog = useDisclosure();
   const signupDialog = useDisclosure();
 
   const handleAccountClick = () => {
-    if (!userData) return alertError(undefined, '尚未登入');
+    if (!isAuthenticated) return alertError(undefined, '尚未登入');
     if (mobileNav.isOpen) mobileNav.onClose();
     history.push('/personal');
   }
 
   const handleSettingClick = () => {
-    if (!userData) return alertError(undefined, "尚未登入！");
+    if (!isAuthenticated) return alertError(undefined, "尚未登入！");
     if (mobileNav.isOpen) mobileNav.onClose();
     history.push('/settings');
   }
@@ -80,7 +81,7 @@ const AppHeader = () => {
                 創作
               </StyledButtonLink>
             </li>
-            {userData && (
+            {isAuthenticated && (
               <li>
                 <StyledButtonLink to="/template-uploading" color={color}>
                   貢獻模板
@@ -88,7 +89,7 @@ const AppHeader = () => {
               </li>
             )}
           </StyledDesktopUl>
-          {userData ? (
+          {isAuthenticated ? (
             <StyledDesktopUl>
               <li>
                 <StyledIconButton type="button" onClick={handleAccountClick}>
@@ -175,14 +176,14 @@ const AppHeader = () => {
                   創作
                 </StyledMobileLink>
               </li>
-              {userData && (
+              {isAuthenticated && (
                 <li>
                   <StyledMobileLink to="/template-uploading" onClick={mobileNav.onClose}>
                     貢獻模板
                   </StyledMobileLink>
                 </li>
               )}
-              {userData ? (
+              {isAuthenticated ? (
                 <>
                   <li>
                     <StyledMobileButton type="button" onClick={handleAccountClick}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAuthId } from "@/features/auth";
 import {
   getPrivateMemeImage,
   changeMemePublicStatus,
@@ -116,17 +117,17 @@ const PrivateMemeImage = (props) => {
 };
 
 const AllPublicMemeImage = () => {
-  const userId = useSelector((state) => state.userData?.user_id);
+  const [authId] = useAuthId();
   const [allPrivateMeme, setAllPrivateMeme] = useState([]);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!authId) return;
     const unsubscribe = getPrivateMemeImage({
-      id: userId,
+      id: authId,
       callback: setAllPrivateMeme
     });
-    return () => unsubscribe();
-  }, [userId])
+    return unsubscribe;
+  }, [authId])
 
   if (allPrivateMeme.length === 0) {
     return (

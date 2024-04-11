@@ -38,7 +38,7 @@ const AllPublicMemes = () => {
       id: publicPersonalInfo.userId,
       callback: setAllPublicMemes
     })
-    return () => unsubscribe();
+    return unsubscribe;
   }, [publicPersonalInfo.userId])
 
   if (allPublicMemes.length === 0) {

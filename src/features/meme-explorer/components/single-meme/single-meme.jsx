@@ -58,7 +58,7 @@ const SingleMeme = () => {
       id: singleMeme.owner_user_id,
       callback: setAuthorInfo
     })
-    return () => unsubscribe();
+    return unsubscribe;
   }, [singleMeme.owner_user_id])
 
   if (!singleMeme.img_url || !authInfo.user_name) {
@@ -88,7 +88,11 @@ const SingleMeme = () => {
           <StyledContext>
             {singleMeme.context}
           </StyledContext>
-          {singleMeme.tags.map((item) => <StyledTag>#{item}</StyledTag>)}
+          {singleMeme.tags.map((item, index) => (
+            <StyledTag key={index}>
+              #{item}
+            </StyledTag>
+          ))}
           <StyledContextBottomWrapper>
             <p>
               <strong>瀏覽次數：</strong>

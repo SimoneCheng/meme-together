@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 // store
 import { usePersonalInfo } from '@/features/user/store';
@@ -29,7 +28,6 @@ import {
 } from './personal-setting.style';
 
 const PersonalSetting = () => {
-  const userData = useSelector((state) => state.userData);
   const [personalInfo] = usePersonalInfo();
   const [selfIntro, setSelfIntro] = useState('');
 
@@ -55,12 +53,12 @@ const PersonalSetting = () => {
       width: 400,
       success: async (compressedResult) => {
         await uploadProfileImg({
-          id: userData.user_id,
+          id: personalInfo.userId,
           file: compressedResult
         });
-        const url = await getProfileImg(userData.user_id);
+        const url = await getProfileImg(personalInfo.userId);
         await updateUserInfo({
-          id: userData.user_id,
+          id: personalInfo.userId,
           data: { user_img: url }
         });
         alertSuccess('成功更換頭像！');
@@ -71,7 +69,7 @@ const PersonalSetting = () => {
   const handleDefaultProfileImgUsing = () => {
     const data = { user_img: process.env.REACT_APP_defaultProfileImg };
     updateUserInfo({
-      id: userData.user_id,
+      id: personalInfo.userId,
       data
     })
       .then(() => alertSuccess('已更換成預設頭像！'));
@@ -80,7 +78,7 @@ const PersonalSetting = () => {
   const handleSelfIntroUpdating = () => {
     const data = { self_intro: selfIntro }
     updateUserInfo({
-      id: userData.user_id,
+      id: personalInfo.userId,
       data
     })
       .then(() => alertSuccess('個人簡介更新成功！'));

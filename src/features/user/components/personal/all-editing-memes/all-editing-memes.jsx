@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { MdAddCircleOutline } from "react-icons/md";
+import { useAuthId } from "@/features/auth";
 import { getAllEditingMemes, deletEditingMeme } from "../../../api";
 import { Button } from "@/components/button";
 import { alertSuccess } from "@/utlis/alert";
@@ -16,7 +16,7 @@ import {
 } from "./all-editing-memes.style";
 
 const EditingMeme = (props) => {
-  const userId = useSelector((state) => state.userData?.user_id);
+  const [authId] = useAuthId();
   const {
     imgSrc,
     docId,
@@ -26,7 +26,7 @@ const EditingMeme = (props) => {
 
   const handleClick = () => {
     deletEditingMeme({
-      id: userId,
+      id: authId,
       docId
     }).then(() => {
       alertSuccess('刪除成功！');
@@ -77,17 +77,17 @@ const AddNewEditingMeme = () => {
 };
 
 const AllEditingMemes = () => {
-  const userId = useSelector((state) => state.userData?.user_id);
+  const [authId] = useAuthId();
   const [allEditingMemes, setAllEditingMemes] = useState([]);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!authId) return;
     const unsubscribe = getAllEditingMemes({
-      id: userId,
+      id: authId,
       callback: setAllEditingMemes
     })
-    return () => unsubscribe();
-  }, [userId]);
+    return unsubscribe;
+  }, [authId]);
 
   if (allEditingMemes.length === 0) {
     return (

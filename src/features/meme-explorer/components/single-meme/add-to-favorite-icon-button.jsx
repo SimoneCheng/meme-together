@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { useIsAuthenticated, useAuthId } from "@/features/auth";
 import {
   checkFavoriteList,
   addToFavorite,
@@ -15,18 +15,19 @@ const AddToFavoriteIconButton = (props) => {
     img_url,
     owner_user_id
   } = props;
-  const userData = useSelector((state) => state.userData);
+  const [isAuthenticated] = useIsAuthenticated();
+  const [authId] = useAuthId();
   const [favoriteList, setFavoriteList] = useState([]);
 
   useEffect(() => {
-    if (!userData?.user_id) return;
+    if (!authId) return;
     const unsubscribe = checkFavoriteList({
-      id: userData.user_id,
+      id: authId,
       imgName: img_name,
       callback: setFavoriteList
     });
-    return () => unsubscribe();
-  }, [img_name, userData.user_id])
+    return unsubscribe;
+  }, [authId, img_name])
 
   const handleAddToFavorite = () => {
     const data = {
@@ -36,7 +37,7 @@ const AddToFavoriteIconButton = (props) => {
       owner_user_id
     };
     addToFavorite({
-      id: userData.user_id,
+      id: authId,
       docId: img_name,
       data
     }).then(() => {
@@ -46,14 +47,14 @@ const AddToFavoriteIconButton = (props) => {
 
   const handleDeleteFromFavorite = () => {
     deleteFromFavorite({
-      id: userData.user_id,
+      id: authId,
       docId: img_name
     }).then(() => {
       alertSuccess('已取消收藏！');
     });
   };
 
-  if (!userData?.user_id) {
+  if (!isAuthenticated) {
     return null;
   }
 

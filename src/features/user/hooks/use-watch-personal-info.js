@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { getUserInfo } from "../api";
+import { useAuthId } from "@/features/auth";
 import { usePersonalInfo } from "../store";
 
 export const useWatchPersonalInfo = (callback) => {
-  const userData = useSelector((state) => state.userData);
+  const [authId] = useAuthId();
   const [, setPersonalInfo] = usePersonalInfo();
 
   useEffect(() => {
-    if (!userData) return;
+    if (!authId) return;
     const unsubscribe = getUserInfo({
-      id: userData.user_id,
+      id: authId,
       callback: (data) => {
         if (!data) return;
         setPersonalInfo({
@@ -24,6 +24,6 @@ export const useWatchPersonalInfo = (callback) => {
         callback?.(data)
       },
     });
-    return () => unsubscribe();
-  }, [callback, setPersonalInfo, userData])
+    return unsubscribe;
+  }, [authId, callback, setPersonalInfo])
 };

@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/button";
 import { useWatchPersonalInfo } from "@/features/user/hooks";
@@ -6,7 +5,6 @@ import { usePersonalInfo } from "@/features/user/store";
 import { StyledImg, StyledItem, StyledWrapper } from "./user-info-summary.style";
 
 const UserInfoSummary = () => {
-  const userId = useSelector((state) => state.userData?.user_id);
   const [personalInfo] = usePersonalInfo();
 
   useWatchPersonalInfo();
@@ -30,7 +28,7 @@ const UserInfoSummary = () => {
         </p>
       </StyledItem>
       <StyledItem>
-        <Link to={`/public/${userId}`}>
+        <Link to={`/public/${personalInfo.userId}`}>
           <Button colorScheme="navyBlue" variant="solid">
             前往個人公開頁面
           </Button>

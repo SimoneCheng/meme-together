@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
+import { useAuthId } from '@/features/auth';
 import {
   uploadTemplate,
   getTemplateURL,
@@ -46,7 +46,7 @@ const UploadTemplateInput = ({ onChange }) => {
 const TemplateUploading = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const compressedFile = useRef(null);
-  const userData = useSelector((state) => state.userData);
+  const [authId] = useAuthId();
 
   const clickUploadTemplate = (e) => {
     const file = e.target.files[0];
@@ -68,7 +68,7 @@ const TemplateUploading = () => {
   const clickDonateTemplate = async () => {
     try {
       const templateId = await uploadTemplate({
-        userId: userData.user_id,
+        userId: authId,
         file: compressedFile.current
       });
       const url = await getTemplateURL(templateId);
@@ -76,7 +76,7 @@ const TemplateUploading = () => {
         image_id: templateId,
         image_url: url,
         created_time: new Date(),
-        creator: userData.user_id
+        creator: authId
       };
       saveNewTemplate({
         id: templateId,

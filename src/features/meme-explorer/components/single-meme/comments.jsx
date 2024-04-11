@@ -173,7 +173,7 @@ const Comments = () => {
       memeId,
       callback: setAllComments
     });
-    return () => unsubscribe();
+    return unsubscribe;
   }, [memeId])
 
   return (

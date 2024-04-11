@@ -1,19 +1,17 @@
 import { createStore, combineReducers } from "redux";
-import { 
-    userData, 
+import {
     canvas,
     textStyleInCanvas,
     shapeStyleInCanvas,
     drawingStyleInCanvas
- } from "./reducers";
+} from "./reducers";
 
- const reducers = combineReducers({ 
-     userData,
-     canvas,
-     textStyleInCanvas,
-     shapeStyleInCanvas,
-     drawingStyleInCanvas
- })
+const reducers = combineReducers({
+    canvas,
+    textStyleInCanvas,
+    shapeStyleInCanvas,
+    drawingStyleInCanvas
+})
 
 const store = createStore(
     reducers,
