@@ -8,6 +8,7 @@ import {
 import { PublicMemesSearchBar } from '../public-memes-search-bar';
 import PublicMemeItem from './public-meme-item';
 import { Button } from '@/components/button';
+import { Loading } from '@/components/loading';
 // styles
 import {
   StyledSearchAndSortWrapper,
@@ -15,8 +16,6 @@ import {
   StyledLoadingWrapper,
   StyledSelect
 } from './all-public-memes.style';
-// utils
-import { loading } from '@/utlis/loading';
 
 const AllPublicMemes = () => {
   const [allPublicMemeImg, setAllPublicMemeImg] = useState([]);
@@ -34,7 +33,12 @@ const AllPublicMemes = () => {
   if (allPublicMemeImg.length === 0) {
     return (
       <StyledLoadingWrapper>
-        {loading('spinningBubbles', '#056', 50, 50)}
+        <Loading
+          type="spinningBubbles"
+          color="#056"
+          width={50}
+          height={50}
+        />
       </StyledLoadingWrapper>
     );
   }

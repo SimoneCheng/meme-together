@@ -10,8 +10,8 @@ import {
 } from '@/features/user/api';
 // components
 import { Button } from '@/components/button';
+import { LoadingWithWholePage } from '@/components/loading';
 // utils
-import { wholePageLoading } from '@/utlis/loading';
 import { alertSuccess } from '@/utlis/alert';
 // hooks
 import { useWatchPersonalInfo } from '@/features/user/hooks';
@@ -40,7 +40,12 @@ const PersonalSetting = () => {
   if (!personalInfo.userName) {
     return (
       <StyledWrapper>
-        {wholePageLoading('spinningBubbles', '#056', 50, 50)}
+        <LoadingWithWholePage
+          type="spinningBubbles"
+          color="#056"
+          width={50}
+          height={50}
+        />
       </StyledWrapper>
     );
   }

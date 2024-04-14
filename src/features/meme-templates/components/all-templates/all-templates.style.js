@@ -61,7 +61,4 @@ export const StyledTemplateItemImg = styled.img`
 
 export const StyledLoadingWrapper = styled.div`
   margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
 `

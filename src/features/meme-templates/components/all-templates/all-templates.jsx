@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllTemplates, getAllTemplatesNextPage } from '../../api';
 import TemplatesItem from './templates-item';
 import { Button } from '@/components/button';
-import { loading } from '@/utlis/loading';
+import { Loading } from '@/components/loading';
 import {
   StyledAllTemplatesWrapper,
   StyledLoadingWrapper,
@@ -23,7 +23,12 @@ const AllTemplates = () => {
   if (allTemplates.length === 0) {
     return (
       <StyledLoadingWrapper>
-        {loading('spinningBubbles', '#056', 50, 50)}
+        <Loading
+          type="spinningBubbles"
+          color="#056"
+          width={50}
+          height={50}
+        />
       </StyledLoadingWrapper>
     );
   }
