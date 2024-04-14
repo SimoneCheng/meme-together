@@ -6,8 +6,7 @@ import { getUserInfo } from "@/features/user/api";
 // components
 import Comments from "./comments";
 import AddToFavoriteIconButton from "./add-to-favorite-icon-button";
-// utils
-import { wholePageLoading } from "@/utlis/loading";
+import { LoadingWithWholePage } from "@/components/loading";
 // styles
 import {
   StyledWrapper,
@@ -62,7 +61,14 @@ const SingleMeme = () => {
   }, [singleMeme.owner_user_id])
 
   if (!singleMeme.img_url || !authInfo.user_name) {
-    return wholePageLoading('spinningBubbles', '#fff', 50, 50);
+    return (
+      <LoadingWithWholePage
+        type="spinningBubbles"
+        color="#fff"
+        width={50}
+        height={50}
+      />
+    );
   }
 
   return (

@@ -79,9 +79,6 @@ export const StyledAllPublicMemesWrapper = styled.div`
 
 export const StyledLoadingWrapper = styled.div`
   margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
 `
 
 export const StyledSelect = styled.select`
