@@ -4,7 +4,6 @@ import { nativeLogin } from '../../api';
 // components
 import {
   Dialog,
-  DialogOverlay,
   DialogContent,
   DialogHeader,
   DialogBody,
@@ -50,56 +49,54 @@ const LoginDialog = ({ isOpen, onClose }) => {
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
-      <DialogOverlay>
-        <DialogContent>
-          <DialogHeader>
+      <DialogContent>
+        <DialogHeader>
+          登入
+        </DialogHeader>
+        <DialogBody>
+          <form>
+            <StyledFormControl>
+              <StyledFormLabel>
+                電子信箱
+              </StyledFormLabel>
+              <Input
+                variant="outline"
+                type="email"
+                placeholder="email"
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
+                autoComplete="on"
+              />
+            </StyledFormControl>
+            <StyledFormControl>
+              <StyledFormLabel>
+                密碼
+              </StyledFormLabel>
+              <Input
+                variant="outline"
+                type="password"
+                placeholder="password"
+                name="password"
+                value={userData.password}
+                onChange={handleChange}
+                autoComplete="on"
+              />
+            </StyledFormControl>
+          </form>
+        </DialogBody>
+        <DialogFooter>
+          <DialogFooterCloseButton>
+            取消
+          </DialogFooterCloseButton>
+          <Button
+            colorScheme="yellow"
+            onClick={handleLoginClick}
+          >
             登入
-          </DialogHeader>
-          <DialogBody>
-            <form>
-              <StyledFormControl>
-                <StyledFormLabel>
-                  電子信箱
-                </StyledFormLabel>
-                <Input
-                  variant="outline"
-                  type="email"
-                  placeholder="email"
-                  name="email"
-                  value={userData.email}
-                  onChange={handleChange}
-                  autoComplete="on"
-                />
-              </StyledFormControl>
-              <StyledFormControl>
-                <StyledFormLabel>
-                  密碼
-                </StyledFormLabel>
-                <Input
-                  variant="outline"
-                  type="password"
-                  placeholder="password"
-                  name="password"
-                  value={userData.password}
-                  onChange={handleChange}
-                  autoComplete="on"
-                />
-              </StyledFormControl>
-            </form>
-          </DialogBody>
-          <DialogFooter>
-            <DialogFooterCloseButton>
-              取消
-            </DialogFooterCloseButton>
-            <Button
-              colorScheme="yellow"
-              onClick={handleLoginClick}
-            >
-              登入
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </DialogOverlay>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 }

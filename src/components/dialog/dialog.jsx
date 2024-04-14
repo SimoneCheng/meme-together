@@ -5,6 +5,7 @@ import {
   useMemo
 } from 'react';
 import { Portal } from '@/components/portal';
+import DialogOverlay from './dialog-overlay';
 
 const DialogContext = createContext(null);
 DialogContext.displayName = 'DialogContext';
@@ -20,6 +21,7 @@ export const useDialogContext = () => {
 const Dialog = ({
   isOpen,
   onClose: onCloseProp,
+  closeOnOutsideClick = true,
   children
 }) => {
 
@@ -29,14 +31,17 @@ const Dialog = ({
 
   const contextValue = useMemo(() => {
     return {
-      onClose
+      onClose,
+      closeOnOutsideClick
     }
-  }, [onClose]);
+  }, [closeOnOutsideClick, onClose]);
 
   return isOpen ? (
     <Portal>
       <DialogContext.Provider value={contextValue}>
-        {children}
+        <DialogOverlay>
+          {children}
+        </DialogOverlay>
       </DialogContext.Provider>
     </Portal>
   ) : null;
