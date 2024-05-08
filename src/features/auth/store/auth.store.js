@@ -7,7 +7,7 @@ const authStore = proxy({
 });
 
 export const useIsAuthenticated = () => {
-  const { isAuthenticated} = useSnapshot(authStore);
+  const { isAuthenticated } = useSnapshot(authStore);
   const setIsAuthenticated = useCallback((data) => {
     authStore.isAuthenticated = data;
   }, []);
