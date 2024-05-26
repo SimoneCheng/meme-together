@@ -13,7 +13,7 @@ const DialogFooterCloseButton = forwardRef((props, ref) => {
   const handleClick = (e) => {
     onClickProp?.(e);
     onClose?.();
-  }
+  };
 
   return (
     <StyledDialogFooterCloseButton
@@ -24,7 +24,9 @@ const DialogFooterCloseButton = forwardRef((props, ref) => {
     >
       {children}
     </StyledDialogFooterCloseButton>
-  )
+  );
 });
+
+DialogFooterCloseButton.displayName = 'DialogFooterCloseButton';
 
 export default DialogFooterCloseButton;
