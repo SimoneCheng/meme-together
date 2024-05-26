@@ -2,6 +2,15 @@
   "name": "meme-together",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "analyze": "craco build",
+    "lint": "npx eslint src/**/*"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -24,18 +33,13 @@
     "valtio": "^1.13.0",
     "web-vitals": "^1.1.2"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
-    "analyze": "craco build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@eslint/js": "^9.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.3.0",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "browserslist": {
     "production": [
@@ -48,9 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@craco/craco": "^7.1.0",
-    "webpack-bundle-analyzer": "^4.10.2"
   }
 }
