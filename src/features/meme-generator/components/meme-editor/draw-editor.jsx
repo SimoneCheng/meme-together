@@ -12,7 +12,8 @@ import { Button } from '@/components/button';
 import {
   StyledContainer,
   StyledInput,
-  StyledEditorContainer
+  StyledEditorContainer,
+  StyledLabel
 } from './meme-editor.style';
 
 const DrawEditor = ({ canvas }) => {
@@ -46,10 +47,10 @@ const DrawEditor = ({ canvas }) => {
         <strong>選擇筆刷樣式</strong>
       </StyledContainer>
       <StyledContainer>
-        <label htmlFor="pencil-color">
+        <StyledLabel htmlFor="pencil-color">
           <RiSipLine />
           顏色
-        </label>
+        </StyledLabel>
         <input
           type="color"
           id="pencil-color"

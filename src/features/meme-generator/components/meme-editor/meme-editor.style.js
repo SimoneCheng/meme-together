@@ -12,6 +12,10 @@ export const StyledContainer = styled.div`
   align-items: center;
 `;
 
+export const StyledLabel = styled.label`
+  margin-right: 8px;
+`;
+
 export const StyledInput = styled.input`
   cursor: pointer;
 `;

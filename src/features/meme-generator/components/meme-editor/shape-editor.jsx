@@ -14,7 +14,8 @@ import { Button } from '@/components/button';
 import {
   StyledContainer,
   StyledInput,
-  StyledEditorContainer
+  StyledEditorContainer,
+  StyledLabel
 } from './meme-editor.style';
 
 const defaultShapeData = {
@@ -105,10 +106,10 @@ const ShapeEditor = ({ canvas }) => {
         <strong>選擇物件樣式</strong>
       </StyledContainer>
       <StyledContainer>
-        <label htmlFor="shape-fill-color">
+        <StyledLabel htmlFor="shape-fill-color">
           <RiPaintFill />
           填滿
-        </label>
+        </StyledLabel>
         <StyledInput
           type="color"
           id="shape-fill-color"
@@ -117,10 +118,10 @@ const ShapeEditor = ({ canvas }) => {
         />
       </StyledContainer>
       <StyledContainer>
-        <label htmlFor="shape-stroke-color">
+        <StyledLabel htmlFor="shape-stroke-color">
           <RiEditBoxLine />
           外框
-        </label>
+        </StyledLabel>
         <StyledInput
           type="color"
           id="shape-stroke-color"

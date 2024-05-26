@@ -21,7 +21,8 @@ const Settings = lazy(() => import('./settings/page'));
 const Personal = lazy(() => import('./personal/page'));
 const Public = lazy(() => import('./public/page'));
 const Meme = lazy(() => import('./meme/page'));
-const PersonalMemeGeneratorPage = lazy(() => import('./personal/meme-generator/[id]/page'));
+const PersonalMemeGenerator = lazy(() => import('./personal/meme-generator/[id]/page'));
+const TemplateMemeGenerator = lazy(() => import('./templates/[id]/page'));
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function App() {
           />
           <Route
             path="/templates/:id"
-            render={() => (<MemeGenerator />)}
+            render={() => (<TemplateMemeGenerator />)}
           />
           <PrivateRoute
             path="/personal"
@@ -60,7 +61,7 @@ function App() {
           />
           <Route
             path="/personal/meme-generator/:id"
-            render={() => (<PersonalMemeGeneratorPage />)}
+            render={() => (<PersonalMemeGenerator />)}
           />
           <PrivateRoute
             path="/settings"

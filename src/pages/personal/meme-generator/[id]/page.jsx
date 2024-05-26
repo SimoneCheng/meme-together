@@ -4,13 +4,18 @@ import { fabric } from 'fabric';
 import { useAuthId } from '@/features/auth';
 import {
   getTheEditingMeme,
-  MemeEditor
+  MemeEditor,
+  PersonalSavingStatusButton,
+  DownloadWithPngButton,
+  DownloadWithJpgButton
 } from '@/features/meme-generator';
 import {
   StyledWrapper,
   StyledH1,
   StyledStrong,
-  StyledContainer
+  StyledCanvasContainer,
+  StyledMemeEditorContainer,
+  StyledButtonsContainer
 } from './style';
 
 const PersonalMemeGeneratorPage = () => {
@@ -26,7 +31,7 @@ const PersonalMemeGeneratorPage = () => {
     }).then((res) => {
       // init canvas
       if (!res) return;
-      const canvas = new fabric.Canvas('c', {
+      const canvas = new fabric.Canvas('meme-canvas', {
         width: res.canvas_width > 600 ? 600 : res.canvas_width,
         height: res.canvas_width > 600 ? res.canvas_height * (600 / res.canvas_width) : res.canvas_height,
         hoverCursor: 'grab',
@@ -45,15 +50,22 @@ const PersonalMemeGeneratorPage = () => {
           迷因產生器
         </StyledStrong>
       </StyledH1>
-      <StyledContainer>
-        <StyledContainer>
-          {canvas ?
-            <MemeEditor canvas={canvas} /> :
-            <h1>讀取中...</h1>
-          }
-        </StyledContainer>
-        <canvas id="c" />
-      </StyledContainer>
+      <div>
+        <StyledCanvasContainer>
+          <StyledMemeEditorContainer>
+            {canvas ?
+              <MemeEditor canvas={canvas} /> :
+              <h1>讀取中...</h1>
+            }
+          </StyledMemeEditorContainer>
+          <canvas id="meme-canvas" />
+        </StyledCanvasContainer>
+        <StyledButtonsContainer>
+          {canvas && <PersonalSavingStatusButton canvas={canvas} />}
+          {canvas && <DownloadWithPngButton canvas={canvas} />}
+          {canvas && <DownloadWithJpgButton canvas={canvas} />}
+        </StyledButtonsContainer>
+      </div>
     </StyledWrapper>
   );
 };
