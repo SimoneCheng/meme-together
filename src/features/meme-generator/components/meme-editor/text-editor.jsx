@@ -9,7 +9,8 @@ import { Button } from '@/components/button';
 import {
   StyledContainer,
   StyledInput,
-  StyledEditorContainer
+  StyledEditorContainer,
+  StyledLabel
 } from './meme-editor.style';
 
 const TextEditor = ({ canvas }) => {
@@ -72,10 +73,10 @@ const TextEditor = ({ canvas }) => {
         <strong>選擇字體樣式</strong>
       </StyledContainer>
       <StyledContainer>
-        <label htmlFor="text-fill-color">
+        <StyledLabel htmlFor="text-fill-color">
           <RiPaintFill />
           填滿
-        </label>
+        </StyledLabel>
         <StyledInput
           type="color"
           id="text-fill-color"
@@ -84,10 +85,10 @@ const TextEditor = ({ canvas }) => {
         />
       </StyledContainer>
       <StyledContainer>
-        <label htmlFor="text-stroke-color">
+        <StyledLabel htmlFor="text-stroke-color">
           <RiEditBoxLine />
           外框
-        </label>
+        </StyledLabel>
         <StyledInput
           type="color"
           id="text-stroke-color"

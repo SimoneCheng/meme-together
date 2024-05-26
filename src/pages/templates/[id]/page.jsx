@@ -16,19 +16,20 @@ const TemplateMemeGeneratorPage = () => {
   useEffect(() => {
     if (!id) return;
     getTheTemplate(id).then((res) => {
+      // init canvas
       if (!res) return;
       const image_url = res.image_url;
       const newImg = new Image();
       newImg.crossOrigin = 'Anonymous';
       newImg.src = image_url;
       newImg.onload = function () {
-        const canvas = new fabric.Canvas('c', {
+        const canvas = new fabric.Canvas('meme-canvas', {
           width: 600,
           height: this.height * (600 / this.width),
           hoverCursor: 'grab',
           freeDrawingCursor: 'crosshair',
           isDrawingMode: false,
-          backgroundImage: new fabric.Image(image_url, {
+          backgroundImage: new fabric.Image(newImg, {
             scaleX: 600 / this.width,
             scaleY: 600 / this.width
           }),
@@ -65,7 +66,7 @@ const TemplateMemeGeneratorPage = () => {
             <h1>讀取中...</h1>
           }
         </StyledContainer>
-        <canvas id="c" />
+        <canvas id="meme-canvas" />
       </StyledContainer>
     </StyledWrapper>
   );
