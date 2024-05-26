@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fabric } from 'fabric';
-import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri';
+import { RiPaintFill, RiEditBoxLine, RiAlignCenter } from 'react-icons/ri/index.esm';
 
 import {
     Container0,

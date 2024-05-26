@@ -4,7 +4,7 @@ import {
     IoTriangleOutline,
     IoSquareOutline,
     IoRadioButtonOffOutline
-} from 'react-icons/io5';
+} from 'react-icons/io5/index.esm';
 
 const Container0 = styled.div`
   margin-bottom: 30px;

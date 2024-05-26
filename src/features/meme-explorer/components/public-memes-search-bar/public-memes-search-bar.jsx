@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa/index.esm';
 import {
   StyledWrapper,
   StyledInput,

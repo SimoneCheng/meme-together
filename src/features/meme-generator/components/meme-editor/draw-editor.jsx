@@ -3,11 +3,11 @@ import { fabric } from '@/libs/fabric';
 import {
   RiSipLine,
   RiAlignCenter
-} from 'react-icons/ri';
+} from 'react-icons/ri/index.esm';
 import {
   FaPencilAlt,
   FaMousePointer
-} from 'react-icons/fa';
+} from 'react-icons/fa/index.esm';
 import { Button } from '@/components/button';
 import {
   StyledContainer,

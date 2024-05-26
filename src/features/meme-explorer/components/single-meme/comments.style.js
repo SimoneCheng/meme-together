@@ -2,12 +2,12 @@ import styled from "styled-components";
 import {
   MdSend,
   MdEdit
-} from 'react-icons/md';
+} from 'react-icons/md/index.esm';
 import {
   IoIosCheckmarkCircle,
   IoIosCloseCircle,
   IoIosTrash
-} from 'react-icons/io';
+} from 'react-icons/io/index.esm';
 import { Button } from "@/components/button";
 
 export const StyledSection = styled.section`

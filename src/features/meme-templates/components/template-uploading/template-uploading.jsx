@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import Compressor from 'compressorjs';
-import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
+import { MdOutlineAddPhotoAlternate } from 'react-icons/md/index.esm';
 import { useAuthId } from '@/features/auth';
 import {
   uploadTemplate,

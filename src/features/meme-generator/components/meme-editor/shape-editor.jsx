@@ -4,12 +4,12 @@ import {
   RiPaintFill,
   RiEditBoxLine,
   RiAlignCenter
-} from 'react-icons/ri';
+} from 'react-icons/ri/index.esm';
 import {
   IoTriangleOutline,
   IoSquareOutline,
   IoRadioButtonOffOutline
-} from 'react-icons/io5';
+} from 'react-icons/io5/index.esm';
 import { Button } from '@/components/button';
 import {
   StyledContainer,

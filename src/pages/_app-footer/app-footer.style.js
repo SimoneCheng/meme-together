@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BsGithub } from 'react-icons/bs';
-import { GoLinkExternal } from 'react-icons/go';
+import { BsGithub } from 'react-icons/bs/index.esm';
+import { GoLinkExternal } from 'react-icons/go/index.esm';
 
 export const StyledWrapper = styled.div`
   background-color: #888;

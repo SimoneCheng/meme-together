@@ -4,7 +4,7 @@ import {
   RiPaintFill,
   RiEditBoxLine,
   RiAlignCenter
-} from 'react-icons/ri';
+} from 'react-icons/ri/index.esm';
 import { Button } from '@/components/button';
 import {
   StyledContainer,

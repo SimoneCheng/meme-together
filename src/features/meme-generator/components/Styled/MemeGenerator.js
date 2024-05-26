@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { FaShapes } from 'react-icons/fa';
+import { FaShapes } from 'react-icons/fa/index.esm';
 import {
   MdTextFields,
   MdEdit
-} from 'react-icons/md';
+} from 'react-icons/md/index.esm';
 
 const Container0 = styled.div`
   display: flex;

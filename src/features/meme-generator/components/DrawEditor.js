@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RiSipLine, RiAlignCenter } from 'react-icons/ri';
+import { RiSipLine, RiAlignCenter } from 'react-icons/ri/index.esm';
 import { fabric } from 'fabric';
 
 import {

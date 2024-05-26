@@ -1,10 +1,10 @@
 
 import { useState } from 'react';
-import { FaShapes } from 'react-icons/fa';
+import { FaShapes } from 'react-icons/fa/index.esm';
 import {
   MdTextFields,
   MdEdit
-} from 'react-icons/md';
+} from 'react-icons/md/index.esm';
 import TextEditor from './text-editor';
 import ShapeEditor from './shape-editor';
 import DrawEditor from './draw-editor';

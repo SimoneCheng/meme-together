@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md/index.esm';
 import { useIsAuthenticated, useAuthId } from "@/features/auth";
 import {
   checkFavoriteList,

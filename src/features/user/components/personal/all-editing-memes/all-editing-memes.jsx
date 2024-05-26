@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MdAddCircleOutline } from "react-icons/md";
+import { MdAddCircleOutline } from "react-icons/md/index.esm";
 import { useAuthId } from "@/features/auth";
 import { getAllEditingMemes, deletEditingMeme } from "../../../api";
 import { Button } from "@/components/button";
