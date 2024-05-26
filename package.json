@@ -9,7 +9,8 @@
     "test": "craco test",
     "eject": "craco eject",
     "analyze": "craco build",
-    "lint": "npx eslint src/**/*"
+    "lint": "npx eslint src/**/*",
+    "prepare": "husky"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -19,6 +20,8 @@
     "compressorjs": "^1.1.1",
     "fabric": "^4.6.0",
     "firebase": "^8.10.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
