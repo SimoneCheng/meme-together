@@ -79,7 +79,7 @@ export const StyledAllPublicMemesWrapper = styled.div`
 
 export const StyledLoadingWrapper = styled.div`
   margin-top: 100px;
-`
+`;
 
 export const StyledSelect = styled.select`
   border: 0;

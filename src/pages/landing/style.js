@@ -13,7 +13,7 @@ export const StyledSloganDiv = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   min-height: calc(100vh - 125px);
-  background-color: ${props => props.color.color1.colorCode};
+  background-color: #ffc349;
   padding-top: calc(30px + 65px);
   padding-bottom: 30px;
   width: 100%;
@@ -127,8 +127,8 @@ export const HotMemesTitle = styled.h1`
 export const SloganButton = styled.button`
   border: none;
   border-radius: 5px;
-  background-color: ${props => props.color.color2.colorCode};
-  color: ${props => props.color.color3.colorCode};
+  background-color: #056;
+  color: #fff;
   font-size: 1rem;
   padding: 10px 30px;
   cursor: pointer;
@@ -146,6 +146,6 @@ export const SloganContent = styled.div`
 
 export const Strong = styled.strong`
   font-size: 20px;
-  border-bottom: 2px ${props => props.color.color2.colorCode} solid;
+  border-bottom: 2px #056 solid;
   margin-left: 5px;
 `;

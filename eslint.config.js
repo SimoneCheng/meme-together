@@ -5,7 +5,11 @@ import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 const settings = [
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest
+      },
       ...pluginReactConfig.languageOptions,
     }
   },

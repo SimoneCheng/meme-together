@@ -7,6 +7,6 @@ const DialogOverlay = ({ ...props }) => {
       {...props}
     />
   );
-}
+};
 
 export default DialogOverlay;

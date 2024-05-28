@@ -13,5 +13,5 @@ export const useWatchAllFollowers = (userId) => {
       }
     });
     return unsubscribe;
-  }, [setAllFollowers, userId])
+  }, [setAllFollowers, userId]);
 };

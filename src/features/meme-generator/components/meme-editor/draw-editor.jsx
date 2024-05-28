@@ -90,7 +90,7 @@ const DrawEditor = ({ canvas }) => {
         </Button>
       </div>
     </StyledEditorContainer>
-  )
+  );
 };
 
 export default DrawEditor;

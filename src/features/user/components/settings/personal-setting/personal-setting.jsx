@@ -32,7 +32,7 @@ const PersonalSetting = () => {
   const [selfIntro, setSelfIntro] = useState('');
 
   const setDefaultSelfIntro = useCallback((data) => {
-    setSelfIntro(data.self_intro)
+    setSelfIntro(data.self_intro);
   }, []);
 
   useWatchPersonalInfo(setDefaultSelfIntro);
@@ -81,7 +81,7 @@ const PersonalSetting = () => {
   };
 
   const handleSelfIntroUpdating = () => {
-    const data = { self_intro: selfIntro }
+    const data = { self_intro: selfIntro };
     updateUserInfo({
       id: personalInfo.userId,
       data

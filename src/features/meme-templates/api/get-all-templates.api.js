@@ -33,4 +33,4 @@ export const getAllTemplatesNextPage = (lastKey) => {
         lastKey
       };
     });
-}
+};

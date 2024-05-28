@@ -61,4 +61,4 @@ export const StyledTemplateItemImg = styled.img`
 
 export const StyledLoadingWrapper = styled.div`
   margin-top: 100px;
-`
+`;

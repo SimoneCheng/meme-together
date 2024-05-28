@@ -93,7 +93,7 @@ const TemplateUploading = () => {
   const handleCleanImagePreview = () => {
     setImagePreview(null);
     compressedFile.current = null;
-  }
+  };
 
   return (
     <StyledWrapper>
@@ -138,7 +138,7 @@ const TemplateUploading = () => {
         )}
       </div>
     </StyledWrapper>
-  )
+  );
 };
 
 export default TemplateUploading;

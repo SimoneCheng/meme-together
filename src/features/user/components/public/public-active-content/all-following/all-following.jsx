@@ -37,13 +37,13 @@ const Following = (props) => {
     addFollowing(personalInfo.userId, user_id, data)
       .then(() => addFollower(user_id, personalInfo.userId, selfData))
       .then(() => alertSuccess('追蹤成功！'));
-  }
+  };
 
   const handleUnfollowUser = () => {
     unfollowing(personalInfo.userId, user_id)
       .then(() => deleteFollower(user_id, personalInfo.userId))
       .then(() => alertSuccess('已取消追蹤！'));
-  }
+  };
 
   if (personalInfo.userId === user_id || !personalInfo.userId) {
     return (
@@ -90,10 +90,9 @@ const AllFollowing = () => {
     }
     getAllFollowing(ids)
       .then((res) => {
-        console.log(res);
         setAllFollowing({ allFollowingList: res });
       });
-  }, [ids, setAllFollowing])
+  }, [ids, setAllFollowing]);
 
   if (allFollowingList.length === 0) {
     return (
@@ -110,7 +109,7 @@ const AllFollowing = () => {
     <StyledWrapper>
       <StyledP>追蹤名單</StyledP>
       {allFollowingList.map((item) => {
-        return <Following key={item.user_id} {...item} />
+        return <Following key={item.user_id} {...item} />;
       })}
     </StyledWrapper>
   );

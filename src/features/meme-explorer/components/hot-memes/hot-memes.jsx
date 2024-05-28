@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 // api
 import { getHotMemes, countClickTime } from "../../api";
 // styles
-import color from "@/features/meme-generator/components/Styled/colorTheme";
 import {
   StyledHotMemesDiv,
   HotMemesTitle,
@@ -22,7 +21,7 @@ function HotMemes() {
 
   return (
     <div style={{ 'width': '100%', 'backgroundColor': '#056' }}>
-      <StyledHotMemesDiv color={color}>
+      <StyledHotMemesDiv>
         <HotMemesTitle>
           熱門創作
         </HotMemesTitle>

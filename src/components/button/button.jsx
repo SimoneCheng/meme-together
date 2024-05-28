@@ -23,7 +23,9 @@ const Button = forwardRef((props, ref) => {
     >
       {children}
     </StyledButton>
-  )
+  );
 });
+
+Button.displayName = 'Button';
 
 export default Button;

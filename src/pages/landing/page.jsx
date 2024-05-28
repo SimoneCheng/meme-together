@@ -1,7 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 // styles
-import color from '@/features/meme-generator/components/Styled/colorTheme';
 import {
   Wrapper,
   StyledSloganDiv,
@@ -32,7 +30,7 @@ import { useScrollTo } from '@/hooks';
 function PrimarySection() {
   return (
     <section style={{ 'width': '100%', 'backgroundColor': '#ffc349' }}>
-      <StyledSloganDiv color={color}>
+      <StyledSloganDiv>
         <SloganImg
           alt='index-main-img'
           src={robot}
@@ -42,7 +40,7 @@ function PrimarySection() {
             製作專屬於你的迷因
           </SloganTitle>
           <Link to="/templates">
-            <SloganButton color={color}>
+            <SloganButton>
               開始使用
             </SloganButton>
           </Link>
@@ -51,7 +49,7 @@ function PrimarySection() {
           </SloganContent>
           <SloganContent>
             點選右上角
-            <Strong color={color}>登入</Strong>
+            <Strong>登入</Strong>
           </SloganContent>
         </SloganText>
       </StyledSloganDiv>
@@ -73,7 +71,7 @@ function SecondarySection() {
               src={canvasStand}
             />
             <div>
-              <Strong color={color}>選擇背景圖片</Strong>
+              <Strong>選擇背景圖片</Strong>
             </div>
             <InfoSubContent>
               提供許多迷因模板，幫你免去製作迷因時找不到圖片的煩惱
@@ -82,7 +80,7 @@ function SecondarySection() {
           <InfoContent>
             <InfoImg alt='info-img-2' src={colorTools} />
             <div>
-              <Strong color={color}>揮灑創意</Strong>
+              <Strong>揮灑創意</Strong>
             </div>
             <InfoSubContent>
               打開編輯器，為迷因加上有趣好笑的時事梗，或是只有你和朋友才懂的笑點
@@ -91,7 +89,7 @@ function SecondarySection() {
           <InfoContent>
             <InfoImg alt='info-img-3' src={floppy} />
             <div>
-              <Strong color={color}>下載迷因</Strong>
+              <Strong>下載迷因</Strong>
             </div>
             <InfoSubContent>
               迷因製作完成後，支援PNG、JPG等圖片格式下載，將迷因保存在你的電腦當中

@@ -64,7 +64,7 @@ const PasswordChanging = () => {
         </StyledButton>
       </form>
     </StyledWrapper>
-  )
+  );
 };
 
 export default PasswordChanging;

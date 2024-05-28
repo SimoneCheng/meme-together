@@ -12,9 +12,9 @@ export const useWatchPersonalFollowing = () => {
     const unsubscribe = checkAllFollowing({
       id: authId,
       callback: (data) => {
-        setPersonalFollowing(data ?? [])
+        setPersonalFollowing(data ?? []);
       }
     });
     return unsubscribe;
-  }, [authId, setPersonalFollowing])
+  }, [authId, setPersonalFollowing]);
 };

@@ -10,7 +10,7 @@ export const getAllPublicMemes = (sort = defaultSort) => {
     .limit(15)
     .get()
     .then((querySnapshot) => {
-      const docs = querySnapshot.docs
+      const docs = querySnapshot.docs;
       const lastKey = docs[docs.length - 1];
       const allPublicMemeImgData = docs.map((doc) => doc.data());
       return {
@@ -18,7 +18,7 @@ export const getAllPublicMemes = (sort = defaultSort) => {
         lastKey
       };
     });
-}
+};
 
 export const getAllPublicMemesNextPage = (lastKey, sort = defaultSort) => {
   return db
@@ -29,7 +29,7 @@ export const getAllPublicMemesNextPage = (lastKey, sort = defaultSort) => {
     .limit(15)
     .get()
     .then((querySnapshot) => {
-      const docs = querySnapshot.docs
+      const docs = querySnapshot.docs;
       const lastKey = docs[docs.length - 1];
       const allPublicMemeImgData = docs.map((doc) => doc.data());
       return {
@@ -37,4 +37,4 @@ export const getAllPublicMemesNextPage = (lastKey, sort = defaultSort) => {
         lastKey
       };
     });
-}
+};

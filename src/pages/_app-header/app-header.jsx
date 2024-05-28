@@ -14,7 +14,6 @@ import logo from '@/image/outline_bug_report_black_36dp.png';
 import account from '@/image/outline_account_circle_black_36dp.png';
 import setting from '@/image/outline_settings_black_36dp.png';
 // styles
-import color from "@/features/meme-generator/components/Styled/colorTheme";
 import {
   StyledHeader,
   StyledDesktopNav,
@@ -40,13 +39,13 @@ const AppHeader = () => {
     if (!isAuthenticated) return alertError(undefined, '尚未登入');
     if (mobileNav.isOpen) mobileNav.onClose();
     history.push('/personal');
-  }
+  };
 
   const handleSettingClick = () => {
     if (!isAuthenticated) return alertError(undefined, "尚未登入！");
     if (mobileNav.isOpen) mobileNav.onClose();
     history.push('/settings');
-  }
+  };
 
   const handleLogoutClick = () => {
     nativeLogout().then(() => {
@@ -54,11 +53,11 @@ const AppHeader = () => {
       if (mobileNav.isOpen) mobileNav.onClose();
       history.push('/');
     });
-  }
+  };
 
   return (
     <>
-      <StyledHeader color={color}>
+      <StyledHeader>
         <StyledDesktopNav>
           <StyledLogoLink to='/'>
             <span>MEME</span>
@@ -72,18 +71,18 @@ const AppHeader = () => {
           </StyledLogoLink>
           <StyledDesktopUl>
             <li>
-              <StyledButtonLink to="/explore-memes" color={color}>
+              <StyledButtonLink to="/explore-memes">
                 探索
               </StyledButtonLink>
             </li>
             <li>
-              <StyledButtonLink to="/templates" color={color}>
+              <StyledButtonLink to="/templates">
                 創作
               </StyledButtonLink>
             </li>
             {isAuthenticated && (
               <li>
-                <StyledButtonLink to="/template-uploading" color={color}>
+                <StyledButtonLink to="/template-uploading">
                   貢獻模板
                 </StyledButtonLink>
               </li>
@@ -116,7 +115,6 @@ const AppHeader = () => {
                   as="button"
                   type="button"
                   onClick={handleLogoutClick}
-                  color={color}
                 >
                   登出
                 </StyledButtonLink>
@@ -129,7 +127,6 @@ const AppHeader = () => {
                   as="button"
                   type="button"
                   onClick={loginDialog.onOpen}
-                  color={color}
                 >
                   登入
                 </StyledButtonLink>
@@ -139,7 +136,6 @@ const AppHeader = () => {
                   as="button"
                   type="button"
                   onClick={signupDialog.onOpen}
-                  color={color}
                 >
                   註冊
                 </StyledButtonLink>

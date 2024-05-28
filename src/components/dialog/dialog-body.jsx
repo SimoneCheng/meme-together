@@ -9,6 +9,6 @@ const DialogBody = ({ children, ...rest }) => {
       {children}
     </StyledDialogBody>
   );
-}
+};
 
 export default DialogBody;

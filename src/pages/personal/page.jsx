@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useScrollTo } from '@/hooks';
 import {
   AllEditingMemes,
@@ -21,7 +21,7 @@ function Personal() {
 
   const handleClick = (status) => {
     setStatus(status);
-  }
+  };
 
   return (
     <StyledWrapper>
@@ -31,28 +31,28 @@ function Personal() {
           <StyledButton
             type="button"
             isActive={status === 'editing'}
-            onClick={() => { handleClick('editing') }}
+            onClick={() => { handleClick('editing'); }}
           >
             創作中
           </StyledButton>
           <StyledButton
             type="button"
             isActive={status === 'nopublic'}
-            onClick={() => { handleClick('nopublic') }}
+            onClick={() => { handleClick('nopublic'); }}
           >
             已完成，未發布
           </StyledButton>
           <StyledButton
             type="button"
             isActive={status === 'ispublic'}
-            onClick={() => { handleClick('ispublic') }}
+            onClick={() => { handleClick('ispublic'); }}
           >
             已發布
           </StyledButton>
           <StyledButton
             type="button"
             isActive={status === 'favorites'}
-            onClick={() => { handleClick('favorites') }}
+            onClick={() => { handleClick('favorites'); }}
           >
             收藏
           </StyledButton>
@@ -63,7 +63,7 @@ function Personal() {
         {status === 'favorites' && <AllFavorite />}
       </StyledMemeManagementWrapper>
     </StyledWrapper>
-  )
+  );
 }
 
 export default Personal;

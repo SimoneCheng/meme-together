@@ -53,13 +53,13 @@ const FollowOrUnFollowButton = () => {
     addFollowing(personalInfo.userId, publicPersonalInfo.userId, data)
       .then(() => addFollower(publicPersonalInfo.userId, personalInfo.userId, selfData))
       .then(() => alertSuccess('追蹤成功！'));
-  }
+  };
 
   const unfollowUser = () => {
     unfollowing(personalInfo.userId, publicPersonalInfo.userId)
       .then(() => deleteFollower(publicPersonalInfo.userId, personalFollowing.userId))
       .then(() => alertSuccess('已取消追蹤！'));
-  }
+  };
 
   if (isInFollowingList) {
     return (

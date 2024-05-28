@@ -26,9 +26,9 @@ export const checkAllFollowers = ({ id, callback }) => {
       const result = [];
       querySnapshot.forEach(doc => {
         result.push(doc.id);
-      })
+      });
       callback(result);
-    })
+    });
 };
 
 export const getAllFollowers = (followersList) => {
@@ -40,7 +40,7 @@ export const getAllFollowers = (followersList) => {
       const allFollowers = [];
       querySnapshot.forEach(doc => {
         allFollowers.push(doc.data());
-      })
+      });
       return allFollowers;
-    })
+    });
 };

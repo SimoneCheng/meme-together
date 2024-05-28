@@ -17,8 +17,7 @@ const PersonalSavingStatusButton = ({ canvas }) => {
     const data = {
       canvas_status: status,
       last_save_time: new Date(),
-    }
-    console.log(id);
+    };
     updateEditingMeme({
       id: authId,
       docId: id,

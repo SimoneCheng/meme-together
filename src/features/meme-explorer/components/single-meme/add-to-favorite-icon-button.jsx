@@ -27,7 +27,7 @@ const AddToFavoriteIconButton = (props) => {
       callback: setFavoriteList
     });
     return unsubscribe;
-  }, [authId, img_name])
+  }, [authId, img_name]);
 
   const handleAddToFavorite = () => {
     const data = {
@@ -81,7 +81,7 @@ const AddToFavoriteIconButton = (props) => {
         }}
       />
     </Button>
-  )
+  );
 };
 
 export default AddToFavoriteIconButton;

@@ -18,7 +18,7 @@ const AllTemplates = () => {
         setAllTemplates(res.allTemplatesData);
         setLastKey(res.lastKey);
       });
-  }, [])
+  }, []);
 
   if (allTemplates.length === 0) {
     return (

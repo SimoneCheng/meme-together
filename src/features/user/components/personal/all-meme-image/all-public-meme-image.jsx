@@ -53,8 +53,8 @@ const PublicMemeImage = (props) => {
     deleteMemeImageInDb(docId)
       .then(() => {
         deleteMemeImageInStorage(docId).then(() => alertSuccess('成功刪除！'));
-      })
-  }
+      });
+  };
 
   return (
     <StyledMemeImageWrapper>
@@ -126,14 +126,14 @@ const AllPublicMemeImage = () => {
       callback: setAllPublicMeme
     });
     return unsubscribe;
-  }, [authId])
+  }, [authId]);
 
   if (allPublicMeme.length === 0) {
     return (
       <StyledNoContentWrapper>
         空空的喔～
       </StyledNoContentWrapper>
-    )
+    );
   }
 
   return (
@@ -155,7 +155,7 @@ const AllPublicMemeImage = () => {
             createdTime={created_time}
             lastSaveTime={last_save_time}
           />
-        )
+        );
       })}
     </StyledAllMemeImageWrapper>
   );

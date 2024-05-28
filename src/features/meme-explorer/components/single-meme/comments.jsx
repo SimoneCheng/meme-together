@@ -38,20 +38,20 @@ const AddCommentInput = () => {
       created_time: new Date(),
       user_id: personalInfo.userId,
       user_name: personalInfo.userName
-    }
+    };
     addComment({
       memeId,
       data
     });
     setNewComment('');
-  }
+  };
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       handleClick();
     }
-  }
+  };
 
   return (
     <StyledAddCommentInputWrapper>
@@ -174,7 +174,7 @@ const Comments = () => {
       callback: setAllComments
     });
     return unsubscribe;
-  }, [memeId])
+  }, [memeId]);
 
   return (
     <StyledSection>
@@ -182,7 +182,7 @@ const Comments = () => {
       <AddCommentInput />
       {allComments.map((item) => <Comment key={item.docId} {...item} />)}
     </StyledSection>
-  )
+  );
 };
 
 export default Comments;

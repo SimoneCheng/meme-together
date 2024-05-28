@@ -7,5 +7,5 @@ export const getTheEditingMeme = ({ userId, docId }) => {
     .collection('editing_meme')
     .doc(docId)
     .get()
-    .then((snapShot) => snapShot.data())
+    .then((snapShot) => snapShot.data());
 };

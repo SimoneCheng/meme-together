@@ -8,7 +8,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   height: 65px;
   z-index: 10;
-  background-color: ${props => props.color.color3.colorCode};
+  background-color: #fff;
   @media screen and (max-width: 768px) {
     height: 60px;
   }
@@ -50,19 +50,19 @@ export const StyledDesktopUl = styled.ul`
 `;
 
 export const StyledButtonLink = styled(Link)`
-  border: 1px ${props => props.color.color2.colorCode} solid;
+  border: 1px #056 solid;
   border-radius: 5px;
-  color: ${props => props.color.color2.colorCode};
-  background-color: ${props => props.color.color3.colorCode};
+  color: #056;
+  background-color: #fff;
   font-size: 1rem;
   padding: 5px 15px;
   cursor: pointer;
   :visited {
-    color: ${props => props.color.color2.colorCode};
+    color: #056;
   }
   :hover {
-    background-color: ${props => props.color.color2.colorCode};
-    color: ${props => props.color.color3.colorCode};
+    background-color: #056;
+    color: #fff;
   }
 `;
 
