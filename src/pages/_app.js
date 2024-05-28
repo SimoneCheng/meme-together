@@ -1,6 +1,5 @@
 import { lazy, Suspense, useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import {
   PrivateRoute,
   checkLoginStatus,
@@ -24,7 +23,6 @@ const PersonalMemeGenerator = lazy(() => import('./personal/meme-generator/[id]/
 const TemplateMemeGenerator = lazy(() => import('./templates/[id]/page'));
 
 function App() {
-  const dispatch = useDispatch();
   const [, setIsAuthenticated] = useIsAuthenticated();
   const [, setAuthId] = useAuthId();
   useLayoutEffect(() => {
@@ -32,7 +30,7 @@ function App() {
       setIsAuthenticated(!!user);
       setAuthId(user.user_id);
     });
-  }, [dispatch, setAuthId, setIsAuthenticated]);
+  }, [setAuthId, setIsAuthenticated]);
 
   return (
     <>

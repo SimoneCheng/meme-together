@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledHotMemesDiv = styled.div`
-  background-color: ${props => props.color.color2.colorCode};
+  background-color: #056;
   padding-top: 30px;
   max-width: 1440px;
   margin: 0 auto;

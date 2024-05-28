@@ -22,6 +22,18 @@ const settings = [
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off"
     }
+  },
+  {
+    files: ['src/**/*.test.js'],
+    languageOptions: {
+      globals: {
+        test: "readonly",
+        jest: "readonly",
+        expect: "readonly",
+        it: "readonly",
+        describe: "readonly"
+      }
+    }
   }
 ];
 

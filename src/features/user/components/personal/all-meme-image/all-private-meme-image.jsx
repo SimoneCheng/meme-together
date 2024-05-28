@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuthId } from "@/features/auth";
 import {
@@ -54,8 +53,8 @@ const PrivateMemeImage = (props) => {
     deleteMemeImageInDb(docId)
       .then(() => {
         deleteMemeImageInStorage(docId).then(() => alertSuccess('成功刪除！'));
-      })
-  }
+      });
+  };
 
   return (
     <StyledMemeImageWrapper>
@@ -127,14 +126,14 @@ const AllPublicMemeImage = () => {
       callback: setAllPrivateMeme
     });
     return unsubscribe;
-  }, [authId])
+  }, [authId]);
 
   if (allPrivateMeme.length === 0) {
     return (
       <StyledNoContentWrapper>
         空空的喔～
       </StyledNoContentWrapper>
-    )
+    );
   }
 
   return (
@@ -156,7 +155,7 @@ const AllPublicMemeImage = () => {
             createdTime={created_time}
             lastSaveTime={last_save_time}
           />
-        )
+        );
       })}
     </StyledAllMemeImageWrapper>
   );

@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import 'animate.css';
 // hooks
 import { useScrollTo } from '@/hooks';
-// store
-import { setCanvas } from '@/redux/actions';
 // styles
 import {
   Wrapper,
@@ -18,16 +14,7 @@ import {
 const imgSrc = "https://firebasestorage.googleapis.com/v0/b/meme-together.appspot.com/o/404image.jpeg?alt=media&token=9540dd77-03cd-4ea9-9931-086e29cc338d";
 
 function PageNotFound() {
-  const dispatch = useDispatch();
-  const canvas = useSelector((state) => state.canvas);
-
   useScrollTo();
-
-  useEffect(() => {
-    if (canvas === null) {
-      dispatch(setCanvas(''));
-    }
-  }, [canvas, dispatch])
 
   return (
     <Wrapper>
