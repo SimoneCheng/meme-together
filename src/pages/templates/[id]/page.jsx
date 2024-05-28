@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fabric } from '@/libs/fabric';
-import { getTheTemplate, MemeEditor } from '@/features/meme-generator';
+import {
+  getTheTemplate,
+  MemeEditor,
+  DownloadWithPngButton,
+  DownloadWithJpgButton,
+  TemplateSaveCanvasStatusButton,
+  TemplatePublishButton
+} from '@/features/meme-generator';
 import {
   StyledWrapper,
   StyledH1,
   StyledStrong,
-  StyledContainer
+  StyledCanvasContainer,
+  StyledMemeEditorContainer,
+  StyledButtonsContainer
 } from './style';
 
 const TemplateMemeGeneratorPage = () => {
@@ -33,7 +42,7 @@ const TemplateMemeGeneratorPage = () => {
             scaleX: 600 / this.width,
             scaleY: 600 / this.width
           }),
-        })
+        });
         const text = new fabric.IText('請輸入文字', {
           top: 50,
           left: 50,
@@ -43,12 +52,12 @@ const TemplateMemeGeneratorPage = () => {
           fontWeight: 800,
           fontSize: 60,
           fontFamily: 'Arial'
-        })
+        });
         canvas.add(text);
         canvas.setActiveObject(text);
         canvas.renderAll();
         setCanvas(canvas);
-      }
+      };
     });
   }, [id]);
 
@@ -59,17 +68,25 @@ const TemplateMemeGeneratorPage = () => {
           迷因產生器
         </StyledStrong>
       </StyledH1>
-      <StyledContainer>
-        <StyledContainer>
-          {canvas ?
-            <MemeEditor canvas={canvas} /> :
-            <h1>讀取中...</h1>
-          }
-        </StyledContainer>
-        <canvas id="meme-canvas" />
-      </StyledContainer>
+      <div>
+        <StyledCanvasContainer>
+          <StyledMemeEditorContainer>
+            {canvas ?
+              <MemeEditor canvas={canvas} /> :
+              <h1>讀取中...</h1>
+            }
+          </StyledMemeEditorContainer>
+          <canvas id="meme-canvas" />
+        </StyledCanvasContainer>
+        <StyledButtonsContainer>
+          {canvas && <TemplateSaveCanvasStatusButton canvas={canvas} />}
+          {canvas && <TemplatePublishButton canvas={canvas} />}
+          {canvas && <DownloadWithPngButton canvas={canvas} />}
+          {canvas && <DownloadWithJpgButton canvas={canvas} />}
+        </StyledButtonsContainer>
+      </div>
     </StyledWrapper>
   );
 };
 
-export default TemplateMemeGeneratorPage
+export default TemplateMemeGeneratorPage;

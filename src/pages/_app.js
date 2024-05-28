@@ -10,7 +10,6 @@ import {
 import { AppHeader } from './_app-header';
 
 // pages
-import MemeGenerator from '../features/meme-generator/components/MemeGenerator';
 const Landing = lazy(() => import('./landing/page'));
 const PageNotFound = lazy(() => import('./not-found/page'));
 const ExploreMemes = lazy(() => import('./explore-memes/page'));

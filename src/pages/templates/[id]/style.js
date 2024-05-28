@@ -19,6 +19,27 @@ export const StyledStrong = styled.strong`
   color: black;
 `;
 
-export const StyledContainer = styled.div`
+export const StyledCanvasContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const StyledMemeEditorContainer = styled.div`
+  display: flex;
+  @media screen and (max-width: 900px) {
+    margin-bottom: 24px;
+  }
+`;
+
+export const StyledButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  button {
+    margin-right: 16px;
+  }
 `;
