@@ -6,6 +6,7 @@ import {
   getTheEditingMeme,
   MemeEditor,
   PersonalSavingStatusButton,
+  PersonalFinishPublishButton,
   DownloadWithPngButton,
   DownloadWithJpgButton
 } from '@/features/meme-generator';
@@ -62,6 +63,7 @@ const PersonalMemeGeneratorPage = () => {
         </StyledCanvasContainer>
         <StyledButtonsContainer>
           {canvas && <PersonalSavingStatusButton canvas={canvas} />}
+          {canvas && <PersonalFinishPublishButton canvas={canvas} />}
           {canvas && <DownloadWithPngButton canvas={canvas} />}
           {canvas && <DownloadWithJpgButton canvas={canvas} />}
         </StyledButtonsContainer>
