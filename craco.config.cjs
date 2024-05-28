@@ -8,6 +8,18 @@ module.exports = {
     },
     plugins: [
       new BundleAnalyzerPlugin({ analyzerMode: "server" }),
-    ]
+    ],
+    configure: {
+      module: {
+        rules: [
+          {
+            test: /\.m?js$/,
+            resolve: {
+              fullySpecified: false,
+            },
+          },
+        ],
+      },
+    },
   },
 };

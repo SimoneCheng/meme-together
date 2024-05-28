@@ -10,13 +10,12 @@ import {
   DialogFooter,
   DialogFooterCloseButton
 } from '@/components/dialog';
+import {
+  FormControl,
+  FormLabel
+} from '@/components/form-control';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
-// styles
-import {
-  StyledFormControl,
-  StyledFormLabel,
-} from './signup-dialog.style';
 // utils
 import { alertError, alertSuccess } from '@/utlis/alert';
 
@@ -55,12 +54,12 @@ const SignupDialog = ({ isOpen, onClose }) => {
         <DialogHeader>
           註冊
         </DialogHeader>
-        <DialogBody>
+        <DialogBody style={{ width: '350px' }}>
           <form>
-            <StyledFormControl>
-              <StyledFormLabel>
+            <FormControl>
+              <FormLabel>
                 暱稱
-              </StyledFormLabel>
+              </FormLabel>
               <Input
                 variant="outline"
                 type="text"
@@ -70,11 +69,11 @@ const SignupDialog = ({ isOpen, onClose }) => {
                 value={userData.name}
                 onChange={handleChange}
               />
-            </StyledFormControl>
-            <StyledFormControl>
-              <StyledFormLabel>
+            </FormControl>
+            <FormControl>
+              <FormLabel>
                 電子信箱
-              </StyledFormLabel>
+              </FormLabel>
               <Input
                 variant="outline"
                 type="email"
@@ -84,11 +83,11 @@ const SignupDialog = ({ isOpen, onClose }) => {
                 value={userData.email}
                 onChange={handleChange}
               />
-            </StyledFormControl>
-            <StyledFormControl>
-              <StyledFormLabel>
+            </FormControl>
+            <FormControl>
+              <FormLabel>
                 密碼
-              </StyledFormLabel>
+              </FormLabel>
               <Input
                 variant="outline"
                 type="password"
@@ -98,7 +97,7 @@ const SignupDialog = ({ isOpen, onClose }) => {
                 value={userData.password}
                 onChange={handleChange}
               />
-            </StyledFormControl>
+            </FormControl>
           </form>
         </DialogBody>
         <DialogFooter>
@@ -117,4 +116,4 @@ const SignupDialog = ({ isOpen, onClose }) => {
   );
 };
 
-export default SignupDialog
+export default SignupDialog;
