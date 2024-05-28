@@ -10,13 +10,12 @@ import {
   DialogFooter,
   DialogFooterCloseButton
 } from '@/components/dialog';
+import {
+  FormControl,
+  FormLabel
+} from '@/components/form-control';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
-// styles
-import {
-  StyledFormControl,
-  StyledFormLabel
-} from './login-dialog.style';
 // utils
 import { alertSuccess, alertError } from '@/utlis/alert';
 
@@ -36,7 +35,7 @@ const LoginDialog = ({ isOpen, onClose }) => {
   };
 
   const handleLoginClick = () => {
-    const { email, password } = userData
+    const { email, password } = userData;
     nativeLogin({ email, password })
       .then(() => {
         onClose();
@@ -53,12 +52,12 @@ const LoginDialog = ({ isOpen, onClose }) => {
         <DialogHeader>
           登入
         </DialogHeader>
-        <DialogBody>
+        <DialogBody style={{ width: '350px' }}>
           <form>
-            <StyledFormControl>
-              <StyledFormLabel>
+            <FormControl>
+              <FormLabel>
                 電子信箱
-              </StyledFormLabel>
+              </FormLabel>
               <Input
                 variant="outline"
                 type="email"
@@ -68,11 +67,11 @@ const LoginDialog = ({ isOpen, onClose }) => {
                 onChange={handleChange}
                 autoComplete="on"
               />
-            </StyledFormControl>
-            <StyledFormControl>
-              <StyledFormLabel>
+            </FormControl>
+            <FormControl>
+              <FormLabel>
                 密碼
-              </StyledFormLabel>
+              </FormLabel>
               <Input
                 variant="outline"
                 type="password"
@@ -82,7 +81,7 @@ const LoginDialog = ({ isOpen, onClose }) => {
                 onChange={handleChange}
                 autoComplete="on"
               />
-            </StyledFormControl>
+            </FormControl>
           </form>
         </DialogBody>
         <DialogFooter>
@@ -99,6 +98,6 @@ const LoginDialog = ({ isOpen, onClose }) => {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 export default LoginDialog;
