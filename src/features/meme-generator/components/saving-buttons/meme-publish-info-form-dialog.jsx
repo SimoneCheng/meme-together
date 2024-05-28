@@ -51,6 +51,7 @@ const MemePublishInfoFormDialog = ({
   const [context, setContext] = useState('');
   const [tags, setTags] = useState('');
   const [isPublic, setIsPublic] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [authId] = useAuthId();
 
@@ -58,6 +59,7 @@ const MemePublishInfoFormDialog = ({
     if (!title) {
       return alertWarning(undefined, '請填寫標題！');
     }
+    setIsLoading(true);
     const canvasDataUrl = canvas.toDataURL();
     const imgId = await uploadCompletedMeme({ id: authId, file: canvasDataUrl });
     const imgUrl = await getCompletedMemeImageUrl(imgId);
@@ -81,6 +83,7 @@ const MemePublishInfoFormDialog = ({
     });
     alertSuccess('成功發布！');
     onClose();
+    setIsLoading(false);
   };
 
   return (
@@ -161,6 +164,7 @@ const MemePublishInfoFormDialog = ({
           <Button
             colorScheme="yellow"
             type="button"
+            disabled={isLoading}
             onClick={handleSubmit}
           >
             送出
