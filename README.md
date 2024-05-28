@@ -2,10 +2,11 @@
 A website for users to produce meme and share to their friends. Let's have fun!
 - Use `fabric.js` to create a meme generator.
 - Use `React` for Single Page Application.
-- Use `Styled Components` for CSS in JS.
+- Use `Styled Components` for handling style.
 - Use `React Router` for client side routing.
-- Use `Redux` for state management.
+- Use `valito` for state management.
 - Integrate member system and database with `Firebase` service, including `Firestore`, `Storage`, and `Authentication`.
+- Use `eslint`, `lint-staged`, and `husky` to ensure code quality.
 
 ![](./ReadmeImage/landingpage.png)
 
@@ -21,11 +22,6 @@ A website for users to produce meme and share to their friends. Let's have fun!
 - CSS
 - JavaScript (ES6+)
 
-### Framework
-- React (Hooks)
-- React Router
-- Redux
-
 ### Firebase
 - Authentication
 - Firestore
@@ -33,6 +29,9 @@ A website for users to produce meme and share to their friends. Let's have fun!
 - Hosting
 
 ### Packages
+- React (Hooks)
+- React Router
+- valito
 - Styled Components
 - fabric.js
 - compressjs
