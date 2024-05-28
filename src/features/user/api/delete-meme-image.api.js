@@ -18,7 +18,7 @@ export const deleteMemeImageInDb = (docId) => {
         .collection('completed_meme')
         .doc(docId)
         .delete();
-    })
+    });
 };
 
 export const deleteMemeImageInStorage = (fileName) => {

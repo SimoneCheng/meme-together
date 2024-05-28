@@ -17,7 +17,7 @@ const PublicMeme = (props) => {
   const handleClick = () => {
     countClickTime(imgName)
       .then(() => {
-        history.push(`/meme/${imgName}`)
+        history.push(`/meme/${imgName}`);
       });
   };
 
@@ -37,9 +37,9 @@ const AllPublicMemes = () => {
     const unsubscribe = getPublicMemeImage({
       id: publicPersonalInfo.userId,
       callback: setAllPublicMemes
-    })
+    });
     return unsubscribe;
-  }, [publicPersonalInfo.userId])
+  }, [publicPersonalInfo.userId]);
 
   if (allPublicMemes.length === 0) {
     return (

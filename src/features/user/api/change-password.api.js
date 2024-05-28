@@ -10,4 +10,4 @@ export const changePassword = ({ password, newPassword }) => {
         .catch((error) => alertError('修改密碼失敗！', error.message));
     })
     .catch(() => alertError('舊密碼輸入錯誤', undefined));
-}
+};

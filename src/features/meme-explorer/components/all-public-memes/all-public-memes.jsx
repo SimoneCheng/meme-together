@@ -28,7 +28,7 @@ const AllPublicMemes = () => {
       setAllPublicMemeImg(allPublicMemeImgData);
       setLastKey(lastKey);
     });
-  }, [sort])
+  }, [sort]);
 
   if (allPublicMemeImg.length === 0) {
     return (
@@ -51,11 +51,11 @@ const AllPublicMemes = () => {
         setAllPublicMemeImg(allPublicMemeImg.concat(allPublicMemeImgData));
         setLastKey(lastKey);
       });
-  }
+  };
 
   const handleSortChange = (e) => {
     setSort(e.target.value);
-  }
+  };
 
   return (
     <>
@@ -88,7 +88,7 @@ const AllPublicMemes = () => {
         <div>沒有囉！</div>
       )}
     </>
-  )
+  );
 };
 
 export default AllPublicMemes;

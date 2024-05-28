@@ -27,10 +27,10 @@ export const checkAllFollowing = ({ id, callback }) => {
       const result = [];
       querySnapshot.forEach(doc => {
         result.push(doc.id);
-      })
+      });
       callback(result);
     });
-}
+};
 
 export const getAllFollowing = (followingList) => {
   return db
@@ -41,7 +41,7 @@ export const getAllFollowing = (followingList) => {
       const allFollowing = [];
       querySnapshot.forEach(doc => {
         allFollowing.push(doc.data());
-      })
+      });
       return allFollowing;
     });
-}
+};

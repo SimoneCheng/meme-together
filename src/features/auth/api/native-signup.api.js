@@ -8,7 +8,7 @@ export const nativeSignup = ({ email, password, name }) => {
       user.updateProfile({
         displayName: name,
         photoURL: process.env.REACT_APP_defaultProfileImg
-      })
+      });
       db.collection('users').doc(user.uid).set({
         user_id: user.uid,
         user_email: user.email,

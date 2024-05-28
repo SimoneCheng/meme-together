@@ -7,4 +7,4 @@ export const deleteAccount = (password) => {
       res.delete();
     })
     .then(() => alertSuccess('成功刪除帳號！'));
-}
+};

@@ -18,7 +18,7 @@ export const usePersonalInfo = () => {
     });
   }, []);
   return [personalInfo, setPersonalInfo];
-}
+};
 
 const settingActiveOptionStore = proxy({
   activeOption: 'userInfo'
@@ -30,7 +30,7 @@ export const useSettingActiveOption = () => {
     settingActiveOptionStore.activeOption = data;
   }, []);
   return [activeOption, setActiveOption];
-}
+};
 
 const personalFollowingStore = proxy({
   ids: []

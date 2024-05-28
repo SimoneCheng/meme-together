@@ -10,7 +10,7 @@ export const deleteAllUserData = (id) => {
       if (querySnapshot.docs.length > 0) {
         querySnapshot.docs.forEach(snapshot => {
           snapshot.ref.delete();
-        })
+        });
       }
     })
     .then(() => {
@@ -23,9 +23,9 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -37,9 +37,9 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -51,15 +51,15 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
         .collection('users')
         .doc(id)
-        .delete()
+        .delete();
     })
     .then(() => {
       db
@@ -70,9 +70,9 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -83,9 +83,9 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -96,9 +96,9 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -111,11 +111,11 @@ export const deleteAllUserData = (id) => {
               if (querySnapshot.docs.length > 0) {
                 querySnapshot.docs.forEach(snapshot => {
                   snapshot.ref.delete();
-                })
+                });
               }
             });
           });
-        })
+        });
     })
     .then(() => {
       db
@@ -126,12 +126,12 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.forEach(doc => {
               storageRef.child(`completed_meme/${doc.data().img_name}`).delete();
-            })
+            });
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       db
@@ -142,13 +142,13 @@ export const deleteAllUserData = (id) => {
           if (querySnapshot.docs.length > 0) {
             querySnapshot.docs.forEach(snapshot => {
               snapshot.ref.delete();
-            })
+            });
           }
-        })
+        });
     })
     .then(() => {
       if (storageRef.child(`users/${id}`)) {
         storageRef.child(`users/${id}`).delete();
       }
     });
-}
+};

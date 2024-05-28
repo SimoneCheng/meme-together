@@ -47,7 +47,7 @@ const SingleMeme = () => {
       id,
       callback: setSingleMeme
     });
-  }, [id])
+  }, [id]);
 
   useEffect(() => {
     if (!singleMeme.owner_user_id) {
@@ -56,9 +56,9 @@ const SingleMeme = () => {
     const unsubscribe = getUserInfo({
       id: singleMeme.owner_user_id,
       callback: setAuthorInfo
-    })
+    });
     return unsubscribe;
-  }, [singleMeme.owner_user_id])
+  }, [singleMeme.owner_user_id]);
 
   if (!singleMeme.img_url || !authInfo.user_name) {
     return (
@@ -114,7 +114,7 @@ const SingleMeme = () => {
         <Comments />
       </StyledSectionsWrapper>
     </StyledWrapper>
-  )
+  );
 };
 
 export default SingleMeme;

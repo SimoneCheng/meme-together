@@ -85,7 +85,7 @@ const AllEditingMemes = () => {
     const unsubscribe = getAllEditingMemes({
       id: authId,
       callback: setAllEditingMemes
-    })
+    });
     return unsubscribe;
   }, [authId]);
 

@@ -5,7 +5,11 @@ import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 const settings = [
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jest
+      },
       ...pluginReactConfig.languageOptions,
     }
   },
@@ -21,18 +25,6 @@ const settings = [
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off"
-    }
-  },
-  {
-    files: ['src/**/*.test.js'],
-    languageOptions: {
-      globals: {
-        test: "readonly",
-        jest: "readonly",
-        expect: "readonly",
-        it: "readonly",
-        describe: "readonly"
-      }
     }
   }
 ];

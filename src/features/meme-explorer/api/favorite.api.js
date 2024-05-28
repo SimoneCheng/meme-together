@@ -28,7 +28,7 @@ export const checkFavoriteList = ({ id, imgName, callback }) => {
       const result = [];
       querySnapshot.forEach(doc => {
         result.push(doc.data());
-      })
+      });
       callback(result);
     });
-}
+};

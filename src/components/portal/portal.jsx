@@ -15,6 +15,6 @@ const Portal = ({
   }
 
   return null;
-}
+};
 
 export default Portal;

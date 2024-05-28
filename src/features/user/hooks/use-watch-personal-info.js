@@ -21,9 +21,9 @@ export const useWatchPersonalInfo = (callback) => {
           userImg: data.user_img,
           userName: data.user_name,
         });
-        callback?.(data)
+        callback?.(data);
       },
     });
     return unsubscribe;
-  }, [authId, callback, setPersonalInfo])
+  }, [authId, callback, setPersonalInfo]);
 };

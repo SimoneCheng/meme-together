@@ -48,7 +48,7 @@ const Favorite = (props) => {
         </Button>
       </StyledWrapper>
     </StyledFavoriteWrapper>
-  )
+  );
 };
 
 const AllFavorite = () => {
@@ -62,7 +62,7 @@ const AllFavorite = () => {
       callback: setAllFavorite
     });
     return unsubscribe;
-  }, [authId])
+  }, [authId]);
 
   if (allFavorite.length === 0) {
     return (

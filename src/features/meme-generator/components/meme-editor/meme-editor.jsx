@@ -46,7 +46,7 @@ const MemeEditor = ({ canvas }) => {
         {activeEditor === 'draw' && <DrawEditor canvas={canvas} />}
       </div>
     </>
-  )
+  );
 };
 
 export default MemeEditor;

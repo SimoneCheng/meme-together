@@ -11,4 +11,4 @@ export const getHotMemes = () => {
       const campaignMeme = querySnapshot.docs.map((doc) => doc.data());
       return campaignMeme;
     });
-}
+};

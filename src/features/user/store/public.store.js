@@ -30,7 +30,7 @@ export const usePublicPersonalInfo = () => {
     });
   }, []);
   return [publicPersonalInfo, setPublicPersonalInfo];
-}
+};
 
 const allFollowingStore = proxy({
   ids: [],

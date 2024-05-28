@@ -48,7 +48,7 @@ const AccountDeleting = () => {
         </StyledButton>
       </form>
     </StyledWrapper>
-  )
+  );
 };
 
 export default AccountDeleting;

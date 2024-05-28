@@ -10,7 +10,7 @@ export const getAllFavorite = ({ id, callback }) => {
       const allFavorite = [];
       querySnapshot.forEach(doc => {
         allFavorite.push(doc.data());
-      })
+      });
       callback(allFavorite);
     });
 };

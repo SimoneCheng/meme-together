@@ -16,7 +16,7 @@ export const useDialogContext = () => {
     throw new Error('use-dialog-context error');
   }
   return context;
-}
+};
 
 const Dialog = ({
   isOpen,
@@ -33,7 +33,7 @@ const Dialog = ({
     return {
       onClose,
       closeOnOutsideClick
-    }
+    };
   }, [closeOnOutsideClick, onClose]);
 
   return isOpen ? (

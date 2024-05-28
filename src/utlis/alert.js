@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import 'animate.css';
 
@@ -9,7 +9,7 @@ export function alertSuccess(text) {
     text: text,
     icon: 'success',
     confirmButtonColor: '#056',
-  })
+  });
 }
 
 export function alertError(title, text) {
@@ -18,7 +18,7 @@ export function alertError(title, text) {
     text: text,
     icon: 'error',
     confirmButtonColor: '#056',
-  })
+  });
 }
 
 export function alertWarning(title, text) {
@@ -27,7 +27,7 @@ export function alertWarning(title, text) {
     text: text,
     icon: 'warning',
     confirmButtonColor: '#056',
-  })
+  });
 }
 
 export function alertDelete(callback) {
@@ -54,7 +54,7 @@ export function alertDelete(callback) {
         didDestroy: () => {
           Swal.hideLoading();
         }
-      })
+      });
     }
   });
 }

@@ -1,4 +1,4 @@
-import { db, storageRef } from "@/libs/firebase"
+import { db, storageRef } from "@/libs/firebase";
 
 export const getUserInfo = ({ id, callback }) => {
   return db

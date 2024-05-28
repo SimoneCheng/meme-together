@@ -12,7 +12,7 @@ export const getAllEditingMemes = ({ id, callback }) => {
         allEditingMemeData.push({ data: doc.data(), docId: doc.id });
       });
       callback(allEditingMemeData);
-    })
+    });
 };
 
 export const getPublicMemeImage = ({ id, callback }) => {
@@ -25,7 +25,7 @@ export const getPublicMemeImage = ({ id, callback }) => {
       const publicMemeImgData = [];
       querySnapshot.forEach(doc => {
         publicMemeImgData.push(doc.data());
-      })
+      });
       callback(publicMemeImgData);
     });
 };
@@ -40,7 +40,7 @@ export const getPrivateMemeImage = ({ id, callback }) => {
       const privateMemeImgData = [];
       querySnapshot.forEach(doc => {
         privateMemeImgData.push(doc.data());
-      })
+      });
       callback(privateMemeImgData);
     });
 };

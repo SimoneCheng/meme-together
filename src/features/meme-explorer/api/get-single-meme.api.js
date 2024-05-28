@@ -7,5 +7,5 @@ export const getSingleMeme = ({ id, callback }) => {
     .get()
     .then((snapShot) => {
       callback(snapShot.data());
-    })
+    });
 };

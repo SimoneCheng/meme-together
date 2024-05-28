@@ -6,7 +6,7 @@ export const uploadTemplate = ({ userId, file }) => {
     .put(file)
     .then((snapShot) => {
       return snapShot.ref.name;
-    })
+    });
 };
 
 export const getTemplateURL = (fileName) => {

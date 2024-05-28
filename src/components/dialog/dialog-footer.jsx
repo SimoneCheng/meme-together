@@ -8,7 +8,7 @@ const DialogFooter = ({ children, ...rest }) => {
     >
       {children}
     </StyledDialogFooter>
-  )
+  );
 };
 
 export default DialogFooter;

@@ -18,7 +18,7 @@ const Search = () => {
     searchPublicMemes(query).then((response) => {
       setSearchResult(response);
     });
-  }, [query])
+  }, [query]);
 
   if (searchResult.length === 0) {
     return (
@@ -26,7 +26,7 @@ const Search = () => {
         <PublicMemesSearchBar />
         <p>您搜尋的關鍵字為：<strong>{query}</strong>，查無結果</p>
       </StyledWrapper>
-    )
+    );
   }
 
   return (

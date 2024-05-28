@@ -116,7 +116,7 @@ const AllFollowers = () => {
       .then((res) => {
         setAllFollowers({ allFollowersList: res });
       });
-  }, [ids, setAllFollowers])
+  }, [ids, setAllFollowers]);
 
   if (allFollowersList.length === 0) {
     return (
@@ -133,7 +133,7 @@ const AllFollowers = () => {
     <StyledWrapper>
       <StyledP>粉絲名單</StyledP>
       {allFollowersList.map((item) => {
-        return <Follower key={item.user_id} {...item} />
+        return <Follower key={item.user_id} {...item} />;
       })}
     </StyledWrapper>
   );

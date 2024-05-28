@@ -27,5 +27,5 @@ export const useWatchPublicPersonalInfo = (userId) => {
       },
     });
     return unsubscribe;
-  }, [history, setPublicPersonalInfo, userId])
+  }, [history, setPublicPersonalInfo, userId]);
 };

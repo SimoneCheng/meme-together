@@ -17,7 +17,7 @@ const PublicMemesSearchBar = () => {
 
   const handleClick = () => {
     history.push(`/search/${value}`);
-  }
+  };
 
   return (
     <StyledWrapper>

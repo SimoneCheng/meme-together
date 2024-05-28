@@ -168,7 +168,7 @@ const ShapeEditor = ({ canvas }) => {
         </Button>
       </div>
     </StyledEditorContainer>
-  )
+  );
 };
 
 export default ShapeEditor;

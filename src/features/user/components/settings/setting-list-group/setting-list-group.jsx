@@ -12,7 +12,7 @@ const SettingListGroup = () => {
 
   useEffect(() => {
     return () => setActiveOption('userInfo');
-  }, [setActiveOption])
+  }, [setActiveOption]);
 
   return (
     <StyledWrapper>

@@ -10,7 +10,7 @@ export const getAllComments = ({ memeId, callback }) => {
       const allComments = [];
       querySnapshot.forEach(doc => {
         allComments.push({ data: doc.data(), docId: doc.id });
-      })
+      });
       callback(allComments);
     });
 };

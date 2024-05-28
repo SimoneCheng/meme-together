@@ -19,7 +19,7 @@ const TextEditor = ({ canvas }) => {
   const [strokeWidth, setStrokeWidth] = useState('2');
 
   const handleFillColorChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     setFillColor(value);
     const activeObject = canvas.getActiveObject();
     if (!activeObject) return;
